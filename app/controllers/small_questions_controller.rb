@@ -1,0 +1,2 @@
+class SmallQuestionsController < ApplicationController
+end

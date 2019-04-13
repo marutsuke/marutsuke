@@ -1,5 +1,4 @@
-class ChaptersController < ApplicationController
-
+class QuestionsController < ApplicationController
   def show
 
   end
@@ -19,5 +18,4 @@ class ChaptersController < ApplicationController
   def update
 
   end
-
 end
