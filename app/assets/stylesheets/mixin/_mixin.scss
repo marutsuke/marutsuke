@@ -1,0 +1,35 @@
+@mixin height-width($height, $width){
+  height: $height;
+  width: $width;
+}
+
+@mixin position-ab ($top, $right, $bottom, $left){
+  position: $absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin size-color($size, $color){
+  font-size: $size;
+  color: $color;
+}
+
+@mixin size-color-bold($size, $color){
+  font-size: $size;
+  color: $color;
+  font-weight: bold;
+}
+
+@mixin size-color-bold-line-height($size, $color, $line-height){
+  font-size: $size;
+  color: $color;
+  font-weight: bold;
+  line-height: $line-height;
+}
+
+@mixin margin-left-right($left, $right){
+  margin-left: $left;
+  margin-right: $right;
+}

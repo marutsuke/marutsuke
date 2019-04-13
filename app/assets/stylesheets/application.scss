@@ -1,0 +1,32 @@
+@import './reset';
+@import "bootstrap";
+@import "./mixin/mixin";
+@import './modules/header';
+@import './config/color';
+
+.main-contain{
+  margin-top: 10px;
+  &_row{
+    &_book{
+      padding: 0px;
+    }
+  }
+}
+.index-lists{
+  padding: 0;
+  &_list{
+    background-color: $gray;
+    border-radius: 5px;
+    margin: 1px;
+    border: 1px solid $black;
+    line-height: 6vh;
+    text-align: center;
+    @include size-color-bold(2.5vmin,$black);
+    height: 6vh;
+  }
+  &_list-book{
+    height: calc(12vh + 1px);
+    line-height: calc(6vh + 1px);
+    margin: 1px;
+  }
+}
