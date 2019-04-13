@@ -5,7 +5,16 @@ class BooksController < ApplicationController
   end
 
   def show
-
+  if params[:bookid]
+    @book = Book.find(params[:bookid])
+    @chapters = @book.chapters
+  end
+    respond_to do |format|
+      format.html{
+      redirect_to action: :index
+      }
+      format.json
+    end
   end
 
   def new
