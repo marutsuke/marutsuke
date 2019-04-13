@@ -4,6 +4,14 @@ class ChaptersController < ApplicationController
 
   end
 
+  def new
+
+  end
+
+  def edit
+    
+  end
+
   def create
 
   end
