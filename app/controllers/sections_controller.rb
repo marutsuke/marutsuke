@@ -1,6 +1,6 @@
 class SectionsController < ApplicationController
 
-  def new
+  def create
     
   end
 

@@ -5,10 +5,7 @@ class BooksController < ApplicationController
   end
 
   def show
-  if params[:bookid]
-    @book = Book.find(params[:bookid])
-    @chapters = @book.chapters
-  end
+    set_book_chapter
     respond_to do |format|
       format.html{
       redirect_to action: :index
@@ -36,6 +33,13 @@ class BooksController < ApplicationController
   def destroy
 
   end
+  private
 
+    def set_book_chapter
+      if params[:bookid]
+        @book = Book.find(params[:bookid])
+        @chapters = @book.chapters
+      end
+    end
 
 end
