@@ -1,0 +1,20 @@
+<%= render "shared/header" %>
+<%= render @small_questions%>
+
+
+
+
+
+
+
+
+
+
+<%# %を.に変えた
+<. fib = [1,1].>
+<. i = 1.>
+<. 200.times do .>
+  <. fib << fib[i-1] + fib[i] .>
+  <div class="fib<.=(i-1).6+1 .>" style="height:<.=i*20.>px; width:<.=i*20.>px; z-index: <.= 1000-i.>;"></div>
+  <.i = i + 1 .>
+<. end .> %>

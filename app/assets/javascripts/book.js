@@ -1,7 +1,9 @@
 $(function(){
   //この下はSection表示用-----------------------------------
   function appendSections(section){
-    let html = `<li class="index-lists_list section-lists" data-section_id=${section.id}>${section.section}</li>`;
+    let html = `<li class="index-lists_list section-lists  animated bounceInRight faster" data-section_id=${section.id}><a href="/chapters/${section.chapter_id}/sections/${section.id}">${section.section}</a>
+    </li>
+    `;
     $('.main-contain_row_section').append(html);
   }
   //マウスを上にすると光る。
@@ -18,14 +20,12 @@ $(function(){
     $(this).toggleClass("jq-blue");
   });
 
-
   //clickしたらsectionがでる
   $(document).on('click','.chapter-lists', function(e){
     e.preventDefault();
     let chapter_id = $(this).data('chapter_id');
     let book_id = $(this).next().data('book_id');
-    href = "/books/" + book_id.toString();+ "/chapters/" + chapter_id.toString();
-    ///books/:book_id/chapters/:id
+    href = "/books/" + book_id.toString()+ "/chapters/" + chapter_id.toString();
     $.ajax({
       url: href,
       type: "GET",
@@ -33,11 +33,10 @@ $(function(){
       dataType: 'json'
     })
     .done(function(sections){
-      // $('.chapter-lists').remove();
+      $('.section-lists').remove();
       sections.forEach(function(section){
         appendSections(section);
       });
-      console.log(sections)
     })
     .fail(function(){
       alert('エラーです');
@@ -47,12 +46,9 @@ $(function(){
     })
   })
 
-
-
-
   // ーーーーーーーーこの下はchapter表示用jQuery----------------
   function appendChapters(chapter){
-    let html = `<li class="index-lists_list chapter-lists" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists" data-book_id=${chapter.book_id}></div>`;
+    let html = `<li class="index-lists_list chapter-lists animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists" data-book_id=${chapter.book_id}></div>`;
     $('.main-contain_row_chapter').append(html);
   }
   //マウスを上にすると光る。クリックしたら色が変わる。
@@ -80,6 +76,7 @@ $(function(){
     })
     .done(function(chapters){
       $('.chapter-lists').remove();
+      $('.section-lists').remove();
       chapters.forEach(function(chapter){
         appendChapters(chapter);
       });

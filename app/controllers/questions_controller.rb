@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
-  def show
 
+  def show
+    set_questions
   end
 
   def new
@@ -8,7 +9,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def create
@@ -18,4 +19,12 @@ class QuestionsController < ApplicationController
   def update
 
   end
+
+  private
+
+  def set_questions
+    @question = Question.find(params[:id])
+    @small_questions = @question.small_questions
+  end
+
 end

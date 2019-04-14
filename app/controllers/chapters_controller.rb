@@ -29,10 +29,8 @@ class ChaptersController < ApplicationController
   private
 
   def set_chapter_section
-    if params[:chapterid]
-      @chapter = Chapter.find(params[:chapterid])
-      @sections = @chapter.sections
-    end
+    @chapter = Chapter.find(params[:chapterid])
+    @sections = @chapter.sections
   end
 
 end
