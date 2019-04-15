@@ -4,15 +4,16 @@
     <ul class="col-5 main-contain_row_book index-lists animated bounceInDown faster">
       <%= render @books %>
       <%= form_tag('/books',method: :post) do %>
-      <input type="text" class="col-12 mt-1 add-book-input" id="inlineFormInput" placeholder="タイトル" name="title" >
-      <button type="submit" class="btn btn-light btn-sm  add-book-btn book-lists col-3 float-right"   style="min-width: 4rem;">追加</button>
+        <input type="text" class="col-12 mt-1 add-book-input" id="inlineFormInput" placeholder="タイトル" name="title" >
+        <button type="submit" class="btn btn-light btn-sm  add-book-btn book-lists col-3 float-right"   style="min-width: 4rem;">追加</button>
       <% end %>
     </ul>
-    <ul class="col-4 index-lists main-contain_row_chapter">
-    <%# 追加するリスト %>
-    <%# `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class=" chapter-lists animated bounceInRight faster" data-book_id=${chapter.book_id}></div>` %>
-    </ul>
-
+    <%=form_tag("/books/#{@book.id}/chapters", method: :post) do%>
+      <ul class="col-4 index-lists main-contain_row_chapter">
+      <%# 追加するリスト %>
+      <%# `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class=" chapter-lists animated bounceInRight faster" data-book_id=${chapter.book_id}></div>` %>
+      </ul>
+    <%end%>
     <ul class="col-3 main-contain_row_section index-lists">
     <%# 追加するリスト %>
     <%# `<li class="index-lists_list section-lists  animated bounceInRight faster" data-section_id=${section.id}><a href="/chapters/${section.chapter_id}/sections/${section.id}">${section.section}</a> </li>``

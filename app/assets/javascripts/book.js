@@ -28,10 +28,8 @@ $(function(){
     $('.main-contain_row_section').append(html);
   }
   function appendAddSection(chapter_id){
-    let html = `<form class="animated bounceInRight faster section-lists">
-    <input type="text" class="col-12 mt-1" id="inlineFormInput" placeholder="">
-    <button type="submit" class="btn btn-light btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem; data-chapter_id=${chapter_id}">追加</button>
-    </form>`
+    let html = `<input type="text" class="col-12 mt-1" id="inlineFormInput" placeholder=""><input type="hidden" name="example" value="${chapter_id}">
+    <button type="submit" class="btn btn-light btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>`
     $('.main-contain_row_section').append(html);
   }
   //マウスを上にすると光る。
@@ -80,14 +78,12 @@ $(function(){
 
   // ーーーーーーーーこの下はchapter表示用jQuery----------------
   function appendChapter(chapter){
-    let html = `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class=" chapter-lists animated bounceInRight faster" data-book_id=${chapter.book_id}></div>`;
+    let html = `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists animated bounceInRight faster" data-book_id=${chapter.book_id}></div>`;
     $('.main-contain_row_chapter').append(html);
   }
   function appendAddCapter(book_id){
-    let html = `<form class="animated bounceInRight faster chapter-lists">
-    <input type="text" class="col-12 mt-1" id="inlineFormInput" placeholder="">
-    <button type="submit" class="btn btn-light btn-sm  add-chapter chapter-lists col-3 float-right" style="min-width: 4rem; data-book_id=${book_id}">追加</button>
-    </form>`
+    let html = `<input type="text" class="col-12 mt-1" id="inlineFormInput" placeholder="">
+    <button type="submit" class="btn btn-light btn-sm  add-chapter col-3 float-right" style="min-width: 4rem; data-book_id=${book_id}">追加</button>`
     $('.main-contain_row_chapter').append(html);
   }
   //マウスを上にすると光る。クリックしたら色が変わる。
