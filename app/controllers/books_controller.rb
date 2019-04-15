@@ -23,7 +23,8 @@ class BooksController < ApplicationController
   end
 
   def create
-
+    new_book_create
+    redirect_to action: :index
   end
 
   def update
@@ -35,6 +36,10 @@ class BooksController < ApplicationController
   end
   private
 
+    def book_params
+      params.permit(:title, :image).merge(rate:0)
+    end
+
     def set_book_chapter
       if params[:bookid]
         @book = Book.find(params[:bookid])
@@ -42,4 +47,11 @@ class BooksController < ApplicationController
       end
     end
 
+    def new_book_create
+      if params[:title] != ""
+      Book.create(title:params[:title], rate: 0)
+      end
+    end
+
 end
+

@@ -5,23 +5,17 @@
 <%# レンダー先のビューサンプル %>
 
 <div class="row justify-content-around questions animated bounceInDown faster">
-<% 5.times do%>
+<% i  =  1%>
+<% 19.times do%>
   <div class="card off col-10 col-lg-5 question-card">
     <img src="https://study-line.com/wp-content/uploads/2018/12/436dfd63251444c3009985607570a6d0.jpg" class="card-img-top" alt="画像">
     <div class="card-body">
-      <h5 class="card-title question-text">[1]</h5>
+      <h5 class="card-title question-text">[<%=i%>]</h5>
       <p class="card-text question-text">父が28歳のとき、Aさんは娘として生まれました。そして現在、2人の年齢の合計が48歳です。現在、父とAさんはそれぞれ何歳になるのか求めてみましょう。</p>
       <%= link_to "解答する",section_question_path(@section), class: "btn btn-primary question-text" %>
     </div>
   </div>
-  <div class="card off col-10 col-lg-5 question-card">
-    <img src="https://study-line.com/wp-content/uploads/2018/12/436dfd63251444c3009985607570a6d0.jpg" class="card-img-top" alt="画像">
-    <div class="card-body">
-      <h5 class="card-title question-text">[2]</h5>
-      <p class="card-text question-text">父が28歳のとき、Aさんは娘として生まれました。そして現在、2人の年齢の合計が48歳です。現在、父とAさんはそれぞれ何歳になるのか求めてみましょう。</p>
-      <%= link_to "解答する",section_question_path(@section), class: "btn btn-primary question-text" %>
-    </div>
-  </div>
+  <%i =  i+1%>
 <%end%>
 </div>
 <%#             %>
