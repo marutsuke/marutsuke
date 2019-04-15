@@ -1,22 +1,22 @@
 $(function(){
   //ここから、createアクション用
   //book追加
-  $('.add-book-form').on('submit', function(e){
-    e.preventDefault();
-    let href = "/books"
-    console.log(href);
-    $.ajax({
-      url: href,
-      type: "POST"
-    })
-    .done(function(){
-      alert('登録しました！');
-      $('.add-book-input').val('')
-    })
-    .fail(function(){
-      alert('エラーです');
-    })
-  })
+  // $('.add-book-form').on('submit', function(e){
+  //   e.preventDefault();
+  //   let href = "/books"
+  //   console.log(href);
+  //   $.ajax({
+  //     url: href,
+  //     type: "POST"
+  //   })
+  //   .done(function(){
+  //     alert('登録しました！');
+  //     $('.add-book-input').val('')
+  //   })
+  //   .fail(function(){
+  //     alert('エラーです');
+  //   })
+  // })
 
   //
 
