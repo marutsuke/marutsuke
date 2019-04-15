@@ -9,6 +9,7 @@
 .index-lists{
   padding: 0;
   &_list{
+    position:relative;
     background-color: $gray;
     border-radius: 5px;
     margin: 1px;
@@ -24,4 +25,9 @@
     line-height: calc(6vh + 1px);
     margin: 1px;
   }
+}
+.icon{
+  position: absolute;
+  top:   8px;
+  right: 8px;
 }

@@ -19,7 +19,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-
+    edit_book
   end
 
   def create
@@ -51,6 +51,11 @@ class BooksController < ApplicationController
       if params[:title] != ""
       Book.create(title:params[:title], rate: 0)
       end
+    end
+
+    def edit_book
+      @book = Book.find(params.permit(:id)[:id])
+      @chapters = @book.chapters
     end
 
 end

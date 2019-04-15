@@ -31,7 +31,6 @@ class ChaptersController < ApplicationController
   def set_chapter_section
     @chapter = Chapter.find(params[:chapterid])
     @sections = @chapter.sections
-    @book = @chapter.book
   end
 
 end

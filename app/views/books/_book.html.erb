@@ -1,4 +1,7 @@
-
 <li class="index-lists_list index-lists_list-book" data-book_id = <%= book.id %>>
-<%= book.title %><br>進捗<%=book.rate%>%
+<a class="fa fa-pencil-square-o icon" href="/books/<%=book.id%>/edit"></a>
+<div class="book-inf">
+<%= book.title %></span><br>進捗<%=book.rate%>%
+</div>
 </li>
+ <%# /books/:id/edit(.:format) %>

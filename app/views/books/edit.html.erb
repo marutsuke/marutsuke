@@ -1,0 +1,22 @@
+<%= render "shared/header" %>
+
+<div class="breadcrumbs float-right">
+<div><%= @book.title %></div>
+<img src="<%=@book.image%>" class="rounded" alt="画像">
+</div>
+<% @chapters.each do|chapter| %>
+  <div class="card mt-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= chapter.chapter %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <%chapter.sections.each do |section|%>
+      <li class="list-group-item"><%= section.section %></li>
+      <% end %>
+    </ul>
+    <div class="card-body">
+<input type="text" class="col-8 mt-1" id="inlineFormInput" name="section" placeholder=""><input type="hidden" name="chapter_id" value="<%=chapter.id%>">
+<button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
+    </div>
+  </div>
+<% end %>
