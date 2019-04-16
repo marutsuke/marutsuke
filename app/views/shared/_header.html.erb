@@ -1,6 +1,5 @@
 <header>
   <nav class="navbar navbar-light bg-light navbar1">
-
       <%= link_to root_path, class: "navbar-brand navbar1_a", data: {"turbolinks" => false} do %>
         <%= image_tag("marutsuke.jpeg",class: "img-fluid navbar1_a_img") %>
       <% end %>
@@ -10,7 +9,7 @@
     <div class="collapse navbar-collapse header-menu" id="navbarNav">
       <ul class="navbar-nav header-menu_list">
         <li class="nav-item active">
-          <a class="nav-link f header-menu_list_a " href="#">ログアウト <span class="sr-only">(current)</span></a>
+          <%= link_to '本を追加する', new_book_path, method: :get, class: "nav-link f header-menu_list_a" %>
         </li>
       </ul>
     </div>

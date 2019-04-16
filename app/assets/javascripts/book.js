@@ -23,7 +23,7 @@ $(function(){
   //このしたはトップページのインデックス用
   //この下はSection表示用-----------------------------------
   function appendSections(section){
-    let html = `<li class="index-lists_list section-lists  animated bounceInRight faster" data-section_id=${section.id}><a href="/chapters/${section.chapter_id}/sections/${section.id}">${section.section}</a>
+    let html = `<li class="index-lists_list section-lists  animated bounceInDown faster" data-section_id=${section.id}><a href="/chapters/${section.chapter_id}/sections/${section.id}">${section.section}</a>
     </li>`;
     $('.main-contain_row_section').append(html);
   }
@@ -43,7 +43,8 @@ $(function(){
   });
   $(document).on("click", ".chapter-lists-mouse",
     function(){
-    $(this).toggleClass("jq-blue");
+      $('.chapter-lists-mouse').removeClass("jq-blue");
+      $(this).toggleClass("jq-blue");
   });
 
   //clickしたらsectionがでる
@@ -78,7 +79,7 @@ $(function(){
 
   // ーーーーーーーーこの下はchapter表示用jQuery----------------
   function appendChapter(chapter){
-    let html = `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInRight faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists animated bounceInRight faster" data-book_id=${chapter.book_id}></div>`;
+    let html = `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInDown faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists animated bounceInDown faster" data-book_id=${chapter.book_id}></div>`;
     $('.main-contain_row_chapter').append(html);
   }
   //チャプター追加ボタンは消す！！
@@ -95,6 +96,7 @@ $(function(){
     $(this).removeClass("jq-red");
   });
   $('.index-lists_list-book').on('click', function(){
+    $('.index-lists_list-book').removeClass("jq-blue");
     $(this).toggleClass("jq-blue");
   });
 
