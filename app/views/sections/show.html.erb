@@ -1,18 +1,22 @@
 <%= render "shared/header" %>
 <div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
+<%= link_to '問題を追加する', new_section_question_path(@section), method: :get, class: "float-right" %>
 </div>
-<%= render @questions %>
+
+
 <%# レンダー先のビューサンプル %>
 
 <div class="row justify-content-around questions animated bounceInDown faster">
-<% i  =  1%>
-<% 19.times do%>
+<% i=1 %>
+<% @questions.each do |question|%>
   <div class="card off col-10 col-lg-5 question-card">
-    <img src="https://study-line.com/wp-content/uploads/2018/12/436dfd63251444c3009985607570a6d0.jpg" class="card-img-top" alt="画像">
+    <%if question.image %>
+      <img src="question.imgage" class="card-img-top" alt="画像">
+    <%end%>  
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
-      <p class="card-text question-text">父が28歳のとき、Aさんは娘として生まれました。そして現在、2人の年齢の合計が48歳です。現在、父とAさんはそれぞれ何歳になるのか求めてみましょう。</p>
-      <%= link_to "解答する",section_question_path(@section), class: "btn btn-primary question-text" %>
+      <p class="card-text question-text"><%= question.text %></p>
+      <%= link_to "解答する",section_question_path(@section,question), class: "btn btn-primary question-text" %>
     </div>
   </div>
   <%i =  i+1%>

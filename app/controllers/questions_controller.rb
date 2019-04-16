@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-
+    set_section
   end
 
   def edit
@@ -13,7 +13,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-
+    new_question_create
+    redirect_to action: :new
   end
 
   def update
@@ -22,9 +23,25 @@ class QuestionsController < ApplicationController
 
   private
 
-  def set_questions
-    @question = Question.find(params[:id])
-    @small_questions = @question.small_questions
-  end
+    def set_questions
+      @question = Question.find(params[:id])
+      @small_questions = @question.small_questions
+    end
+
+    def new_question_create
+      if (params[:text] != "" && params["small_text-1".to_sym])
+        question = Question.create(text:params[:text],section_id:params[:section_id])
+        small_num = 1
+        while params["small_text-#{small_num}".to_sym] do
+          SmallQuestion.create(text:params["small_text-#{small_num}".to_sym], question_id:question.id)
+          small_num += 1
+        end
+      end
+    end
+
+    def set_section
+      @section = Section.find(params[:section_id])
+      @questions = @section.questions
+    end
 
 end

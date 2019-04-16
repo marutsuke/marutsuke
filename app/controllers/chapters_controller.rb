@@ -15,7 +15,7 @@ class ChaptersController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def create

@@ -1,0 +1,32 @@
+<%= render "shared/header" %>
+<div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
+<div class="col-10 offset-1 card mt-5 mr-3 mb-5" >
+  <div class="card-body">
+    <div>問題の追加</div>
+    <%= form_tag("/sections/#{@section.id}/questions",method: :post) do%>
+      <div class= textarea>
+        <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="20" name="text" placeholder="本文のみ入力してください。(入力必須)"></textarea>
+        <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(入力必須)"></textarea> 
+      </div>
+      <div class="row justify-content-between">
+        <button type="button" class="add-small-question btn btn-primary btn-sm  add-section section-lists col-2" style="min-width: 4rem;">小問の追加</button>
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-2" style="min-width: 4rem;">問題の登録</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row justify-content-around questions">
+<% i=1 %>
+<% @questions.each do |question|%>
+  <div class="card off col-10 col-lg-5 question-card">
+    <%if question.image %>
+      <img src="question.imgage" class="card-img-top" alt="画像">
+    <%end%>  
+    <div class="card-body">
+      <h5 class="card-title question-text">[<%=i%>]</h5>
+      <p class="card-text question-text"><%= question.text %></p>
+    </div>
+  </div>
+  <%i =  i+1%>
+<%end%>
+</div>
