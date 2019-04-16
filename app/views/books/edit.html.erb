@@ -1,0 +1,38 @@
+<%= render "shared/header" %>
+
+<div class="breadcrumbs float-right col-4">
+  <h4 style="text-align:center;"><%= @book.title %></h4>
+  <%if @book.image%>
+    <img src="<%=@book.image%>" class="rounded" alt="画像">
+  <%end%>
+  <div class="col-12 card float-right mt-5 mr-3">
+    <div class="card-body">
+      <div>章の追加</div>
+      <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
+        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="">
+        <input type="hidden" name="book_id" value="<%=@book.id%>">
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% @chapters.each do|chapter| %>
+  <div class="col-6 offset-1 card mt-5">
+    <div class="card-body">
+      <h5 class="card-title"><%= chapter.chapter %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <%chapter.sections.each do |section|%>
+      <li class="list-group-item"><%= section.section %></li>
+      <% end %>
+    </ul>
+    <div class="card-body">
+      <%= form_tag("/chapters/#{chapter.id}/sections",method: :post) do%>
+        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="section" placeholder="">
+        <input type="hidden" name="chapter_id" value="<%=chapter.id%>">
+        <input type="hidden" name="book_id" value="<%=@book.id%>">
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">節の追加</button>
+      <% end %>
+    </div>
+  </div>
+<% end %>

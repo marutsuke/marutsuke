@@ -1,0 +1,24 @@
+<%= render "shared/header" %>
+
+<div class="col-4 card float-right mt-5 mr-3" >
+  <div class="card-body">
+    <div>本の追加</div>
+    <%= form_tag("/books",method: :post) do%>
+      <input type="text" class="col-8 mt-1" id="inlineFormInput" name="title" placeholder="">
+      <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
+    <% end %>
+  </div>
+</div>
+
+<% @books.each do|book| %>
+  <div class="col-6 offset-1  card mt-5">
+    <div class="card-body">
+      <h5 class="card-title"><%= book.title %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <%book.chapters.each do |chapter|%>
+      <li class="list-group-item"><%= chapter.chapter %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
