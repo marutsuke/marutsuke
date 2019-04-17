@@ -29,12 +29,14 @@ class QuestionsController < ApplicationController
     end
 
     def new_question_create
-      if (params[:text] != "" && params["small_text-1".to_sym])
+      if (params[:text] != "" && params["small_text-1".to_sym]) != ""
         question = Question.create(text:params[:text],section_id:params[:section_id])
         small_num = 1
         while params["small_text-#{small_num}".to_sym] do
+          if params["small_text-#{small_num}".to_sym] !=  ""
           SmallQuestion.create(text:params["small_text-#{small_num}".to_sym], question_id:question.id)
           small_num += 1
+          end
         end
       end
     end

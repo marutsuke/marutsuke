@@ -4,9 +4,9 @@
   <div class="card-body">
     <div>問題の追加</div>
     <%= form_tag("/sections/#{@section.id}/questions",method: :post) do%>
-      <div class= textarea>
-        <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="20" name="text" placeholder="本文のみ入力してください。(入力必須)"></textarea>
-        <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(入力必須)"></textarea> 
+      <div class= "textarea">
+        <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="18" name="text" placeholder="本文のみ入力してください。(必須)" autocomplete="off"></textarea>
+        <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(必須)" autocomplete="off"></textarea> 
       </div>
       <div class="row justify-content-between">
         <button type="button" class="add-small-question btn btn-primary btn-sm  add-section section-lists col-2" style="min-width: 4rem;">小問の追加</button>
@@ -21,11 +21,35 @@
   <div class="card off col-10 col-lg-5 question-card">
     <%if question.image %>
       <img src="question.imgage" class="card-img-top" alt="画像">
-    <%end%>  
+    <%end%>
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
       <p class="card-text question-text"><%= question.text %></p>
     </div>
+    <ul class="list-group list-group-flush">
+      <% j = 1 %>
+      <% question.small_questions.each do |small_question| %>
+      <li class="list-group-item">
+      <span>(<%=j%>) </span><%= small_question.text %>
+      </br>
+      解答：
+      <% small_question.answers.each do |answer| %>
+        <%= answer.answer %>, 
+      <% end %>
+      </br>
+        <%= form_tag("/small_questions/#{small_question.id}/answers", method: :post) do %>
+        <div class="create-ansewer">
+          <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-1" placeholder="解答1(必須)" autocomplete="off">
+          <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-2" placeholder="解答2(任意)" autocomplete="off">
+          <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-3" placeholder="解答3(任意)" autocomplete="off">
+          <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-4" placeholder="解答4(任意)" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-2" style="min-width: 8rem;">解答の登録</button>
+          <% end %>
+          </li>
+      <% j += 1%>
+      <% end %>
+    </ul>
   </div>
   <%i =  i+1%>
 <%end%>

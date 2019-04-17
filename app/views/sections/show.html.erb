@@ -1,6 +1,5 @@
 <%= render "shared/header" %>
 <div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
-<%= link_to '問題を追加する', new_section_question_path(@section), method: :get, class: "float-right" %>
 </div>
 
 
@@ -12,14 +11,22 @@
   <div class="card off col-10 col-lg-5 question-card">
     <%if question.image %>
       <img src="question.imgage" class="card-img-top" alt="画像">
-    <%end%>  
+    <%end%>
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
       <p class="card-text question-text"><%= question.text %></p>
-      <%= link_to "解答する",section_question_path(@section,question), class: "btn btn-primary question-text" %>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% j = 1 %>
+      <% question.small_questions.each do |small_question|%>
+      <li class="list-group-item"><span>(<%=j%>) </span><%= small_question.text %></li>
+      <% j += 1%>
+      <% end %>
+    </ul>
+    <div class="row">
+    <%= link_to "解答する",section_question_path(@section,question), class: "btn btn-primary question-text col-3 offset-8  mt-2 mb-2 mr-2", data: {"turbolinks" => false} %>
     </div>
   </div>
-  <%i =  i+1%>
+  <%i += 1%>
 <%end%>
 </div>
-<%#             %>

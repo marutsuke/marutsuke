@@ -1,19 +1,23 @@
 <%= render "shared/header" %>
-
+本の追加ページ
 <div class="col-4 card float-right mt-5 mr-3" >
   <div class="card-body">
     <div>本の追加</div>
     <%= form_tag("/books",method: :post) do%>
-      <input type="text" class="col-8 mt-1" id="inlineFormInput" name="title" placeholder="">
+      <input type="text" class="col-8 mt-1" id="inlineFormInput" name="title" placeholder="" autocomplete="off">
       <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
     <% end %>
   </div>
 </div>
-
 <% @books.each do|book| %>
   <div class="col-6 offset-1  card mt-5">
     <div class="card-body">
-      <h5 class="card-title"><%= book.title %></h5>
+      <h5 class="card-title">
+        <%= book.title %>
+      </h5>
+      <li class="" data-book_id = <%= book.id %> style="list-style:none;">
+        <a class="fa fa-pencil-square-o icon" href="/books/<%=book.id%>/edit"></a>
+      </li>
     </div>
     <ul class="list-group list-group-flush">
       <%book.chapters.each do |chapter|%>

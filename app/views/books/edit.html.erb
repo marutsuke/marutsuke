@@ -9,7 +9,7 @@
     <div class="card-body">
       <div>章の追加</div>
       <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
-        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="">
+        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="" autocomplete="off">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
         <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
       <% end %>
@@ -23,12 +23,14 @@
     </div>
     <ul class="list-group list-group-flush">
       <%chapter.sections.each do |section|%>
-      <li class="list-group-item"><%= section.section %></li>
+      <li class="list-group-item"><%= section.section %>
+      <%= link_to '編集', new_section_question_path(section), method: :get, class: 'float-right',data: {"turbolinks" => false} %>
+      </li>
       <% end %>
     </ul>
     <div class="card-body">
       <%= form_tag("/chapters/#{chapter.id}/sections",method: :post) do%>
-        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="section" placeholder="">
+        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="section" placeholder=""  autocomplete="off">
         <input type="hidden" name="chapter_id" value="<%=chapter.id%>">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
         <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">節の追加</button>
