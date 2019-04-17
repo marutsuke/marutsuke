@@ -1,13 +1,25 @@
 <%= render "shared/header" %>
-<%= render @small_questions%>
-
-
-
-
-
-
-
-
+<div class="breadcrumbs"><%= @question.section.chapter.book.title %> > <%= @question.section.chapter.chapter%> > <%= @question.section.section%> > 大問<%= @question.num%>
+</div>
+<div class="row justify-content-around">
+  <div class="card off col-11 mt-5 ml-3 mr-3 question-card">
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item"><span>[<%=@question.num%>] </span><%= @question.text %></li>
+      <% j = 1 %>
+      <% @question.small_questions.each do |small_question|%>
+        <li class="list-group-item"><span>(<%=j%>) </span><%= small_question.text %>
+        <%# <%= form_tag("", method: :post) do %> 
+          <input type="text" size="18",maxlength="20" name="answer" placeholder="" autocomplete="off" class="input-answer">
+          <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">解答する</button>
+          <div data-question_id="<%=small_question.question.id%>"></div>
+          </li>
+          <% j += 1%>
+        <%# <% end %>
+        </button>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 
 <%# %を.に変えた

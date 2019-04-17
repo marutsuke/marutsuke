@@ -24,7 +24,7 @@ class BooksController < ApplicationController
 
   def create
     new_book_create
-    redirect_to action: :index
+    redirect_to action: :new
   end
 
   def update
@@ -49,7 +49,7 @@ class BooksController < ApplicationController
 
     def new_book_create
       if params[:title] != ""
-      Book.create(title:params[:title], rate: 0)
+        Book.create(title:params[:title], rate: 0)
       end
     end
 
