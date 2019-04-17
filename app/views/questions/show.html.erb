@@ -10,7 +10,8 @@
         <li class="list-group-item"><span>(<%=j%>) </span><%= small_question.text %>
         <%# <%= form_tag("", method: :post) do %> 
           <input type="text" size="18",maxlength="20" name="answer" placeholder="" autocomplete="off" class="input-answer">
-          <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1" style="min-width: 6rem;">解答する</button>
+          <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">解答する</button>
+          <div data-question_id="<%=small_question.question.id%>"></div>
           </li>
           <% j += 1%>
         <%# <% end %>
