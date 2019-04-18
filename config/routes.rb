@@ -10,12 +10,12 @@ Rails.application.routes.draw do
  end
 
   resources :sections, only: [] do
-    resources :questions, only: [:show, :new, :edit, :create, :update]
+    resources :questions, only: [:index, :show, :new, :edit, :create, :update]
   end
 
 
   resources :questions, only: [] do
-    resources :small_questions, only: [:show, :new, :edit, :create, :update]
+    resources :small_questions, only: [:index, :show, :new, :edit, :create, :update]
   end
 
 
