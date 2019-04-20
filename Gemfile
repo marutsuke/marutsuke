@@ -65,3 +65,8 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem "font-awesome-rails"
 gem 'pry-rails'
+gem 'mini_magick'
+gem 'carrierwave'
+group :production do
+  gem 'unicorn', '5.4.1'
+end

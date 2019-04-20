@@ -13,10 +13,14 @@ Rails.application.routes.draw do
     resources :questions, only: [:index, :show, :new, :edit, :create, :update]
   end
 
+  resources :questions, only: [:destroy]
+
 
   resources :questions, only: [] do
     resources :small_questions, only: [:index, :show, :new, :edit, :create, :update]
   end
+
+  resources :small_questions, only: [:destroy]
 
 
   resources :small_questions, only: [] do
