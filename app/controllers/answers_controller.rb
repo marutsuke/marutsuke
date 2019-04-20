@@ -27,4 +27,3 @@ class AnswersController < ApplicationController
       end
     end
 end
-

@@ -1,5 +1,11 @@
 class SmallQuestionsController < ApplicationController
 
+  protect_from_forgery :except => [:destroy]
+
+  def index
+    @question=Question.find(params[:question_id])
+  end
+
   def show
     @small_question = SmallQuestion.find(params[:smallquestionid])
     # count = @small_question.correct_count + 1
@@ -22,7 +28,6 @@ class SmallQuestionsController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
@@ -33,5 +38,19 @@ class SmallQuestionsController < ApplicationController
 
   end
 
+  def destroy
+    @small_question = SmallQuestion.find(params[:small_question_id])
+    @small_question.destroy
+
+    respond_to do |format|
+      format.html{
+      }
+      format.json
+    end
+
+    # redirect_to controller: 'books',action: 'index'
+  end
+  #
+  # end
 
 end

@@ -1,5 +1,72 @@
 $(function(){
+  //解答追加用
 
+
+  //大問削除用
+  $(".delete-q-btn").on('click', function(e){
+    e.preventDefault();
+    let question_id = $(this).data('question_id');
+
+    function disp(){
+      // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+      if(window.confirm('！警告！\n大問1つ丸々削除します。本当にいいですか。')){
+        $.ajax({
+          url: `/questions/${question_id}`,
+          type: "DELETE",
+          data: {question_id: question_id,},
+          dataType: 'json'
+        })
+        .done(function(data){
+        $(`.question-${data.id}`).remove()
+        })
+        .fail(function(){
+          alert('エラーです');
+        })
+        .always(() => {
+        })
+      }
+      else{
+      }
+    }
+    disp()
+  })
+
+  //小問削除ボタン用
+  $(".delete-sq-btn").on('click', function(e){
+    e.preventDefault();
+    let small_question_id = $(this).data('small_question_id');
+
+    function disp(){
+      // 「OK」時の処理開始 ＋ 確認ダイアログの表示
+      if(window.confirm('！警告！\nこの小問を削除します。本当にいいですか。')){
+        href = `/small_questions/${small_question_id}`
+        $.ajax({
+          url: href,
+          type: "DELETE",
+          data: {small_question_id: small_question_id,},
+          dataType: 'json'
+        })
+        .done(function(data){
+        $(`.small-question-${data.id}`).remove()
+        })
+        .fail(function(){
+          alert('エラーです');
+        })
+        .always(() => {
+        })
+      }
+      else{
+       // window.alert('キャンセルされました'); // 警告ダイアログを表示
+      }
+    }
+    disp()
+
+ 
+ 
+ 
+
+    
+  })
 
   //--この下は、問題の丸つけ用----------
   function judge(data_count,html_count,id){
@@ -35,7 +102,6 @@ $(function(){
     })
     .done(function(data){
       judge(data.correct_count,correct_count,data.id)
-      console.log(data.small_question_count)
       commentary(data.small_question_count,data.question_id)
     })
     .fail(function(){

@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
 
+  protect_from_forgery :except => [:destroy]
+
   def show
     set_questions
   end
@@ -18,6 +20,18 @@ class QuestionsController < ApplicationController
   end
 
   def update
+
+  end
+
+  def destroy
+    @question = Question.find(params[:question_id])
+    @question.destroy
+
+    respond_to do |format|
+      format.html{
+      }
+      format.json
+    end
 
   end
 
