@@ -1,9 +1,7 @@
 <%= render "shared/header" %>
-<div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
-</div>
+  <div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>    <span>進捗:<%=rate(@section)%>% </span>
+  </div>
 
-
-<%# レンダー先のビューサンプル %>
 
 <div class="row justify-content-around questions animated bounceInDown faster">
 <% i=1 %>

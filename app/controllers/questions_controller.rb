@@ -48,7 +48,7 @@ class QuestionsController < ApplicationController
         small_num = 1
         while params["small_text-#{small_num}".to_sym] do
           if params["small_text-#{small_num}".to_sym] !=  ""
-          SmallQuestion.create(text:params["small_text-#{small_num}".to_sym], question_id:question.id)
+          SmallQuestion.create(text:params["small_text-#{small_num}".to_sym], question_id:question.id,section_id:question.section.id,book_id:question.section.chapter.book.id)
           small_num += 1
           end
         end
@@ -56,8 +56,9 @@ class QuestionsController < ApplicationController
     end
 
     def set_section
-      @section = Section.find(params[:section_id])
-      @questions = @section.questions
+      @section = Section.includes([{small_questions: [:answers]}, :questions]).find(params[:section_id])
+      @questions = @section.questions.includes({small_questions: [:answers]})
+      
     end
 
 end

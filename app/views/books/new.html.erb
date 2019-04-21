@@ -5,6 +5,7 @@
     <div>本の追加</div>
     <%= form_tag("/books",method: :post) do%>
       <input type="text" class="col-8 mt-1" id="inlineFormInput" name="title" placeholder="" autocomplete="off">
+      <input type="file" name="image">
       <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
     <% end %>
   </div>

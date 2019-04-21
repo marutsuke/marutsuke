@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.all
+    @books = Book.includes(:chapters,:small_questions).all
   end
 
   def show
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @books = Book.all
+    @books = Book.includes(:chapters).all
   end
 
   def edit
@@ -49,14 +49,13 @@ class BooksController < ApplicationController
 
     def new_book_create
       if params[:title] != ""
-        Book.create(title:params[:title], rate: 0)
+        Book.create(title:params[:title], rate: 0, image:params[:image])
       end
     end
 
     def edit_book
-      @book = Book.find(params.permit(:id)[:id])
+      @book = Book.includes({chapters: [:sections]}).find(params.permit(:id)[:id])
       @chapters = @book.chapters
     end
 
 end
-
