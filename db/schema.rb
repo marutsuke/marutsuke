@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_18_035548) do
+ActiveRecord::Schema.define(version: 2019_04_21_033654) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer", null: false
@@ -64,12 +64,18 @@ ActiveRecord::Schema.define(version: 2019_04_18_035548) do
     t.integer "correct_count", default: 0
     t.integer "incorrect_count", default: 0
     t.date "last_correct_day"
+    t.bigint "section_id"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_small_questions_on_book_id"
     t.index ["question_id"], name: "index_small_questions_on_question_id"
+    t.index ["section_id"], name: "index_small_questions_on_section_id"
   end
 
   add_foreign_key "answers", "small_questions"
   add_foreign_key "chapters", "books"
   add_foreign_key "questions", "sections"
   add_foreign_key "sections", "chapters"
+  add_foreign_key "small_questions", "books"
   add_foreign_key "small_questions", "questions"
+  add_foreign_key "small_questions", "sections"
 end

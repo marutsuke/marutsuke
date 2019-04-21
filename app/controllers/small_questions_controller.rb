@@ -3,7 +3,7 @@ class SmallQuestionsController < ApplicationController
   protect_from_forgery :except => [:destroy]
 
   def index
-    @question=Question.find(params[:question_id])
+    @question=Question.includes({small_questions: [:answers]}).find(params[:question_id])
   end
 
   def show

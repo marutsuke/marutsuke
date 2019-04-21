@@ -24,7 +24,7 @@ class SectionsController < ApplicationController
   private
 
   def set_section_questions
-    @section = Section.find(params[:id])
+    @section = Section.includes({questions: [:small_questions]}).find(params[:id])
     @questions = @section.questions
   end
 
