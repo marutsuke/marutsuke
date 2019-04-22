@@ -15,7 +15,7 @@
       <% j = 1 %>
       <% @question.small_questions.each do |small_question|%>
         <li class="list-group-item judge-<%=small_question.id%>"><span>(<%=j%>) </span><%= small_question.text %>
-        <%# <%= form_tag("", method: :post) do %> 
+        <%# <%= form_tag("", method: :post) do %>
           <input type="text" size="18",maxlength="20" name="answer" placeholder="" autocomplete="off" class="input-answer">
           <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1 btn-<%=small_question.id %>" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">解答する</button>
           <div data-question_id="<%=small_question.question.id%>"></div>
