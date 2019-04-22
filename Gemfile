@@ -82,3 +82,4 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
 end
+gem  'nokogiri', '1.10.2'
