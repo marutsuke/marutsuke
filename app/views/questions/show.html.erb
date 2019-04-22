@@ -1,14 +1,14 @@
 <%= render "shared/header" %>
-<div class="breadcrumbs"><%= @question.section.chapter.book.title %> > <%= @question.section.chapter.chapter%> > <%= @question.section.section%> > 
+<div class="breadcrumbs"><%= @question.section.chapter.book.title %> > <%= @question.section.chapter.chapter%> > <%= @question.section.section%> >
 <%# 大問<%= @question.num%> %>
 </div>
 <div class="row justify-content-around">
   <div class="card off col-11 mt-5 ml-3 mr-3 question-card">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-
-     <%if false%>
-     <span>[<%=@question.num%>] </span>
+<%# 
+     <%if false>
+     <span>[<%=@question.num>] </span>
      <%end%>
 
      <%= @question.text %></li>
