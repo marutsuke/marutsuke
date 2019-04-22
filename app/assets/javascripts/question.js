@@ -1,6 +1,27 @@
 $(function(){
   //解答追加用
+  // $(".add-answer").on('click', function(e){
+  //   e.preventDefault();
+  //   let small_question_id = $(this).data('small_question_id');
 
+  //   let href = `/small_questions/${small_question_id}/answers`
+  //   $.ajax({
+  //     url: href,
+  //     type: "POST",
+  //     data: {small_question_id: small_question_id,},
+  //     dataType: 'json'
+  //   })
+  //   .done(function(data){
+  //     html ='<span>data.answer</span>'
+  //   $(`.small_question-${data.id}`).append()
+  //   })
+  //   .fail(function(){
+  //     alert('エラーです');
+  //   })
+  //   .always(() => {
+  //   })
+
+  // })
 
   //大問削除用
   $(".delete-q-btn").on('click', function(e){

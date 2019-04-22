@@ -5,8 +5,13 @@ class AnswersController < ApplicationController
 
   def create
     new_answer_create
-
     redirect_to controller: 'questions', action: 'new', section_id: @small_question.question.section.id
+
+    # respond_to do |format|
+    #   format.html{
+    #   }
+    #   format.json
+    # end
   end
 
   def update
