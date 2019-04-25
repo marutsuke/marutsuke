@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_033654) do
+ActiveRecord::Schema.define(version: 2019_04_25_022457) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer", null: false
@@ -61,11 +61,11 @@ ActiveRecord::Schema.define(version: 2019_04_21_033654) do
     t.bigint "question_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "section_id"
+    t.bigint "book_id"
     t.integer "correct_count", default: 0
     t.integer "incorrect_count", default: 0
     t.date "last_correct_day"
-    t.bigint "section_id"
-    t.bigint "book_id"
     t.index ["book_id"], name: "index_small_questions_on_book_id"
     t.index ["question_id"], name: "index_small_questions_on_question_id"
     t.index ["section_id"], name: "index_small_questions_on_section_id"

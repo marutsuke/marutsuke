@@ -1,7 +1,5 @@
 <div class="index-lists_list index-lists_list-book" data-book_id = <%= book.id %>>
   <div class="book-inf">
-    <%= book.title %></span><br>進捗%
+    <%= book.title %></span><br>進捗<%=rate_book(book)%>%
   </div>
 </div>
-
-<%=rate_book(book)%>
