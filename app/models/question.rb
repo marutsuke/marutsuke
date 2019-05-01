@@ -8,4 +8,7 @@ class Question < ApplicationRecord
   def num
       self.section.questions.find_index(self) +1
   end
+
+  validates :question, presence:true
+
 end
