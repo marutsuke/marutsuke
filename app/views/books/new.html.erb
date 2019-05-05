@@ -3,11 +3,14 @@
 <div class="col-4 card float-right mt-5 mr-3" >
   <div class="card-body">
     <div>本の追加</div>
-    <%= form_tag("/books",method: :post) do%>
-      <input type="text" class="col-8 mt-1" id="inlineFormInput" name="title" placeholder="" autocomplete="off">
-      <input type="file" name="image">
-      <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
-    <% end %>
+    <%= form_with(model: @book, url: "/books") do |f|%>
+      <%= f.text_field :title ,class: "col-8 mt-1",autocomplete:'off'%>
+      <label for="book-image">
+        <i class="fa fa-image book-image-icon"></i>
+        <%= f.file_field :image, class: "col-8 mt-1", id: "book-image",style:"display:none;"%>
+      </label>
+      <%= f.submit "追加", class:"btn btn-primary btn-sm  add-section section-lists col-3 float-right"%>
+    <%end%>
   </div>
 </div>
 <% @books.each do|book| %>

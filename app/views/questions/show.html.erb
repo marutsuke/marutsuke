@@ -4,13 +4,13 @@
 <div class="row justify-content-around">
   <div class="card off col-11 mt-5 ml-3 mr-3 question-card">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><span>[<%=@question.num%>] </span><%= @question.text %></li>
+      <li class="list-group-item"><span>[<%=@question.num%>] </span><%= simple_format(@question.text) %></li>
       <% j = 1 %>
       <% @question.small_questions.each do |small_question|%>
         <li class="list-group-item judge-<%=small_question.id%>"><span>(<%=j%>) </span><%= small_question.text %>
-        <%# <%= form_tag("", method: :post) do %> 
+        <%# <%= form_tag("", method: :post) do %>
           <input type="text" size="18",maxlength="20" name="answer" placeholder="" autocomplete="off" class="input-answer">
-          <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1 btn-<%=small_question.id %>" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">解答する</button>
+          <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1 btn-<%=small_question.id %>" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">丸つけ</button>
           <div data-question_id="<%=small_question.question.id%>"></div>
           <div data-correct_count="<%=small_question.correct_count%>"></div>
         </li>

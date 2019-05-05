@@ -2,17 +2,17 @@
 
 <div class="breadcrumbs float-right col-4">
   <h4 style="text-align:center;"><%= @book.title %></h4>
-  <%if @book.image%>
-    <img src="<%=@book.image%>" class="rounded" alt="画像">
-  <%end%>
   <div class="col-12 card float-right mt-5 mr-3">
     <div class="card-body">
       <div>章の追加</div>
       <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
         <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="" autocomplete="off">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
-        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">追加</button>
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mb-3" style="min-width: 4rem;">追加</button>
       <% end %>
+      <% if @book.image.url%>
+        <%= image_tag("#{@book.image.url}",class:"rounded image-tag", alt:"画像") %>
+      <%end%>
     </div>
   </div>
 </div>
@@ -38,3 +38,8 @@
     </div>
   </div>
 <% end %>
+<div class="book-delete-div">
+    <%= form_with(model:@book,url:"/books/#{@book.id}",method:"delete") do |f|%>
+      <%= f.submit "本の削除", class: "btn btn-danger btn-sm col-1 float-right delete-book-btn mb-5 mr-5", style:"min-width: 8rem;",data:{confirm:"#{@book.title}を削除します。本当によろしいですか。"}%>
+    <%end%>
+</div>

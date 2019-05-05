@@ -32,7 +32,9 @@ class BooksController < ApplicationController
   end
 
   def destroy
-
+    set_book
+    @book.destroy
+    redirect_to action: :new
   end
   private
 
@@ -49,13 +51,17 @@ class BooksController < ApplicationController
 
     def new_book_create
       if params[:title] != ""
-        Book.create(title:params[:title], rate: 0, image:params[:image])
+        Book.create(book_params)
       end
     end
 
     def edit_book
       @book = Book.includes({chapters: [:sections]}).find(params.permit(:id)[:id])
       @chapters = @book.chapters
+    end
+
+    def set_book
+      @book = Book.find(params.permit(:id)[:id])
     end
 
 end

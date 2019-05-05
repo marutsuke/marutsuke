@@ -5,5 +5,5 @@ class SmallQuestion < ApplicationRecord
   belongs_to :book
   has_many :answers, dependent: :destroy
   mount_uploader :image, ImageUploader
-  validates :texts, presence:true
+  validates :text, presence:true
 end
