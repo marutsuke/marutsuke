@@ -49,6 +49,14 @@ $(function(){
     let html = `<li class="index-lists_list chapter-lists  chapter-lists-mouse  animated bounceInDown faster" data-chapter_id=${chapter.id}>${chapter.chapter}</li><div class="chapter-lists animated bounceInDown faster" data-book_id=${chapter.book_id}></div>`;
     $('.main-contain_row_chapter').append(html);
   }
+  function appendBookimage(data){
+    if(data.book_image !==null){
+      let html = `<img class="rounded image-tag book-image-in-index" alt="画像" src="${data.book_image}">`
+      $(".book-image-in-index").remove()
+      $(".book-image-index").append(html)
+    }
+  }
+
   $('.index-lists_list-book').on('mouseover', function(){
     $(this).addClass("jq-red");
   });
@@ -66,6 +74,7 @@ $(function(){
     // e.preventDefault();これがあるとaタグが反応しない！！！！森口さんありがとう！
     let book_id = $(this).data('book_id');
     href = "/books/" + book_id.toString();
+    $('.index-lists_list-book').not(this).remove();
     $.ajax({
       url: href,
       type: "GET",
@@ -77,6 +86,7 @@ $(function(){
       $('.section-lists').remove();
       chapters.forEach(function(chapter){
         appendChapter(chapter);
+        appendBookimage(chapter);
       });
     })
     .fail(function(){

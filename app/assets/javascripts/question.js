@@ -8,22 +8,21 @@ $(function(){
 
     let href = `/small_questions/${small_question_id}/answers`
     console.log(small_question_id,answer,href);
-
-    $.ajax({
-         url: href,
-         type: "POST",
-         data: {small_question_id: small_question_id,answer:answer},
-         dataType: 'json'
-         })
-       .done(function(data){
-         html =`<span>・${data.answer}</span>`
-         $(`.answers-${data.small_question_id}`).append(html);
+    if (answer!==""){
+      $.ajax({
+        url: href,
+        type: "POST",
+        data: {small_question_id: small_question_id,answer:answer},
+        dataType: 'json'
+      })
+      .done(function(data){
+        html =`<span>・${data.answer}</span>`
+        $(`.answers-${data.small_question_id}`).append(html);
         })
       .fail(function(){
         alert('エラーです');
-       })
-  //   .always(() => {
-  //   })
+      })
+    }
   })
 
   //大問削除用
