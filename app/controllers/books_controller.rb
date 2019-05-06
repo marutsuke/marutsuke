@@ -28,7 +28,9 @@ class BooksController < ApplicationController
   end
 
   def update
-
+    @book = Book.find(params[:id])
+    @book.update!(update_book_params)
+    redirect_to action: :edit, id: @book.id
   end
 
   def destroy
@@ -62,6 +64,10 @@ class BooksController < ApplicationController
 
     def set_book
       @book = Book.find(params.permit(:id)[:id])
+    end
+
+    def update_book_params
+      params.require(:book).permit(:title,:image)
     end
 
 end

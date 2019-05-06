@@ -2,10 +2,10 @@ Rails.application.routes.draw do
  root 'books#index'
 
  resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-   resources :chapters, only: [:show, :new, :edit, :create, :update]
+   resources :chapters, only: [:show, :new, :edit, :create]
  end
 
- resources :chapters, only: [] do
+ resources :chapters, only: [:destroy,:update] do
    resources :sections, only: [:show, :new, :edit, :create,:update]
  end
 

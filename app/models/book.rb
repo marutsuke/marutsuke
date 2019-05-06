@@ -3,7 +3,7 @@ class Book < ApplicationRecord
   has_many :small_questions
   validates :title, presence:true
   validates :title, uniqueness: true
-  validates :title, length: {maximum: 8}
+  validates :title, length: {maximum: 10}
 
   mount_uploader :image, ImageUploader
 end

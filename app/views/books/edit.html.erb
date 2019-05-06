@@ -2,6 +2,16 @@
 
 <div class="breadcrumbs float-right col-4">
   <h4 style="text-align:center;"><%= @book.title %></h4>
+    <div class="book-edit">
+      <%= form_with(model: @book) do |f|%>
+      <%= f.text_field :title ,class: "col-8 mt-1",autocomplete:'off'%>
+      <label for="book-image">
+        <i class="fa fa-image book-edit-image"></i>
+        <%= f.file_field :image, class: "col-8 mt-1", id: "book-image",style:"display:none;"%>
+      </label>
+      <%= f.submit "編集", class:"btn btn-success btn-sm  add-section section-lists col-3 float-right"%>
+    <%end%>
+    </div>
   <div class="col-12 card float-right mt-5 mr-3">
     <div class="card-body">
       <div>章の追加</div>
@@ -20,6 +30,17 @@
   <div class="col-6 offset-1 card mt-5">
     <div class="card-body">
       <h5 class="card-title"><%= chapter.chapter %></h5>
+      <div class="chapter-edit">
+        <%= form_with(model:chapter) do |f|%>
+          <%=f.text_field :chapter%>
+          <%= f.submit "編集", class:"btn btn-success btn-sm mb-3"%>
+        <%end%>
+      </div>
+      <div class="chapter-delete-div">
+        <%= form_with(model:chapter,url:"/chapters/#{chapter.id}",method:"delete") do |f|%>
+          <%= f.submit "章の削除", class: "btn btn-danger btn-sm col-1 float-right delete-chapter-btn mb-5 mr-5", style:"min-width: 8rem;",data:{confirm:"#{chapter.chapter}を削除します。本当によろしいですか。"}%>
+        <%end%>
+</div>
     </div>
     <ul class="list-group list-group-flush">
       <%chapter.sections.each do |section|%>
