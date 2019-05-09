@@ -22,6 +22,7 @@
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
       <p class="card-text question-text"><%= simple_format(question.text) %></p>
+      <%=link_to '編集ページへ', edit_question_path(question.id), class:'btn btn-success btn-sm'%>
       <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-q-btn" data-question_id="<%=question.id%>" style="min-width: 8rem;">大問の削除
       </button>
     </div>

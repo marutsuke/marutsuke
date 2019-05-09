@@ -5,16 +5,15 @@ Rails.application.routes.draw do
    resources :chapters, only: [:show, :new, :edit, :create]
  end
 
- resources :chapters, only: [:destroy,:update] do
-   resources :sections, only: [:show, :new, :edit, :create,:update]
- end
-
-  resources :sections, only: [] do
-    resources :questions, only: [:index, :show, :new, :edit, :create, :update]
+  resources :chapters, only: [:destroy,:update] do
+    resources :sections, only: [:show, :new, :edit, :create,:update]
   end
 
-  resources :questions, only: [:destroy]
+  resources :sections, only: [] do
+    resources :questions, only: [:index, :show, :new, :create, :update]
+  end
 
+  resources :questions, only: [:destroy,:edit]
 
   resources :questions, only: [] do
     resources :small_questions, only: [:index, :show, :new, :edit, :create, :update]
