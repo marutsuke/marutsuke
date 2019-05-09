@@ -9,6 +9,6 @@ class Question < ApplicationRecord
       self.section.questions.find_index(self) +1
   end
 
-  validates :question, presence:true
+  validates :text, presence:true
 
 end

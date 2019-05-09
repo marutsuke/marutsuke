@@ -1,27 +1,29 @@
 $(function(){
   //解答追加用
-  // $(".add-answer").on('click', function(e){
-  //   e.preventDefault();
-  //   let small_question_id = $(this).data('small_question_id');
+  $(".add-answer").on('click', function(){
+    let small_question_id = $(this).data('small_question_id');
+    let answer = $(this).prev().children().val();
+    $(this).prev().children().val('')
 
-  //   let href = `/small_questions/${small_question_id}/answers`
-  //   $.ajax({
-  //     url: href,
-  //     type: "POST",
-  //     data: {small_question_id: small_question_id,},
-  //     dataType: 'json'
-  //   })
-  //   .done(function(data){
-  //     html ='<span>data.answer</span>'
-  //   $(`.small_question-${data.id}`).append()
-  //   })
-  //   .fail(function(){
-  //     alert('エラーです');
-  //   })
-  //   .always(() => {
-  //   })
 
-  // })
+    let href = `/small_questions/${small_question_id}/answers`
+    console.log(small_question_id,answer,href);
+    if (answer!==""){
+      $.ajax({
+        url: href,
+        type: "POST",
+        data: {small_question_id: small_question_id,answer:answer},
+        dataType: 'json'
+      })
+      .done(function(data){
+        html =`<span>・${data.answer}</span>`
+        $(`.answers-${data.small_question_id}`).append(html);
+        })
+      .fail(function(){
+        alert('エラーです');
+      })
+    }
+  })
 
   //大問削除用
   $(".delete-q-btn").on('click', function(e){
@@ -81,12 +83,6 @@ $(function(){
       }
     }
     disp()
-
- 
- 
- 
-
-    
   })
 
   //--この下は、問題の丸つけ用----------
@@ -109,7 +105,7 @@ $(function(){
   $(".marutsuke").on('click', function(e){
     e.preventDefault();
     let answer = $(this).prev().val();
-    let small_question_id = $(this).data('small_question_id');
+    let small_question_id = $(this).data('small_question_id')
     let question_id = $(this).next().data('question_id');
     let correct_count = $(this).next().next().data('correct_count');
 

@@ -19,13 +19,10 @@
 <% i=1 %>
 <% @questions.each do |question|%>
   <div class="card off col-10 col-lg-5 question-card question-<%=question.id%>">
-    <%if question.image %>
-      <img src="question.imgage" class="card-img-top" alt="画像">
-    <%end%>
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
-
-      <p class="card-text question-text"><%= question.text %></p>
+      <p class="card-text question-text"><%= simple_format(question.text) %></p>
+      <%=link_to '編集ページへ', edit_question_path(question.id), class:'btn btn-success btn-sm'%>
       <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-q-btn" data-question_id="<%=question.id%>" style="min-width: 8rem;">大問の削除
       </button>
     </div>
@@ -34,32 +31,27 @@
     <% question.small_questions.each do |small_question| %>
       <li class="list-group-item small-question-<%=small_question.id%> ">
         <span>(<%=j%>) </span><%= small_question.text %>
-        <%# <%=form_tag("/small_questions/#{small_question.id}", method: :DELETE) do%>
           <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-sq-btn" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">小問の削除
           </button>
-        <%# <%end%>
         </br>
         解答：
         <span class="answers-<%=small_question.id%>">
-        <% small_question.answers.each do |answer| %>
-          <%= answer.answer %>,
-        <% end %>
+          <% small_question.answers.each do |answer| %>
+            <span>・<%= answer.answer %></span>
+          <%end%>
+        </span>
         </br>
-        <span>
           <%= form_tag("/small_questions/#{small_question.id}/answers", method: :post) do %>
-          <div class="create-ansewer">
-            <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-1" placeholder="解答1(必須)" autocomplete="off">
-            <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-2" placeholder="解答2(任意)" autocomplete="off">
-            <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-3" placeholder="解答3(任意)" autocomplete="off">
-            <input class="count-ansewr-" type="answer" size="20",maxlength="30" name="answer-4" placeholder="解答4(任意)" autocomplete="off">
-          </div>
-          <button type="submit" class="btn btn-primary btn-sm  add-answer section-lists col-2" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">解答の登録</button>
-            <% end %>
+            <div class="create-ansewer">
+              <input class="count-ansewr" type="answer" size="20",maxlength="30" name="answer" placeholder="解答(必須)" autocomplete="off">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm  add-answer section-lists col-2" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">解答の登録</button>
+          <%end%>
       </li>
       <% j += 1%>
     <% end %>
     </ul>
   </div>
-  <%i =  i+1%>
+  <% i += 1%>
 <%end%>
 </div>

@@ -7,12 +7,12 @@
 <% i=1 %>
 <% @questions.each do |question|%>
   <div class="card off col-10 col-lg-5 question-card">
-    <%if question.image %>
-      <img src="question.imgage" class="card-img-top" alt="画像">
+    <%# <%if question.image 画像を入れる場所%>
+      <%# <img src="question.imgage" class="card-img-top" alt="画像">
     <%end%>
     <div class="card-body">
       <h5 class="card-title question-text">[<%=i%>]</h5>
-      <p class="card-text question-text"><%= question.text %></p>
+      <p class="card-text question-text"><%= simple_format(question.text) %></p>
     </div>
     <ul class="list-group list-group-flush">
       <% j = 1 %>

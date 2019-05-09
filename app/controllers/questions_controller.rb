@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-
+    set_questions
   end
 
   def create
@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
   private
 
     def set_questions
-      @question = Question.find(params[:id])
+      @question = Question.find(params.permit(:id)[:id])
       @small_questions = @question.small_questions
     end
 
@@ -58,7 +58,6 @@ class QuestionsController < ApplicationController
     def set_section
       @section = Section.includes([{small_questions: [:answers]}, :questions]).find(params[:section_id])
       @questions = @section.questions.includes({small_questions: [:answers]})
-      
     end
 
 end
