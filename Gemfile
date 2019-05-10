@@ -83,3 +83,4 @@ group :development, :test do
   gem 'capistrano3-unicorn'
 end
 gem  'nokogiri', '1.10.2'
+gem 'fog-aws'
