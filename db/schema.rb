@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_022457) do
+ActiveRecord::Schema.define(version: 2019_05_09_005306) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer", null: false
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 2019_04_25_022457) do
     t.index ["book_id"], name: "index_small_questions_on_book_id"
     t.index ["question_id"], name: "index_small_questions_on_question_id"
     t.index ["section_id"], name: "index_small_questions_on_section_id"
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", default: "名前なし", null: false
+    t.string "login_id", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "admin", default: false, null: false
+    t.index ["login_id"], name: "index_users_on_login_id", unique: true
   end
 
   add_foreign_key "answers", "small_questions"

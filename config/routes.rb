@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'users/new'
+    get 'users/edit'
+    get 'users/show'
+    get 'users/index'
+  end
  root 'books#index'
 
  resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
@@ -27,13 +33,3 @@ Rails.application.routes.draw do
   end
 
 end
-
-  # resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-  #   resources :chapters, only: [:show, :new, :edit, :create, :update] do
-  #     resources :sections, only: [:show, :new, :edit, :create,:update] do
-  #       resources :questions, only: [:show, :new, :edit, :create, :update] do
-  #         resources :small_questions, only: [:show, :new, :edit, :create, :update]
-  #       end
-  #     end
-  #   end
-  # end
