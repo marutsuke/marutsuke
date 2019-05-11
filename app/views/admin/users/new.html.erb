@@ -1,2 +1,29 @@
-<h1>Admin::Users#new</h1>
-<p>Find me in app/views/admin/users/new.html.erb</p>
+<h1>ユーザー登録ページ</h1>
+<div  class="user-register-form">
+  <%= form_with(model: [:admin,@user]) do |f|%>
+    <div class="ml-2">
+      <label for="user_name">名前</label><br>
+      <%= f.text_field :name ,class: "col-4 mt-1 ml-2", id:"user_name",autocomplete:'off',value:""%>
+    </div>
+    <div class="ml-2">
+      <label for="login_id">ログインID</label><br>
+        <%= f.text_field :login_id, class: "col-4 mt-1 ml-2", id: "login_id"%>
+    </div>
+    <div class="ml-2">
+      <label for="login_id">パスワード(必須・初期値:1234)</label><br>
+      <%= f.text_field :password, class: "col-4 mt-1 ml-2", id: "login_id", value: "1234"%>
+    </div>
+    <div class="ml-2">
+      <label for="login_id">パスワード(確認)</label><br>
+      <%= f.text_field :password_confirmation, class: "col-4 mt-1 ml-2", id: "login_id", value: "1234"%>
+    </div>
+    <div class="ml-2">
+    <%= f.submit "ユーザー追加", class:"btn btn-primary btn-sm  add-section section-lists col-3 mt-3 ml-3"%>
+    </div>
+  <%end%>
+</div>
+<div class="users">
+  <%@users.each do |user| %>
+    user.name
+  <%end%>
+</div>

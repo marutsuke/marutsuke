@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'users/new'
-    get 'users/edit'
-    get 'users/show'
-    get 'users/index'
+    resources :users
   end
+
  root 'books#index'
 
  resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
@@ -26,7 +24,6 @@ Rails.application.routes.draw do
   end
 
   resources :small_questions, only: [:destroy]
-
 
   resources :small_questions, only: [] do
     resources :answers, only: [:show, :create, :update]

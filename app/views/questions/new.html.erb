@@ -1,12 +1,14 @@
 <%= render "shared/header" %>
-<div class="breadcrumbs"><%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
+  <div class="breadcrumbs">
+    <%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
+  </div>
 <div class="col-10 offset-1 card mt-5 mr-3 mb-5" >
   <div class="card-body">
     <div>問題の追加</div>
     <%= form_tag("/sections/#{@section.id}/questions",method: :post) do%>
       <div class= "textarea">
         <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="18" name="text" placeholder="本文のみ入力してください。(必須)" autocomplete="off"></textarea>
-        <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(必須)" autocomplete="off"></textarea> 
+        <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(必須)" autocomplete="off"></textarea>
       </div>
       <div class="row justify-content-between">
         <button type="button" class="add-small-question btn btn-primary btn-sm  add-section section-lists col-2" style="min-width: 4rem;">小問の追加</button>
@@ -16,42 +18,42 @@
   </div>
 </div>
 <div class="row justify-content-around questions">
-<% i=1 %>
-<% @questions.each do |question|%>
-  <div class="card off col-10 col-lg-5 question-card question-<%=question.id%>">
-    <div class="card-body">
-      <h5 class="card-title question-text">[<%=i%>]</h5>
-      <p class="card-text question-text"><%= simple_format(question.text) %></p>
-      <%=link_to '編集ページへ', edit_question_path(question.id), class:'btn btn-success btn-sm'%>
-      <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-q-btn" data-question_id="<%=question.id%>" style="min-width: 8rem;">大問の削除
-      </button>
+  <% i=1 %>
+  <% @questions.each do |question|%>
+    <div class="card off col-10 col-lg-5 question-card question-<%=question.id%>">
+      <div class="card-body">
+        <h5 class="card-title question-text">[<%=i%>]</h5>
+        <p class="card-text question-text"><%= simple_format(question.text) %></p>
+        <%=link_to '編集ページへ', edit_question_path(question.id), class:'btn btn-success btn-sm'%>
+        <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-q-btn" data-question_id="<%=question.id%>" style="min-width: 8rem;">大問の削除
+        </button>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% j = 1 %>
+        <% question.small_questions.each do |small_question| %>
+          <li class="list-group-item small-question-<%=small_question.id%> ">
+            <span>(<%=j%>) </span><%= small_question.text %>
+              <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-sq-btn" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">小問の削除
+              </button>
+            </br>
+            解答：
+            <span class="answers-<%=small_question.id%>">
+              <% small_question.answers.each do |answer| %>
+                <span>・<%= answer.answer %></span>
+              <%end%>
+            </span>
+            </br>
+              <%= form_tag("/small_questions/#{small_question.id}/answers", method: :post) do %>
+                <div class="create-ansewer">
+                  <input class="count-ansewr" type="answer" size="20",maxlength="30" name="answer" placeholder="解答(必須)" autocomplete="off">
+                </div>
+                <button type="button" class="btn btn-primary btn-sm  add-answer section-lists col-2" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">解答の登録</button>
+              <%end%>
+          </li>
+        <% j += 1%>
+        <% end %>
+      </ul>
     </div>
-    <ul class="list-group list-group-flush">
-      <% j = 1 %>
-    <% question.small_questions.each do |small_question| %>
-      <li class="list-group-item small-question-<%=small_question.id%> ">
-        <span>(<%=j%>) </span><%= small_question.text %>
-          <button type="submit" class="btn btn-danger btn-sm col-1 float-right delete-sq-btn" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">小問の削除
-          </button>
-        </br>
-        解答：
-        <span class="answers-<%=small_question.id%>">
-          <% small_question.answers.each do |answer| %>
-            <span>・<%= answer.answer %></span>
-          <%end%>
-        </span>
-        </br>
-          <%= form_tag("/small_questions/#{small_question.id}/answers", method: :post) do %>
-            <div class="create-ansewer">
-              <input class="count-ansewr" type="answer" size="20",maxlength="30" name="answer" placeholder="解答(必須)" autocomplete="off">
-            </div>
-            <button type="button" class="btn btn-primary btn-sm  add-answer section-lists col-2" data-small_question_id="<%=small_question.id%>" style="min-width: 8rem;">解答の登録</button>
-          <%end%>
-      </li>
-      <% j += 1%>
-    <% end %>
-    </ul>
-  </div>
-  <% i += 1%>
-<%end%>
+    <% i += 1%>
+  <%end%>
 </div>

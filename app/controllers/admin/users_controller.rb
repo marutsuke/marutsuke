@@ -2,6 +2,7 @@ class Admin::UsersController < ApplicationController
 
   def new
     @user = User.new
+    @users = User.where(admin:false)
   end
 
   def create

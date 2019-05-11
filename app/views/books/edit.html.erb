@@ -9,7 +9,7 @@
         <i class="fa fa-image book-edit-image"></i>
         <%= f.file_field :image, class: "col-8 mt-1", id: "book-image",style:"display:none;"%>
       </label>
-      <%= f.submit "編集", class:"btn btn-success btn-sm  add-section section-lists col-3 float-right"%>
+      <%= f.submit "編集", class:"btn btn-success btn-sm  add-section section-lists mt-1 col-3 float-right"%>
     <%end%>
     </div>
   <div class="col-12 card float-right mt-5 mr-3">
@@ -18,7 +18,7 @@
       <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
         <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="" autocomplete="off">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
-        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mb-3" style="min-width: 4rem;">追加</button>
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mt-1" style="min-width: 4rem;">追加</button>
       <% end %>
       <% if @book.image.url%>
         <%= image_tag("#{@book.image.url}",class:"rounded image-tag", alt:"画像") %>
@@ -33,7 +33,7 @@
       <div class="chapter-edit">
         <%= form_with(model:chapter) do |f|%>
           <%=f.text_field :chapter%>
-          <%= f.submit "編集", class:"btn btn-success btn-sm mb-3"%>
+          <%= f.submit "編集", class:"btn btn-success btn-sm"%>
         <%end%>
       </div>
       <div class="chapter-delete-div">
@@ -54,7 +54,7 @@
         <input type="text" class="col-8 mt-1" id="inlineFormInput" name="section" placeholder=""  autocomplete="off">
         <input type="hidden" name="chapter_id" value="<%=chapter.id%>">
         <input type="hidden" name="book_id" value="<%=@book.id%>">
-        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right" style="min-width: 4rem;">節の追加</button>
+        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mt-1" style="min-width: 4rem;">節の追加</button>
       <% end %>
     </div>
   </div>
