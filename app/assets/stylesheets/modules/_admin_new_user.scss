@@ -1,0 +1,68 @@
+.new-user-label{
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+.table{
+  border: solid 1px black;
+  margin: 10px;
+  width: 680px;
+  &__head{
+    border: solid 1px black;
+    &__id{
+      width:60px;
+      border-right: 1px solid black;
+    }
+    &__name{
+      width: 200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__login_id{
+      width:  200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__password{
+      width:200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__edit{
+      width: 80px;
+      border-right: 1px black solid;
+    }
+    &__delete{
+      width: 80px;
+    }
+  }
+  &__body{
+    border: solid 1px black;
+    &__id{
+      width:60px;
+      border-right: 1px solid black;
+    }
+    &__name{
+      width: 200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__login_id{
+      width:  200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__password{
+      width:200px;
+      text-align: left;
+      border-right: 1px black solid;
+    }
+    &__edit{
+      width: 80px;
+      border-right: 1px black solid;
+    }
+    &__delete{
+      width: 80px;
+    }
+  }
+
+}

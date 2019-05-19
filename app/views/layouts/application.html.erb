@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <div class="notification">
+      <%flash.each do |key,value|%>
+      <div class="aleart alert-success "><%=value%></div>
+      <%end%>
+    </div>
     <%= yield %>
     <small class="copyright">
         Copyright © 2019 NishiguchiShoichi All Right Reserved.

@@ -2,6 +2,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.includes(:chapters,:small_questions).all
+    @small_questions  = SmallQuestion.all
   end
 
   def show
@@ -16,6 +17,7 @@ class BooksController < ApplicationController
 
   def new
     @books = Book.includes(:chapters).all
+    @book = Book.new
   end
 
   def edit
@@ -23,8 +25,14 @@ class BooksController < ApplicationController
   end
 
   def create
-    new_book_create
-    redirect_to action: :new
+    @books = Book.includes(:chapters).all
+    @book = Book.new(book_params)
+    # binding.pry
+    if @book.save
+      redirect_to new_book_path, notice: "本を出版しました。"
+    else
+      render :new
+    end
   end
 
   def update
@@ -38,10 +46,11 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to action: :new
   end
+
   private
 
     def book_params
-      params.permit(:title, :image).merge(rate:0)
+      params.require(:book).permit(:title, :image).merge(rate:0)
     end
 
     def set_book_chapter
@@ -51,11 +60,6 @@ class BooksController < ApplicationController
       end
     end
 
-    def new_book_create
-      if params[:title] != ""
-        Book.create(book_params)
-      end
-    end
 
     def edit_book
       @book = Book.includes({chapters: [:sections]}).find(params.permit(:id)[:id])

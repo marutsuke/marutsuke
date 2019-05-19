@@ -13,9 +13,20 @@
         <li class="nav-item active">
           <%= link_to '本の追加・編集をする', new_book_path, method: :get, class: "nav-link f header-menu_list_a" %>
         </li>
+          <%if current_user&.admin%>
         <li class="nav-item active">
           <%= link_to 'ユーザー管理', admin_users_path, method: :get, class: "nav-link f header-menu_list_a" %>
         </li>
+          <%end%>
+        <%if current_user%>
+          <li class="nav-item active">
+            <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-link f header-menu_list_a" %>
+          </li>
+        <%else%>
+          <li class="nav-item active">
+            <%= link_to 'ログイン', login_path, method: :get, class: "nav-link f header-menu_list_a" %>
+          </li>
+        <%end%>
       </ul>
     </div>
   </nav>

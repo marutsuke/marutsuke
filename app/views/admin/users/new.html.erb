@@ -1,29 +1,67 @@
+<%=render "shared/header"%>
 <h1>ユーザー登録ページ</h1>
+<%= link_to 'ユーザー一覧ページ', admin_users_path, method: :get, class: "nav-link f header-menu_list_a" %>
+<%if @user.errors.present?%>
+  <ul>
+    <%@user.errors.messages.each_value do |message| %>
+    <li class="error-message"><%=message[0]%></li>
+    <%end%>
+  </ul>
+<%end%>
 <div  class="user-register-form">
-  <%= form_with(model: [:admin,@user]) do |f|%>
+  <%= form_with(model: [:admin,@user],local:true) do |f|%>
     <div class="ml-2">
-      <label for="user_name">名前</label><br>
+      <label for="user_name">名前</label class="new-user-label"><br>
       <%= f.text_field :name ,class: "col-4 mt-1 ml-2", id:"user_name",autocomplete:'off',value:""%>
     </div>
     <div class="ml-2">
-      <label for="login_id">ログインID</label><br>
+      <label for="login_id" class="new-user-label">ログインID</label><br>
         <%= f.text_field :login_id, class: "col-4 mt-1 ml-2", id: "login_id"%>
     </div>
     <div class="ml-2">
-      <label for="login_id">パスワード(必須・初期値:1234)</label><br>
-      <%= f.text_field :password, class: "col-4 mt-1 ml-2", id: "login_id", value: "1234"%>
+      <label for="password" class="new-user-label">パスワード(必須・初期値:1234)</label><br>
+      <%= f.text_field :password, class: "col-4 mt-1 ml-2", id: "password", value: "1234"%>
     </div>
-    <div class="ml-2">
-      <label for="login_id">パスワード(確認)</label><br>
-      <%= f.text_field :password_confirmation, class: "col-4 mt-1 ml-2", id: "login_id", value: "1234"%>
+    <div class="ml-2" >
+      <label for="password_confirmation" class="new-user-label">パスワード(確認)</label><br>
+      <%= f.text_field :password_confirmation, class: "col-4 mt-1 ml-2", id: "password_confirmation", value: "1234"%>
     </div>
     <div class="ml-2">
     <%= f.submit "ユーザー追加", class:"btn btn-primary btn-sm  add-section section-lists col-3 mt-3 ml-3"%>
     </div>
   <%end%>
 </div>
-<div class="users">
-  <%@users.each do |user| %>
-    user.name
-  <%end%>
-</div>
+<table class="table">
+  <thead class="table__head">
+    <tr>
+      <th class="table__head__id">id</th>
+      <th class="table__head__name">名前</th>
+      <th  class="table__head__login_id">ログインID</th>
+      <th class="table__head__password">パスワード</th>
+      <th class="table__head__edit">編集</th>
+      <th class="table__head__delete">削除</th>
+    </tr>
+  </thead>
+  <tbody class="table__body">
+    <%@users.each do |user| %>
+      <tr>
+        <td class="table__body__id"><%=user.id%></td>
+        <td class="table__body__name">
+          <%if user.admin%>★<%end%><%=user.name%>
+        </td>
+        <td class="table__body__login_id">
+          <%=user.login_id%>
+        </td>
+        <td class="table__body__password">
+          非表示
+        </td>
+        <td class="table__body__edit">
+          <%=link_to "編集", edit_admin_user_path(user.id), class: "btn btn-sm btn-success" %>
+        </td>
+        <td class="table__body__delete">
+          <%=link_to "削除", admin_user_path(user.id), method:"delete",class: "btn btn-sm btn-danger",data:{confirm:"#{user.name}さんを削除します。本当によろしいですか。"}%>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
