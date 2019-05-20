@@ -1,6 +1,7 @@
 @import './reset';
 @import "bootstrap";
 @import "./mixin/mixin";
+@import "./mixin/flex";
 @import './shared/header';
 @import './config/color';
 @import './modules/lists';
@@ -15,4 +16,5 @@
 @import "./modules/admin_edit_user";
 @import "./shared/messages";
 @import "./modules/book_new";
-@import "./modules/session_login"
+@import "./modules/session_login";
+@import "./modules/buy_index";

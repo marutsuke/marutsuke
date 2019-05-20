@@ -34,4 +34,6 @@ Rails.application.routes.draw do
     resources :answers, only: [:show, :create, :update]
   end
 
+  resources :buy, only: [:index,:new,:create,:destroy,:show]
+
 end

@@ -3,4 +3,7 @@ class User < ApplicationRecord
   validates :login_id, presence: {message:"ログインIDを入力してください。"}, uniqueness: {message: "同じログインIDが存在します。別のIDに変えてください。"}, length: {maximum: 12, message:"ログインIDは、12文字以内となります。"}
   validates :password, presence: true, confirmation: true
   has_secure_password
+
+  has_many :user_books
+  has_many :books, through: :user_books
 end
