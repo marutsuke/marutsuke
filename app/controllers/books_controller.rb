@@ -1,8 +1,12 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.includes(:chapters,:small_questions).all
-    @small_questions  = SmallQuestion.all
+    if current_user
+      @books = current_user.books.includes(:chapters,:small_questions).all
+      @small_questions  = SmallQuestion.all
+    else
+      @books = Book.where(id: 1)
+    end
   end
 
   def show
