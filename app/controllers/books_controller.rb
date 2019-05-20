@@ -5,7 +5,7 @@ class BooksController < ApplicationController
       @books = current_user.books.includes(:chapters,:small_questions)
       @small_questions  = SmallQuestion.all
     else
-      @books = Book.where(id:1)
+      @books = Book.where(author_id:1)
     end
   end
 
