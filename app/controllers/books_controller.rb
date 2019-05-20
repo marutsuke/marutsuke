@@ -2,10 +2,10 @@ class BooksController < ApplicationController
 
   def index
     if current_user
-      @books = current_user.books.includes(:chapters,:small_questions).all
+      @books = current_user.books.includes(:chapters,:small_questions)
       @small_questions  = SmallQuestion.all
     else
-      @books = Book.where(id: 1)
+      @books = Book.where(id:1)
     end
   end
 
@@ -20,7 +20,11 @@ class BooksController < ApplicationController
   end
 
   def new
-    @books = current_user.books.includes(:chapters)
+    if current_user.admin
+      @books = Book.includes(:chapters).all
+    else
+      @books = Book.where(author_id:current_user.id).includes(:chapters)
+    end
     @book = Book.new
   end
 
@@ -33,6 +37,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     # binding.pry
     if @book.save
+       current_user.books << @book
       redirect_to new_book_path, notice: "本を出版しました。"
     else
       render :new
@@ -54,7 +59,7 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:title, :image).merge(rate:0)
+      params.require(:book).permit(:title, :image).merge(rate:0,author_id:current_user.id)
     end
 
     def set_book_chapter
