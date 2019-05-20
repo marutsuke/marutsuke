@@ -20,7 +20,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @books = Book.includes(:chapters).all
+    @books = current_user.books.includes(:chapters)
     @book = Book.new
   end
 
