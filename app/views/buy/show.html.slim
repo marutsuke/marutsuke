@@ -1,0 +1,8 @@
+=render "shared/header"
+.buy-container.col-6.offset-3
+  -if @book.image&.url
+    =image_tag(@book.image.url,class:"buy-container__image")
+    .buy-container__title=@book.title
+  -@book.chapters.each do |chapter|
+    .buy-container__chapter=chapter.chapter
+  =link_to "購入する",buy_buy_path(@book.id),class:"btn btn-primary",data:{confirm: "0円です。購入しますか？"}

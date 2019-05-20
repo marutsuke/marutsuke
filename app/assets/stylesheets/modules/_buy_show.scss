@@ -1,0 +1,13 @@
+.buy-container{
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 20px;
+  &__image{
+    width: 100%;
+    border-radius: 20px;
+  }
+  &__title{
+    margin-top: 10px;
+    font-size: 28px;
+  }
+}

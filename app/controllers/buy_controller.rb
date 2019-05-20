@@ -16,4 +16,10 @@ class BuyController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def buy
+    @book = Book.find(params[:id])
+    current_user.books << @book
+    redirect_to buy_index_path, notice:"#{@book.title}を購入しました。"
+  end
+
 end

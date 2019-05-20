@@ -84,3 +84,4 @@ group :development, :test do
 end
 gem  'nokogiri', '1.10.2'
 gem 'fog-aws'
+gem 'slim-rails'
