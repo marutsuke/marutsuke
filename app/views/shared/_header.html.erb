@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse header-menu" id="navbarNav">
       <ul class="navbar-nav header-menu_list">
-          <%if current_user&.admin%>
+          <%# <%if current_user&.admin%>
         <li class="nav-item active">
           <%= link_to 'ユーザー管理', admin_users_path, method: :get, class: "nav-link f header-menu_list_a" %>
         </li>
