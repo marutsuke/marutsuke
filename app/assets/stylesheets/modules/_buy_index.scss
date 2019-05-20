@@ -1,0 +1,9 @@
+.card-contains{
+  padding: 10px;
+  @include flex-spbet;
+  flex-wrap: wrap;
+  &__card{
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+}
