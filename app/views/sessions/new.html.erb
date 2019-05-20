@@ -2,15 +2,18 @@
 
 <h1>ログイン</h1>
 <%=form_with scope: :session, local: true do |f|%>
-  <div class="form-group">
-    <%=f.label :login_id, class:'login_label'%>
-    ログインID
+  <div class="form-group col-6">
+    <%=f.label  :login_id,"ログインID", class:'login_label'%>
     <%=f.text_field :login_id, class:"form-control",id:"session_login_id" %>
   </div>
-  <div class="form-group">
-    <%=f.label :password, class:'password_label'%>
-    パスワード
-    <%=f.password_field :password, class:"form-control",id:"session_login_id"%>
+  <div class="form-group col-6">
+    <%=f.label :password,"パスワード", class:'password_label'%>
+    <%=f.password_field :password, class:"form-control",id:"session_password",autocomplete:"current_password"%>
   </div>
-  <%=f.submit "ログインする", class: 'btn btn-primary'%>
+  <%=f.submit "ログインする", class: 'btn btn-primary ml-3'%>
 <%end%>
+<div class = "sample-account ml-3">
+  <h5>体験用アカウント</h5>
+  <div>ログインID:sample</div>
+  <div>パスワード:1234</div>
+</div>
