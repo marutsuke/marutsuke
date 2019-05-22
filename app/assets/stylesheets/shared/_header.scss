@@ -1,6 +1,14 @@
 .header-marutsuke{
   font-size: 30px;
   color: red;
+  &__div{
+    background-image:image-url("marutsuke.jpeg");
+    background-size: 10vh;
+    min-height: 10vh;
+    min-width: 10vh;
+    background-color: red;
+    border-radius:50%;
+  }
 }
 .navbar1{
   min-height: 10vh;
