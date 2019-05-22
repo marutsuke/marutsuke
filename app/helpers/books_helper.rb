@@ -26,7 +26,7 @@ module BooksHelper
       correct_count = book.correct_numbers.select{|correct_number|correct_number.user_id == current_user&.id}.length
       return "進捗:#{correct_count}/#{small_question_count}問"
     else
-      return ""
+      return "進捗:-"
     end
   end
 
