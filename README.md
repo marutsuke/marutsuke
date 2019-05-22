@@ -22,13 +22,10 @@
 
 ### ・全ての問題集の管理・編集
 
-# Description
 
+# environment
 
+### Rails 5.2.3
 
-
-
-Rails 5.2.3
-
-ruby 2.5.1
+### ruby 2.5.1
 
