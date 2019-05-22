@@ -1,7 +1,20 @@
 <%= render "shared/header" %>
-  <div class="breadcrumbs">
-    <%= @section.chapter.book.title %> > <%= @section.chapter.chapter%> > <%= @section.section%>
-  </div>
+<div class="breadcrumbs">
+  <%=link_to "出版・編集ページ", new_book_path, class:"breadcrumbs__link"%>
+  <%=fa_icon("chevron-right breadcrumbs__chevron")%>
+  <%=link_to "#{@section.chapter.book.title}", edit_book_path(@section.chapter.book.id), class:"breadcrumbs__link"%>
+  <%=fa_icon("chevron-right breadcrumbs__chevron")%>
+  <span><%=@section.chapter.chapter%></span>
+  <%=fa_icon("chevron-right breadcrumbs__chevron")%>
+  <span><%=@section.section%></span>
+</div>
+<div class="form-group col-6">
+  <%=form_with(model:@section,local:true)do |f|%>
+  <%=f.label :section,"節の編集"%>
+  <%=f.text_field :section,class:"col-6",autocomplete:'off'%>
+  <%=f.submit "編集",class:"btn btn-sm btn-success"%>
+  <%end%>
+</div>
 <div class="col-10 offset-1 card mt-5 mr-3 mb-5" >
   <div class="card-body">
     <div>問題の追加</div>

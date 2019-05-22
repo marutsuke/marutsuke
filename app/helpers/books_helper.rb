@@ -9,6 +9,7 @@ module BooksHelper
     end
   end
 
+  ##以下は未使用。削除可
   def rate_book_sm(book,smallquestions)
     correct_count = small_questions.select{|smallquestion|smallquestion.correct_count > 0 && smallquestion.book_id == book.id}.length
     small_question_count = small_questions.select{|smallquestion| smallquestion.book_id == book.id}.length
@@ -19,8 +20,10 @@ module BooksHelper
     end
   end
 
-  def self.category_children(category_id)
-    self.data.select{|category_children| category_children[:category_id] == category_id}
+  def book_correct_count(book)
+    small_question_count = book.small_questions.length
+    correct_count = book.small_questions.select{|smallquestion|smallquestion.correct_count > 0}.length
+    return "進捗:#{correct_count}/#{small_question_count}問"
   end
 
 end

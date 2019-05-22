@@ -22,3 +22,13 @@
     }
   }
 }
+.breadcrumbs{
+  margin-top: 1px;
+  background-color: #F8F8F8;
+  &__link{
+    color: black;
+  }
+}
+.fa-breadcrumbs__chevron{
+  color: gray;
+}

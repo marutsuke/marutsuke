@@ -18,7 +18,10 @@ class SectionsController < ApplicationController
   end
 
   def update
-
+    @section = Section.find(params[:id])
+    if @section.update(section_params)
+      redirect_to new_section_question_path(@section.id)
+    end
   end
 
   private
@@ -34,5 +37,8 @@ class SectionsController < ApplicationController
     end
   end
 
+  def section_params
+    params.require(:section).permit(:section)
+  end
 
 end

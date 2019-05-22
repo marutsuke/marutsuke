@@ -1,5 +1,4 @@
 .buy-container{
-  text-align: center;
   margin-top: 20px;
   border-radius: 20px;
   &__image{
@@ -9,5 +8,15 @@
   &__title{
     margin-top: 10px;
     font-size: 28px;
+    text-align: center;
+  }
+  &__introduction{
+    margin: 5px;
+  }
+  &__chapter-head{
+    font-size: 20px;
+  }
+  &__chapter{
+    font-size: 18px;
   }
 }
