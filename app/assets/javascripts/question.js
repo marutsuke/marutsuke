@@ -7,7 +7,6 @@ $(function(){
 
 
     let href = `/small_questions/${small_question_id}/answers`
-    console.log(small_question_id,answer,href);
     if (answer!==""){
       $.ajax({
         url: href,
@@ -86,9 +85,20 @@ $(function(){
   })
 
   //--この下は、問題の丸つけ用----------
-  function judge(data_count,html_count,id){
+  // function judge(data_count,html_count,id){
+  //   $(`.judged-${id}`).remove()
+  //   if(data_count !== html_count){
+  //     $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-blue col-3">正解！</li>`)
+  //     $(`.btn-${id}`).prop("disabled", true);
+  //   }
+  //   else{
+  //     $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-red col-3">もう一度チャレンジ！</li>`)
+  //   }
+  // }
+
+  function judge(user_answer,answers,id){
     $(`.judged-${id}`).remove()
-    if(data_count !== html_count){
+    if(answers.includes(user_answer)){
       $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-blue col-3">正解！</li>`)
       $(`.btn-${id}`).prop("disabled", true);
     }
@@ -96,6 +106,8 @@ $(function(){
       $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-red col-3">もう一度チャレンジ！</li>`)
     }
   }
+
+
   function commentary(count,question_id){
     if($(".jq-blue").length == count){
      $(".list-group").append(`<li><a href="/questions/${question_id}/small_questions">解答・解説をみる！</a></li>`)
@@ -106,20 +118,17 @@ $(function(){
     e.preventDefault();
     let answer = $(this).prev().val();
     let small_question_id = $(this).data('small_question_id')
-    let question_id = $(this).next().data('question_id');
+    // let question_id = $(this).next().data('question_id');
     let correct_count = $(this).next().next().data('correct_count');
-
-    href = "/questions/" + question_id.toString() + "/small_questions/" + small_question_id.toString()
-
+    href = "/marutsuke"
     $.ajax({
       url: href,
-      type: "GET",
+      type: "POST",
       data: {smallquestionid: small_question_id, answer: answer},
       dataType: 'json'
     })
     .done(function(data){
-      judge(data.correct_count,correct_count,data.id)
-      commentary(data.small_question_count,data.question_id)
+      judge(data.user_answer,data.answers,data.id)
     })
     .fail(function(){
       alert('エラーです');

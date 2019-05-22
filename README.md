@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# AppName : Marutsuke
 
-Things you may want to cover:
+# Overview
 
-* Ruby version
+## 問題を解ける・丸付けしてもらえる・問題集を作れるアプリ
 
-* System dependencies
+## ユーザーにできること
 
-* Configuration
+### ・問題集の作成。
 
-* Database creation
+### ・ユーザーが作った問題集を解くことができる。(正誤判定付き)
 
-* Database initialization
+### ・問題集の進捗の確認
 
-* How to run the test suite
+### ・他のユーザーが作った問題集の購入
 
-* Services (job queues, cache servers, search engines, etc.)
+## 管理者にできること
 
-* Deployment instructions
+### ・ユーザーの管理・編集・削除
 
-* ...
+### ・全ての問題集の管理・編集
+
+# Description
+
+
+
+
+
+Rails 5.2.3
+
+ruby 2.5.1
+
