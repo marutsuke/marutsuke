@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :user_books
   has_many :books, through: :user_books
+  has_many :correct_numbers
+  has_many :small_questions, through: :correct_numbers
 end

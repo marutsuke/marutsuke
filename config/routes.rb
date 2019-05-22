@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
  root 'books#index'
 
+ resources :marutsuke, only: [:create, :show]
+
  resources :books, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
    resources :chapters, only: [:show, :new, :edit, :create]
  end
