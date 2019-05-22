@@ -22,7 +22,7 @@
             <%= link_to '本を購入する', buy_index_path, method: :get, class: "nav-link f header-menu_list_a" %>
           </li>
           <li class="nav-item active">
-            <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-link f header-menu_list_a" %>
+            <%= link_to "#{current_user&.name}さん・ログアウト", logout_path, method: :delete, class: "nav-link f header-menu_list_a" %>
           </li>
         <%else%>
           <li class="nav-item active">
