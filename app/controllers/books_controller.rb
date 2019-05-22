@@ -21,9 +21,9 @@ class BooksController < ApplicationController
 
   def new
     if current_user.admin
-      @books = Book.includes(:chapters).all
+      @books = Book.includes(:chapters).all.order('updated_at DESC')
     else
-      @books = Book.where(author_id:current_user.id).includes(:chapters)
+      @books = Book.where(author_id:current_user.id).includes(:chapters).order('updated_at DESC')
     end
     @book = Book.new
   end
@@ -46,8 +46,12 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.update!(update_book_params)
-    redirect_to action: :edit, id: @book.id
+    if @book.update(update_book_params)
+      redirect_to action: :edit, id: @book.id
+    else
+      edit_book
+      render :edit
+    end
   end
 
   def destroy
@@ -59,7 +63,7 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:title, :image).merge(rate:0,author_id:current_user.id)
+      params.require(:book).permit(:title,:introduction, :image).merge(rate:0,author_id:current_user.id)
     end
 
     def set_book_chapter
@@ -80,7 +84,7 @@ class BooksController < ApplicationController
     end
 
     def update_book_params
-      params.require(:book).permit(:title,:image)
+      params.require(:book).permit(:title,:image,:introduction)
     end
 
 end

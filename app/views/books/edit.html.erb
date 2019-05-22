@@ -1,33 +1,53 @@
 <%= render "shared/header" %>
-
-<div class="breadcrumbs float-right col-4">
-  <h4 style="text-align:center;"><%= @book.title %></h4>
-    <div class="book-edit">
-      <%= form_with(model: @book) do |f|%>
-      <%= f.text_field :title ,class: "col-8 mt-1",autocomplete:'off'%>
-      <label for="book-image">
-        <i class="fa fa-image book-edit-image"></i>
-        <%= f.file_field :image, class: "col-8 mt-1", id: "book-image",style:"display:none;"%>
-      </label>
-      <%= f.submit "編集", class:"btn btn-success btn-sm  add-section section-lists mt-1 col-3 float-right"%>
-    <%end%>
-    </div>
-  <div class="col-12 card float-right mt-5 mr-3">
-    <div class="card-body">
-      <div>章の追加</div>
-      <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
-        <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="" autocomplete="off">
-        <input type="hidden" name="book_id" value="<%=@book.id%>">
-        <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mt-1" style="min-width: 4rem;">追加</button>
-      <% end %>
-      <% if @book.image.url%>
-        <%= image_tag("#{@book.image.url}",class:"rounded image-tag", alt:"画像") %>
+<div class="breadcrumbs">
+  <%=link_to "出版・編集ページ", new_book_path, class:"breadcrumbs__link"%>
+  <%=fa_icon("chevron-right breadcrumbs__chevron")%>
+  <span><%=@book.title%></span>
+</div>
+<div class="error-message">
+  <%if @book.errors.any?%>
+    <ul>
+      <% @book.errors.messages.each_value do |message|%>
+        <li class="error"><%= message[0]%></li>
       <%end%>
-    </div>
+    </ul>
+  <%end%>
+</div>
+<div class="col-8 offset-2 card  mt-5 mb-3" >
+  <div class="card-body">
+    <h3>本の編集</h3>
+    <%= form_with(model: @book, url: book_path(@book.id),local:true) do |f|%>
+      <div class="form-group">
+        <%=f.label :title, "タイトル" %>
+        <%= f.text_field :title ,class: "col-8 mt-1",autocomplete:'off'%>
+      </div>
+      <div class="form-group">
+        <%=f.label :introduction, "紹介文", class:"float-left" %>
+        <%=f.text_area :introduction,class:"col-8 ml-4", rows: "10"%>
+      </div>
+      <%=f.label :image, "表紙の画像", class:"float-left" %>
+      <%= f.file_field :image, class: "col-8 mt-1", id: "book-image"%>
+      <%= f.submit "編集", class:"btn btn-success btn-sm  add-section section-lists col-1 float-right"%>
+    <%end%>
+    <%if @book.image&.url%>
+      <%= image_tag("#{@book.image.url}",class:"rounded image-tag offset-3 col-6", alt:"画像") %>
+    <%end%>
+  </div>
+</div>
+
+<h4 style="text-align:center;"><%= @book.title %></h4>
+<div class="col-6 offset-3 card mt-5 mr-3">
+  <div class="card-body">
+    <div>章の追加</div>
+    <%= form_tag("/books/#{@book.id}/chapters",method: :post) do%>
+      <input type="text" class="col-8 mt-1" id="inlineFormInput" name="chapter" placeholder="" autocomplete="off">
+      <input type="hidden" name="book_id" value="<%=@book.id%>">
+      <button type="submit" class="btn btn-primary btn-sm  add-section section-lists col-3 float-right mt-1" style="min-width: 4rem;">追加</button>
+    <% end %>
   </div>
 </div>
 <% @chapters.each do|chapter| %>
-  <div class="col-6 offset-1 card mt-5">
+  <div class="col-6 offset-3 card mt-5">
     <div class="card-body">
       <h5 class="card-title"><%= chapter.chapter %></h5>
       <div class="chapter-edit">
