@@ -22,7 +22,7 @@ module BooksHelper
 
   def book_correct_count(book)
     small_question_count = book.small_questions.length
-    correct_count = book.small_questions.select{|smallquestion|smallquestion.correct_count > 0}.length
+    correct_count = book.correct_numbers.select{|correct_number|correct_number.user_id == current_user.id}.length
     return "進捗:#{correct_count}/#{small_question_count}問"
   end
 
