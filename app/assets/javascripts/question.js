@@ -85,16 +85,6 @@ $(function(){
   })
 
   //--この下は、問題の丸つけ用----------
-  // function judge(data_count,html_count,id){
-  //   $(`.judged-${id}`).remove()
-  //   if(data_count !== html_count){
-  //     $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-blue col-3">正解！</li>`)
-  //     $(`.btn-${id}`).prop("disabled", true);
-  //   }
-  //   else{
-  //     $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-red col-3">もう一度チャレンジ！</li>`)
-  //   }
-  // }
 
   function judge(user_answer,answers,id){
     $(`.judged-${id}`).remove()
@@ -106,7 +96,6 @@ $(function(){
       $(`.judge-${id}`).append(`<li class="judged-${id} animated bounceInDown faster jq-red col-3">もう一度チャレンジ！</li>`)
     }
   }
-
 
   function commentary(count,question_id){
     if($(".jq-blue").length == count){

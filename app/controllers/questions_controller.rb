@@ -40,6 +40,8 @@ class QuestionsController < ApplicationController
     def set_questions
       @question = Question.find(params.permit(:id)[:id])
       @small_questions = @question.small_questions
+      @section = @question.section
+      @chapter = @section.chapter
     end
 
     def new_question_create

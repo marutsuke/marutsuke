@@ -20,7 +20,7 @@
     <div>問題の追加</div>
     <%= form_tag("/sections/#{@section.id}/questions",method: :post) do%>
       <div class= "textarea">
-        <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="18" name="text" placeholder="本文のみ入力してください。(必須)" autocomplete="off"></textarea>
+        <textarea type="textarea" class="col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="18" name="text" placeholder="大問入力欄-本文のみ入力してください。(必須)-" autocomplete="off"></textarea>
         <textarea type="textarea" class="count col-10 offset-1 mt-1 mb-3 form-control" id="inlineFormInput" rows="5" name="small_text-1" placeholder="(1)本文のみ入力してください。(必須)" autocomplete="off"></textarea>
       </div>
       <div class="row justify-content-between">

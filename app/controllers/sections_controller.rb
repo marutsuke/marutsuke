@@ -29,6 +29,8 @@ class SectionsController < ApplicationController
   def set_section_questions
     @section = Section.includes({questions: [:small_questions]}).find(params[:id])
     @questions = @section.questions
+    @chapter = @section.chapter
+    @book = @chapter.book
   end
 
   def create_section

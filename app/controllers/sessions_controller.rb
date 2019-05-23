@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.find_by(login_id: session_params[:login_id])
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-
       redirect_to root_path, notice:"#{user.name}さん、こんにちは！"
     else
       render  :new, notice:'ログインに失敗しました。'
