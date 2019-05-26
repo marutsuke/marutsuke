@@ -30,7 +30,7 @@
 <%if current_user.admin%>
   <h4 class="your-book-index">全部の本</h4>
 <%else%>
-  <h4 class="your-book-index"> あなたの出版した本一覧 </h4>
+  <h4 class="your-book-index"> あなたの編集・出版した本一覧 </h4>
 <%end%>
 <% @books.each do|book| %>
   <div class="col-6 offset-3  card mt-5">
@@ -44,7 +44,7 @@
         <%end%>
       </div>
       <li class="" data-book_id = <%= book.id %> style="list-style:none;">
-        <a class="fa fa-pencil-square-o icon" href="/books/<%=book.id%>/edit"></a>
+        <%=link_to "", edit_book_path(book.id),class:"fa fa-pencil-square-o icon"%>
       </li>
     </div>
     <div class="book-new-introduction">
@@ -53,6 +53,11 @@
     <div class="book-new-smallquestion-count">
       小問:<%=book.small_questions.length%>問
     </div>
+    <%if book.published%>
+      <%=link_to "販売中止", publish_path(book.id),method: :patch,class:"btn btn-danger btn-sm col-3 offset-9 mb-3", data: { confirm: '出版を取り下げます。よろしいですか。' }%>
+    <%else%>
+      <%=link_to "出版する", publish_path(book.id),method: :patch, class:"btn btn-success btn-sm col-3 offset-9 mb-3", data: { confirm: '出版し公開ます。よろしいですか。' }%>
+    <%end%>
     <ul class="list-group list-group-flush">
       <%book.chapters.each do |chapter|%>
       <li class="list-group-item"><%= chapter.chapter %></li>

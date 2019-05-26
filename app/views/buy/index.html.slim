@@ -1,4 +1,6 @@
 = render "shared/header"
+-if @books == []
+  .no-book-buy 購入できる本はありません。
 .card-contains
   - @books.each do |book|
     .card.card-contains__card style="width: 18rem;"

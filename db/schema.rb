@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_102832) do
+ActiveRecord::Schema.define(version: 2019_05_26_025518) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_05_22_102832) do
     t.integer "rate"
     t.integer "author_id", default: 1
     t.text "introduction"
+    t.boolean "published", default: false, null: false
   end
 
   create_table "chapters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -6,7 +6,7 @@ class BuyController < ApplicationController
   end
 
   def index
-    @books = Book.all - current_user.books
+    @books = Book.where(published:true) - current_user.books
   end
 
   def destroy
