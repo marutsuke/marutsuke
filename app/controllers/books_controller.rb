@@ -35,10 +35,9 @@ class BooksController < ApplicationController
   def create
     @books = Book.includes(:chapters).all
     @book = Book.new(book_params)
-    # binding.pry
     if @book.save
        current_user.books << @book
-      redirect_to new_book_path, notice: "本を出版しました。"
+      redirect_to new_book_path, notice: "本を作成しました。"
     else
       render :new
     end
