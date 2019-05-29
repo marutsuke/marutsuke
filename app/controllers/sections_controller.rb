@@ -2,6 +2,7 @@ class SectionsController < ApplicationController
 
   def show
     set_section_questions
+    @correct_numbers = current_user&.correct_numbers.map{|sq_numbers| sq_numbers.small_question_id}
   end
 
   def new

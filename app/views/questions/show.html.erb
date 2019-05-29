@@ -4,7 +4,7 @@
   <%=fa_icon("chevron-right breadcrumbs__chevron")%>
   <span><%= @chapter.chapter%></span>
   <%=fa_icon("chevron-right breadcrumbs__chevron")%>
-  <%=link_to "#{@section.section}", chapter_section_path(@section.id), class:"breadcrumbs__link"%>
+  <%=link_to "#{@section.section}", chapter_section_path(@chapter.id,@section.id), class:"breadcrumbs__link"%>
   <%=fa_icon("chevron-right breadcrumbs__chevron")%>
   <span>大問[<%=@question.num%>]</span>
 </div>
@@ -17,6 +17,9 @@
         <li class="list-group-item judge-<%=small_question.id%>"><span>(<%=j%>) </span><%= small_question.text %>
           <input type="text" size="18",maxlength="20" name="answer" placeholder="" autocomplete="off" class="input-answer">
           <button type="submit" class="btn btn-primary btn-sm marutsuke section-lists col-1 btn-<%=small_question.id %>" style="min-width: 6rem;" data-small_question_id="<%=small_question.id %>">丸つけ</button>
+          <%if @correct_numbers.include?(small_question.id)%>
+            <p class="float-right solved-question">正解済み！</p>
+          <%end%>
           <div data-question_id="<%=small_question.question.id%>"></div>
           <div data-correct_count="<%=small_question.correct_count%>"></div>
         </li>

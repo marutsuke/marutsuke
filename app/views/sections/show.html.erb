@@ -21,7 +21,12 @@
     <ul class="list-group list-group-flush">
       <% j = 1 %>
       <% question.small_questions.each do |small_question|%>
-      <li class="list-group-item"><span>(<%=j%>) </span><%= small_question.text %></li>
+      <li class="list-group-item">
+        <span>(<%=j%>) </span><%= small_question.text %>
+        <%if @correct_numbers.include?(small_question.id)%>
+          <p class="float-right solved-question">正解済み！</p>
+        <%end%>
+      </li>
       <% j += 1%>
       <% end %>
     </ul>
