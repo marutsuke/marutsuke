@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_26_025518) do
+ActiveRecord::Schema.define(version: 2019_05_31_235400) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_025518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false, null: false
+    t.integer "login_count", default: 0
     t.index ["login_id"], name: "index_users_on_login_id", unique: true
   end
 
