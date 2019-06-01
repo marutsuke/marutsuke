@@ -35,9 +35,9 @@
   <thead class="table__head">
     <tr>
       <th class="table__head__id">id</th>
-      <th class="table__head__name">名前</th>
-      <th  class="table__head__login_id">ログインID</th>
-      <th class="table__head__password">パスワード</th>
+      <th class="table__head__name">名前(★は管理者)</th>
+      <th class="table__head__login_id">ログインID</th>
+      <th class="table__head__login-count">ログイン回数/最終ログイン</th>
       <th class="table__head__edit">編集</th>
       <th class="table__head__delete">削除</th>
     </tr>
@@ -53,7 +53,7 @@
           <%=user.login_id%>
         </td>
         <td class="table__body__password">
-          非表示
+          <%=user.login_count%>回/ <%=user.updated_at.strftime('%Y/%m/%d %H:%M')%>
         </td>
         <td class="table__body__edit">
           <%=link_to "編集", edit_admin_user_path(user.id), class: "btn btn-sm btn-success" %>

@@ -5,7 +5,7 @@
 .table{
   border: solid 1px black;
   margin: 10px;
-  width: 680px;
+  width: 780px;
   &__head{
     border: solid 1px black;
     &__id{
@@ -22,8 +22,8 @@
       text-align: left;
       border-right: 1px black solid;
     }
-    &__password{
-      width:200px;
+    &__login-count{
+      width:300px;
       text-align: left;
       border-right: 1px black solid;
     }
