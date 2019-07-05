@@ -1,8 +1,11 @@
 class SectionsController < ApplicationController
 
   def show
+    unless current_user
+      redirect_to login_path, notice: 'まずはログインをお願いします。'
+    end
     set_section_questions
-    @correct_numbers = current_user&.correct_numbers.map{|sq_numbers| sq_numbers.small_question_id}
+    @correct_numbers = current_user&.correct_numbers&.map{|sq_numbers| sq_numbers.small_question_id}
   end
 
   def new
