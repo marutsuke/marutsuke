@@ -7,7 +7,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'UA-154235866-1');
       var dimensionValue = "<%=current_user.present? ? current_user.correct_numbers.size : false %>";
       ga('set', 'dimension1', dimensionValue);
