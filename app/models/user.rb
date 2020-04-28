@@ -5,6 +5,6 @@ class User < ApplicationRecord
   validates :password, presence: true, confirmation: true
   has_secure_password
 
-  belongs_to :school
+  belongs_to :school,
   has_many :small_questions, through: :correct_numbers
 end
