@@ -1,4 +1,5 @@
 class Admin::Base < ApplicationController
+  include Admin::SessionsHelper
   before_action :admin_login_required
 
   private

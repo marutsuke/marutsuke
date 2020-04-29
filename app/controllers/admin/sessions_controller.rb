@@ -1,12 +1,15 @@
-class Admin::SessionsController < ApplicationController
+class Admin::SessionsController < Admin::Base
   def new
   end
 
   def create
     @admin = Admin.find_by(email: params[:session][:email].downcase)
-    if @user && @user.authenticate(params[:session][:password])
+    if @admin&.authenticate(params[:session][:password])
+      admin_log_in(@admin)
+      flash[:success] = 'ログイン成功に成功しました。'
+      redirect_to admin_users_path
     else
-      flash[:danger] = 'メールアドレスまたはパスワードが間違っています。'
+      flash.now[:danger] = 'メールアドレスまたはパスワードが間違っています。'
       render :new
     end
   end

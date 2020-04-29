@@ -22,8 +22,22 @@
     .notification
       - flash.each do |key,value|
         - case key
+        - when 'primary'
+          .alert.alert-primary= value
+        - when 'secondary'
+          .alert.alert-secondary= value
+        - when 'success'
+          .alert.alert-success= value
         - when 'danger'
-          .aleart.alert-success= value
+          .alert.alert-danger= value
+        - when 'warning'
+          .alert.alert-warning= value
+        - when 'info'
+          .alert.alert-info= value
+        - when 'light'
+          .alert.alert-light= value
+        - when 'dark'
+          .alert.alert-dark= value
     = yield
     .debug_space
       = debug(params) if Rails.env.development?
