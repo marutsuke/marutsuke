@@ -4,3 +4,6 @@
     = link_to '学校一覧画面', '#'
     = link_to '管理者作成', new_admin_admin_path
     = link_to '管理者ログイン', admin_login_path
+    = link_to '管理者ログアウト', admin_logout_path, method: :delete
+    - if current_admin
+      %p= current_admin.name + 'さん'

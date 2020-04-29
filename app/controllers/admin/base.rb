@@ -5,7 +5,9 @@ class Admin::Base < ApplicationController
   private
 
   def admin_login_required
-    # raise Forbidden unless current_user&.admin
+    unless current_admin
+      flash[:info] = 'ログインしてください'
+      redirect_to admin_login_path
+    end
   end
-
 end

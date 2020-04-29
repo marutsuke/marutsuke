@@ -1,4 +1,5 @@
 class Admin::SessionsController < Admin::Base
+  skip_before_action :admin_login_required
   def new
   end
 
@@ -15,5 +16,8 @@ class Admin::SessionsController < Admin::Base
   end
 
   def destroy
+    admin_log_out
+    flash[:danger] = 'ログアウトしました。'
+    redirect_to admin_users_path
   end
 end

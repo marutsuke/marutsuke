@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 describe Admin::AdminsController, type: :request do
-  describe '#new /admin/admins' do
+  describe '/admin/admins#new ' do
       it 'createエラー後更新してもアクセスできる' do
       get '/admin/admins'
       expect(response).to have_http_status(200)
     end
   end
 
-  describe '#new /admin/admins/new' do
+  describe '/admin/admins/new#new' do
     it 'アクセスできる' do
       get new_admin_admin_path
       expect(response).to have_http_status(200)
     end
   end
 
-  describe '#create /admin/admins/new' do
+  describe '/admin/admins/new#create' do
     let(:admin_params){ {
         name: "テスト",
         email: "test_mail@test.com",
