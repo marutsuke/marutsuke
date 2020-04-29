@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :admins, only: [:new, :create, :show, :update]
-    get '/admins', to: 'admins#new'
+    get '/admins', to: 'admins#new' #ok
     get '/login', to:'sessions#new'
     post '/login', to:'sessions#create'
     delete '/logout', to:'sessions#destroy'

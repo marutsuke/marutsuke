@@ -1,8 +1,10 @@
 .error_explanation {
   &__count {
+    color: $alert_orange;
   }
   &__ul {
   }
   &__li {
+    color: $alert_orange;
   }
 }
