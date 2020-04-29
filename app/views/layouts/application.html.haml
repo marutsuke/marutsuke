@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Global site tag (gtag.js) - Google Analytics
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-154235866-1"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-154235866-1', {
+        'custom_map': {'dimension1': 'current_question_cnt'},
+        'current_question_cnt': "#{current_user.present? ? current_user.correct_numbers.size : nil}"
+      });
+    %title Marutsuke
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = render 'shared/favicon'
+  %body
+    .notification
+      - flash.each do |key,value|
+        - case key
+        - when 'danger'
+          .aleart.alert-success= value
+    = yield
+    .debug_space
+      = debug(params) if Rails.env.development?
