@@ -18,6 +18,6 @@ class Admin::SessionsController < Admin::Base
   def destroy
     admin_log_out
     flash[:danger] = 'ログアウトしました。'
-    redirect_to admin_users_path
+    redirect_to admin_login_path
   end
 end
