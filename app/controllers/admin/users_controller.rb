@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::Base
 
 
   def index
-    @users = User.where(admin:false)
+    # @users = User.where(admin:false)
   end
 
 

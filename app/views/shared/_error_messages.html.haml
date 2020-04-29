@@ -1,0 +1,6 @@
+- if model_object.errors.any?
+  .error_explanation
+    .error_explanation__count= "#{ model_object.errors.count }件のエラーがあります。"
+    %ul.error_explanation__ul
+      - model_object.errors.full_messages.each do |msg|
+        %li.error_explanation__li= msg

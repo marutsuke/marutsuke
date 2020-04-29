@@ -1,0 +1,28 @@
+.user_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & form {
+    width: 80%;
+  }
+  &__label_and_input {
+    & label {
+      margin-bottom: 8px;
+      display: block;
+    }
+    & input {
+      width: 80%;
+      height: 32px;
+      margin-bottom: 15px;
+      border: 1px solid $light_gray;
+    }
+  }
+  &__submit_btn {
+    width: 80%;
+    height: 40px;
+    border: solid 1px $gray;
+    background-color: $btn_blue;
+    color: $white;
+    margin-top: 16px;
+  }
+}
