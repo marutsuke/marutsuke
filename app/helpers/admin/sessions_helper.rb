@@ -6,10 +6,17 @@ module Admin::SessionsHelper
   def remember(admin)
     admin.remember
     cookies.permanent.signed[:admin_id] = admin.id
-    cookies.permanent[:remember_token] = user.remember_token
+    cookies.permanent[:remember_token] = admin.remember_token
+  end
+
+  def forget(admin)
+    admin.forget
+    cookies.delete(:admin_id)
+    cookies.delete(:remember_token)
   end
 
   def admin_log_out
+    forget(current_admin)
     session.delete(:admin_id)
     @current_admin = nil
   end

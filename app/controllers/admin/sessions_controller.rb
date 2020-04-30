@@ -8,7 +8,7 @@ class Admin::SessionsController < Admin::Base
     if admin&.authenticate(params[:session][:password])
       admin_log_in(admin)
       flash[:success] = 'ログイン成功に成功しました。'
-      remember(admin)
+      params[:session][:remember_me] == '1' ? remember(admin) : forget(admin)
       redirect_to admin_users_path
     else
       flash.now[:danger] = 'メールアドレスまたはパスワードが間違っています。'
@@ -17,7 +17,7 @@ class Admin::SessionsController < Admin::Base
   end
 
   def destroy
-    admin_log_out
+    admin_log_out if current_admin
     flash[:danger] = 'ログアウトしました。'
     redirect_to admin_login_path
   end
