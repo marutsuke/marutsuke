@@ -3,9 +3,6 @@ class Admin::AdminsController < Admin::Base
     @admin = Admin.new
   end
 
-  def show
-  end
-
   def create
     @admin = Admin.new(admin_params)
     if @admin.save

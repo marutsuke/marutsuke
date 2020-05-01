@@ -8,7 +8,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :admins, only: [:new, :create, :show, :update] # update, show以外
+    resources :admins, only: [:new, :create] # テスト済み
+    get '/admins', to: 'admins#new' #テスト済み
+    get '/login', to:'sessions#new' #テスト済み
+    post '/login', to:'sessions#create' #テスト済み
+    delete '/logout', to:'sessions#destroy' #テスト済み
+  end
+
+  namespace :teacher do
+    resources :users
+    resources :teachers, only: [:new, :create, :show, :update] # update, show以外
     get '/admins', to: 'admins#new' #テスト済み
     get '/login', to:'sessions#new' #テスト済み
     post '/login', to:'sessions#create' #テスト済み
