@@ -26,7 +26,7 @@ describe Admin::SessionsController, type: :request do
     it 'remember meしないでログイン・ログアウトできる' do
       session_params[:remember_me] = '0'
       post admin_login_path, params: { session: session_params }
-      expect(response.cookies['remember_token']).to eq nil
+      expect(response.cookies['admin_remember_token']).to eq nil
       expect(response).to have_http_status(302)
       follow_redirect!
       expect(response.body).to be_include(admin.name + 'さん')
@@ -41,7 +41,7 @@ describe Admin::SessionsController, type: :request do
       session_params[:remember_me] = '1'
       post admin_login_path, params: { session: session_params }
       expect(response).to have_http_status(302)
-      expect(response.cookies['remember_token']).to_not eq nil
+      expect(response.cookies['admin_remember_token']).to_not eq nil
       follow_redirect!
       expect(response.body).to be_include(admin.name + 'さん')
       expect(session[:admin_id]).to eq admin.id
@@ -55,7 +55,7 @@ describe Admin::SessionsController, type: :request do
       session_params[:remember_me] = '1'
       post admin_login_path, params: { session: session_params }
       expect(response).to have_http_status(302)
-      expect(response.cookies['remember_token']).not_to eq nil
+      expect(response.cookies['admin_remember_token']).not_to eq nil
       follow_redirect!
       expect(response.body).to be_include(admin.name + 'さん')
       expect(session[:admin_id]).to eq admin.id
@@ -70,7 +70,7 @@ describe Admin::SessionsController, type: :request do
       session_params[:remember_me] = '0'
       post admin_login_path, params: { session: session_params }
       expect(response).to have_http_status(302)
-      expect(response.cookies['remember_token']).to eq nil
+      expect(response.cookies['admin_remember_token']).to eq nil
       follow_redirect!
       expect(response.body).to be_include(admin.name + 'さん')
       expect(session[:admin_id]).to eq admin.id

@@ -1,14 +1,13 @@
-class Teacher::TeachersController < ApplicationController
+class Teacher::TeachersController < Teacher::Base
 
   def new
     @teacher = Teacher.new
   end
 
   def create
-    @teacher = Teacher.new(teacher_params)
+    @teacher = current_school.teachers.new(teacher_params)
     if @teacher.save
-      teacher_log_in(@teacher)
-      flash[:success] = "ようこそ!#{@teacher.name}さん"
+      flash[:success] = "#{@teacher.name}先生を作成しました"
       redirect_to new_teacher_teacher_path
     else
       render 'new'

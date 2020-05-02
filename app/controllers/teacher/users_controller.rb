@@ -1,2 +1,2 @@
-class Teacher::UsersController < ApplicationController
+class Teacher::UsersController < Teacher::Base
 end

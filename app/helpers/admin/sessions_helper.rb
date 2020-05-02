@@ -3,20 +3,20 @@ module Admin::SessionsHelper
     session[:admin_id] = admin.id
   end
 
-  def remember(admin)
+  def remember_admin(admin)
     admin.remember
     cookies.permanent.signed[:admin_id] = admin.id
-    cookies.permanent[:remember_token] = admin.remember_token
+    cookies.permanent[:admin_remember_token] = admin.admin_remember_token
   end
 
-  def forget(admin)
+  def forget_admin(admin)
     admin.forget
     cookies.delete(:admin_id)
-    cookies.delete(:remember_token)
+    cookies.delete(:admin_remember_token)
   end
 
   def admin_log_out
-    forget(current_admin)
+    forget_admin(current_admin)
     session.delete(:admin_id)
     @current_admin = nil
   end
@@ -26,7 +26,7 @@ module Admin::SessionsHelper
       @current_admin ||= Admin.find_by(id: admin_id)
     elsif admin_id = cookies.signed[:admin_id]
       admin = Admin.find_by(id: admin_id)
-      if admin&.authenticated?(cookies[:remember_token])
+      if admin&.authenticated?(cookies[:admin_remember_token])
         admin_log_in(admin)
         @current_admin = admin
       end

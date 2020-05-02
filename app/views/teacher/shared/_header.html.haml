@@ -1,4 +1,8 @@
 .header_for_teacher
   .teacher_link.flex.flex-sparo
     = link_to 'top', root_path
-    =link_to '教師用画面', new_teacher_teacher_path
+    =link_to '教師追加', new_teacher_teacher_path
+    =link_to '教師ログイン', teacher_login_path
+    = link_to '教師ログアウト', teacher_logout_path, method: :delete
+    - if current_teacher
+      %p= "#{current_school.name}： #{current_teacher.name}先生"

@@ -1,5 +1,5 @@
 class Admin < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :admin_remember_token
   before_save { email.downcase! }
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
@@ -16,13 +16,13 @@ class Admin < ApplicationRecord
   end
 
   def remember
-    self.remember_token = self.class.new_token
-    update_attribute(:remember_digest, self.class.digest(remember_token))
+    self.admin_remember_token = self.class.new_token
+    update_attribute(:remember_digest, self.class.digest(admin_remember_token))
   end
 
-  def authenticated?(remember_token)
+  def authenticated?(admin_remember_token)
     return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(remember_digest).is_password?(admin_remember_token)
   end
 
   def forget
