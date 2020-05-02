@@ -1,10 +1,14 @@
 ja:
   activerecord:
     models:
-      admin: 管理者
+      teacher: 教師
     attributes:
-      admin:
+      teacher:
         name: 名前
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認)
+        school_id: 学校ID
+        start_at: 業務開始日時
+        end_at: 業務終了日時
+        activated: アカウント有効化

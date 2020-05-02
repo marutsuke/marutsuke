@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      user: 教師
+    attributes:
+      user:
+        name: 名前
+        login_id: ログインID
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        school_id: 学校ID
+        start_at: アカウント開始日時
+        end_at: アカウント終了日時
+        activated: アカウント有効化

@@ -1,3 +1,5 @@
 class School < ApplicationRecord
-  validates :name, presence: {message:"名前を入力してください。"}, length: {maximum:10, message:"名前は10文字以内でお願いします。"}
+  validates :name, presence: {message:"学校名を入力してください。"}, length: {maximum: 20, message:"名前は20文字以内でお願いします。"}
+  has_many :teachers
+  has_many :users
 end

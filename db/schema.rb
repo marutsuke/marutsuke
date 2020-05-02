@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_113858) do
+ActiveRecord::Schema.define(version: 2020_05_02_031800) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -39,14 +39,15 @@ ActiveRecord::Schema.define(version: 2020_04_29_113858) do
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.integer "school_id"
-    t.date "start_at"
-    t.date "end_date"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.boolean "activated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_digest"
+    t.bigint "school_id"
     t.index ["email"], name: "index_teachers_on_email", unique: true
+    t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -57,12 +58,15 @@ ActiveRecord::Schema.define(version: 2020_04_29_113858) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "login_count", default: 0
-    t.integer "school_id"
-    t.date "start_date", default: "2020-01-01", null: false
-    t.date "end_date"
+    t.datetime "start_at", default: "2020-01-01 00:00:00", null: false
+    t.datetime "end_at"
     t.boolean "activated", default: true, null: false
     t.string "remember_digest"
+    t.bigint "school_id"
     t.index ["login_id"], name: "index_users_on_login_id", unique: true
+    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
+  add_foreign_key "teachers", "schools"
+  add_foreign_key "users", "schools"
 end
