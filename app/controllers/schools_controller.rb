@@ -6,17 +6,13 @@ class SchoolsController < ApplicationController
 
   def create
     @school = School.new(school_params)
-    if @school.save
-      @teacher = @school.teachers.new(teacher_params[:teacher])
-      if @teacher.save
-        # teacher_log_in(@teacher)
-        flash[:success] = "ようこそ!#{@teacher.name}さん"
-        redirect_to new_teacher_teacher_path
-      else
-        @school.destroy
-        render 'new'
-      end
+    @teacher = @school.teachers.new(teacher_params[:teacher])
+    if @school.save && @teacher.save
+      # teacher_log_in(@teacher)
+      flash[:success] = "ようこそ!#{@teacher.name}さん"
+      redirect_to new_teacher_teacher_path
     else
+      @school.destroy
       render 'new'
     end
   end

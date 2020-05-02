@@ -3,7 +3,6 @@
 .user_form
   = form_with model: @school, local: true do |f|
     = render 'shared/error_messages', model_object: @school
-    = render 'shared/error_messages', model_object: @teacher
     .user_form__label_and_input
       = f.label :name
       = f.text_field :name

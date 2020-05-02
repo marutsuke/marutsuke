@@ -12,3 +12,10 @@ ja:
         start_at: 業務開始日時
         end_at: 業務終了日時
         activated: アカウント有効化
+        school: 学校
+    errors:
+      models:
+        teacher:
+          attributes:
+            school:
+              required: の保存が失敗しました。同じ名前の学校があります。
