@@ -21,11 +21,11 @@ module Marutsuke
       g.skip_routes true
       g.helper false
       g.test_framework :rspec,
-            view_specs: false,
-            helper_specs: false,
-            controller_specs: false,
-            request_specs: true,
-            routing_specs: false
+                       view_specs: false,
+                       helper_specs: false,
+                       controller_specs: false,
+                       request_specs: true,
+                       routing_specs: false
     end
     config.i18n.default_locale = :ja
 
