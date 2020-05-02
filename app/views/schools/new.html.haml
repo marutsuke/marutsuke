@@ -3,16 +3,22 @@
 .user_form
   = form_with model: @school, local: true do |f|
     = render 'shared/error_messages', model_object: @school
+    = render 'shared/error_messages', model_object: @teacher
     .user_form__label_and_input
       = f.label :name
       = f.text_field :name
-    .user_form__label_and_input
-      = f.label :email
-      = f.email_field :email
-    .user_form__label_and_input
-      = f.label :password
-      = f.password_field :password
-    .user_form__label_and_input
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
+    = f.fields_for @teacher do |ff|
+      .user_form__label_and_input
+        = ff.label :name
+        = ff.text_field :name
+      .user_form__label_and_input
+        = ff.label :email
+        = ff.email_field :email
+      .user_form__label_and_input
+        = ff.label :password
+        = ff.password_field :password
+      .user_form__label_and_input
+        = ff.label :password_confirmation
+        = ff.password_field :password_confirmation
+        = ff.hidden_field :school
     = f.submit '登録する', class: 'user_form__submit_btn'

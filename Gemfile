@@ -81,8 +81,7 @@ group :production do
   gem 'unicorn', '5.4.1'
 end
 
-gem  'nokogiri', '1.10.2'
+gem 'nokogiri', '1.10.2'
 gem 'fog-aws'
-gem 'slim-rails'
 gem "haml-rails", "~> 2.0"
 gem 'i18n_generators'

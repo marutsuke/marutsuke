@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   resources :lessons, only: [:index]
   resources :schools, only: [:new, :create]
+  get '/schools', to: 'schools#new'
 
 end

@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      school: 学校・塾
+    attributes:
+      school:
+        name: 学校名・塾名
