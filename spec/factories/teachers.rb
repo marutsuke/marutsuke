@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :teacher do
-    name "MyString"
-    email "MyString"
+    name { Faker::Name.unique.name }
+    email { Faker::Internet.unique.email }
     password_digest "MyString"
-    school_id 1
-    start_at "2020-04-28"
-    end_date "2020-04-28"
+    start_at 1.day.ago
+    end_at 1.year.since
     activated false
+    association :school, factory: [:school]
   end
 end

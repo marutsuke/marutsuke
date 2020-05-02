@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Admin::AdminsController, type: :request do
+  before { admin_log_in }
   describe '/admin/admins#new ' do
       it 'createエラー後更新してもアクセスできる' do
       get '/admin/admins'

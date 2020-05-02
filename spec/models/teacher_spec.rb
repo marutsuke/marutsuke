@@ -25,14 +25,14 @@ RSpec.describe Teacher, type: :model do
                                       'foo@bar+baz.com').for(:email)
     end
     describe 'validate unqueness of email' do
-      let!(:admin) { create(:admin, email: 'original@example.com') }
+      let!(:teacher) { create(:teacher, email: 'original@example.com') }
       it 'is invalid with a duplicate email' do
-        admin = build(:admin, email: 'original@example.com')
-        expect(admin).to_not be_valid
+        teacher_2 = build(:teacher, email: 'original@example.com')
+        expect(teacher_2).to_not be_valid
       end
       it 'is case insensitive in email' do
-        admin = build(:admin, email: 'ORIGINAL@EXAMPLE.COM')
-        expect(admin).to_not be_valid
+        teacher_2 = build(:teacher, email: 'ORIGINAL@EXAMPLE.COM')
+        expect(teacher_2).to_not be_valid
       end
     end
     it { is_expected.to validate_presence_of(:password) }
@@ -41,9 +41,9 @@ RSpec.describe Teacher, type: :model do
   it { is_expected.to have_secure_password }
   describe 'before_save' do
     describe '#email_downcase' do
-      let!(:admin) { create(:admin, email: 'ORIGINAL@EXAMPLE.COM') }
+      let!(:teacher) { create(:teacher, email: 'ORIGINAL@EXAMPLE.COM') }
       it 'makes email to low case' do
-        expect(admin.reload.email).to eq 'original@example.com'
+        expect(teacher.reload.email).to eq 'original@example.com'
       end
     end
   end
