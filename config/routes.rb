@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   resources :lessons, only: [:index]
-  resources :schools, only: [:new, :create]
-  get '/schools', to: 'schools#new'
+  resources :schools, only: [:new, :create] #テスト済み
+  get '/schools', to: 'schools#new' #テスト済み
 
 end
