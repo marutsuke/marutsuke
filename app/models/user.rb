@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   before_save { email&.downcase! }
+  validates :name, presence: true, length: { maximum: 12 }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness:{ case_sensitive: false}, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
 
   belongs_to :school
@@ -9,8 +11,3 @@ class User < ApplicationRecord
     login_id = school.id.to_s + sprintf("%06d", school.users.count)
   end
 end
-
-  # validates :name, presence: {message:"名前を入力してください。"}
-  # # , length: {maximum:12, message:"名前は10文字以内でお願いします。"}
-  # validates :login_id, presence: {message:"ログインIDを入力してください。"}, uniqueness: {message: "同じログインIDが存在します。別のIDに変えてください。"}, length: {maximum: 12, message:"ログインIDは、12文字以内となります。"}
-  # validates :password, presence: true, confirmation: true
