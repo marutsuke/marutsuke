@@ -4,15 +4,15 @@
   = form_with model: [:teacher, @teacher], local: true do |f|
     = render 'shared/error_messages', model_object: @teacher
     .user_form__label_and_input
-      = f.label :name
+      = f.label :name, class: 'required'
       = f.text_field :name
     .user_form__label_and_input
-      = f.label :email
+      = f.label :email, class: 'required'
       = f.email_field :email
     .user_form__label_and_input
-      = f.label :password
+      = f.label :password, class: 'required'
       = f.password_field :password
     .user_form__label_and_input
-      = f.label :password_confirmation
+      = f.label :password_confirmation, class: 'required'
       = f.password_field :password_confirmation
     = f.submit '登録する', class: 'user_form__submit_btn'
