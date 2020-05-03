@@ -1,0 +1,27 @@
+= render 'teacher/shared/header'
+.user_form__title 生徒追加登録
+.user_form
+  = form_with model: [:teacher, @user], local: true do |f|
+    = render 'shared/error_messages', model_object: @user
+    .user_form__label_and_input
+      = f.label :name, class: 'required'
+      = f.text_field :name, value: ''
+    .user_form__label_and_input
+      = f.label :email
+      = f.email_field :email
+    .user_form__label_and_input
+      = f.label :start_at
+      = f.datetime_field :start_at, value: ''
+    .user_form__label_and_input
+      = f.label :end_at
+      = f.datetime_field :end_at, value: ''
+    .user_form__label_and_input
+      .flex
+        = f.label :password, class: 'required mr24'
+        %span (ログイン後、生徒自身が変更することができます)
+      = f.text_field :password, value: 123456
+    .user_form__label_and_input
+      = f.label :password_confirmation, class: 'required'
+      = f.text_field :password_confirmation, value: 123456
+      = f.hidden_field :school_id, value: current_school.id
+    = f.submit '登録する', class: 'user_form__submit_btn'

@@ -9,6 +9,11 @@
     & label {
       margin-bottom: 8px;
       display: block;
+      &.required:after {
+        content: "*";
+        padding-left: 2px;
+        color: $red;
+      }
     }
     & input {
       width: 80%;
