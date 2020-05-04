@@ -26,5 +26,4 @@
     .user_form__label_and_input
       = f.label :password_confirmation, class: 'required'
       = f.text_field :password_confirmation, value: 123456
-      = f.hidden_field :school_id, value: current_school.id
     = f.submit '登録する', class: 'user_form__submit_btn'

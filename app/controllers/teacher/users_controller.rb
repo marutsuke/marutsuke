@@ -8,7 +8,8 @@ class Teacher::UsersController < Teacher::Base
   def create
     @user = current_school.users.new(user_params)
     @user.email = nil if @user.email == ''
-    @user.login_id = current_school.id.to_s + format('%07d', User.last.id + 1)
+    @user.login_id =
+      current_school.id.to_s + format('%07d', (User.last&.id || 0) + 1)
     if @user.save
       flash[:success] = "#{@user.name}を作成しました"
       redirect_to new_teacher_user_path
