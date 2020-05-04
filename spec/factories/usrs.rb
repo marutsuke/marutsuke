@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :teacher do
+  factory :user do
     name { Faker::Name.unique.name }
     email { Faker::Internet.unique.email }
+    sequence(:login_id) { |n| n }
     password 'password'
     start_at 1.day.ago
     end_at 1.year.since
