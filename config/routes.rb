@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :teacher do
-    resources :users, only: %i[new create] # テスト済み
+    resources :users, only: %i[index new create] # テスト済み
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み

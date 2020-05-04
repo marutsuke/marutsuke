@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Teacher::UsersController < Teacher::Base
+  def index
+    @users = current_school.users
+  end
+
   def new
     @user = User.new
   end

@@ -1,0 +1,17 @@
+= render 'teacher/shared/header'
+%table.users_account_table
+  %thead.users_account_table__thead
+    %th.users_account_table__th= User.human_attribute_name(:name)
+    %th.users_account_table__th= User.human_attribute_name(:login_id)
+    %th.users_account_table__th= User.human_attribute_name(:email)
+    %th.users_account_table__th= User.human_attribute_name(:start_at)
+    %th.users_account_table__th= User.human_attribute_name(:end_at)
+    %th.users_account_table__th= User.human_attribute_name(:activated)
+  - @users.each do |user|
+    %tr.users_account_table__tr
+      %td.users_account_table__tr= user.name
+      %td.users_account_table__tr= user.login_id
+      %td.users_account_table__tr= user.email || '未設定'
+      %td.users_account_table__tr= user.start_at&.strftime('%F-%R') || '未設定'
+      %td.users_account_table__tr= user.end_at&.strftime('%F-%R') || '未設定'
+      %td.users_account_table__tr= user.activated ? '有効' : '無効'

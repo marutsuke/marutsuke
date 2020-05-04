@@ -2,6 +2,7 @@
   .teacher_link.flex.flex-sparo
     = link_to 'top', root_path
     - if current_teacher
+      = link_to '生徒一覧', teacher_users_path
       = link_to '生徒追加', new_teacher_user_path
       = link_to '教師追加', new_teacher_teacher_path
       %p= "#{current_school.name}： #{current_teacher.name}先生"
