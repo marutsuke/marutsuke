@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
   def create
     user = search_user_from_email_or_login_id
     if user&.authenticate(session_params[:password])
-      session[:user_id] = user.id
+      user_log_in(user)
       login_count_up(user)
+      params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       redirect_to root_path, notice: "#{user.name}さん、こんにちは！"
     else
       flash.now[:danger] = if session_params[:email].present?
@@ -22,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
+    user_log_out(user)
     redirect_to root_path, notice: 'ログアウトしました。'
   end
 

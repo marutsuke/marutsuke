@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Teacher::SessionsController, type: :request do
@@ -9,21 +11,21 @@ describe Teacher::SessionsController, type: :request do
   end
 
   describe '/teacher/login#create ' do
-    let(:teacher){ create(:teacher) }
-    let(:session_params){ { email: teacher.email, password: teacher.password } }
+    let(:teacher) { create(:teacher) }
+    let(:session_params) { { email: teacher.email, password: teacher.password } }
 
     it 'ログインできる' do
       post teacher_login_path, params: { session: session_params }
       expect(response).to have_http_status(302)
       follow_redirect!
-      expect(response.body).to include('ログインに成功しました。')
+      expect(response.body).to include("#{teacher.name}先生こんにちは!")
       expect(session[:teacher_id]).to eq teacher.id
     end
   end
 
   describe '/admin/logout#destroy ' do
-    let(:teacher){ create(:teacher) }
-    let(:session_params){ { email: teacher.email, password: teacher.password } }
+    let(:teacher) { create(:teacher) }
+    let(:session_params) { { email: teacher.email, password: teacher.password } }
 
     it 'remember meしないでログイン・ログアウトできる' do
       session_params[:remember_me] = '0'
@@ -63,7 +65,7 @@ describe Teacher::SessionsController, type: :request do
       follow_redirect!
       expect(response.body).to be_include(teacher.name + '先生')
       expect(session[:teacher_id]).to eq teacher.id
-      session.delete(:teacher_id) #ここで、ブラウザを閉じる動作をしてほしい
+      session.delete(:teacher_id) # ここで、ブラウザを閉じる動作をしてほしい
       expect(session[:teacher_id]).to eq nil
       get new_teacher_teacher_path
       expect(response).to have_http_status(200)

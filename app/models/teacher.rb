@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Teacher < ApplicationRecord
   attr_accessor :teacher_remember_token
   before_save { email.downcase! }
@@ -23,11 +25,11 @@ class Teacher < ApplicationRecord
 
   def authenticated?(teacher_remember_token)
     return false if remember_digest.nil?
+
     BCrypt::Password.new(remember_digest).is_password?(teacher_remember_token)
   end
 
   def forget
     update_attribute(:remember_digest, nil)
   end
-
 end

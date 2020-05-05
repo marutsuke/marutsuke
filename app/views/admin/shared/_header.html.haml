@@ -1,11 +1,11 @@
 .header_for_admin.mb24.mt8
   .admin_links.flex.flex-sparo
     - if current_admin
-      %p= current_admin.name + 'さん'
       = link_to 'top', root_path
       = link_to '管理トップ画面', admin_users_path
       = link_to '学校一覧画面', '#'
       = link_to '管理者作成', new_admin_admin_path
+      %p= current_admin.name + 'さん'
       = link_to '管理者ログアウト', admin_logout_path, method: :delete
     - else
       = link_to '管理者ログイン', admin_login_path
