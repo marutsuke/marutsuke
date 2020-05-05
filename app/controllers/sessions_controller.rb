@@ -11,7 +11,8 @@ class SessionsController < ApplicationController
       user_log_in(user)
       login_count_up(user)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
-      redirect_to root_path, notice: "#{user.name}さん、こんにちは！"
+      flash[:success] = "#{user.name}さん、こんにちは!"
+      redirect_to root_path
     else
       flash.now[:danger] = if session_params[:email].present?
                              'メールアドレスまたはパスワードが間違っています'
@@ -23,8 +24,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    user_log_out(user)
-    redirect_to root_path, notice: 'ログアウトしました。'
+    user_log_out
+    flash[:danger] = 'ログアウトしました。'
+    redirect_to root_path
   end
 
   private

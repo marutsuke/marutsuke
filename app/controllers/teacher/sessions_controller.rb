@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class Teacher::SessionsController < Teacher::Base
   skip_before_action :teacher_login_required
 
-  def new
-  end
+  def new; end
 
   def create
     teacher = Teacher.find_by(email: params[:session][:email].downcase)
     if teacher&.authenticate(params[:session][:password])
       teacher_log_in(teacher)
-      flash[:success] = "#{ teacher.name }先生こんにちは!"
+      flash[:success] = "#{teacher.name}先生、こんにちは!"
       params[:session][:remember_me] == '1' ? remember_teacher(teacher) : forget_teacher(teacher)
       redirect_to new_teacher_teacher_path
     else

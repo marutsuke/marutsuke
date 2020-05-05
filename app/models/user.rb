@@ -29,6 +29,16 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, self.class.digest(user_remember_token))
   end
 
+  def authenticated?(user_remember_token)
+    return false if remember_digest.nil?
+
+    BCrypt::Password.new(remember_digest).is_password?(user_remember_token)
+  end
+
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
   private
 
   def user_auto_login_id_create
