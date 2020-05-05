@@ -1,0 +1,21 @@
+=render 'shared/header'
+.user_form__title ログイン
+.user_form
+  = form_with scope: :session, url: login_path, local: true do |f|
+    - if @email_login
+      .user_form__label_and_input
+        = f.label :email, User.human_attribute_name(:email)
+        = f.email_field :email
+    - else
+      .user_form__label_and_input
+        = f.label :login_id, User.human_attribute_name(:login_id)
+        = f.text_field :login_id
+    .user_form__label_and_input
+      = f.label :password, User.human_attribute_name(:password), class: 'required'
+      = f.password_field :password
+    .user_form__label_and_input--checkbox
+      = f.check_box :remember_me
+      = f.label :remember_me, 'ログイン状態を保持する'
+    = f.submit 'ログイン', class: 'user_form__submit_btn'
+    .mt16
+      = link_to 'メールアドレスでログインする', login_path(email: true)
