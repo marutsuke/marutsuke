@@ -6,9 +6,11 @@
   }
   &__th {
     border: solid 1px $black;
+    padding: 4px;
   }
   &__tr {
     border: solid 1px $black;
+    padding: 4px;
     &:hover {
       background-color: $gray;
     }
