@@ -1,0 +1,13 @@
+= render 'teacher/shared/header'
+%table.lesson_table.ml24
+  %thead.lesson_table__thead
+    %th.lesson_table__th= Lesson.human_attribute_name(:name)
+    %th.lesson_table__th= Lesson.human_attribute_name(:start_at)
+    %th.lesson_table__th= Lesson.human_attribute_name(:end_at)
+    %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
+  - @lessons.each do |lesson|
+    %tr.lesson_table__tr
+      %td.lesson_table__tr= lesson.name
+      %td.lesson_table__tr= lesson.start_at&.strftime('%F-%R')
+      %td.lesson_table__tr= lesson.end_at&.strftime('%F-%R') || '未設定'
+      %td.lesson_table__tr= lesson.teacher.name

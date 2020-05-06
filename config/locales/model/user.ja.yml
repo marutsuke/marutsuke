@@ -1,7 +1,7 @@
 ja:
   activerecord:
     models:
-      user: ユーザー
+      user: 受講生
     attributes:
       user:
         name: 名前
