@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_134413) do
+ActiveRecord::Schema.define(version: 2020_05_06_011522) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -27,6 +27,10 @@ ActiveRecord::Schema.define(version: 2020_05_03_134413) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "school_id"
+    t.bigint "teacher_id"
+    t.index ["school_id"], name: "index_lessons_on_school_id"
+    t.index ["teacher_id"], name: "index_lessons_on_teacher_id"
   end
 
   create_table "schools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -68,6 +72,8 @@ ActiveRecord::Schema.define(version: 2020_05_03_134413) do
     t.index ["school_id"], name: "index_users_on_school_id"
   end
 
+  add_foreign_key "lessons", "schools"
+  add_foreign_key "lessons", "teachers"
   add_foreign_key "teachers", "schools"
   add_foreign_key "users", "schools"
 end
