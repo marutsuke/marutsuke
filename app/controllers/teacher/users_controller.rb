@@ -23,6 +23,17 @@ class Teacher::UsersController < Teacher::Base
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :start_at, :end_at, :password, :password_confirmation)
+    params.require(:user).permit(
+      :name,
+      :email,
+      :start_at_date,
+      :start_at_hour,
+      :start_at_min,
+      :end_at_date,
+      :end_at_hour,
+      :end_at_min,
+      :password,
+      :password_confirmation
+    )
   end
 end

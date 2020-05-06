@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  attr_accessor :user_remember_token
+  attr_accessor :user_remember_token,
+                :start_at_date, :start_at_hour, :start_at_min,
+                :end_at_date, :end_at_hour, :end_at_min
   before_save { email&.downcase! }
-  before_validation { user_auto_login_id_create }
+  before_validation { start_at_set }
+  before_validation { end_at_set }
+  before_validation { auto_login_id_create }
   validates :name, presence: true, length: { maximum: 12 }
   validates :login_id, presence: true, uniqueness: true
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
@@ -41,7 +45,17 @@ class User < ApplicationRecord
 
   private
 
-  def user_auto_login_id_create
+  def auto_login_id_create
     self.login_id = school_id.to_s + format('%07d', (User.last&.id || 0) + 1)
+  end
+
+  def start_at_set
+    self.start_at = Time.zone.parse("#{start_at_date} #{start_at_hour}:#{start_at_min}:00")
+  end
+
+  def end_at_set
+    if end_at_date.present? && end_at_hour.present? && end_at_min.present?
+      self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
+    end
   end
 end
