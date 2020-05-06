@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Teacher::SessionsController, type: :request do
   describe '/teacher/login#new' do
-    it '管理者ログイン画面を表示する' do
+    it '教師ログイン画面を表示する' do
       get teacher_login_path
       expect(response).to have_http_status(200)
     end
@@ -18,7 +18,7 @@ describe Teacher::SessionsController, type: :request do
       post teacher_login_path, params: { session: session_params }
       expect(response).to have_http_status(302)
       follow_redirect!
-      expect(response.body).to include("#{teacher.name}先生こんにちは!")
+      expect(response.body).to include("#{teacher.name}先生、こんにちは!")
       expect(session[:teacher_id]).to eq teacher.id
     end
   end
