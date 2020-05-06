@@ -5,8 +5,8 @@ class User < ApplicationRecord
                 :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min
   before_save { email&.downcase! }
-  before_validation { start_at_set }
-  before_validation { end_at_set }
+  before_save { start_at_set }
+  before_save { end_at_set }
   before_validation { auto_login_id_create }
   validates :name, presence: true, length: { maximum: 12 }
   validates :login_id, presence: true, uniqueness: true
@@ -50,7 +50,9 @@ class User < ApplicationRecord
   end
 
   def start_at_set
-    self.start_at = Time.zone.parse("#{start_at_date} #{start_at_hour}:#{start_at_min}:00")
+    if start_at_date.present? && start_at_hour.present? && start_at_min.present?
+      self.start_at = Time.zone.parse("#{start_at_date} #{start_at_hour}:#{start_at_min}:00")
+    end
   end
 
   def end_at_set

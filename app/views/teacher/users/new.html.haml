@@ -12,7 +12,7 @@
     .user_form__label_and_input
       = f.label :email
       = f.email_field :email
-    .user_form__label_and_input.mb16
+    .user_form__label_and_input
       = f.label :start_at_date
       .user_form__datetime_select
         = f.date_field :start_at_date, value: Time.zone.today
