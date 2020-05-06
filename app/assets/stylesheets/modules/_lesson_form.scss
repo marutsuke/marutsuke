@@ -1,0 +1,57 @@
+.lesson_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & form {
+    width: 80%;
+  }
+  &__label_and_input {
+    & label {
+      margin-bottom: 8px;
+      display: block;
+      &.required:after {
+        content: "*";
+        padding-left: 2px;
+        color: $red;
+      }
+    }
+    & input {
+      width: 80%;
+      height: 32px;
+      margin-bottom: 15px;
+      border: 1px solid $light_gray;
+    }
+    & select {
+      width: 240px;
+      height: 32px;
+      margin-bottom: 16px;
+      background-color: white;
+    }
+  }
+  &__datetime_select {
+    & input {
+      width: 160px;
+      height: 32px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 1px solid $light_gray;
+    }
+    & select {
+      width: auto;
+      height: 32px;
+      font-size: 16px;
+      background-color: white;
+    }
+    & label {
+      display: inline;
+    }
+  }
+  &__submit_btn {
+    width: 80%;
+    height: 40px;
+    border: solid 1px $gray;
+    background-color: $btn_blue;
+    color: $white;
+    margin-top: 16px;
+  }
+}

@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :lesson do
-    name "MyString"
-    start_at "2020-04-26 22:16:15"
-    end_at ""
+    name { Faker::Book.genre }
+    start_at 1.day.ago
+    end_at 1.year.since
+    association :teacher, factory: [:teacher]
+    association :school, factory: [:school]
   end
 end
