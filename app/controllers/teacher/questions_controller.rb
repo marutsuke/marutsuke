@@ -11,7 +11,8 @@ class Teacher::QuestionsController < Teacher::Base
       flash[:success] = "#{@question.title}を作成しました。"
       redirect_to teacher_lesson_path(@question.lesson)
     else
-      render :show
+      @lesson = @question.lesson
+      render template: 'teacher/lessons/show'
     end
   end
 
