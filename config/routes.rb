@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index new create] # テスト済み
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み
-    resources :lessons, only: %i[index new create]
+    resources :lessons, only: %i[index show new create] # テスト済み showまだ
     get '/teachers', to: 'teachers#new' # テスト済み
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み

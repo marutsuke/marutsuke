@@ -5,6 +5,10 @@ class Teacher::LessonsController < Teacher::Base
     @lessons = current_school.lessons
   end
 
+  def show
+    @lesson = current_school.lessons.find(params[:id])
+  end
+
   def new
     @lesson = Lesson.new
   end

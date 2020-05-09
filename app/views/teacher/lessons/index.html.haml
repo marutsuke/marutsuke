@@ -7,7 +7,7 @@
     %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
   - @lessons.each do |lesson|
     %tr.lesson_table__tr
-      %td.lesson_table__tr= lesson.name
-      %td.lesson_table__tr= lesson.start_at&.strftime('%F-%R')
-      %td.lesson_table__tr= lesson.end_at&.strftime('%F-%R') || '未設定'
+      %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
+      %td.lesson_table__tr= lesson.decorate.start_at
+      %td.lesson_table__tr= lesson.decorate.end_at
       %td.lesson_table__tr= lesson.teacher.name
