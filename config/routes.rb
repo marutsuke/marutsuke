@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み
     resources :lessons, only: %i[index show new create] # テスト済み showまだ
+    resources :questions, only: %i[create] # テスト済み showまだ
     get '/teachers', to: 'teachers#new' # テスト済み
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み

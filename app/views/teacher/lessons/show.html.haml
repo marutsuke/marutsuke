@@ -3,3 +3,25 @@
   .lesson_show_title= Lesson.human_attribute_name(:name) + ':　' + @lesson.name
   .lesson_show_start_at= Lesson.human_attribute_name(:start_at) + ':　' + @lesson.decorate.start_at
   .lesson_show_end_at= Lesson.human_attribute_name(:end_at) + ':　' + @lesson.decorate.end_at
+.question_new_form__title
+  問題追加
+.question_new_form
+  = form_with model: [:teacher, @question], local: true do |f|
+    =render 'shared/error_messages', model_object: @question
+    .question_form__label_and_input
+      = f.label :title, class: 'required'
+      = f.text_field :title
+    .question_form__label_and_input
+      = f.label :text
+      = f.text_area :text
+    .question_form__label_and_input
+      = f.label :image
+      = f.file_field :image
+    = f.hidden_field :lesson_id, value: @lesson.id
+    = f.submit '登録する', class: 'question_form__submit_btn'
+.questions_infos
+  - @questions&.each do |question|
+    .question_info__title= question.title
+    - if question.image.present?
+      = image_tag question&.image_url, alt: question.title, height: '100', width: '100', class: 'question_info__image'
+    .question_info__text= question.text

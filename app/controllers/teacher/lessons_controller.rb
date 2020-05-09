@@ -7,6 +7,8 @@ class Teacher::LessonsController < Teacher::Base
 
   def show
     @lesson = current_school.lessons.find(params[:id])
+    @question = @lesson.questions.build
+    @questions = @lesson.questions
   end
 
   def new
