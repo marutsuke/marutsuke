@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Teacher, type: :model do
   describe 'Associations' do
     it { is_expected.to belong_to(:school) }
+    it { is_expected.to have_many(:lessons) }
   end
 
   describe 'Validations' do
