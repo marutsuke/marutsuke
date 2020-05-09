@@ -389,7 +389,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano3-unicorn
   capybara (>= 2.15)
-  carrierwave
+  carrierwave (~> 2.0)
   coffee-rails (~> 4.2)
   draper (~> 3.0.1)
   factory_bot_rails

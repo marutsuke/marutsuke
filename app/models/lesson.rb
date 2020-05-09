@@ -9,6 +9,7 @@ class Lesson < ApplicationRecord
   before_save { end_at_set }
   belongs_to :school
   belongs_to :teacher
+  has_many :questions, dependent: :destroy
 
   private
 
