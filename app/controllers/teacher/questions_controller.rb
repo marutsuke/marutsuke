@@ -12,6 +12,7 @@ class Teacher::QuestionsController < Teacher::Base
       redirect_to teacher_lesson_path(@question.lesson)
     else
       @lesson = @question.lesson
+      @questions = @lesson.questions
       render template: 'teacher/lessons/show'
     end
   end

@@ -19,9 +19,10 @@
       = f.file_field :image
     = f.hidden_field :lesson_id, value: @lesson.id
     = f.submit '登録する', class: 'question_form__submit_btn'
-.questions_infos
+.question_infos
   - @questions&.each do |question|
-    .question_info__title= question.title
-    - if question.image.present?
-      = image_tag question&.image_url, alt: question.title, height: '100', width: '100', class: 'question_info__image'
-    .question_info__text= question.text
+    .question_info
+      .question_info__title= "タイトル: #{ question.title } "
+      - if question.image.present?
+        = image_tag question&.image_url, alt: question.title, height: '200', width: '200', class: 'question_info__image'
+      .question_info__text= "説明: #{ question.text } "

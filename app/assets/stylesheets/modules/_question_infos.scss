@@ -1,0 +1,15 @@
+.question_infos {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.question_info {
+  border: 1px solid $black;
+  width: 33%;
+  &__title {
+    padding: 8px;
+  }
+  &__text {
+    padding: 8px;
+  }
+}
