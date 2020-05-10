@@ -2,9 +2,9 @@
 
 class LessonsController < ApplicationController
   def index
-    # @going_lessons = current_school&.lessons&.going_to
-    # @doing_lessons = current_school&.lessons&.doing
-    # @done_lessons = current_school&.lessons&.done
+    @going_lessons = current_school&.lessons&.going_to
+    @doing_lessons = current_school&.lessons&.doing
+    @done_lessons = current_school&.lessons&.done
   end
 
   def show
