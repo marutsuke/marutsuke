@@ -50,3 +50,58 @@
     margin-top: 16px;
   }
 }
+.user_form_session {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    margin-top: 56px;
+    font-size: 36px;
+    text-align: center;
+  }
+  & form {
+    width: 80%;
+  }
+  &__label_and_input {
+    & label {
+      font-size: 36px;
+      margin: 24px 0 8px;
+      display: block;
+      &.required:after {
+        content: "*";
+        padding-left: 2px;
+        color: $red;
+      }
+    }
+    & input {
+      width: 80%;
+      height: 48px;
+      margin-bottom: 15px;
+      border: 1px solid $light_gray;
+    }
+    &--checkbox {
+      margin-top: 16px;
+      & input {
+        width: 16px;
+        height: 16px;
+      }
+      & label {
+        font-size: 24px;
+      }
+    }
+  }
+  &__submit_btn {
+    width: 80%;
+    height: 80px;
+    font-size: 36px;
+    border: solid 1px $gray;
+    background-color: $btn_blue;
+    color: $white;
+    margin-top: 16px;
+  }
+  &__link {
+    margin-top: 48px;
+    font-size: 24px;
+    text-align: right;
+  }
+}
