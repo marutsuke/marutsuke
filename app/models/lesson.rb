@@ -11,6 +11,10 @@ class Lesson < ApplicationRecord
   belongs_to :teacher
   has_many :questions, dependent: :destroy
 
+  scope :going_to, -> { where('start_at > ?', Time.zone.now) }
+  scope :doing, -> { where('start_at <= ?', Time.zone.now).where('end_at >= ?', Time.zone.now) }
+  scope :done, -> { where('end_at < ?', Time.zone.now) }
+
   private
 
   def start_at_set

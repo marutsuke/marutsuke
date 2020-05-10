@@ -38,4 +38,8 @@ module SessionsHelper
       end
     end
   end
+
+  def current_school
+    current_user&.school
+  end
 end
