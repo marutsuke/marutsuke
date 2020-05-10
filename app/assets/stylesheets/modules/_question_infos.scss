@@ -6,10 +6,20 @@
 .question_info {
   border: 1px solid $black;
   width: 33%;
+  text-decoration: none;
+  color: $black;
+  &:hover {
+    text-decoration: none;
+    color: $black;
+    opacity: 0.4;
+  }
   &__title {
     padding: 8px;
   }
   &__text {
+    padding: 8px;
+  }
+  &__display_order {
     padding: 8px;
   }
 }
