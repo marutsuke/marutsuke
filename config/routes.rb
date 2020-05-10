@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy' # テスト済み
 
   namespace :admin do
+    get '', to: 'users#index'
     resources :users, only: %i[index] # テスト済み
     resources :admins, only: %i[new create] # テスト済み
     get '/admins', to: 'admins#new' # テスト済み
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :teacher do
+    get '', to: 'lessons#index'
     resources :users, only: %i[index new create] # テスト済み
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み

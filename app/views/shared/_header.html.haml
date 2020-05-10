@@ -1,10 +1,7 @@
-.header_for_user.mb24.mt8
-  .user_link.flex.flex-sparo
+.user_header.mb24.mt8
+  .user_header__link.flex.flex-sparo
     - if current_user
       = current_user.name + 'さん'
       = link_to 'ログアウト', logout_path, method: :delete
     - else
-      =link_to '管理者画面', new_admin_admin_path, class: 'mr16'
-      =link_to '教師用画面', new_teacher_teacher_path, class: 'mr16'
-      =link_to '教師登録', new_school_path
       =link_to 'ログイン', login_path
