@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :lessons, only: %i[index show] # テスト済み showはまだ
+  resources :questions, only: %i[show]
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
 end
