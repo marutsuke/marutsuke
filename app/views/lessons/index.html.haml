@@ -6,10 +6,10 @@
     %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-  - if @going_lessons.length == 0
+  - if @going_lessons&.length == 0
     %tr.user_lesson_table__tr--nil
       %td.user_lesson_table__tr--nil{ colspan: '4' } 現在、開催予定の授業・講座は登録されていません。
-  - @going_lessons.each do |lesson|
+  - @going_lessons&.each do |lesson|
     %tr.user_lesson_table__tr
       %td.user_lesson_table__tr= link_to lesson.name, lesson_path(lesson)
       %td.user_lesson_table__tr= lesson.decorate.start_at_for_user
@@ -22,10 +22,10 @@
     %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-  - if @doing_lessons.length == 0
+  - if @doing_lessons&.length == 0
     %tr.user_lesson_table__tr--nil
       %td 現在、開講中の授業・講座は登録されていません。
-  - @doing_lessons.each do |lesson|
+  - @doing_lessons&.each do |lesson|
     %tr.user_lesson_table__tr
       %td.user_lesson_table__tr= link_to lesson.name, lesson_path(lesson)
       %td.user_lesson_table__tr= lesson.decorate.start_at_for_user
@@ -38,7 +38,10 @@
     %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
     %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-  - @done_lessons.each do |lesson|
+  - if @done_lessons&.length == 0
+    %tr.user_lesson_table__tr--nil
+      %td 現在、期間終了の授業・講座は登録されていません。
+  - @done_lessons&.each do |lesson|
     %tr.user_lesson_table__tr
       %td.user_lesson_table__tr= link_to lesson.name, lesson_path(lesson)
       %td.user_lesson_table__tr= lesson.decorate.start_at_for_user
