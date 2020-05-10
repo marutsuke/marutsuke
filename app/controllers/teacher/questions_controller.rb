@@ -3,7 +3,7 @@
 class Teacher::QuestionsController < Teacher::Base
   def show
     @question = Question.find(params[:id])
-    @lesson = current_school.lessons.find(@question.lesson_id)
+    @lesson = current_school&.lessons.find(@question.lesson_id)
   end
 
   def create
