@@ -12,6 +12,13 @@ RSpec.describe 'Teacher::Lessons', type: :request do
     end
   end
 
+  describe '/teacher/questions#new ' do
+    it '講座の問題作成に失敗後、更新をかけると、lessons#indexに飛ばされる' do
+      get '/teacher/questions'
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe '/teacher/lesson#new ' do
     it 'ログインしていなければリダイレクトされる' do
       teacher_log_out
