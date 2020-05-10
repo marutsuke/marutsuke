@@ -1,0 +1,13 @@
+= render 'shared/header'
+.lesson_show_for_user
+  .flex.ml24
+    .lesson_show_for_user__name= @lesson.name
+    .lesson_show_for_user__teacher= @lesson.teacher.name  + '先生'
+  .lesson_show_for_user__term= "#{@lesson.decorate.start_at_for_user} ~ #{@lesson.decorate.end_at_for_user}"
+.lesson_show_for_user__questions
+  - @questions.display_order&.each do |question|
+    = link_to question_path(question), class: 'question_info' do
+      .question_info__title= "タイトル: #{ question.title } "
+      - if question.image.present?
+        = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
+      .question_info__text= "説明: #{ question.text } "

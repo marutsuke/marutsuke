@@ -8,7 +8,8 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
+    @lesson = current_school.lessons.find(params[:id])
+    @questions = @lesson.questions
   end
-
 end
+554
