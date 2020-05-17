@@ -6,8 +6,12 @@
   .lesson_show_for_user__term= "#{@lesson.decorate.start_at_for_user} ~ #{@lesson.decorate.end_at_for_user}"
 .lesson_show_for_user__questions
   - @questions.display_order&.each do |question|
-    = link_to question_path(question), class: 'question_info' do
-      .question_info__title= "タイトル: #{ question.title } "
-      - if question.image.present?
-        = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
-      .question_info__text= "説明: #{ question.text } "
+    .flex.question_info
+      = link_to question_path(question), class: 'question_info__link' do
+        .question_info__title= "タイトル: #{ question.title } "
+        - if question.image.present?
+          = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
+        .question_info__text= "説明: #{ question.text } "
+      .aaa
+        -# =form_with model: Answer.new do |f|
+        -#   = f.file_field, :image
