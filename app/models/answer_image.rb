@@ -1,0 +1,2 @@
+class AnswerImage < ApplicationRecord
+end
