@@ -34,16 +34,24 @@
   }
   &__tr {
     border: solid 1px $black;
-    padding: 4px;
+    padding: 16px;
     &:hover {
       background-color: $gray;
     }
     &--nil {
+      border: solid 1px $black;
       padding: 8px;
       text-align: center;
     }
   }
   &__td {
     border: solid 1px $black;
+    padding: 8px;
+    &--link {
+      @extend .user_lesson_table__td;
+      font-size: 42px;
+      padding: 16px;
+      text-align: center;
+    }
   }
 }

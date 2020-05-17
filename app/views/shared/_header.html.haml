@@ -2,6 +2,7 @@
   .user_header__link.flex.flex-sparo
     - if current_user
       = current_user.name + 'さん'
+      = link_to 'トップ', root_path
       = link_to 'ログアウト', logout_path, method: :delete
     - else
       =link_to 'ログイン', login_path
