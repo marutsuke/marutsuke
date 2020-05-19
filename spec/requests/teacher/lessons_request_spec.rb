@@ -34,6 +34,13 @@ RSpec.describe 'Teacher::Lessons', type: :request do
     end
   end
 
+  describe '/teacher/lessons#index' do
+    it 'アクセスできる' do
+      get '/teacher'
+      expect(response).to have_http_status(200)
+    end
+  end
+
   describe '/teacher/lessons#create' do
     let(:teacher) { create(:teacher) }
     let(:lesson_params) do

@@ -7,6 +7,10 @@ describe Admin::UsersController, type: :request do
 
   describe '/admin/users#index' do
     it 'アクセスできる' do
+      get '/admin'
+      expect(response).to have_http_status(200)
+    end
+    it 'アクセスできる' do
       get admin_users_path
       expect(response).to have_http_status(200)
     end
