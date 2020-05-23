@@ -6,6 +6,7 @@ class Question < ApplicationRecord
   validates :title, presence: true, length: { maximum: 20 }
   validate :image_size
   belongs_to :lesson
+  has_many :answers
 
   scope :not_nil, -> { where.not(id: nil) }
   scope :display_order, -> { where.not(id: nil).order(display_order: :asc) }

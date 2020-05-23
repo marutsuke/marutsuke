@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :school
+  has_many :answers
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
