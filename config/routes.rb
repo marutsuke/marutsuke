@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :lessons, only: %i[index show] # テスト済み showはまだ
   resources :questions, only: %i[show]
+  resources :answers, only: %i[create]
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
 end
