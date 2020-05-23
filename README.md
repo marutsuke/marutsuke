@@ -35,3 +35,11 @@
 ## ログイン・サインアップフロー
 
 ![ログイン・サインアップフロー](wiki/images/login_sign_up_flow.png "hero")
+
+## レッスンフロー
+
+![レッスンフロー](wiki/images/lesson_flow.png "fllow")
+
+# ER 図 (2020/5/23 現在)
+
+![ER図](wiki/images/er.png "fllow")
