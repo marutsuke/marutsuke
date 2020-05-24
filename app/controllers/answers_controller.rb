@@ -4,17 +4,10 @@ class AnswersController < ApplicationController
   def create
     @answer = current_user.answers.new(answer_params)
     if @answer.save
-      answer_images.each do |image|
-        @answer_image = @answer.answer_images.new(image: image)
-        if @answer_image.save
-          flash[:success] = '課題を提出しました'
-        else
-          flash[:danger] = 'imageの保存に失敗しました。'
-        end
-      end
+      answer_images_save(@answer)
       redirect_to question_path(@answer.question)
     else
-      flash[:danger] = 'そもそもanswerの保存に失敗しました。'
+      flash[:danger] = '解答の保存に失敗しました。'
       render template: 'questions/show'
     end
   end
@@ -26,6 +19,19 @@ class AnswersController < ApplicationController
   end
 
   def answer_images
-    params.require(:answer).require(:answer_image).permit({ image: [] })[:image]
+    if params.require(:answer)[:answer_image].present?
+      params.require(:answer)&.require(:answer_image)&.permit({ image: [] })[:image]
+    end
+  end
+
+  def answer_images_save(answer)
+    answer_images&.each do |image|
+      answer_image = answer.answer_images.new(image: image)
+      if answer_image.save
+        flash[:success] = '課題を提出しました'
+      else
+        flash[:danger] = 'imageの保存に失敗しました。'
+      end
+    end
   end
 end
