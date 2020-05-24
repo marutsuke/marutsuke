@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 module RequestSpecHelper
+  def user_log_in(user = nil)
+    user ||= create(:user)
+    session_params = { email: user.email, password: user.password }
+    post login_path, params: { session: session_params }
+  end
+
+  def user_log_out
+    delete logout_path
+  end
+
   def admin_log_in
     admin = create(:admin)
     session_params = { email: admin.email, password: admin.password }
