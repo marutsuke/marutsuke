@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  skip_before_action :user_login_required
+
   def new
     @email_login = params[:email].present?
   end

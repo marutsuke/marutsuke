@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class SchoolsController < ApplicationController
+  skip_before_action :user_login_required
+
   def new
     @school = School.new
     @teacher = @school.teachers.build
@@ -24,6 +28,6 @@ class SchoolsController < ApplicationController
   end
 
   def teacher_params
-    params.require(:school).permit(teacher: [:name, :email, :password, :password_confirmation])
+    params.require(:school).permit(teacher: %i[name email password password_confirmation])
   end
 end

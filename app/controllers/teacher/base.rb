@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class Teacher::Base < ApplicationController
   include Teacher::SessionsHelper
   before_action :teacher_login_required
+  skip_before_action :user_login_required
 
   private
 
