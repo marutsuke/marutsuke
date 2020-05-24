@@ -10,8 +10,7 @@ class Teacher::QuestionsController < Teacher::Base
     @question = current_school
                   &.lessons
                   &.find(question_params[:lesson_id])
-                  &.questions
-                  &.build(question_params)
+                  &.questions.new(question_params)
     if @question.save
       flash[:success] = "#{@question.title}を作成しました。"
       redirect_to teacher_lesson_path(@question.lesson)
