@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
   def create
     @answer = current_user.answers.new(answer_params)
     if @answer.save
+      flash[:success] = '課題を提出しました'
       answer_images_save(@answer)
       redirect_to question_path(@answer.question)
     else
@@ -28,9 +29,9 @@ class AnswersController < ApplicationController
     answer_images&.each do |image|
       answer_image = answer.answer_images.new(image: image)
       if answer_image.save
-        flash[:success] = '課題を提出しました'
+        flash[:success] = '課題と画像を提出しました'
       else
-        flash[:danger] = 'imageの保存に失敗しました。'
+        flash[:danger] = '画像の保存に失敗しました。形式やサイズが間違っていないか確かめてください。'
       end
     end
   end

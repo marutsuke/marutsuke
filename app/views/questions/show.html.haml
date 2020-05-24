@@ -9,7 +9,6 @@
   .answer_form__label_and_input
     = f.label :text
     = f.text_area :text
-
   = f.fields_for @answer.answer_images.build do |ff|
     .answer_images_form__label_and_input
       .flex
