@@ -14,7 +14,7 @@
     .answer_images_form__label_and_input
       .flex
         = ff.label :image
-        %span (最大5MBまで)
+        %span (最大5MBまで・複数投稿できます)
       = ff.file_field :image, multiple: true
   = f.hidden_field :question_id, value: @question.id
   = f.submit '登録する'

@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      answer: 解答
+    attributes:
+      answer:
+        text: 文章
+        image: 画像
