@@ -14,6 +14,6 @@ class Question < ApplicationRecord
   private
 
   def image_size
-    errors.add(:picture, 'サイズは5MBまでです。') if image.size > 5.megabytes
+    errors.add(:image, 'サイズは5MBまでです。') if image.size > 5.megabytes
   end
 end
