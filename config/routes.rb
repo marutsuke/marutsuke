@@ -6,16 +6,11 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new' # テスト済み
   post '/login', to: 'sessions#create' # テスト済み
   delete '/logout', to: 'sessions#destroy' # テスト済み
-
-  namespace :admin do
-    get '', to: 'users#index' # テスト済み
-    resources :users, only: %i[index] # テスト済み
-    resources :admins, only: %i[new create] # テスト済み
-    get '/admins', to: 'admins#new' # テスト済み
-    get '/login', to: 'sessions#new' # テスト済み
-    post '/login', to: 'sessions#create' # テスト済み
-    delete '/logout', to: 'sessions#destroy' # テスト済み
-  end
+  resources :lessons, only: %i[index show] # テスト済み
+  resources :questions, only: %i[show]
+  resources :answers, only: %i[create]
+  resources :schools, only: %i[new create] # テスト済み
+  get '/schools', to: 'schools#new' # テスト済み
 
   namespace :teacher do
     get '', to: 'lessons#index' # テスト済み
@@ -31,9 +26,13 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy' # テスト済み
   end
 
-  resources :lessons, only: %i[index show] # テスト済み
-  resources :questions, only: %i[show]
-  resources :answers, only: %i[create]
-  resources :schools, only: %i[new create] # テスト済み
-  get '/schools', to: 'schools#new' # テスト済み
+  namespace :admin do
+    get '', to: 'users#index' # テスト済み
+    resources :users, only: %i[index] # テスト済み
+    resources :admins, only: %i[new create] # テスト済み
+    get '/admins', to: 'admins#new' # テスト済み
+    get '/login', to: 'sessions#new' # テスト済み
+    post '/login', to: 'sessions#create' # テスト済み
+    delete '/logout', to: 'sessions#destroy' # テスト済み
+  end
 end
