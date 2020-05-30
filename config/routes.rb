@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   namespace :teacher do
     get '', to: 'lessons#index' # テスト済み
+    get '/login', to: 'sessions#new' # テスト済み
+    post '/login', to: 'sessions#create' # テスト済み
+    delete '/logout', to: 'sessions#destroy' # テスト済み
     resources :users, only: %i[index new create] # テスト済み
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み
@@ -21,9 +24,6 @@ Rails.application.routes.draw do
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
-    get '/login', to: 'sessions#new' # テスト済み
-    post '/login', to: 'sessions#create' # テスト済み
-    delete '/logout', to: 'sessions#destroy' # テスト済み
   end
 
   namespace :admin do
