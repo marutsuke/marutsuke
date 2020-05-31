@@ -1,13 +1,11 @@
 :ruby
   active_ele ||= ''
-  elements = [ 
+  elements = [
     {href: lessons_path, icon: 'list-alt', text: '講座一覧'},
     {href: '', icon: 'check-circle', text: '提出済み'},
     {href: '', icon: 'times-circle', text: '未提出'},
     {href: '', icon: 'user', text: 'マイページ'},
     ]
-
-
 .user_footer.flex-sparo
   - elements.each do |element|
     .user_footer__ele.mr24
