@@ -24,6 +24,7 @@ RSpec.describe 'LessonsController', type: :request do
         get lessons_path
         expect(response).to have_http_status(200)
         expect(response.body).to include(going_lesson.name)
+        expect(response.body).not_to include('現在、開催予定の授業・講座は登録されていません。')
         expect(response.body).to include('現在、開催中の授業・講座は登録されていません。')
         expect(response.body).to include('現在、期間終了の授業・講座は登録されていません。')
       end
@@ -35,6 +36,7 @@ RSpec.describe 'LessonsController', type: :request do
         expect(response).to have_http_status(200)
         expect(response.body).to include(doing_lesson.name)
         expect(response.body).to include('現在、開催予定の授業・講座は登録されていません。')
+        expect(response.body).not_to include('現在、開催中の授業・講座は登録されていません。')
         expect(response.body).to include('現在、期間終了の授業・講座は登録されていません。')
       end
     end
@@ -46,6 +48,7 @@ RSpec.describe 'LessonsController', type: :request do
         expect(response.body).to include(done_lesson.name)
         expect(response.body).to include('現在、開催予定の授業・講座は登録されていません。')
         expect(response.body).to include('現在、開催中の授業・講座は登録されていません。')
+        expect(response.body).not_to include('現在、期間終了の授業・講座は登録されていません。')
       end
     end
     context '他の学校の授業だけがある' do

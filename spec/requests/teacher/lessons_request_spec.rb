@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Teacher::Lessons', type: :request do
-  before { teacher_log_in }
+  let(:teacher) { create(:teacher) }
+  before { teacher_log_in(teacher) }
 
   describe '/teacher/lesson#new ' do
     it 'アクセスできる' do
@@ -69,6 +70,14 @@ RSpec.describe 'Teacher::Lessons', type: :request do
       end.to change(Lesson, :count).by(0)
       expect(response).to have_http_status(200)
       expect(response.body).to include('を入力してください。')
+    end
+  end
+
+  describe '/teacher/lesson#show' do
+    let(:lesson) { create(:lesson, teacher: teacher, school: teacher.school) }
+    it 'アクセスできる' do
+      get teacher_lesson_path(lesson)
+      expect(response).to have_http_status(200)
     end
   end
 end

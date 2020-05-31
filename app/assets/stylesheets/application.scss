@@ -1,9 +1,12 @@
 @import "./reset";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 @import "./mixin/mixin";
 @import "./mixin/flex";
 @import "./mixin/margin";
 @import "./modules/header";
+@import "./modules/footer";
 @import "./config/color";
 @import "./modules/admin_new_user";
 @import "./modules/admin_edit_user";
