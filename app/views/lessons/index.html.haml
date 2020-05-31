@@ -1,3 +1,6 @@
+.lessons_tab.flex
+
+
 - if @going_lessons
   %table.user_lesson_table.ml24
     %thead.user_lesson_table__thead
@@ -47,4 +50,4 @@
         %td.user_lesson_table__td= lesson.decorate.end_at_for_user
         %td.user_lesson_table__td= lesson.teacher.name
 
-= render 'shared/footer'
+= render 'shared/footer', active_ele: 'list-alt'
