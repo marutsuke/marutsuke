@@ -1,4 +1,3 @@
-= render 'shared/header'
 .lesson_show_for_user
   .flex.ml24
     .lesson_show_for_user__name= @lesson.name
@@ -12,7 +11,4 @@
         - if question.image.present?
           = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
         .question_info__text= "説明: #{ question.text } "
-      .aaa
-        -# =form_with model: Answer.new do |f|
-        -#   = f.file_field, :image
 = render 'shared/footer'
