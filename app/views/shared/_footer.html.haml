@@ -1,17 +1,18 @@
 .user_footer.flex-sparo
   .user_footer__ele.mr24
-    .flex-cen
-      = icon('far', 'list-alt fa-3x') # activeは、fas
-    %span 講座一覧
+    = link_to root_path do
+      .flex-cen
+        = icon('far', 'list-alt fa-5x') # activeは、fas
+      .user_footer__ele_text 講座一覧
   .user_footer__ele.mr24
     .flex-cen
-      = icon('far', 'check-circle fa-3x') # activeは、fas
-    %span 提出済み
+      = icon('far', 'check-circle fa-5x') # activeは、fas
+    .user_footer__ele_text 提出済み
   .user_footer__ele.mrs24
     .flex-cen
-      = icon('far', 'times-circle fa-3x') # activeは、fas
-    %span 未提出一覧
+      = icon('far', 'times-circle fa-5x') # activeは、fas
+    .user_footer__ele_text 未提出一覧
   .user_footer__ele
     .flex-cen
-      = icon('far', 'user fa-3x')
-    %span マイページ
+      = icon('far', 'user fa-5x')
+    .user_footer__ele_text マイページ

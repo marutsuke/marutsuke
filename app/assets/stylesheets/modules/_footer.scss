@@ -4,6 +4,20 @@
   position: fixed;
   bottom: 0;
   width: 100%;
+  background-color: $white;
+  &__ele a {
+    text-decoration: none;
+    color: black;
+    opacity: 1;
+    &:hover {
+      text-decoration: none;
+      color: black;
+      opacity: 1;
+    }
+  }
+  &__ele_text {
+    text-align: center;
+  }
 }
 
 .copyright {
