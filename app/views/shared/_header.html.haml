@@ -1,7 +1,6 @@
 .user_header.mb24.mt8
   .user_header__link.flex.flex-sparo
     - if current_user
-      = link_to 'フッターテスト', root_path
       = current_user.name + 'さん'
       = link_to 'トップ', root_path
       = link_to 'ログアウト', logout_path, method: :delete
