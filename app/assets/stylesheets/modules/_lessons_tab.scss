@@ -1,4 +1,25 @@
 .lessons_tab {
-  height: 80px;
+  height: 120px;
   box-shadow: 0 1px gray;
+  &__ele {
+    text-align: center;
+    background-color: $gray;
+    border-radius: 5px;
+    & a {
+      color: white;
+      display: block;
+      padding: 16px 24px;
+      line-height: 48px;
+      font-size: 48px;
+    }
+    &.active {
+      background-color: $black;
+      & a {
+        color: white;
+        display: block;
+        font-weight: bold;
+        box-shadow: 2px 4px $gray;
+      }
+    }
+  }
 }

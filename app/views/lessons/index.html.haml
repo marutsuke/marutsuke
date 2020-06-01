@@ -1,5 +1,10 @@
-.lessons_tab.flex
-
+.lessons_tab.flex-sparo-cen
+  .lessons_tab__ele{class: 'active'}
+    =link_to '予定', lessons_path(scope: 'going_to')
+  .lessons_tab__ele
+    =link_to '期間中', lessons_path(scope: 'doing')
+  .lessons_tab__ele
+    =link_to '終了', lessons_path(scope: 'going')
 
 - if @going_lessons
   %table.user_lesson_table.ml24

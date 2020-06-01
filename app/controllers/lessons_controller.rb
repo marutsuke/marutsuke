@@ -11,4 +11,8 @@ class LessonsController < ApplicationController
     @lesson = current_school&.lessons&.find(params[:id])
     @questions = @lesson&.questions
   end
+
+  private
+
+  def set_lessons; end
 end
