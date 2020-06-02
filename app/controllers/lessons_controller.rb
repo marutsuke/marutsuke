@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class LessonsController < ApplicationController
+  before_action :set_lessons_scope, only: [:index]
   def index
-    @going_lessons = current_school&.lessons&.going_to
-    @doing_lessons = current_school&.lessons&.doing
-    @done_lessons = current_school&.lessons&.done
+    @lessons = current_school&.lessons&.send(@scope)
   end
 
   def show
@@ -14,5 +13,17 @@ class LessonsController < ApplicationController
 
   private
 
-  def set_lessons; end
+  def set_lessons_scope
+    case params[:scope]
+    when 'going_to'
+      @scope = 'going_to'
+      @scope_text = '予定'
+    when 'done'
+      @scope = 'done'
+      @scope_text = '期間中'
+    else
+      @scope = 'doing'
+      @scope_text = '期間中'
+    end
+  end
 end

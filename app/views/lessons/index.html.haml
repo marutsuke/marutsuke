@@ -1,58 +1,24 @@
 .lessons_tab.flex-sparo-cen
-  .lessons_tab__ele{class: 'active'}
+  .lessons_tab__ele{class: lessons_active_judge('going_to', @scope)}
     =link_to '予定', lessons_path(scope: 'going_to')
-  .lessons_tab__ele
+  .lessons_tab__ele{class: lessons_active_judge('doing', @scope)}
     =link_to '期間中', lessons_path(scope: 'doing')
-  .lessons_tab__ele
-    =link_to '終了', lessons_path(scope: 'going')
+  .lessons_tab__ele{class: lessons_active_judge('done', @scope)}
+    =link_to '終了', lessons_path(scope: 'done')
 
-- if @going_lessons
-  %table.user_lesson_table.ml24
-    %thead.user_lesson_table__thead
-      %th.user_lesson_table__th 開催予定の授業・講座一覧
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-    - if @going_lessons&.length == 0
-      %tr.user_lesson_table__tr--nil
-        %td.user_lesson_table__tr--nil{ colspan: '4' } 現在、開催予定の授業・講座は登録されていません。
-    - @going_lessons&.each do |lesson|
-      %tr.user_lesson_table__tr
-        %td.user_lesson_table__td= link_to lesson.name, lesson_path(lesson)
-        %td.user_lesson_table__td= lesson.decorate.start_at_for_user
-        %td.user_lesson_table__td= lesson.decorate.end_at_for_user
-        %td.user_lesson_table__td= lesson.teacher.name
-- if @doing_lessons
-  %table.user_lesson_table.ml24
-    %thead.user_lesson_table__thead
-      %th.user_lesson_table__th 開催中の授業・講座一覧
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-    - if @doing_lessons&.length == 0
-      %tr.user_lesson_table__tr--nil
-        %td{ colspan: '4' } 現在、開催中の授業・講座は登録されていません。
-    - @doing_lessons&.each do |lesson|
-      %tr.user_lesson_table__tr
-        %td.user_lesson_table__td= link_to lesson.name, lesson_path(lesson)
-        %td.user_lesson_table__td= lesson.decorate.start_at_for_user
-        %td.user_lesson_table__td= lesson.decorate.end_at_for_user
-        %td.user_lesson_table__td= lesson.teacher.name
-- if @done_lessons
-  %table.user_lesson_table.ml24
-    %thead.user_lesson_table__thead
-      %th.user_lesson_table__th 期間終了の授業・講座一覧
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
-      %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-    - if @done_lessons&.length == 0
-      %tr.user_lesson_table__tr--nil
-        %td{ colspan: '4' } 現在、期間終了の授業・講座は登録されていません。
-    - @done_lessons&.each do |lesson|
-      %tr.user_lesson_table__tr
-        %td.user_lesson_table__td--link= link_to lesson.name, lesson_path(lesson)
-        %td.user_lesson_table__td= lesson.decorate.start_at_for_user
-        %td.user_lesson_table__td= lesson.decorate.end_at_for_user
-        %td.user_lesson_table__td= lesson.teacher.name
-
+%table.user_lesson_table.ml24
+  %thead.user_lesson_table__thead
+    %th.user_lesson_table__th= "開催#{ @scope_text }の授業・講座一覧"
+    %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
+    %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
+    %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
+  - if @lessons&.length == 0
+    %tr.user_lesson_table__tr--nil
+      %td.user_lesson_table__tr--nil{ colspan: '4' }= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
+  - @lessons&.each do |lesson|
+    %tr.user_lesson_table__tr
+      %td.user_lesson_table__td= link_to lesson.name, lesson_path(lesson)
+      %td.user_lesson_table__td= lesson.decorate.start_at_for_user
+      %td.user_lesson_table__td= lesson.decorate.end_at_for_user
+      %td.user_lesson_table__td= lesson.teacher.name
 = render 'shared/footer', active_ele: 'list-alt'
