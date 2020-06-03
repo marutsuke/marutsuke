@@ -21,4 +21,4 @@
       %td.user_lesson_table__td= lesson.decorate.start_at_for_user
       %td.user_lesson_table__td= lesson.decorate.end_at_for_user
       %td.user_lesson_table__td= lesson.teacher.name
-= render 'shared/footer', active_ele: 'list-alt'
+= render 'shared/footer', active_ele: 'list-alt', scope: @scope
