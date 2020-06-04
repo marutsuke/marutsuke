@@ -6,19 +6,18 @@
   .lessons_tab__ele{class: lessons_active_judge('done', @scope)}
     =link_to '終了', lessons_path(scope: 'done')
 
-%table.user_lesson_table.ml24
-  %thead.user_lesson_table__thead
-    %th.user_lesson_table__th= "開催#{ @scope_text }の授業・講座一覧"
-    %th.user_lesson_table__th= Lesson.human_attribute_name(:start_at)
-    %th.user_lesson_table__th= Lesson.human_attribute_name(:end_at)
-    %th.user_lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-  - if @lessons&.length == 0
-    %tr.user_lesson_table__tr--nil
-      %td.user_lesson_table__tr--nil{ colspan: '4' }= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
-  - @lessons&.each do |lesson|
-    %tr.user_lesson_table__tr
-      %td.user_lesson_table__td= link_to lesson.name, lesson_path(lesson)
-      %td.user_lesson_table__td= lesson.decorate.start_at_for_user
-      %td.user_lesson_table__td= lesson.decorate.end_at_for_user
-      %td.user_lesson_table__td= lesson.teacher.name
+- if @lessons&.length == 0
+  .user_lesson_card--no_lesson
+    .user_lesson_card__title= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
+- else
+  - @lessons.each do |lesson|
+    =link_to lesson_path(lesson), class: 'user_lesson_card' do
+      .user_lesson_card__content
+        .user_lesson_card__teacher= lesson.teacher.name
+        .user_lesson_card__title= lesson.name
+        .user_lesson_card__time= lesson.decorate.start_to_end_time
+
+
+
+
 = render 'shared/footer', active_ele: 'list-alt', scope: @scope

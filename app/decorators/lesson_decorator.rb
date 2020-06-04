@@ -14,10 +14,20 @@ class LessonDecorator < Draper::Decorator
   end
 
   def start_at_for_user
-    Time.parse(start_at).strftime("%y/%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(start_at).wday]}) %R") || '未設定'
+    time_format(start_at) || '未設定'
   end
 
   def end_at_for_user
-    Time.parse(end_at).strftime("%y/%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(end_at).wday]}) %R") || '未設定'
+    time_format(end_at) || '未設定'
+  end
+
+  def start_to_end_time
+    "#{time_format(start_at) || ''} ~ #{time_format(start_at) || ''}"
+  end
+
+  private
+
+  def time_format(time)
+    Time.parse(time).strftime("%y/%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
   end
 end
