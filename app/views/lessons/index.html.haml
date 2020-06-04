@@ -11,10 +11,11 @@
     .user_lesson_card__title= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
 - else
   - @lessons.each do |lesson|
-    .user_lesson_card
-      .user_lesson_card__teacher= lesson.teacher.name
-      .user_lesson_card__title= lesson.name
-      .user_lesson_card__time= lesson.decorate.start_to_end_time
+    =link_to lesson_path(lesson), class: 'user_lesson_card' do
+      .user_lesson_card__content
+        .user_lesson_card__teacher= lesson.teacher.name
+        .user_lesson_card__title= lesson.name
+        .user_lesson_card__time= lesson.decorate.start_to_end_time
 
 
 
