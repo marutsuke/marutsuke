@@ -7,8 +7,8 @@
     =link_to '終了', lessons_path(scope: 'done')
 
 - if @lessons&.length == 0
-  .user_lesson_card--no_lesson
-    .user_lesson_card__title= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
+  .user_lesson_card--no_lessons
+    .user_lesson_card--no_lessons__title= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
 - else
   - @lessons.each do |lesson|
     =link_to lesson_path(lesson), class: 'user_lesson_card' do
