@@ -47,7 +47,7 @@ RSpec.describe 'SessionsController', type: :request do
       delete logout_path
       follow_redirect!
       expect(session[:user_id]).to eq nil
-      expect(response.body).not_to be_include(user.name + 'さん')
+      expect(response.body).not_to be_include('予定')
     end
 
     # このテストは、成功するが、ブラウザを閉じる動作が実現できていない(cookieができたかどうかのテストはできている。)
@@ -63,7 +63,7 @@ RSpec.describe 'SessionsController', type: :request do
       get root_path
       expect(response).to have_http_status(200)
       expect(session[:user_id]).to eq user.id
-      expect(response.body).to be_include(user.name + 'さん')
+      expect(response.body).to be_include('予定')
     end
 
     xit 'remember meせずにログインすると、セッションが切れるとログイン状態が保持できない' do
