@@ -13,7 +13,7 @@
   - @lessons.each do |lesson|
     =link_to lesson_path(lesson), class: 'user_lesson_card' do
       .user_lesson_card__content
-        .user_lesson_card__teacher= lesson.teacher.name
+        .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
         .user_lesson_card__title= lesson.name
         .user_lesson_card__time= lesson.decorate.start_to_end_time
 
