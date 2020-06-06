@@ -22,12 +22,14 @@ class LessonDecorator < Draper::Decorator
   end
 
   def start_to_end_time
-    "#{time_format(start_at) || ''} ~ #{time_format(start_at) || ''}"
+    "#{time_format(start_at) || ''} ~ #{time_format(end_at) || ''}"
   end
 
   private
 
   def time_format(time)
+    return nil if time == '未設定' || time.nil?
+
     Time.parse(time).strftime("%y/%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
   end
 end
