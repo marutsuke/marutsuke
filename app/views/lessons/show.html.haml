@@ -1,8 +1,8 @@
-.lesson_show_for_user
-  .flex.ml24
-    .lesson_show_for_user__name= @lesson.name
-    .lesson_show_for_user__teacher= @lesson.teacher.name  + '先生'
-  .lesson_show_for_user__term= "#{@lesson.decorate.start_at_for_user} ~ #{@lesson.decorate.end_at_for_user}"
+.lesson_show_for_user_header
+  .lesson_show_for_user_header__name= @lesson.name
+  .lesson_show_for_user_header__info
+    .lesson_show_for_user_header__teacher= "担当: #{@lesson.teacher.name}"
+    .lesson_show_for_user_header__term= @lesson.decorate.start_to_end_time
 .lesson_show_for_user__questions
   - @questions.display_order&.each do |question|
     .flex.question_info
