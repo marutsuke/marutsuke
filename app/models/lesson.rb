@@ -12,7 +12,24 @@ class Lesson < ApplicationRecord
   has_many :questions, dependent: :destroy
 
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
-  scope :doing, -> { where('start_at <= ?', Time.zone.now).where('end_at >= ?', Time.zone.now) }
+
+  scope :doing, lambda {
+    where('start_at <= ?', Time.zone.now)
+      .where('end_at >= ?', Time.zone.now)
+      .or(
+        Lesson.where('start_at <= ?', Time.zone.now)
+            .where(end_at: nil)
+      )
+      .or(
+        Lesson.where('end_at >= ?', Time.zone.now)
+        .where(start_at: nil)
+      )
+      .or(
+        Lesson.where(end_at: nil)
+        .where(start_at: nil)
+      )
+  }
+
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
   private
