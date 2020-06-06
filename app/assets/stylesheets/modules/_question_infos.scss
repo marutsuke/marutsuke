@@ -4,6 +4,7 @@
   box-shadow: 0 1px $gray;
   padding: 16px 8px;
   height: 272px;
+  overflow: hidden;
   &__image_content {
     width: 30vw;
     background-color: $white;
@@ -13,10 +14,13 @@
     margin-left: 16px;
   }
   &__num {
-    font-size: 12px;
+    font-size: 16px;
   }
   &__title {
     font-size: 48px;
+  }
+  &__text {
+    font-size: 24px;
   }
 }
 
