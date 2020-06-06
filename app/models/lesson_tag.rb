@@ -1,0 +1,2 @@
+class LessonTag < ApplicationRecord
+end
