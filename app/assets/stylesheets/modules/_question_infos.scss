@@ -2,12 +2,21 @@
   display: block;
   display: flex;
   box-shadow: 0 1px $gray;
-  padding: 4px 0;
-  height: 248px;
+  padding: 16px 8px;
+  height: 272px;
   &__image_content {
     width: 30vw;
     background-color: $white;
     overflow: hidden;
+  }
+  &__description {
+    margin-left: 16px;
+  }
+  &__num {
+    font-size: 12px;
+  }
+  &__title {
+    font-size: 48px;
   }
 }
 

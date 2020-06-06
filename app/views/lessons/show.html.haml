@@ -9,7 +9,7 @@
       - if question.image.present?
         = image_tag question&.image_url, alt: question.title, height: '240px'
     .user_question_row__description
-      .user_question_row__num= "#{i}."
+      .user_question_row__num= "#{i + 1}."
       .user_question_row__title= question.title
-      .user_question_row__text= "説明: #{ question.text } "
+      .user_question_row__text= simple_format(question.text, {})
 = render 'shared/footer'
