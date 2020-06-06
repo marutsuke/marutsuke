@@ -3,10 +3,13 @@
   .lesson_show_for_user_header__info
     .lesson_show_for_user_header__teacher= "担当: #{@lesson.teacher.name}"
     .lesson_show_for_user_header__term= @lesson.decorate.start_to_end_time
-- @questions.display_order&.each do |question|
+- @questions.display_order&.each_with_index do |question, i|
   = link_to question_path(question), class: 'user_question_row' do
-    - if question.image.present?
-      = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
-    .question_info__title= "タイトル: #{ question.title } "
-    .question_info__text= "説明: #{ question.text } "
+    .user_question_row__image_content
+      - if question.image.present?
+        = image_tag question&.image_url, alt: question.title, height: '240px'
+    .user_question_row__description
+      .user_question_row__num= "#{i}."
+      .user_question_row__title= question.title
+      .user_question_row__text= "説明: #{ question.text } "
 = render 'shared/footer'

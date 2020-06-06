@@ -3,6 +3,12 @@
   display: flex;
   box-shadow: 0 1px $gray;
   padding: 4px 0;
+  height: 248px;
+  &__image_content {
+    width: 30vw;
+    background-color: $white;
+    overflow: hidden;
+  }
 }
 
 .question_infos {
