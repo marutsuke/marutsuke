@@ -1,3 +1,10 @@
+.user_question_row {
+  display: block;
+  display: flex;
+  box-shadow: 0 1px $gray;
+  padding: 4px 0;
+}
+
 .question_infos {
   margin-top: 24px;
   display: flex;
