@@ -1,0 +1,18 @@
+= render 'teacher/shared/header'
+.teacher_user_show
+  .flex
+    .teacher_user_show__th.mr8= User.human_attribute_name(:name) + ':'
+    .teacher_user_show__ele= @user.name
+  .flex
+    .teacher_user_show__th.mr8= User.human_attribute_name(:login_id) + ':'
+    .teacher_user_show__ele= @user.login_id
+  .flex
+    .teacher_user_show__th.mr8= User.human_attribute_name(:email) + ':'
+    .teacher_user_show__ele= @user.email
+  .flex
+    .teacher_user_show__th.mr8= User.human_attribute_name(:start_at) + ':'
+    .teacher_user_show__ele= @user.start_at
+  .flex
+    .teacher_user_show__th.mr8= User.human_attribute_name(:activated) + ':'
+    .teacher_user_show__ele= @user.activated_status
+= link_to '編集', edit_teacher_user_path(@user)

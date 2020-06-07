@@ -20,6 +20,10 @@ class Teacher::UsersController < Teacher::Base
     end
   end
 
+  def show
+    @user = current_school.users.find(params[:id]).decorate
+  end
+
   private
 
   def user_params
