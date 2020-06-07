@@ -1,0 +1,9 @@
+= render 'teacher/shared/header'
+.user_form__title タグ新規登録
+.user_form
+  = form_with model: [:teacher, @tag], local: true do |f|
+    = render 'shared/error_messages', model_object: @tag
+    .user_form__label_and_input
+      = f.label :name, class: 'required'
+      = f.text_field :name
+    = f.submit '登録する', class: 'user_form__submit_btn'
