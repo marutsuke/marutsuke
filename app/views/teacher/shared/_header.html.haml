@@ -1,6 +1,5 @@
 .header_for_teacher.mb24.mt8
   .teacher_link.flex.flex-sparo
-    = link_to 'top', root_path
     - if current_teacher
       = link_to "#{User.model_name.human}一覧", teacher_users_path
       = link_to "#{Lesson.model_name.human}一覧", teacher_lessons_path
