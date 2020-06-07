@@ -1,0 +1,36 @@
+- password_form_show ||= false
+.user_form
+  = form_with model: [:teacher, user], local: true do |f|
+    = render 'shared/error_messages', model_object: @user
+    .user_form__label_and_input
+      = f.label :name, class: 'required'
+      = f.text_field :name
+    .user_form__label_and_input
+      = f.label :email
+      = f.email_field :email
+    .user_form__label_and_input
+      = f.label :start_at_date
+      .user_form__datetime_select
+        = f.date_field :start_at_date, value: Time.zone.today
+        = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, selected: Time.zone.now.hour
+        = f.label :start_at_hour, '時'
+        = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, selected: Time.zone.now.min.floor(-1)
+        = f.label :start_at_min, '分'
+    .user_form__label_and_input
+      = f.label :end_at_date
+      .user_form__datetime_select
+        = f.date_field :end_at_date
+        = f.select :end_at_hour, (8..21).map{|e| [format('%02d', e), e]}, include_blank: true
+        = f.label :end_at_hour, '時'
+        = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, include_blank: true
+        = f.label :end_at_min, '分'
+    - if password_form_show
+      .user_form__label_and_input
+        .flex
+          = f.label :password, class: 'required mr24'
+          %span (ログイン後、生徒自身が変更することができます)
+        = f.text_field :password, value: 123456
+      .user_form__label_and_input
+        = f.label :password_confirmation, class: 'required'
+        = f.text_field :password_confirmation, value: 123456
+    = f.submit '登録する', class: 'user_form__submit_btn'

@@ -24,6 +24,10 @@ class Teacher::UsersController < Teacher::Base
     @user = current_school.users.find(params[:id]).decorate
   end
 
+  def edit
+    @user = current_school.users.find(params[:id])
+  end
+
   private
 
   def user_params
