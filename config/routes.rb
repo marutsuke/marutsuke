@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
     resources :tags, only: %i[new create]
+    resources :user_tags, only: %i[create]
     get '/tags', to: 'tags#new'
   end
 
