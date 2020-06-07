@@ -13,8 +13,8 @@ class User < ApplicationRecord
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
-                    allow_nil: true
-  validates :password, presence: true, length: { minimum: 6 }
+                    allow_blank: true
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
   has_secure_password
 
   belongs_to :school

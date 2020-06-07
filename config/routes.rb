@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み
     delete '/logout', to: 'sessions#destroy' # テスト済み
-    resources :users, only: %i[index new create show edit] # テスト済み show, editはまだ
+    resources :users, only: %i[index new create show edit update] # テスト済み show, editはまだ
     get 'users', to: 'users#new' # テスト済み
     resources :teachers, only: %i[new create] # テスト済み
     resources :lessons, only: %i[index show new create] # テスト済み

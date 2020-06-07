@@ -28,6 +28,16 @@ class Teacher::UsersController < Teacher::Base
     @user = current_school.users.find(params[:id])
   end
 
+  def update
+    @user = current_school.users.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = "#{@user.name}の情報を更新しました"
+      redirect_to edit_teacher_user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def user_params
