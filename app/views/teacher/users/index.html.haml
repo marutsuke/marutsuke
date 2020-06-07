@@ -7,11 +7,15 @@
     %th.users_account_table__th= User.human_attribute_name(:start_at)
     %th.users_account_table__th= User.human_attribute_name(:end_at)
     %th.users_account_table__th= User.human_attribute_name(:activated)
+    - current_school.tags.each do |tag|
+      %th.users_account_table__th= tag.name
   - @users.each do |user|
     %tr.users_account_table__tr
-      %td.users_account_table__tr= user.name
+      %td.users_account_table__tr= link_to user.name, teacher_user_path(user)
       %td.users_account_table__tr= user.login_id
-      %td.users_account_table__tr= user.email || '未設定'
-      %td.users_account_table__tr= user.start_at&.strftime('%F-%R') || '未設定'
-      %td.users_account_table__tr= user.end_at&.strftime('%F-%R') || '未設定'
-      %td.users_account_table__tr= user.activated ? '有効' : '無効'
+      %td.users_account_table__tr= user.decorate.email
+      %td.users_account_table__tr= user.decorate.start_at
+      %td.users_account_table__tr= user.decorate.end_at
+      %td.users_account_table__tr= user.decorate.activated_status
+      - current_school.tags.each do |tag|
+        %td.users_account_table__th
