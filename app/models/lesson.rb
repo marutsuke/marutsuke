@@ -10,6 +10,8 @@ class Lesson < ApplicationRecord
   belongs_to :school
   belongs_to :teacher
   has_many :questions, dependent: :destroy
+  has_many :tags, through: :lesson_tags
+  has_many :lesson_tags
 
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
 
