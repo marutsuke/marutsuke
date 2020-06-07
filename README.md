@@ -42,4 +42,4 @@
 
 # ER 図 (2020/5/23 現在)
 
-![ER図](wiki/images/er2.jpg "fllow")
+![ER図](wiki/images/er2.png "fllow")
