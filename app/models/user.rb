@@ -19,8 +19,8 @@ class User < ApplicationRecord
 
   belongs_to :school
   has_many :answers
-  has_many :tags, through: :user_tags
   has_many :user_tags
+  has_many :tags, through: :user_tags
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
