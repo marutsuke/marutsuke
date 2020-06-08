@@ -1,0 +1,4 @@
+= form_with model: [:teacher, UserTag.new] do |f|
+  =f.select :tag_id ,Tag.all.map{|tag| [tag.name, tag.id]}
+  =f.hidden_field :user_id, value: user.id
+  =f.submit
