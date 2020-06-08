@@ -3,8 +3,9 @@
 class Teacher::UserTagsController < ApplicationController
   def create
     @user_tag = UserTag.new(user_tag_params)
+    @user = @user_tag.user
     respond_to do |format|
-      if @user_tag.save && current_school.users.find_by(id: @user_tag.user.id)
+      if @user_tag.save && current_school.users.find_by(id: @user.id)
         format.js # create.js.erb
       else
         flash[:danger] = 'タグ登録に失敗しました。もう一度試してください。解決しない場合は、お問い合わせください。'
