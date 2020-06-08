@@ -5,5 +5,7 @@ class Tag < ApplicationRecord
   validates :name, uniqueness: { scope: :school_id }
   has_many :user_tags
   has_many :lesson_tags
+  has_many :users, through: :user_tags
+  has_many :lessons, through: :lesson_tags
   belongs_to :school
 end
