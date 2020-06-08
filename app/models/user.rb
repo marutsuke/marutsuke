@@ -7,14 +7,14 @@ class User < ApplicationRecord
   before_save { email&.downcase! }
   before_save { start_at_set }
   before_save { end_at_set }
-  before_validation { auto_login_id_create }
+  before_create { auto_login_id_create }
   validates :name, presence: true, length: { maximum: 12 }
   validates :login_id, presence: true, uniqueness: true
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
-                    allow_nil: true
-  validates :password, presence: true, length: { minimum: 6 }
+                    allow_blank: true
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
   has_secure_password
 
   belongs_to :school
