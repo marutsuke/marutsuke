@@ -2,3 +2,4 @@
   =f.select :tag_id ,(current_school.tags - user.tags).map{|tag| [tag.name, tag.id]}
   =f.hidden_field :user_id, value: user.id
   =f.submit
+= '登録済みタグ: ' + user.tags.map{ |tag| tag.name }.join(',')
