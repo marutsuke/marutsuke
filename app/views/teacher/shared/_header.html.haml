@@ -7,6 +7,7 @@
       = link_to '受講生追加', new_teacher_user_path
       = link_to '教師追加', new_teacher_teacher_path
       = link_to 'タグ新規作成', new_teacher_tag_path
+      = link_to '学校情報編集', edit_teacher_school_path
       %p= "#{current_school.name}： #{current_teacher.name}先生"
       = link_to '教師ログアウト', teacher_logout_path, method: :delete
     - else
