@@ -16,11 +16,11 @@
     .user_form_session__label_and_input--checkbox
       = f.check_box :remember_me
       = f.label :remember_me, '次回から自動的にログイン'
-      =f.hidden_field :school_login_path, value: @school.login_path
+      =f.hidden_field :school_login_path, value: @school&.login_path
     = f.submit 'ログイン', class: 'user_form_session__submit_btn'
     - if @email_login
       .user_form_session__link
-        = link_to 'ログインIDでログインする', login_path
+        = link_to 'ログインIDでログインする', login_path(login_path: @school&.login_path)
     - else
       .user_form_session__link
-        = link_to 'メールアドレスでログインする', login_path(email: true)
+        = link_to 'メールアドレスでログインする', login_path(login_path: @school&.login_path, email: true)

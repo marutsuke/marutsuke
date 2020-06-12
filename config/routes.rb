@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root 'lessons#index' # テスト済み
 
-  get '/login/:login_path', to: 'sessions#new' # テスト済み
+  get '/login/:login_path', to: 'sessions#new', as: 'login' # テスト済み
   post '/login', to: 'sessions#create' # テスト済み
   delete '/logout', to: 'sessions#destroy' # テスト済み
   resources :lessons, only: %i[index show] # テスト済み
