@@ -4,11 +4,13 @@ class SessionsController < ApplicationController
   skip_before_action :user_login_required
 
   def new
+    @school = School.find_by(login_path: params[:login_path])
     @email_login = params[:email].present?
   end
 
   def create
-    user = search_user_from_email_or_login_id
+    school = School.find_by(login_path: session_params[:school_login_path])
+    user = search_user_from_email_or_login_id(school)
     if user&.authenticate(session_params[:password])
       user_log_in(user)
       login_count_up(user)
@@ -34,7 +36,8 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:login_id, :password, :email)
+    params.require(:session)
+          .permit(:login_id, :password, :email, :school_login_path)
   end
 
   def login_count_up(user)
@@ -42,11 +45,13 @@ class SessionsController < ApplicationController
     user.update_attribute(:login_count, login_count)
   end
 
-  def search_user_from_email_or_login_id
+  def search_user_from_email_or_login_id(school)
+    return nil if school.nil?
+
     if session_params[:login_id].present?
-      User.find_by(login_id: session_params[:login_id])
+      school.users.find_by(login_id: session_params[:login_id])
     elsif session_params[:email].present?
-      User.find_by(email: session_params[:email])
+      school.users.find_by(email: session_params[:email])
     end
   end
 end
