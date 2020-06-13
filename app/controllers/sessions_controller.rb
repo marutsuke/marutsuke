@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    school = School.find_by(login_path: session_params[:school_login_path])
-    user = search_user_from_email_or_login_id(school)
+    @school = School.find_by(login_path: session_params[:school_login_path])
+    user = search_user_from_email_or_login_id(@school)
     if user&.authenticate(session_params[:password])
       user_log_in(user)
       login_count_up(user)
