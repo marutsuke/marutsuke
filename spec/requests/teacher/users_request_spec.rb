@@ -33,6 +33,7 @@ describe Teacher::UsersController, type: :request do
     let(:user_params) do
       {
         name: 'テスト',
+        login_id: 'test_id',
         email: 'test_mail@test.com',
         start_at_date: '2020-02-01',
         start_at_hour: '12',
