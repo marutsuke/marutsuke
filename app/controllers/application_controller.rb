@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :user_login_required
 
+  class Forbidden < ActionController::ActionControllerError; end
+  include ErrorHandlers if Rails.env.production?
+
   private
 
   def user_login_required
