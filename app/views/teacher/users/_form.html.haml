@@ -6,8 +6,8 @@
       = f.label :name, class: 'required'
       = f.text_field :name
     .user_form__label_and_input
-      = f.label :email
-      = f.email_field :email
+      = f.label :login_id, class: 'required'
+      = f.text_field :login_id
     .user_form__label_and_input
       = f.label :start_at_date
       .user_form__datetime_select
@@ -33,4 +33,7 @@
       .user_form__label_and_input
         = f.label :password_confirmation, class: 'required'
         = f.text_field :password_confirmation, value: 123456
+      .user_form__label_and_input
+        = f.label :email
+        = f.email_field :email
     = f.submit '登録する', class: 'user_form__submit_btn'
