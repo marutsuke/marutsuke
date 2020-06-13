@@ -48,6 +48,6 @@
 
 ![レッスンフロー](wiki/images/lesson_flow.png "fllow")
 
-# ER 図 (2020/6/7 現在)
+# ER 図 (2020/6/13 現在)
 
 ![ER図](wiki/images/er5.png "fllow")
