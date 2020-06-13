@@ -7,9 +7,9 @@ class User < ApplicationRecord
   before_save { email&.downcase! }
   before_save { start_at_set }
   before_save { end_at_set }
-  # before_save { auto_login_id_create }
   validates :name, presence: true, length: { maximum: 12 }
-  validates :login_id, presence: true, uniqueness: true
+  validates :login_id, presence: true
+  validates :login_id, uniqueness: { scope: :school_id }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
@@ -47,10 +47,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def auto_login_id_create
-    self.login_id = school_id.to_s + format('%07d', (User.last&.id || 0) + 1)
-  end
 
   def start_at_set
     if start_at_date.present? && start_at_hour.present? && start_at_min.present?
