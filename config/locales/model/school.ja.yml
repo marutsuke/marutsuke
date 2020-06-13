@@ -5,6 +5,7 @@ ja:
     attributes:
       school:
         name: 学校名・塾名
+        login_path: ログインPATH
       teachers:
         name: 名前
         email: メールアドレス
