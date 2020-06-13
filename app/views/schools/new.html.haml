@@ -1,10 +1,12 @@
-.user_form__title 新規教師登録
+.user_form__title 新規学校登録
 .user_form
   = form_with model: @school, local: true do |f|
     = render 'shared/error_messages', model_object: @school
     .user_form__label_and_input
       = f.label :name, class: 'required'
       = f.text_field :name
+      = f.label :login_path, class: 'required'
+      = f.text_field :login_path
     = f.fields_for @teacher do |ff|
       .user_form__label_and_input
         = ff.label :name, class: 'required'
