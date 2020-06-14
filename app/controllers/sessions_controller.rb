@@ -30,9 +30,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    @school = current_school
     user_log_out
     flash[:danger] = 'ログアウトしました。'
-    redirect_to root_path
+    redirect_to school_login_path(@school.login_path)
   end
 
   private
