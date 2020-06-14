@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :user_login_required
 
   class Forbidden < ActionController::ActionControllerError; end
+  class LoginRequired < ActionController::ActionControllerError; end
   include ErrorHandlers if Rails.env.production?
 
   private
@@ -12,7 +13,7 @@ class ApplicationController < ActionController::Base
   def user_login_required
     unless current_user
       flash[:info] = 'ログインしてください'
-      redirect_to login_path
+      raise LoginRequired
     end
   end
 end
