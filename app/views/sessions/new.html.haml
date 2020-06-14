@@ -1,6 +1,6 @@
 .user_form_session__title= "#{ @school.name }ログイン"
 .user_form_session
-  = form_with scope: :session, url: login_path, local: true do |f|
+  = form_with scope: :session, url: "/login_post/#{@school.login_path}", local: true do |f|
     - if @email_login
       .user_form_session__label_and_input
         = f.label :email, User.human_attribute_name(:email)
@@ -19,7 +19,7 @@
     = f.submit 'ログイン', class: 'user_form_session__submit_btn'
     - if @email_login
       .user_form_session__link
-        = link_to 'ログインIDでログインする', login_path(login_path: @school&.login_path)
+        = link_to 'ログインIDでログインする', school_login_path(login_path: @school&.login_path)
     - else
       .user_form_session__link
-        = link_to 'メールアドレスでログインする', login_path(login_path: @school&.login_path, email: true)
+        = link_to 'メールアドレスでログインする', school_login_path(login_path: @school&.login_path, email: true)
