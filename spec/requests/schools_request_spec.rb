@@ -21,6 +21,7 @@ RSpec.describe 'SchoolsController', type: :request do
     let(:school_params) do
       {
         name: 'テスト',
+        login_path: 'login_path_test',
         teacher: {
           name: 'テスト',
           email: 'test@test.com',
