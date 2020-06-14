@@ -1,0 +1,8 @@
+.error
+  %h1 403 Forbidden
+  - case @exception
+  - when ApplicationController::LoginRequired
+    %p 指定のログインページからログインしてください。
+  - else
+    %p このページにアクセスできません。
+    %p= @exception

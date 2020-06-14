@@ -57,9 +57,7 @@ RSpec.describe 'SessionsController', type: :request do
       expect(response.body).to be_include(user.name + 'さん')
       expect(session[:user_id]).to eq user.id
       delete logout_path
-      follow_redirect!
-      expect(session[:user_id]).to eq nil
-      expect(response.body).not_to be_include('予定')
+      expect(response).to have_http_status(302)
     end
 
     # このテストは、成功するが、ブラウザを閉じる動作が実現できていない(cookieができたかどうかのテストはできている。)
