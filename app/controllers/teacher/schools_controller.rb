@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Teacher::SchoolsController < ApplicationController
+class Teacher::SchoolsController < Teacher::Base
   def edit; end
 
   def update

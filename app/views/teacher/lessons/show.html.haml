@@ -11,7 +11,7 @@
     - display_order_now = @lesson.questions.index(@question) + 1
     .question_form__label_and_input
       = f.label :display_order, class: 'required'
-      = f.select :display_order, (1..display_order_now) , value: display_order_now
+      = f.select :display_order, (1..@questions.length + 5) , value: display_order_now
     .question_form__label_and_input
       = f.label :title, class: 'required'
       = f.text_field :title

@@ -13,6 +13,7 @@ class Teacher::LessonsController < Teacher::Base
 
   def new
     @lesson = Lesson.new
+    @tags = current_school.tags
   end
 
   def create
@@ -30,7 +31,7 @@ class Teacher::LessonsController < Teacher::Base
   def lesson_params
     params.require(:lesson).permit(
       :name, :teacher_id, :start_at_date, :start_at_hour,
-      :start_at_min, :end_at_date, :end_at_hour, :end_at_min
+      :start_at_min, :end_at_date, :end_at_hour, :end_at_min, tag_ids: []
     )
   end
 end

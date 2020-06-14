@@ -8,4 +8,6 @@ class Tag < ApplicationRecord
   has_many :users, through: :user_tags
   has_many :lessons, through: :lesson_tags
   belongs_to :school
+
+  scope :saved, -> { where.not(id: nil) }
 end
