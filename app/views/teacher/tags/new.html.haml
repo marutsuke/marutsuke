@@ -7,6 +7,7 @@
       = f.label :name, class: 'required'
       = f.text_field :name
     = f.submit '登録する', class: 'user_form__submit_btn'
-.tags
+.tags.mb8 タグ一覧
+%ul
   - current_school.tags.saved.each do |tag|
-    .div= tag.name
+    %li.div= tag.name
