@@ -12,6 +12,7 @@ class Lesson < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :lesson_tags
   has_many :tags, through: :lesson_tags
+  accepts_nested_attributes_for :lesson_tags, allow_destroy: true
 
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
 
