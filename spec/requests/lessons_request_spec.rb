@@ -13,8 +13,7 @@ RSpec.describe 'LessonsController', type: :request do
     context 'ログインしていない' do
       it 'アクセスできない' do
         user_log_out
-        get lessons_path
-        expect(response).to have_http_status(302)
+        expect { get lessons_path }.to raise_error(ApplicationController::LoginRequired)
       end
     end
 
