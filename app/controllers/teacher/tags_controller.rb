@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Teacher::TagsController < ApplicationController
+class Teacher::TagsController < Teacher::Base
   def new
     @tag = Tag.new
   end

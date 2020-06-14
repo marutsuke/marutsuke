@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Teacher::UserTagsController < ApplicationController
+class Teacher::UserTagsController < Teacher::Base
   def create
     @user_tag = UserTag.new(user_tag_params)
     @user = @user_tag.user
