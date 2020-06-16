@@ -1,25 +1,37 @@
 .lessons_tab {
-  height: 120px;
-  box-shadow: 0 1px gray;
-  &__ele {
-    text-align: center;
-    background-color: $gray;
-    border-radius: 5px;
-    & a {
-      color: white;
-      display: block;
-      padding: 16px 24px;
-      line-height: 48px;
-      font-size: 48px;
-    }
-    &.active {
-      background-color: $black;
-      & a {
-        color: white;
-        display: block;
-        font-weight: bold;
-        box-shadow: 2px 4px $gray;
+  background-color: #dddddd;
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  &_items {
+    border-bottom: 2px solid $pink_2;
+    a {
+      color: #ffffff;
+      letter-spacing: 2px;
+      font-weight: 600;
+      font-size: 1.2em;
+      &:link, :visited, :hover, :active {
+        color: $black;
+        text-decoration: none;
       }
+    }
+  }
+  &_item {
+    padding: 12px 0;
+    border-right: 1px solid #aaaaaa;
+    display: block;
+    &:last-child {
+      border: none;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .active {
+    background-color: $pink_3;
+    a {
+      color: $pink_0;
     }
   }
 }

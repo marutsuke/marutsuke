@@ -1,0 +1,32 @@
+.lessons_header {
+  background-color: #555555;
+  height: 50px;
+  width: 100%;
+  line-height: 36px;
+  padding: 8px 12px;
+  position: relative;
+  &_logo {
+    height: 100%;
+    margin-left: 12px;
+    img {
+      display: block;
+      height: 100%;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  &_ico {
+    position: absolute;
+    right: 16px;
+    height: 40px;
+    img {
+      top: 0;
+      display: block;
+      height: 100%;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
