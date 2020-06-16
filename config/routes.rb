@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :tags, only: %i[new create]
     resources :user_tags, only: %i[create]
     get '/tags', to: 'tags#new'
+    resources :account_activations, only: %i[edit]
   end
 
   namespace :admin do
