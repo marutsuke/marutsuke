@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Teacher < ApplicationRecord
-  attr_accessor :teacher_remember_token
-  before_save { email.downcase! }
+  attr_accessor :teacher_remember_token, :teacher_activation_token
+  before_save :downcase_email
+  before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
@@ -32,5 +33,16 @@ class Teacher < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  def create_activation_digest
+    self.teacher_activation_token = self.class.new_token
+    self.activation_digest = self.class.digest(teacher_activation_token)
   end
 end
