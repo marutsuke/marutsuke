@@ -1,6 +1,6 @@
 
 %h1= "#{@teacher.name}さん"
--# %p= "#{ @teacher.school.name }学校の課題提出管理システムのパスワード"
+%p= "#{ @teacher.school.name }学校の課題提出管理システムのパスワード"
 %br のアカウントを有効化するには、以下のリンクより、アクセスをお願いします。
 
 = link_to 'ここをクリック', edit_teacher_account_activation_url(@teacher.teacher_activation_token, email: @teacher.email)
