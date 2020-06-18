@@ -14,9 +14,9 @@ RSpec.describe TeacherMailer, type: :mailer do
       # expect(mail.from).to eq(["from@example.com"])
     end
 
-    # it 'renders the body' do
-    #   expect(mail.body.encoded).to match("#{teacher.name}さん")
-    # end
+    xit 'renders the body' do
+      expect(mail.body.encoded).to match("#{teacher.name}さん")
+    end
   end
 
   # describe 'password_reset' do
