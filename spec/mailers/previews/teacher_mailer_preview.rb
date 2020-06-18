@@ -4,7 +4,7 @@
 class TeacherMailerPreview < ActionMailer::Preview
   # Preview this email at http://localhost:3000/rails/mailers/teacher_mailer/account_activation
   def account_activation
-    teacher = Teacher.new(name: 'aaa', email: 'aaa@fwea.di')
+    teacher = Teacher.first
     teacher.teacher_activation_token = Teacher.new_token
     TeacherMailer.account_activation(teacher)
   end
