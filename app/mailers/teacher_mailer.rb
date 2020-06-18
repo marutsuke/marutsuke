@@ -6,10 +6,10 @@ class TeacherMailer < ApplicationMailer
   #
   #   en.teacher_mailer.account_activation.subject
   #
-  def account_activation
+  def account_activation(teacher)
     @teacher = teacher
 
-    mail to: teacher.email, subject: 'アカウント有効化メール'
+    mail to: @teacher.email, subject: 'アカウント有効化メール'
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
