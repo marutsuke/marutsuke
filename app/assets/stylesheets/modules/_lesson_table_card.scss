@@ -25,6 +25,7 @@
     background-color: #cccccc;
     padding: 12px 0;
     &--doing {
+      @extend .user_lesson_card__time;
       background-color: $pink_3;
     }
   }

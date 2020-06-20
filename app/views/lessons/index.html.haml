@@ -8,10 +8,10 @@
   - @lessons.each do |lesson|
     =link_to lesson_path(lesson), class: 'user_lesson_card' do
       .user_lesson_card__content
-          .user_lesson_card__time.user_lesson_card__time--doing= lesson.decorate.start_to_end_time
         - if lesson.doing?
+          .user_lesson_card__time--doing= lesson.decorate.start_to_end_time
         - else
-          .user_lesson_card__time.user_lesson_card__time--expired= lesson.decorate.start_to_end_time
+          .user_lesson_card__time--expired= lesson.decorate.start_to_end_time
         .user_lesson_card__body
           .user_lesson_card__title= lesson.name
           .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
