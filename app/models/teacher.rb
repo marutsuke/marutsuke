@@ -25,10 +25,11 @@ class Teacher < ApplicationRecord
     update_attribute(:remember_digest, self.class.digest(teacher_remember_token))
   end
 
-  def authenticated?(teacher_remember_token)
-    return false if remember_digest.nil?
+  def authenticated?(attribute, teacher_token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
 
-    BCrypt::Password.new(remember_digest).is_password?(teacher_remember_token)
+    BCrypt::Password.new(digest).is_password?(teacher_token)
   end
 
   def forget
