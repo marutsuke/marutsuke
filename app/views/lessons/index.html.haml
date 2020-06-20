@@ -1,10 +1,5 @@
-.lessons_tab.flex-sparo-cen
-  .lessons_tab__ele{class: lessons_active_judge('going_to', @scope)}
-    =link_to '予定', lessons_path(scope: 'going_to')
-  .lessons_tab__ele{class: lessons_active_judge('doing', @scope)}
-    =link_to '期間中', lessons_path(scope: 'doing')
-  .lessons_tab__ele{class: lessons_active_judge('done', @scope)}
-    =link_to '終了', lessons_path(scope: 'done')
+= render 'shared/lessons_header'
+= render 'shared/lessons_tab'
 
 - if @lessons&.length == 0
   .user_lesson_card--no_lessons
@@ -13,11 +8,8 @@
   - @lessons.each do |lesson|
     =link_to lesson_path(lesson), class: 'user_lesson_card' do
       .user_lesson_card__content
-        .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
-        .user_lesson_card__title= lesson.name
-        .user_lesson_card__time= lesson.decorate.start_to_end_time
-
-
-
-
-= render 'shared/footer', active_ele: 'list-alt', scope: @scope
+        %div{class: "user_lesson_card__time--#{lesson.duration_judge_word}"}= lesson.decorate.start_to_end_time
+        .user_lesson_card__body
+          .user_lesson_card__title= lesson.name
+          .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
+-# = render 'shared/footer', active_ele: 'list-alt', scope: @scope
