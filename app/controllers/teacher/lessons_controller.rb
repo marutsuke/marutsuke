@@ -18,6 +18,7 @@ class Teacher::LessonsController < Teacher::Base
 
   def create
     @lesson = current_school.lessons.new(lesson_params)
+    @tags = current_school.tags
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"
       redirect_to new_teacher_lesson_path
