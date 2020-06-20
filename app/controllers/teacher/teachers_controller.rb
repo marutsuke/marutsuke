@@ -1,5 +1,6 @@
-class Teacher::TeachersController < Teacher::Base
+# frozen_string_literal: true
 
+class Teacher::TeachersController < Teacher::Base
   def new
     @teacher = Teacher.new
   end
@@ -15,6 +16,7 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   private
+
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password, :password_confirmation)
   end
