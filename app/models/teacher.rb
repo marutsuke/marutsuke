@@ -6,7 +6,7 @@ class Teacher < ApplicationRecord
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
   belongs_to :school
   has_many :lessons, dependent: :destroy
@@ -34,6 +34,14 @@ class Teacher < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def send_activation_mail
+    TeacherMailer.account_activation(self).deliver_now
+  end
+
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
   end
 
   private

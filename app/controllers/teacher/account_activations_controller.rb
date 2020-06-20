@@ -6,8 +6,7 @@ class Teacher::AccountActivationsController < Teacher::Base
   def edit
     @teacher = Teacher.find_by(email: params[:email])
     if @teacher&.authenticated?(:activation, params[:id]) && !@teacher.activated?
-      @teacher.update(activated: true)
-      @teacher.update(activated_at: Time.zone.now)
+      @teacher.activate
       teacher_log_in(@teacher)
       flash[:success] = 'アカウントが有効になりました。'
       redirect_to teacher_path
