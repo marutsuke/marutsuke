@@ -12,9 +12,10 @@ class SchoolsController < ApplicationController
     @school = School.new(school_params)
     @teacher = @school.teachers.new(teacher_params[:teacher])
     if @school.save && @teacher.save
-      teacher_log_in(@teacher)
-      flash[:success] = "ようこそ!#{@teacher.name}さん"
-      redirect_to new_teacher_teacher_path
+      TeacherMailer.account_activation(@teacher).deliver_now
+      # teacher_log_in(@teacher)
+      flash[:success] = "#{@teacher.email}宛にアカウント承認メールを送りました。ご確認ください。"
+      redirect_to new_school_path
     else
       @school.destroy
       render 'new'
