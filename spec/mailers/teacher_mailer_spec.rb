@@ -7,6 +7,14 @@ RSpec.describe TeacherMailer, type: :mailer do
     let(:school) { create(:school, name: 'test_school') }
     let(:teacher) { create(:teacher, school: school) }
     let(:mail) { TeacherMailer.account_activation(teacher) }
+    let(:html_body) do
+      part = mail.body.parts.detect { |part| part.content_type == 'text/html; charset=UTF-8' }
+      part.body.raw_source
+    end
+    let(:text_body) do
+      part = mail.body.parts.detect { |part| part.content_type == 'text/plain; charset=UTF-8' }
+      part.body.raw_source
+    end
 
     it 'renders the headers' do
       # expect(mail.subject).to eq("Account activation")
@@ -14,8 +22,9 @@ RSpec.describe TeacherMailer, type: :mailer do
       # expect(mail.from).to eq(["from@example.com"])
     end
 
-    xit 'renders the body' do
-      expect(mail.body.encoded).to match("#{teacher.name}さん")
+    it 'renders the body' do
+      expect(html_body).to match("#{teacher.name}さん")
+      expect(text_body).to match("#{teacher.name}さん")
     end
   end
 
