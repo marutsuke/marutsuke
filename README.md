@@ -40,14 +40,18 @@
 
 # フロー図
 
-## ログイン・サインアップフロー
-
-![ログイン・サインアップフロー](wiki/images/login_sign_up_flow.png "hero")
-
-## レッスンフロー
-
-![レッスンフロー](wiki/images/lesson_flow.png "fllow")
-
 # ER 図 (2020/6/13 現在)
 
 ![ER図](wiki/images/er5.png "fllow")
+
+## ログイン・サインアップフロー
+
+![ログイン・サインアップフロー](wiki/images/login_sign_up_flow.png "flow")
+
+## 学校&教員作成フロー(6/20)
+
+![学校&教員作成フロー](wiki/images/school_and_teacher_create_flow.png "flow")
+
+## レッスンフロー
+
+![レッスンフロー](wiki/images/lesson_flow.png "flow")
