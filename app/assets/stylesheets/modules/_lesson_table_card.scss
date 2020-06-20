@@ -22,11 +22,14 @@
     font-size: 20px;
     position: relative;
     text-align: center;
-    background-color: #cccccc;
     padding: 12px 0;
     &--doing {
       @extend .user_lesson_card__time;
       background-color: $pink_3;
+    }
+    &--expired {
+      @extend .user_lesson_card__time;
+      background-color: #cccccc;
     }
   }
   &__body {
