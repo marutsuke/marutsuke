@@ -1,11 +1,16 @@
 .lessons_tab {
   background-color: #dddddd;
+  border-bottom: 2px solid $pink_2;
   .row {
     margin-left: 0;
     margin-right: 0;
   }
+  &_inner {
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+  }
   &_items {
-    border-bottom: 2px solid $pink_2;
     a {
       color: #ffffff;
       letter-spacing: 2px;
@@ -21,8 +26,8 @@
     padding: 12px 0;
     border-right: 1px solid #aaaaaa;
     display: block;
-    &:last-child {
-      border: none;
+    &:first-child {
+      border-left: 1px solid #aaaaaa;
     }
     &:hover {
       opacity: 0.8;

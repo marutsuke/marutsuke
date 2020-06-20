@@ -1,9 +1,10 @@
 .lessons
   .lessons_tab.w-100
-    .lessons_tab_items.row
-      .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('going_to', @scope)}
-        =link_to '予定', lessons_path(scope: 'going_to')
-      .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('doing', @scope)}
-        =link_to '期間中', lessons_path(scope: 'doing')
-      .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('done', @scope)}
-        =link_to '終了', lessons_path(scope: 'done')
+    .lessons_tab_inner
+      .lessons_tab_items.row
+        .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('going_to', @scope)}
+          =link_to '予定', lessons_path(scope: 'going_to')
+        .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('doing', @scope)}
+          =link_to '期間中', lessons_path(scope: 'doing')
+        .lessons_tab_item.col-4.d-block.text-center{class: lessons_active_judge('done', @scope)}
+          =link_to '終了', lessons_path(scope: 'done')
