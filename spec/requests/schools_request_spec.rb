@@ -35,7 +35,7 @@ RSpec.describe 'SchoolsController', type: :request do
         post schools_path, params: { school: school_params }
       end.to change { School.count + Teacher.count }.by(2)
       expect(response).to have_http_status 302
-      expect(response).to redirect_to new_teacher_teacher_path
+      expect(response).to redirect_to new_school_path
     end
 
     context 'パスワード確認を間違えた時' do
