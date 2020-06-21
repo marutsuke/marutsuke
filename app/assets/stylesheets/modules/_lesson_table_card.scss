@@ -19,10 +19,14 @@
     opacity: 0.6;
   }
   &__time {
-    font-size: 20px;
+    font-size: 1.2rem;
+    line-height: 2rem;
     position: relative;
-    text-align: center;
-    padding: 12px 0;
+    padding: 4px 24px;
+    @include media-breakpoint-down(sm) {
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
     &--doing {
       @extend .user_lesson_card__time;
       background-color: $pink_3;
@@ -34,13 +38,23 @@
   }
   &__body {
     padding: 24px;
+    @include media-breakpoint-down(sm) {
+      padding: 12px 8px;
+    }
   }
   &__teacher {
     margin-top: 14px;
-    font-size: 20px;
+    font-size: 1rem;
+    @include media-breakpoint-down(sm) {
+      margin-top: 8px;
+      font-size: 0.8rem;
+    }
   }
   &__title {
-    font-size: 36px;
+    font-size: 2rem;
+    @include media-breakpoint-down(sm) {
+      font-size: 1.6rem;
+    }
   }
   &--no_lessons {
     @extend .user_lesson_card;
@@ -54,7 +68,7 @@
       opacity: 1;
     }
     &__title {
-      font-size: 24px;
+      font-size: 1rem;
     }
   }
 }
