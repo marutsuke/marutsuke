@@ -2,6 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     / Global site tag (gtag.js) - Google Analytics
     %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-154235866-1"}
     :javascript
@@ -22,5 +23,5 @@
       - flash.each do |message_type, message|
         = content_tag(:div, message, class: "alert alert-#{ message_type }" )
     = yield
-    .debug_space
-      = debug(params) if Rails.env.development?
+    -# .debug_space
+    -#   = debug(params) if Rails.env.development?
