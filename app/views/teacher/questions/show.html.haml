@@ -1,1 +1,28 @@
 = render 'teacher/shared/header'
+
+= @question.title
+= @question.text
+= image_tag @question&.image_url, alt: @question.title
+
+-# 本当はユーザーごとに提出した答え一覧を表示したい。
+-# lesson.users.each ... みたいな。
+%hr
+- @question.answers.each do |answer|
+  .answers
+    = "#{answer.user.name}さん"
+    = answer.text
+    - answer.answer_images.each do |image|
+      = image_tag image.image_url, alt: ''
+  = form_with model: [:teacher, Comment.new], local: true do |f|
+    =render 'shared/error_messages', model_object: @question
+    .question_form__label_and_input
+      = f.label :text, class: 'required'
+      = f.text_area :text, rows: '10', cols: '100'
+    .question_form__label_and_input
+      .flex
+        = f.label :image
+        %span (最大5MBまで)
+      = f.file_field :image
+    = f.hidden_field :answer_id, value: answer.id
+    = f.submit '登録する', class: 'question_form__submit_btn'
+  %hr
