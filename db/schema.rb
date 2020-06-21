@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_062105) do
+ActiveRecord::Schema.define(version: 2020_06_21_032926) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 2020_06_14_062105) do
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text"
+    t.string "image"
+    t.bigint "teacher_id"
+    t.bigint "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_comments_on_answer_id"
+    t.index ["teacher_id"], name: "index_comments_on_teacher_id"
   end
 
   create_table "lesson_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,10 +103,12 @@ ActiveRecord::Schema.define(version: 2020_06_14_062105) do
     t.string "password_digest", null: false
     t.datetime "start_at"
     t.datetime "end_at"
-    t.boolean "activated"
+    t.boolean "activated", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_digest"
+    t.string "activation_digest"
+    t.datetime "activated_at"
     t.bigint "school_id"
     t.index ["email"], name: "index_teachers_on_email", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
