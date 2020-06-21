@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :question do
-    title { Faker::Book.genre }
+  factory :comment do
     text 'testtesttesttesttesttesttesttest'
     image { Faker::File.file_name }
-    display_order 1
-    association :lesson, factory: [:lesson]
+    association :answer, factory: [:answer]
+    association :teacher, factory: [:teacher]
   end
 end

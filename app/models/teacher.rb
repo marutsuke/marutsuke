@@ -10,6 +10,7 @@ class Teacher < ApplicationRecord
   has_secure_password
   belongs_to :school
   has_many :lessons, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

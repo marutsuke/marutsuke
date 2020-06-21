@@ -3,7 +3,9 @@
 class Teacher::QuestionsController < Teacher::Base
   def show
     @question = Question.find(params[:id])
-    @lesson = current_school&.lessons.find(@question.lesson_id)
+    @lesson = current_school&.lessons.find_by(id: @question.lesson_id)
+
+    render 'errors/not_found' unless @lesson
   end
 
   def create

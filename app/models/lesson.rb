@@ -35,6 +35,14 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
+  def doing?
+    start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
+  end
+
+  def duration_judge_word
+    doing? ? 'doing' : 'expired'
+  end
+
   private
 
   def start_at_set

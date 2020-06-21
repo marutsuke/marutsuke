@@ -5,4 +5,5 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
   has_many :answer_images
+  has_many :comments
 end
