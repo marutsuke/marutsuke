@@ -11,5 +11,8 @@
         %div{class: "user_lesson_card__time--#{lesson.duration_judge_word}"}= lesson.decorate.start_to_end_time
         .user_lesson_card__body
           .user_lesson_card__title= lesson.name
+          .flex
+            - lesson.tags.each do |tag|
+              .user_lesson_card__tags= tag.name
           .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
 -# = render 'shared/footer', active_ele: 'list-alt', scope: @scope
