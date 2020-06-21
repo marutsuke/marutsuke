@@ -5,5 +5,7 @@ FactoryBot.define do
     title { Faker::Book.genre }
     text 'testtesttesttesttesttesttesttest'
     image { Faker::File.file_name }
+    display_order 1
+    association :lesson, factory: [:lesson]
   end
 end
