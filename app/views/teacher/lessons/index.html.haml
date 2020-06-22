@@ -1,13 +1,22 @@
-= render 'teacher/shared/header'
-%table.lesson_table.ml24
-  %thead.lesson_table__thead
-    %th.lesson_table__th= Lesson.human_attribute_name(:name)
-    %th.lesson_table__th= Lesson.human_attribute_name(:start_at)
-    %th.lesson_table__th= Lesson.human_attribute_name(:end_at)
-    %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-  - @lessons.each do |lesson|
-    %tr.lesson_table__tr
-      %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
-      %td.lesson_table__tr= lesson.decorate.start_at
-      %td.lesson_table__tr= lesson.decorate.end_at
-      %td.lesson_table__tr= lesson.teacher.name
+-# = render 'teacher/shared/header'
+.flex
+  .teacher_sidebar
+    = link_to teacher_path do
+      .teacher_sidebar__logo
+        = image_tag ('marutsuke_logo_w.png'), art: 'marutsuke'
+    = link_to teacher_path do
+      .teacher_sidebar__element 課題管理
+
+  .main_content
+    %table.lesson_table.ml24
+      %thead.lesson_table__thead
+        %th.lesson_table__th= Lesson.human_attribute_name(:name)
+        %th.lesson_table__th= Lesson.human_attribute_name(:start_at)
+        %th.lesson_table__th= Lesson.human_attribute_name(:end_at)
+        %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
+      - @lessons.each do |lesson|
+        %tr.lesson_table__tr
+          %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
+          %td.lesson_table__tr= lesson.decorate.start_at
+          %td.lesson_table__tr= lesson.decorate.end_at
+          %td.lesson_table__tr= lesson.teacher.name
