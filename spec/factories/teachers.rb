@@ -7,6 +7,7 @@ FactoryBot.define do
     password 'password'
     start_at 1.day.ago
     end_at 1.year.since
+    activation_digest 'fljahfljdshalf'
     activated true
     association :school, factory: [:school]
   end

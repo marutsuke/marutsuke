@@ -1,5 +1,6 @@
-module Teacher::SessionsHelper
+# frozen_string_literal: true
 
+module Teacher::SessionsHelper
   def teacher_log_in(teacher)
     session[:teacher_id] = teacher.id
   end
@@ -27,7 +28,7 @@ module Teacher::SessionsHelper
       @current_teacher ||= Teacher.find_by(id: teacher_id)
     elsif teacher_id = cookies.signed[:teacher_id]
       teacher = Teacher.find_by(id: teacher_id)
-      if teacher&.authenticated?(cookies[:teacher_remember_token])
+      if teacher&.authenticated?(:remember, cookies[:teacher_remember_token])
         teacher_log_in(teacher)
         @current_teacher = teacher
       end
@@ -35,7 +36,6 @@ module Teacher::SessionsHelper
   end
 
   def current_school
-    current_teacher.school if current_teacher
+    current_teacher&.school
   end
-
 end
