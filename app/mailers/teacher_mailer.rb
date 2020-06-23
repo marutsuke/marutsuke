@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherMailer < ApplicationMailer
+  default from: 'test@test.mail.co.jp'
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
