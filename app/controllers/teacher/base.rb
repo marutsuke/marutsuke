@@ -5,6 +5,8 @@ class Teacher::Base < ApplicationController
   before_action :teacher_login_required
   skip_before_action :user_login_required
 
+  layout 'teacher/layouts/teacher_layout'
+
   private
 
   def teacher_login_required
