@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class Teacher < ApplicationRecord
-  attr_accessor :teacher_remember_token
-  before_save { email.downcase! }
+  attr_accessor :teacher_remember_token, :teacher_activation_token
+  before_save :downcase_email
+  before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
   belongs_to :school
   has_many :lessons, dependent: :destroy
@@ -25,13 +26,33 @@ class Teacher < ApplicationRecord
     update_attribute(:remember_digest, self.class.digest(teacher_remember_token))
   end
 
-  def authenticated?(teacher_remember_token)
-    return false if remember_digest.nil?
+  def authenticated?(attribute, teacher_token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
 
-    BCrypt::Password.new(remember_digest).is_password?(teacher_remember_token)
+    BCrypt::Password.new(digest).is_password?(teacher_token)
   end
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def send_activation_mail
+    TeacherMailer.account_activation(self).deliver_now
+  end
+
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase
+  end
+
+  def create_activation_digest
+    self.teacher_activation_token = self.class.new_token
+    self.activation_digest = self.class.digest(teacher_activation_token)
   end
 end
