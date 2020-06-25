@@ -5,7 +5,6 @@
   & a:hover {
     text-decoration: none;
   }
-
   &__logo {
     background-color: $light_gray;
     padding: 16px 24px 16px;
@@ -26,4 +25,7 @@
     height: 800px;
     border-bottom: 1px $black solid;
   }
+}
+.main_with_sidebar {
+  width: calc(100vw - 240px);
 }
