@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Teacher::TeachersController < Teacher::Base
+  def index
+    @teachers = current_school.teachers
+  end
+
   def new
     @teacher = Teacher.new
   end
