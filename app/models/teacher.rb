@@ -41,8 +41,18 @@ class Teacher < ApplicationRecord
     TeacherMailer.account_activation(self).deliver_now
   end
 
+  def resend_activation_mail
+    update_activation_digest
+    inactive
+    TeacherMailer.account_activation(self).deliver_now
+  end
+
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def inactive
+    update_columns(activated: false)
   end
 
   private
@@ -54,5 +64,10 @@ class Teacher < ApplicationRecord
   def create_activation_digest
     self.teacher_activation_token = self.class.new_token
     self.activation_digest = self.class.digest(teacher_activation_token)
+  end
+
+  def update_activation_digest
+    self.teacher_activation_token = self.class.new_token
+    update_columns(activation_digest: self.class.digest(teacher_activation_token))
   end
 end

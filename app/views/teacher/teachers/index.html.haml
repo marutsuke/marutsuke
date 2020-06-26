@@ -1,0 +1,16 @@
+%table.users_account_table.ml24
+  %thead.users_account_table__thead
+    %th.users_account_table__th= Teacher.human_attribute_name(:name)
+    %th.users_account_table__th= Teacher.human_attribute_name(:email)
+    %th.users_account_table__th= Teacher.human_attribute_name(:start_at)
+    %th.users_account_table__th= Teacher.human_attribute_name(:end_at)
+    %th.users_account_table__th= Teacher.human_attribute_name(:activated)
+    %th.users_account_table__th 認証メール再送信
+  - @teachers.each do |teacher|
+    %tr.users_account_table__tr
+      %td.users_account_table__tr= link_to teacher.name, new_teacher_teacher_path(teacher)
+      %td.users_account_table__tr= teacher.decorate.email
+      %td.users_account_table__tr= teacher.decorate.start_at
+      %td.users_account_table__tr= teacher.decorate.end_at
+      %td.users_account_table__tr= teacher.decorate.activated_status
+      %td.users_account_table__tr= link_to '再送信', resend_activation_mail_teacher_teacher_path(teacher), method: :post, confirm: 'アカウント有効化メールを再送信します。よろしいですか。'

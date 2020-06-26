@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Teacher::TeachersController < Teacher::Base
+  def index
+    @teachers = current_school.teachers
+  end
+
   def new
     @teacher = Teacher.new
   end
@@ -13,6 +17,13 @@ class Teacher::TeachersController < Teacher::Base
     else
       render 'new'
     end
+  end
+
+  def resend_activation_mail
+    @teacher = current_school.teachers.find(params[:id])
+    @teacher.resend_activation_mail
+    flash[:success] = "#{@teacher.name}のアドレス宛にアカウント承認メールを送りました。ご確認ください。"
+    redirect_to teacher_teachers_path
   end
 
   private
