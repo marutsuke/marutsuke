@@ -19,6 +19,20 @@ class Teacher::TeachersController < Teacher::Base
     end
   end
 
+  def edit
+    @teacher = current_school.teachers.find(params[:id])
+  end
+
+  def update
+    @teacher = current_school.teachers.find(params[:id])
+    if @teacher.update(teacher_update_params)
+      flash[:success] = "#{@teacher.name}先生の情報を更新しました。"
+      redirect_to teacher_teachers_path
+    else
+      render 'edit'
+    end
+  end
+
   def resend_activation_mail
     @teacher = current_school.teachers.find(params[:id])
     @teacher.resend_activation_mail
@@ -30,5 +44,9 @@ class Teacher::TeachersController < Teacher::Base
 
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def teacher_update_params
+    params.require(:teacher).permit(:name, :email)
   end
 end
