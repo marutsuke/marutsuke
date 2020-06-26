@@ -11,7 +11,6 @@ class Teacher::AccountActivationsController < Teacher::Base
       flash[:success] = 'アカウントが有効になりました。'
       redirect_to teacher_path
     else
-      binding.pry
       flash[:danger] = '有効でないリンクです。'
     end
   end
