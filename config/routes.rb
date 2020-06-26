@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index new create show edit update] # テスト済み show, editはまだ
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
-    resources :teachers, only: %i[index new create] do # index以外テスト済み
+    resources :teachers, only: %i[index new create edit update] do # index, edit, update以外テスト済み
       member do
         post :resend_activation_mail
       end
