@@ -41,8 +41,18 @@ class Teacher < ApplicationRecord
     TeacherMailer.account_activation(self).deliver_now
   end
 
+  def resend_activation_mail
+    create_activation_digest
+    inactive
+    TeacherMailer.account_activation(self).deliver_now
+  end
+
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def inactive
+    update_columns(activated: false)
   end
 
   private

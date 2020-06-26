@@ -19,6 +19,13 @@ class Teacher::TeachersController < Teacher::Base
     end
   end
 
+  def resend_activation_mail
+    @teacher = current_school.teachers.find(params[:id])
+    @teacher.resend_activation_mail
+    flash[:success] = "#{@teacher.name}のアドレス宛にアカウント承認メールを送りました。ご確認ください。"
+    redirect_to teacher_teachers_path
+  end
+
   private
 
   def teacher_params
