@@ -42,7 +42,7 @@ class Teacher < ApplicationRecord
   end
 
   def resend_activation_mail
-    create_activation_digest
+    update_activation_digest
     inactive
     TeacherMailer.account_activation(self).deliver_now
   end
@@ -64,5 +64,10 @@ class Teacher < ApplicationRecord
   def create_activation_digest
     self.teacher_activation_token = self.class.new_token
     self.activation_digest = self.class.digest(teacher_activation_token)
+  end
+
+  def update_activation_digest
+    self.teacher_activation_token = self.class.new_token
+    update_columns(activation_digest: self.class.digest(teacher_activation_token))
   end
 end
