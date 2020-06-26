@@ -8,7 +8,7 @@
     %th.users_account_table__th 認証メール再送信
   - @teachers.each do |teacher|
     %tr.users_account_table__tr
-      %td.users_account_table__tr= link_to teacher.name, new_teacher_teacher_path(teacher)
+      %td.users_account_table__tr= link_to teacher.name, edit_teacher_teacher_path(teacher)
       %td.users_account_table__tr= teacher.decorate.email
       %td.users_account_table__tr= teacher.decorate.start_at
       %td.users_account_table__tr= teacher.decorate.end_at
