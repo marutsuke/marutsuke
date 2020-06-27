@@ -18,11 +18,7 @@ class SessionsController < ApplicationController
       flash[:success] = "#{user.name}さん、こんにちは!"
       redirect_to root_path
     else
-      flash.now[:danger] = if session_params[:email].present?
-                             'メールアドレスまたはパスワードが間違っています'
-                           else
-                             'ログインIDまたはパスワードが間違っています'
-                           end
+      flash.now[:danger] = 'ログインに失敗しました。正しいか確認してもう一度お願いします。'
       render :new
     end
   end
