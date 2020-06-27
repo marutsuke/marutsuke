@@ -1,16 +1,17 @@
 %head
   %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-  / Global site tag (gtag.js) - Google Analytics
-  %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-154235866-1"}
-  :javascript
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-154235866-1', {
-      'custom_map': {'dimension1': 'current_school'},
-      'current_school': "#{current_user.present? ? current_user.school.name : ''}"
-    });
+  - if Rails.env.production?
+    / Global site tag (gtag.js) - Google Analytics only production
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-154235866-1"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-154235866-1', {
+        'custom_map': {'dimension1': 'current_school'},
+        'current_school': "#{current_user.present? ? current_user.school.name : ''}"
+      });
   %title Marutsuke
   = csrf_meta_tags
   = csp_meta_tag
