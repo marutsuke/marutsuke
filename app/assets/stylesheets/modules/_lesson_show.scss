@@ -1,16 +1,22 @@
 .lesson_show_for_user_header {
-  padding: 8px;
-  box-shadow: 0 1px gray;
+  padding: 8px 0;
+  border-bottom: 1px solid #999999;
+  max-width: 800px;
+  margin: 0 auto;
   &__name {
-    font-size: 56px;
-    text-align: center;
+    font-size: 1.3rem;
+    margin-left: 16px;
   }
   &__teacher {
-    font-size: 16px;
+    color: #555555;
+    font-size: 0.9rem;
+    margin-right: 16px;
     text-align: right;
   }
   &__term {
-    font-size: 16px;
+    color: #555555;
+    font-size: 0.9rem;
+    margin-right: 16px;
     text-align: right;
   }
 }
