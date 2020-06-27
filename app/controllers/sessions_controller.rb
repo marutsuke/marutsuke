@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session)
-          .permit(:login_id, :password, :email, :school_login_path)
+          .permit(:password, :email_or_login_id, :school_login_path)
   end
 
   def login_count_up(user)
@@ -51,10 +51,8 @@ class SessionsController < ApplicationController
   def search_user_from_email_or_login_id(school)
     return nil if school.nil?
 
-    if session_params[:login_id].present?
-      school.users.find_by(login_id: session_params[:login_id])
-    elsif session_params[:email].present?
-      school.users.find_by(email: session_params[:email])
-    end
+    user = school.users.find_by(login_id: session_params[:email_or_login_id]) ||
+           school.users.find_by(email: session_params[:email_or_login_id])
+    user
   end
 end
