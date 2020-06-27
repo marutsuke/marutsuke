@@ -87,5 +87,5 @@ end
 gem 'fog-aws'
 gem 'haml-rails', '~> 2.0'
 gem 'i18n_generators'
-gem 'nokogiri', '1.10.2'
+gem 'nokogiri', '1.10.8'
 gem 'sendgrid-ruby'
