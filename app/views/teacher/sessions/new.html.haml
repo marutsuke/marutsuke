@@ -2,10 +2,10 @@
 .user_form
   = form_with scope: :session, url: teacher_login_path, local: true do |f|
     .user_form__label_and_input
-      = f.label :email
+      = f.label :email, Teacher.human_attribute_name(:email)
       = f.email_field :email
     .user_form__label_and_input
-      = f.label :password
+      = f.label :password, Teacher.human_attribute_name(:password)
       = f.password_field :password
     .user_form__label_and_input--checkbox
       = f.check_box :remember_me
