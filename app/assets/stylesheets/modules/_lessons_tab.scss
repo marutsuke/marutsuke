@@ -18,7 +18,7 @@
       font-size: 1.2em;
       &:link, :visited, :hover, :active {
         color: $black;
-        text-decoration: none;
+        @include link($black);
       }
     }
   }
@@ -26,15 +26,22 @@
     padding: 12px 0;
     border-right: 1px solid #aaaaaa;
     display: block;
+    transition: 0.5s;
+    cursor: pointer;
     &:first-child {
       border-left: 1px solid #aaaaaa;
     }
     &:hover {
-      opacity: 0.8;
+      &:hover {
+        background-color: lighten(#aaaaaa, 5%);
+      }
     }
   }
   .active {
     background-color: $pink_3;
+    &:hover {
+      background-color: lighten($pink_3, 5%);
+    }
     a {
       color: $pink_0;
     }

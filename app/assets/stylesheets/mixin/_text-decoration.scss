@@ -1,0 +1,6 @@
+@mixin link($color) {
+  &:link, :visited, :hover, :active {
+    color: $color;
+    text-decoration: none;
+  }
+}
