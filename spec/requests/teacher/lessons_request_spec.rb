@@ -73,9 +73,9 @@ RSpec.describe 'Teacher::Lessons', type: :request do
     end
 
     context 'tagの登録' do
-      let!(:tag_1) { create(:tag, school: teacher.school) }
-      let!(:tag_2) { create(:tag, school: teacher.school) }
-      let!(:tag_3) { create(:tag, school: teacher.school) }
+      let!(:tag_1) { create(:tag, name: 'tag1', school: teacher.school) }
+      let!(:tag_2) { create(:tag, name: 'tag2', school: teacher.school) }
+      let!(:tag_3) { create(:tag, name: 'tag3', school: teacher.school) }
       it 'タグを登録' do
         lesson_params[:tag_ids] = [tag_1.id, tag_2.id]
         expect do

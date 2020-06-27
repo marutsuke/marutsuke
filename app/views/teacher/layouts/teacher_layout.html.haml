@@ -1,0 +1,9 @@
+!!!
+%html
+  =render 'layouts/application_head'
+  %body
+    .flex
+      =render 'teacher/shared/sidebar'
+      .main_with_sidebar
+        =render 'layouts/notification'
+        = yield

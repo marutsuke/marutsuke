@@ -1,4 +1,3 @@
-= render 'teacher/shared/header'
 .lesson_show
   .lesson_show_title= Lesson.human_attribute_name(:name) + ':　' + @lesson.name
   .lesson_show_start_at= Lesson.human_attribute_name(:start_at) + ':　' + @lesson.decorate.start_at

@@ -2,7 +2,7 @@
 
 class Teacher::SessionsController < Teacher::Base
   skip_before_action :teacher_login_required
-
+  layout 'layouts/application'
   def new; end
 
   def create

@@ -21,7 +21,11 @@ Rails.application.routes.draw do
     resources :users, only: %i[index new create show edit update] # テスト済み show, editはまだ
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
-    resources :teachers, only: %i[new create] # テスト済み
+    resources :teachers, only: %i[index new create edit update] do # index, edit, update以外テスト済み
+      member do
+        post :resend_activation_mail
+      end
+    end
     resources :lessons, only: %i[index show new create] # テスト済み
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
     resources :tags, only: %i[new create]
     resources :user_tags, only: %i[create]
     get '/tags', to: 'tags#new'
+    resources :account_activations, only: %i[edit]
     resources :comments, only: %i[create] # テスト済み
   end
 

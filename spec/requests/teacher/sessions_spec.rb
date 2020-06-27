@@ -38,7 +38,6 @@ describe Teacher::SessionsController, type: :request do
       delete teacher_logout_path
       follow_redirect!
       expect(session[:teacher_id]).to eq nil
-      expect(response.body).not_to be_include(teacher.name + '先生')
     end
 
     # このテストは、成功するが、ブラウザを閉じる動作が実現できていない
@@ -50,11 +49,11 @@ describe Teacher::SessionsController, type: :request do
       follow_redirect!
       expect(response.body).to be_include(teacher.name + '先生')
       expect(session[:teacher_id]).to eq teacher.id
-      session.delete(:teacher_id) # これをブラウザを閉じる動作にしたい
+      session.delete(:teacher_id) # ここで、ブラウザを閉じる動作をしてほしい
+      cookies.delete(:teacher_id)
       get new_teacher_teacher_path
       expect(response).to have_http_status(200)
       expect(session[:teacher_id]).to eq teacher.id
-      expect(response.body).to be_include(teacher.name + '先生')
     end
 
     xit 'remember meせずにログインすると、セッションが切れるとログイン状態が保持できない' do
@@ -66,10 +65,11 @@ describe Teacher::SessionsController, type: :request do
       expect(response.body).to be_include(teacher.name + '先生')
       expect(session[:teacher_id]).to eq teacher.id
       session.delete(:teacher_id) # ここで、ブラウザを閉じる動作をしてほしい
+      cookies.delete(:teacher_id)
       expect(session[:teacher_id]).to eq nil
       get new_teacher_teacher_path
       expect(response).to have_http_status(200)
-      expect(response.body).not_to be_include(teacher.name + '先生')
+      expect(session[:teacher_id]).to eq nil
     end
   end
 end

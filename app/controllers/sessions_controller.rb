@@ -6,8 +6,6 @@ class SessionsController < ApplicationController
   def new
     @school = School.find_by(login_path: params[:login_path])
     raise ActiveRecord::RecordNotFound unless @school
-
-    @email_login = params[:email].present?
   end
 
   def create
@@ -20,11 +18,7 @@ class SessionsController < ApplicationController
       flash[:success] = "#{user.name}さん、こんにちは!"
       redirect_to root_path
     else
-      flash.now[:danger] = if session_params[:email].present?
-                             'メールアドレスまたはパスワードが間違っています'
-                           else
-                             'ログインIDまたはパスワードが間違っています'
-                           end
+      flash.now[:danger] = 'ログインに失敗しました。正しいか確認してもう一度お願いします。'
       render :new
     end
   end
@@ -40,7 +34,7 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session)
-          .permit(:login_id, :password, :email, :school_login_path)
+          .permit(:password, :email_or_login_id, :school_login_path)
   end
 
   def login_count_up(user)
@@ -51,10 +45,8 @@ class SessionsController < ApplicationController
   def search_user_from_email_or_login_id(school)
     return nil if school.nil?
 
-    if session_params[:login_id].present?
-      school.users.find_by(login_id: session_params[:login_id])
-    elsif session_params[:email].present?
-      school.users.find_by(email: session_params[:email])
-    end
+    user = school.users.find_by(login_id: session_params[:email_or_login_id]) ||
+           school.users.find_by(email: session_params[:email_or_login_id])
+    user
   end
 end

@@ -26,7 +26,7 @@ RSpec.describe 'SessionsController', type: :request do
     let(:another_school) { create(:school) }
 
     it 'メールアドレスでログインできる' do
-      session_params[:email] = user.email
+      session_params[:email_or_login_id] = user.email
       post login_post_path(user.school.login_path), params: { session: session_params }
       expect(response).to have_http_status(302)
       follow_redirect!
@@ -35,7 +35,7 @@ RSpec.describe 'SessionsController', type: :request do
     end
 
     it 'ログインIDでログインできる' do
-      session_params[:login_id] = user.login_id
+      session_params[:email_or_login_id] = user.login_id
       post login_post_path(user.school.login_path), params: { session: session_params }
       expect(response).to have_http_status(302)
       follow_redirect!
@@ -44,7 +44,7 @@ RSpec.describe 'SessionsController', type: :request do
     end
 
     it '他校の生徒は、ログインできない' do
-      session_params[:login_id] = user.login_id
+      session_params[:email_or_login_id] = user.login_id
       session_params[:school_login_path] = another_school.login_path
       post login_post_path(user.school.login_path), params: { session: session_params }
       expect(response).to have_http_status(200)
@@ -52,9 +52,9 @@ RSpec.describe 'SessionsController', type: :request do
     end
   end
 
-  describe '/admin/logout#destroy ' do
+  describe '/logout#destroy ' do
     let(:user) { create(:user) }
-    let(:session_params) { { login_id: user.login_id, password: user.password, school_login_path: user.school.login_path } }
+    let(:session_params) { { email_or_login_id: user.login_id, password: user.password, school_login_path: user.school.login_path } }
 
     it 'remember meしないでログイン・ログアウトできる' do
       session_params[:remember_me] = '0'
