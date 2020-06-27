@@ -1,15 +1,16 @@
+= render 'shared/lessons_header'
+= render 'shared/lessons_tab'
+
 .lesson_show_for_user_header
+  .lesson_show_for_user_header__term= @lesson.decorate.start_to_end_time
+  .lesson_show_for_user_header__teacher= "担当: #{@lesson.teacher.name}"
   .lesson_show_for_user_header__name= @lesson.name
-  .lesson_show_for_user_header__info
-    .lesson_show_for_user_header__teacher= "担当: #{@lesson.teacher.name}"
-    .lesson_show_for_user_header__term= @lesson.decorate.start_to_end_time
-- @questions.display_order&.each_with_index do |question, i|
-  = link_to question_path(question), class: 'user_question_row' do
-    .user_question_row__image_content
-      - if question.image.present?
-        = image_tag question&.image_url, alt: question.title, height: '240px'
-    .user_question_row__description
-      .user_question_row__num= "#{i + 1}."
-      .user_question_row__title= question.title
-      .user_question_row__text= simple_format(question.text, {})
-= render 'shared/footer'
+.user_question_card
+  .user_question_card__head 課題一覧
+  - @questions.display_order&.each do |question|
+    =link_to question_path(question) do
+      .user_question_card__item
+        .user_question_card__tag--status01 未提出
+        .user_question_card__title #{question.title}
+        .user_question_card__description
+          %p #{question.text}

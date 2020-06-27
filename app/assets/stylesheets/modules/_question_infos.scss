@@ -1,31 +1,91 @@
-.user_question_row {
-  display: block;
-  display: flex;
-  border-bottom: 1px $black solid;
-  padding: 16px 8px;
-  height: 272px;
-  overflow: hidden;
-  color: $black;
-  &:hover {
-    text-decoration: none;
+.user_question_card {
+  padding: 0 16px;
+  a {
     color: $black;
+    text-decoration: none;
   }
-  &__image_content {
-    width: 30vw;
-    background-color: $white;
+  &__head {
+    font-size: 0.9em;
+    color: #999999;
+    padding: 16px 0;
+    max-width: 800px;
+    min-width: 288px;
+    margin: 0 auto;
+  }
+  &__item {
+    margin: 0 auto 18px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    background-color: #eeeeee;
+    max-width: 800px;
+    min-width: 288px;
+    position: relative;
+    transition: 0.5s;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(#eeeeee, 5%);
+    }
+  }
+  &__tag {
+    letter-spacing: 1px;
+    font-size: 8px;
+    line-height: 12px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    padding: 1px 0;
+    width: 50px;
+    &--status01 {
+      // 未提出
+      @extend .user_question_card__tag;
+      background-color: $status_pink;
+      color: #ffffff;
+    }
+    &--status02 {
+      // 確認中
+      @extend .user_question_card__tag;
+      background-color: $status-blue;
+      color: #ffffff;
+    }
+    &--status03 {
+      // 再提出
+      @extend .user_question_card__tag;
+      background-color: $status-pink;
+      color: #ffffff;
+    }
+    &--status04 {
+      // 完了
+      @extend .user_question_card__tag;
+      background-color: $status-green;
+      color: #ffffff;
+    }
+    &--status05 {
+      // グレーアウト
+      @extend .user_question_card__tag;
+      background-color: $status-gray;
+      color: #ffffff;
+    }
+  }
+  &__title {
+    font-size: 1.1em;
+    padding: 8px 0;
+    max-width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
   }
   &__description {
-    margin-left: 16px;
-  }
-  &__num {
-    font-size: 16px;
-  }
-  &__title {
-    font-size: 48px;
-  }
-  &__text {
-    font-size: 24px;
+    font-size: 0.8em;
+    color: #777777;
+    width: 100%;
+    p {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      margin-bottom: 0;
+    }
   }
 }
 
