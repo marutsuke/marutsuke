@@ -6,8 +6,6 @@ class SessionsController < ApplicationController
   def new
     @school = School.find_by(login_path: params[:login_path])
     raise ActiveRecord::RecordNotFound unless @school
-
-    @email_login = params[:email].present?
   end
 
   def create

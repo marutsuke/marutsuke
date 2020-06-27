@@ -12,9 +12,3 @@
       = f.label :remember_me, '次回から自動的にログイン'
       =f.hidden_field :school_login_path, value: @school&.login_path
     = f.submit 'ログイン', class: 'user_form_session__submit_btn'
-    - if @email_login
-      .user_form_session__link
-        = link_to 'ログインIDでログインする', school_login_path(login_path: @school&.login_path)
-    - else
-      .user_form_session__link
-        = link_to 'メールアドレスでログインする', school_login_path(login_path: @school&.login_path, email: true)
