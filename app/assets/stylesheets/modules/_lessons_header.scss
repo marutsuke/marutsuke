@@ -16,6 +16,7 @@
     img {
       display: block;
       height: 100%;
+      transition: 0.5s;
       &:hover {
         opacity: 0.8;
       }
@@ -28,6 +29,7 @@
     img {
       top: 0;
       height: 100%;
+      transition: 0.5s;
       &:hover {
         opacity: 0.8;
       }
