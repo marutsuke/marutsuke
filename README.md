@@ -40,9 +40,9 @@
 
 # フロー図
 
-# ER 図 (2020/6/13 現在)
+# ER 図 (2020/6/28 現在)
 
-![ER図](wiki/images/er5.png "fllow")
+![ER図](wiki/images/er6.png "fllow")
 
 ## ログイン・サインアップフロー
 
