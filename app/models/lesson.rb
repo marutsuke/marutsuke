@@ -35,6 +35,18 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
+  scope :taken_by, lambda { |user|
+    ng_lessons =
+      user
+      .school
+      .lessons
+      .includes(:tags)
+      .where.not(tags: { id: user.tags.pluck(:id) })
+    ng_ids = ng_lessons.pluck(:id)
+    where(school_id: user.school_id)
+      .where.not(id: ng_ids)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
