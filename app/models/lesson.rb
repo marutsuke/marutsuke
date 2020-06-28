@@ -35,7 +35,9 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
-  scope :taken_by, lambda { |user|
+  # タグで判定するそのuserの出席可能なlesson
+  # ユーザーが持っているタグが、lessonの持っているタグを含む
+  scope :possible_attend_for, lambda { |user|
     ng_lessons =
       user
       .school
