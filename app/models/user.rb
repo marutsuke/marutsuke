@@ -50,6 +50,16 @@ class User < ApplicationRecord
     user_tags.exists?(tag_id: tag.id)
   end
 
+  scope :taking, lambda { |lesson|
+    tags = lesson.tags
+    user_having_tag_list_array = tags.map { |tag| tag.users.pluck(:id) }
+
+    binding.pry
+
+    required_user_ids = user_having_tag_list_array.inject(:&)
+    where(id: required_user_ids)
+  }
+
   private
 
   def start_at_set
