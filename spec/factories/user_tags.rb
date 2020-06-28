@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :user_tag do
-    association :school, factory: [:user]
-    association :school, factory: [:tag]
+    association :user, factory: [:user]
+    association :tag, factory: [:tag]
   end
 end

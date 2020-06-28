@@ -64,4 +64,66 @@ RSpec.describe User, type: :model do
       end
     end
   end
+  describe 'scope' do
+    describe '#attendees_at' do
+      subject { User.attendees_at(lesson) }
+      let(:school) { create(:school) }
+      let(:lesson) { create(:lesson, school: school) }
+      let(:tag_1) { create(:tag, school: school) }
+      let(:tag_2) { create(:tag, school: school) }
+      let(:tag_3) { create(:tag, school: school) }
+      let(:user) { create(:user, school: school) }
+
+      context 'タグを持っていない授業' do
+        context 'タグを持っていないユーザ-は含まれる' do
+          it { is_expected.to include user }
+        end
+        context 'タグを持っているユーザ-は含まれる' do
+          let!(:user_tag) { create(:user_tag, user: user, tag: tag_1) }
+          it { is_expected.to include user }
+        end
+      end
+      context 'タグを1つ持っている授業' do
+        let!(:lesson_tag) { create(:lesson_tag, lesson: lesson, tag: tag_1) }
+        context 'タグを持っていないユーザ-は含まれない' do
+          it { is_expected.not_to include user }
+        end
+        context '同じタグを持っているユーザ-は含まれる' do
+          let!(:user_tag) { create(:user_tag, user: user, tag: tag_1) }
+          it { is_expected.to include user }
+        end
+        context '違うタグを持っているユーザ-は含まれない' do
+          let!(:user_tag) { create(:user_tag, user: user, tag: tag_2) }
+          it { is_expected.not_to include user }
+        end
+      end
+      context 'タグを2つ持っている授業' do
+        let!(:lesson_tag_1) { create(:lesson_tag, lesson: lesson, tag: tag_1) }
+        let!(:lesson_tag_2) { create(:lesson_tag, lesson: lesson, tag: tag_2) }
+        context 'タグを持っていないユーザ-は含まれない' do
+          it { is_expected.not_to include user }
+        end
+        context '同じタグを1つしか持っているユーザ-は含まれない' do
+          let!(:user_tag) { create(:user_tag, user: user, tag: tag_1) }
+          it { is_expected.not_to include user }
+        end
+        context '同じタグだけを持っているユーザ-は含まれる' do
+          let!(:user_tag_1) { create(:user_tag, user: user, tag: tag_1) }
+          let!(:user_tag_2) { create(:user_tag, user: user, tag: tag_2) }
+          it { is_expected.to include user }
+        end
+        context '同じタグと他のタグを持っているユーザ-は含まれる' do
+          let!(:user_tag_1) { create(:user_tag, user: user, tag: tag_1) }
+          let!(:user_tag_2) { create(:user_tag, user: user, tag: tag_2) }
+          let!(:user_tag_3) { create(:user_tag, user: user, tag: tag_3) }
+          it { is_expected.to include user }
+        end
+        context '同じタグを全て持っておらず他のタグを持っているユーザ-は含まれない' do
+          let!(:user_tag_2) { create(:user_tag, user: user, tag: tag_2) }
+          let!(:user_tag_3) { create(:user_tag, user: user, tag: tag_3) }
+          it { is_expected.not_to include user }
+        end
+      end
+    end
+  end
 end

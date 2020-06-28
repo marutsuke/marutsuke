@@ -17,4 +17,4 @@
       %td.users_account_table__tr= user.decorate.end_at
       %td.users_account_table__tr= user.decorate.activated_status
       - current_school.tags.each do |tag|
-        %td.users_account_table__th
+        %td.users_account_table__th= tag.decorate.user_tagged_mark(user)

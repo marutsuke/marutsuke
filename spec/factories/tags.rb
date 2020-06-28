@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :tag do
-    name { Faker::Book.genre[0..9] }
+    name { Faker::Lorem.unique.paragraph[0..9] }
     association :school, factory: [:school]
   end
 end

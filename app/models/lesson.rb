@@ -35,6 +35,20 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
+  # タグで判定するそのuserの出席可能なlesson
+  # ユーザーが持っているタグが、lessonの持っているタグを含む
+  scope :possible_attend_for, lambda { |user|
+    ng_lessons =
+      user
+      .school
+      .lessons
+      .includes(:tags)
+      .where.not(tags: { id: user.tags.pluck(:id) })
+    ng_ids = ng_lessons.pluck(:id)
+    where(school_id: user.school_id)
+      .where.not(id: ng_ids)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
