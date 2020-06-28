@@ -46,6 +46,10 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  def tagged_for?(tag)
+    user_tags.exists?(tag_id: tag.id)
+  end
+
   private
 
   def start_at_set
