@@ -57,6 +57,10 @@ class Lesson < ApplicationRecord
     doing? ? 'doing' : 'expired'
   end
 
+  def complete_count
+    "xx/#{User.attendees_at(self).size * questions.size}"
+  end
+
   private
 
   def start_at_set
