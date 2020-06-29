@@ -13,7 +13,9 @@
         'current_school': "#{current_user.present? ? current_user.school.name : ''}"
       });
   %title Marutsuke
-  = favicon_link_tag('favicons/maru.ico')
+  = favicon_link_tag 'favicons/maru.ico'
+  = favicon_link_tag 'favicons/maru180x180.png', rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png'
+  = favicon_link_tag 'favicons/maru192x192.png', rel: 'android-touch-icon', sizes: '192x192', type: 'image/png'
   = csrf_meta_tags
   = csp_meta_tag
   = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
