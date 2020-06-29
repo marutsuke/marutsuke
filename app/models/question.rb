@@ -7,7 +7,7 @@ class Question < ApplicationRecord
   validate :image_size
   belongs_to :lesson
   has_many :answers
-
+  has_many :question_statuses
   scope :not_nil, -> { where.not(id: nil) }
   scope :display_order, -> { where.not(id: nil).order(display_order: :asc) }
 
