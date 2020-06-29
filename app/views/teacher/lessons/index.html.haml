@@ -4,9 +4,19 @@
     %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
     %th.lesson_table__th 講座期間
     %th.lesson_table__th 受講数
+    %th.lesson_table__th 課題数
+    %th.lesson_table__th 完了数
+    %th.lesson_table__th 未提出
+    %th.lesson_table__th 再提出
+    %th.lesson_table__th 要確認
   - @lessons.each do |lesson|
     %tr.lesson_table__tr
       %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
       %td.lesson_table__tr= lesson.teacher.name
       %td.lesson_table__tr= lesson.decorate.start_to_end_time
-      %td.lesson_table__tr= current_school.users.size
+      %td.lesson_table__tr= User.attendees_at(lesson).size
+      %td.lesson_table__tr= lesson.questions.size
+      %td.lesson_table__tr= lesson.complete_count
+      %td.lesson_table__tr= lesson.questions.size
+      %td.lesson_table__tr= lesson.questions.size
+      %td.lesson_table__tr= lesson.questions.size
