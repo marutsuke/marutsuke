@@ -90,6 +90,9 @@
     &:hover {
       background-color: $gray;
     }
+    &--red {
+      color: red;
+    }
   }
   &__td {
     border: solid 1px $black;

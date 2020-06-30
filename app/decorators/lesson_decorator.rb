@@ -25,6 +25,10 @@ class LessonDecorator < Draper::Decorator
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
 
+  def complete_rate
+    "#{complete_count}/#{User.attendees_at(self).size * questions.size}"
+  end
+
   private
 
   def time_format(time)

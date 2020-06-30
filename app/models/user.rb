@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :answers
   has_many :user_tags
   has_many :tags, through: :user_tags
+  has_many :question_statuses
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
