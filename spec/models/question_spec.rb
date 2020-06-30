@@ -8,4 +8,31 @@ RSpec.describe Question, type: :model do
   end
   it { is_expected.to validate_presence_of(:title) }
   it { is_expected.to validate_length_of(:title).is_at_most(20) }
+
+  describe 'question_status関連のスコープ' do
+    let!(:question) { create(:question) }
+    it { expect(Question.checking).not_to include(question) }
+    it { expect(Question.submit_again).not_to include(question) }
+    it { expect(Question.complete).not_to include(question) }
+    it { expect(Question.not_submitted).to include(question) }
+
+    context 'chekingの問題' do
+      let!(:question_status) do
+        create(:question_status, status: :checking, question: question)
+      end
+      it { expect(Question.checking).to include(question) }
+    end
+    context 'submit_againの問題' do
+      let!(:question_status) do
+        create(:question_status, status: :submit_again, question: question)
+      end
+      it { expect(Question.submit_again).to include(question) }
+    end
+    context 'completeの問題' do
+      let!(:question_status) do
+        create(:question_status, status: :complete, question: question)
+      end
+      it { expect(Question.complete).to include(question) }
+    end
+  end
 end
