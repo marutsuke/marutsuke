@@ -62,7 +62,7 @@ class Lesson < ApplicationRecord
   end
 
   def checking_question_count
-    questions.cheking.size
+    questions.checking.size
   end
 
   private
