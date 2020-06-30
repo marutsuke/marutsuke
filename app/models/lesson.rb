@@ -57,6 +57,10 @@ class Lesson < ApplicationRecord
     doing? ? 'doing' : 'expired'
   end
 
+  def cheking_count_td_class
+    checking_count.positive? ? 'lesson_table__tr--red' : 'lesson_table__tr'
+  end
+
   def not_submitted_count
     (User.attendees_at(self).size * questions.size) -
       checking_count -
