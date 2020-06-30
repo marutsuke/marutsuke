@@ -6,7 +6,7 @@ class QuestionStatus < ApplicationRecord
   validates :status, presence: true
 
   enum status: {
-    not_submitted: 10,
+    not_submitted: 10, #データとして発生しないはず。
     checking: 20,
     submit_again: 30,
     complete: 40
