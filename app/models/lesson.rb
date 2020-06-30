@@ -61,6 +61,13 @@ class Lesson < ApplicationRecord
     "xx/#{User.attendees_at(self).size * questions.size}"
   end
 
+  def checking_question_count
+    questions
+      .joins(:question_statuses)
+      .where(question_statuses: { status: :checking })
+      .size
+  end
+
   private
 
   def start_at_set
