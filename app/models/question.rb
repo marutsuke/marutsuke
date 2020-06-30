@@ -11,6 +11,11 @@ class Question < ApplicationRecord
   scope :not_nil, -> { where.not(id: nil) }
   scope :display_order, -> { where.not(id: nil).order(display_order: :asc) }
 
+  scope :cheking, lambda {
+    joins(:question_statuses)
+      .where(question_statuses: { status: :checking })
+  }
+
   private
 
   def image_size

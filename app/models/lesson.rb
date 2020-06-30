@@ -62,10 +62,7 @@ class Lesson < ApplicationRecord
   end
 
   def checking_question_count
-    questions
-      .joins(:question_statuses)
-      .where(question_statuses: { status: :checking })
-      .size
+    questions.cheking.size
   end
 
   private
