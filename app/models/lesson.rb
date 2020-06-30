@@ -57,12 +57,23 @@ class Lesson < ApplicationRecord
     doing? ? 'doing' : 'expired'
   end
 
-  def complete_count
-    "xx/#{User.attendees_at(self).size * questions.size}"
+  def not_submitted_count
+    (User.attendees_at(self).size * questions.size) -
+      checking_count -
+      submit_again_count -
+      complete_count
   end
 
-  def checking_question_count
+  def checking_count
     questions.checking.size
+  end
+
+  def submit_again_count
+    questions.submit_again.size
+  end
+
+  def complete_count
+    questions.complete.size
   end
 
   private

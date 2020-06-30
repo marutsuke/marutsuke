@@ -80,8 +80,8 @@ RSpec.describe Lesson, type: :model do
     end
   end
 
-  describe '#checking_question_count' do
-    subject { lesson.checking_question_count }
+  describe '#checking_count' do
+    subject { lesson.checking_count }
 
     let!(:lesson) { create(:lesson) }
     let!(:question_1) { create(:question, lesson: lesson) }
