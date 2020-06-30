@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      question_status: 課題の状況
+    attributes:
+      question_status:
+        user_id: ユーザー
+        question_id: 課題
+        status: 状況
+  enums:
+    question_status:
+      status:
+        not_submitted: 未提出
+        checking: 確認中
+        submit_again: 再提出
+        complete: 完了
