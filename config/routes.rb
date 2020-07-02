@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :answers, only: %i[create]
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
+  resources :users, only: [:new] do
+    collection do
+      get :mypage # テスト済み
+    end
+  end
 
   namespace :teacher do
     get '', to: 'lessons#index' # テスト済み
