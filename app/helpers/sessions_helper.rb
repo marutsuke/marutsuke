@@ -7,6 +7,7 @@ module SessionsHelper
 
   def user_log_in(user)
     session[:user_id] = user.id
+    cookies.permanent.signed[:school_id] = user.school.id
   end
 
   def remember_user(user)

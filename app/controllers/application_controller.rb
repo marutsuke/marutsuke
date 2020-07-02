@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
   def user_login_required
     unless current_user
       flash[:info] = 'ログインしてください'
-      raise LoginRequired
+      if school = School.find_by(id: cookies.signed[:school_id])
+        redirect_to school_login_path(login_path: school.login_path)
+      else
+        raise LoginRequired
+      end
     end
   end
 end
