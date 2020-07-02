@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/schools', to: 'schools#new' # テスト済み
   resources :users, only: [:new] do
     collection do
-      get :mypage
+      get :mypage # テスト済み
     end
   end
 
