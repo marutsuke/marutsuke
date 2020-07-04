@@ -1,0 +1,2 @@
+class LessonGroupUser < ApplicationRecord
+end
