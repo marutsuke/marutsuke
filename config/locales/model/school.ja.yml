@@ -16,3 +16,5 @@ ja:
         end_at: 業務終了日時
         activated: アカウント有効化
         school: 学校
+      school_building:
+        name: 校舎名

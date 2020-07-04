@@ -1,0 +1,7 @@
+.user_form
+  = form_with model: [:teacher, @school_building], local: true do |f|
+    =render 'shared/error_messages', model_object: @school_building
+    .user_form__label_and_input
+      = f.label :name, class: 'required'
+      = f.text_field :name
+    = f.submit '作成する', class: 'user_form__submit_btn'

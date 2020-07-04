@@ -1,3 +1,8 @@
 校舎管理
-
+.mt8
 = link_to '校舎作成', new_teacher_school_building_path
+
+%hr
+- @school_buildings.each do |school_building|
+  .mb8= school_building.name
+  %hr
