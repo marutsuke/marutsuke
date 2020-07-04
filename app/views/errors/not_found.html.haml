@@ -1,4 +1,10 @@
-.error
-  %h1 404 Not Found
-  %p 指定されたページは存在しません。
-  %p= request.env['REQUEST_URI']
+.errors
+  .errors__logo
+    =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
+  .errors__container
+    .errors__head
+      %p お探しのページは見つかりませんでした。
+      %p URLが間違っているか、ページが存在しません。
+    .errors__caption
+      %p.errors__caption--status 404 Not Found
+      %p リクエストしたURL：#{request.env['REQUEST_URI']}
