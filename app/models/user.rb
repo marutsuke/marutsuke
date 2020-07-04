@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :questions, through: :question_statuses
   has_many :school_building_users
   has_many :school_buildings, through: :school_building_users
+  has_many :lesson_group_users
+  has_many :lesson_groups, through: :lesson_group_users
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
