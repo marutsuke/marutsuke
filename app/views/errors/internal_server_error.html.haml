@@ -1,3 +1,8 @@
-.error
-  %h1 500 Internal Server Error
-  %p 申し訳ございません。システムエラーが発生しました。
+.errors
+  .errors__logo
+    =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
+  .errors__container
+    .errors__head
+      %p システムエラーが発生しました。
+    .errors__caption
+      %p.errors__caption--status 500 Internal Server Error
