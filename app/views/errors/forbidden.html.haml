@@ -1,8 +1,13 @@
-.error
-  %h1 403 Forbidden
-  - case @exception
-  - when ApplicationController::LoginRequired
-    %p 指定のログインページからログインしてください。
-  - else
-    %p このページにアクセスできません。
-    %p= @exception
+.errors
+  .errors__logo
+    =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
+  .errors__container
+    .errors__head
+      - case @exception
+      - when ApplicationController::LoginRequired
+        %p 指定のログインページからログインしてください。
+      - else
+        %p このページにアクセスできません。
+        %p= @exception
+    .errors__caption
+      %p.errors__caption--status 403 Forbidden
