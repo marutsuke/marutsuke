@@ -24,8 +24,4 @@
         = f.label :end_at_hour, '時'
         = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, include_blank: true
         = f.label :end_at_min, '分'
-    .lesson_form__check_box.flex
-      %p.mr8 タグ
-      = f.collection_check_boxes :tag_ids, @tags, :id, :name, include_hidden: false do |b|
-        = b.label { b.check_box + b.text }
     = f.submit '登録する', class: 'lesson_form__submit_btn'

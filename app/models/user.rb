@@ -19,8 +19,6 @@ class User < ApplicationRecord
 
   belongs_to :school
   has_many :answers
-  has_many :user_tags
-  has_many :tags, through: :user_tags
   has_many :question_statuses
 
   def self.digest(string)
@@ -46,21 +44,6 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-
-  def tagged_for?(tag)
-    user_tags.exists?(tag_id: tag.id)
-  end
-
-  # タグで判定するそのlessonnに出席可能なuser
-  # lessonが持ってるタグを全て持っているユーザーに絞る
-  scope :attendees_at, lambda { |lesson|
-    return lesson.school.users if lesson.tags.empty?
-
-    tags = lesson.tags
-    user_having_tag_list_array = tags.map { |tag| tag.users.pluck(:id) }
-    required_user_ids = user_having_tag_list_array.inject(:&)
-    where(id: required_user_ids)
-  }
 
   private
 

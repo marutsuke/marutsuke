@@ -35,9 +35,6 @@ Rails.application.routes.draw do
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
-    resources :tags, only: %i[new create]
-    resources :user_tags, only: %i[create]
-    get '/tags', to: 'tags#new'
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[create] # テスト済み
   end

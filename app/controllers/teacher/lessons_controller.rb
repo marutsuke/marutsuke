@@ -13,12 +13,10 @@ class Teacher::LessonsController < Teacher::Base
 
   def new
     @lesson = Lesson.new
-    @tags = current_school.tags
   end
 
   def create
     @lesson = current_school.lessons.new(lesson_params)
-    @tags = current_school.tags
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"
       redirect_to new_teacher_lesson_path
@@ -32,7 +30,7 @@ class Teacher::LessonsController < Teacher::Base
   def lesson_params
     params.require(:lesson).permit(
       :name, :teacher_id, :start_at_date, :start_at_hour,
-      :start_at_min, :end_at_date, :end_at_hour, :end_at_min, tag_ids: []
+      :start_at_min, :end_at_date, :end_at_hour, :end_at_min
     )
   end
 end

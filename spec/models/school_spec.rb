@@ -6,7 +6,6 @@ RSpec.describe School, type: :model do
   describe 'Associations' do
     it { is_expected.to have_many(:teachers) }
     it { is_expected.to have_many(:lessons) }
-    it { is_expected.to have_many(:tags) }
   end
 
   it { is_expected.to validate_presence_of(:name) }

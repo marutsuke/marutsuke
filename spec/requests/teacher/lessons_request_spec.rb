@@ -71,20 +71,6 @@ RSpec.describe 'Teacher::Lessons', type: :request do
       expect(response).to have_http_status(200)
       expect(response.body).to include('を入力してください。')
     end
-
-    context 'tagの登録' do
-      let!(:tag_1) { create(:tag, name: 'tag1', school: teacher.school) }
-      let!(:tag_2) { create(:tag, name: 'tag2', school: teacher.school) }
-      let!(:tag_3) { create(:tag, name: 'tag3', school: teacher.school) }
-      it 'タグを登録' do
-        lesson_params[:tag_ids] = [tag_1.id, tag_2.id]
-        expect do
-          post teacher_lessons_path, params: { lesson: lesson_params }
-        end.to change(Lesson, :count).by(1).and change(LessonTag, :count).by(2)
-
-        expect(response).to have_http_status(302)
-      end
-    end
   end
 
   describe '/teacher/lesson#show' do
