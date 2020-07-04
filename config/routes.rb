@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get '/teachers', to: 'teachers#new' # テスト済み
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[create] # テスト済み
+    resources :school_buildings, only: %i[index new create edit update]
   end
 
   namespace :admin do

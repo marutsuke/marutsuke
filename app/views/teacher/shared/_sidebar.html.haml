@@ -12,6 +12,8 @@
     .teacher_sidebar__element 教員管理
   = link_to edit_teacher_school_path(current_school) do
     .teacher_sidebar__element 学校情報
+  = link_to teacher_school_buildings_path do
+    .teacher_sidebar__element 校舎管理
   = link_to teacher_logout_path, method: :delete do
     .teacher_sidebar__element ログアウト
   .teacher_sidebar__space
