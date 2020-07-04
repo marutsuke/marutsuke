@@ -20,6 +20,7 @@ class User < ApplicationRecord
   belongs_to :school
   has_many :answers
   has_many :question_statuses
+  has_many :questions, through: :question_statuses
   has_many :school_building_users
   has_many :school_buildings, through: :school_building_users
 
