@@ -26,7 +26,7 @@ class LessonDecorator < Draper::Decorator
   end
 
   def complete_rate
-    "#{complete_count}/#{User.attendees_at(self).size * questions.size}"
+    "#{complete_count}/"
   end
 
   private

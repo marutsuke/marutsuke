@@ -47,7 +47,7 @@ class Lesson < ApplicationRecord
   end
 
   def not_submitted_count
-    (User.attendees_at(self).size * questions.size) -
+    (questions.size) -
       checking_count -
       submit_again_count -
       complete_count
