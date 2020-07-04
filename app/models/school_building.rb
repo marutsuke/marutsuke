@@ -1,0 +1,2 @@
+class SchoolBuilding < ApplicationRecord
+end
