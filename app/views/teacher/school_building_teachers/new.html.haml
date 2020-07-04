@@ -11,7 +11,7 @@
     = f.submit '登録する', class: 'user_form__submit_btn'
 %hr
 %hr
-- @teacher.school_building_teachers.where.not(id: nil).order(main: 'desc').each do |school_building_teacher|
+- @teacher.school_building_teachers.where.not(id: nil).main_order.each do |school_building_teacher|
   = school_building_teacher.school_building.name
   - if school_building_teacher.main?
     (所属校)
