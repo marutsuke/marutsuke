@@ -9,6 +9,8 @@ class Lesson < ApplicationRecord
   before_save { end_at_set }
   belongs_to :school
   belongs_to :teacher
+  belongs_to :lesson_group
+  belongs_to :school_building
   has_many :questions, dependent: :destroy
 
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
