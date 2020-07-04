@@ -1,19 +1,20 @@
+= "#{@teacher.name}先生の所属校・兼務校登録"
 .user_form
-  = form_with model: [:teacher, @school_building_teacher], local: true do |f|
+  = form_with url: teacher_teacher_school_building_teachers_path(@teacher), model: @school_building_teacher, local: true do |f|
     = render 'shared/error_messages', model_object: @school_building_teacher
     .user_form__label_and_input
       = f.label :name, class: 'required'
-      = f.select :school_building_id, (current_school.school_buildings - current_teacher.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
+      = f.select :school_building_id, (current_school.school_buildings - @teacher.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
     .user_form__label_and_input--checkbox
       = f.label :main
-      = f.check_box(:main, {checked: false}, true, false)
+      = f.check_box(:main, {checked: false})
     = f.submit '登録する', class: 'user_form__submit_btn'
 %hr
 %hr
-- current_teacher.school_building_teachers.where.not(id: nil).order(main: 'desc').each do |school_building_teacher|
+- @teacher.school_building_teachers.where.not(id: nil).order(main: 'desc').each do |school_building_teacher|
   = school_building_teacher.school_building.name
   - if school_building_teacher.main?
     (所属校)
   - else
-    = link_to '削除', teacher_school_building_teacher_path(school_building_teacher), method: :delete, class: 'btn  btn-samll btn-danger'
+    = link_to '削除', teacher_teacher_school_building_teacher_path(@teacher, school_building_teacher), method: :delete, class: 'btn  btn-samll btn-danger'
   %hr

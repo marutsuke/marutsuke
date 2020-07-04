@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       member do
         post :resend_activation_mail
       end
+      resources :school_building_teachers, only: %i[new create destroy]
     end
     resources :lessons, only: %i[index show new create] # テスト済み
     resources :questions, only: %i[create show] # createテスト済み
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[create] # テスト済み
     resources :school_buildings, only: %i[index new create]
-    resources :school_building_teachers, only: %i[new create destroy]
+
   end
 
   namespace :admin do
