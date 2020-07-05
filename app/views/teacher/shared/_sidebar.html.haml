@@ -4,6 +4,8 @@
       = image_tag ('marutsuke_logo_w.png'), art: 'marutsuke'
   = link_to teacher_lessons_path do
     .teacher_sidebar__element 提出課題管理
+  = link_to teacher_lesson_groups_path do
+    .teacher_sidebar__element 講座作成
   = link_to new_teacher_lesson_path do
     .teacher_sidebar__element 授業・課題作成
   = link_to teacher_users_path do
@@ -14,6 +16,8 @@
     .teacher_sidebar__element 学校情報
   = link_to teacher_school_buildings_path do
     .teacher_sidebar__element 校舎管理
+  .teacher_name= current_teacher.name + '先生'
+
   = link_to teacher_logout_path, method: :delete do
     .teacher_sidebar__element ログアウト
   .teacher_sidebar__space

@@ -1,0 +1,16 @@
+講座新規作成
+%hr
+.lesson_form
+  = form_with model: [:teacher, @lesson_group], local: true do |f|
+    =render 'shared/error_messages', model_object: @lesson_group
+    .lesson_form__label_and_input
+      = f.label :name, class: 'required'
+      = f.text_field :name
+    .lesson_form__label_and_input
+      = f.label :school_building_id, class: 'required'
+      = f.select :school_building_id,
+         current_teacher.decorate.school_building_select_array,
+         selected: current_teacher.main_school_building.id
+    = f.submit '登録する', class: 'lesson_form__submit_btn'
+%hr
+  - 

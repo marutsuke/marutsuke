@@ -58,6 +58,10 @@ class Teacher < ApplicationRecord
     update_columns(activated: false)
   end
 
+  def main_school_building
+    school_building_teachers.find_by(main: true).school_building
+  end
+
   private
 
   def downcase_email
