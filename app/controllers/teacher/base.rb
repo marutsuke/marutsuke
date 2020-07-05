@@ -11,6 +11,7 @@ class Teacher::Base < ApplicationController
 
   def teacher_login_required
     unless current_teacher
+      store_location
       flash[:info] = 'ログインしてください'
       redirect_to teacher_login_path
     end
