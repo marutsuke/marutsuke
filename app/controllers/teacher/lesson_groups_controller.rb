@@ -19,6 +19,8 @@ class Teacher::LessonGroupsController < Teacher::Base
     end
   end
 
+  def edit; end
+
   private
 
   def lesson_group_params
