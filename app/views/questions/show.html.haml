@@ -1,3 +1,4 @@
+= render 'shared/lesson_title'
 .question_info__title= "タイトル: #{ @question.title } "
 - if @question.image.present?
   = image_tag @question&.image_url, alt: @question.title, class: 'question_info__image'
@@ -20,4 +21,4 @@
   .taaaaaaa= answer.text
   - answer&.answer_images&.each do |image|
     .answer_image= image_tag image&.image_url, alt: '解答画像'
-= render 'shared/footer'
+

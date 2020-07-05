@@ -1,10 +1,7 @@
 = render 'shared/lessons_header'
 = render 'shared/lessons_tab'
 
-.lesson_show_for_user_header
-  .lesson_show_for_user_header__term= @lesson.decorate.start_to_end_time
-  .lesson_show_for_user_header__teacher= "担当: #{@lesson.teacher.name}"
-  .lesson_show_for_user_header__name= @lesson.name
+= render 'shared/lesson_title'
 .user_question_card
   .user_question_card__head 課題一覧
   - if @questions&.length == 0
