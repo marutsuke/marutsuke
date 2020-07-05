@@ -1,0 +1,30 @@
+= render 'shared/lessons_header'
+= render 'shared/lesson_title'
+
+-# TO DO ここに解答フォームを作成する
+answers#new
+
+
+-# .question_info__title= "タイトル: #{ @question.title } "
+-# - if @question.image.present?
+-#   = image_tag @question&.image_url, alt: @question.title, class: 'question_info__image'
+-# .question_info__text= "説明: #{ @question.text } "
+
+-# = form_with model: @answer, local: true do |f|
+-#   = render 'shared/error_messages', model_object: @answer
+-#   .answer_form__label_and_input
+-#     = f.label :text
+-#     = f.text_area :text
+-#   = f.fields_for @answer.answer_images.build do |ff|
+-#     .answer_images_form__label_and_input
+-#       .flex
+-#         = ff.label :image
+-#         %span (最大5MBまで・複数投稿できます)
+-#       = ff.file_field :image, multiple: true
+-#   = f.hidden_field :question_id, value: @question.id
+-#   = f.submit '登録する'
+-# - current_user&.answers&.where(question_id: @question.id)&.each do |answer|
+-#   .taaaaaaa= answer.text
+-#   - answer&.answer_images&.each do |image|
+-#     .answer_image= image_tag image&.image_url, alt: '解答画像'
+

@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   get '/login_post/:login_path', to: 'sessions#new' # テスト済み
   delete '/logout', to: 'sessions#destroy' # テスト済み
   resources :lessons, only: %i[index show] # テスト済み
-  resources :questions, only: %i[show]
-  resources :answers, only: %i[create]
+  resources :questions, only: %i[show] do
+    resources :answers, only: %i[new create]
+  end
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
   resources :users, only: [:new] do
