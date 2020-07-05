@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       login_count_up(user)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       flash[:success] = "#{user.name}さん、こんにちは!"
-      redirect_to root_path
+      redirect_back_or user
     else
       flash.now[:danger] = 'ログインに失敗しました。正しいか確認してもう一度お願いします。'
       render :new
