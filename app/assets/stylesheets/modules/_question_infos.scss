@@ -87,6 +87,13 @@
       margin-bottom: 0;
     }
   }
+  &--no_questions {
+    margin: 0 auto;
+    padding: 12px 0;
+    max-width: 800px;
+    min-width: 288px;
+    transition: 0.5s;
+  }
 }
 
 .question_infos {

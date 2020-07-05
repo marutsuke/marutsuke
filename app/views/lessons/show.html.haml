@@ -7,10 +7,14 @@
   .lesson_show_for_user_header__name= @lesson.name
 .user_question_card
   .user_question_card__head 課題一覧
-  - @questions.display_order&.each do |question|
-    =link_to question_path(question) do
-      .user_question_card__item
-        .user_question_card__tag--status01 未提出
-        .user_question_card__title #{question.title}
-        .user_question_card__description
-          %p #{question.text}
+  - if @questions&.length == 0
+    .user_question_card--no_questions
+      現在、設定されている課題はありません。
+  - else
+    - @questions.display_order&.each do |question|
+      =link_to question_path(question) do
+        .user_question_card__item
+          .user_question_card__tag--status01 未提出
+          .user_question_card__title #{question.title}
+          .user_question_card__description
+            %p #{question.text}
