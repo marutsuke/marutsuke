@@ -5,4 +5,8 @@ class LessonGroup < ApplicationRecord
   has_many :lesson_group_users
   has_many :users, through: :lesson_group_users
   has_many :lessons
+
+  scope :for_school_buildings_belonged_to, -> (teacher){
+    where(school_building_id: teacher.school_building_teachers.pluck(:school_building_id))
+  }
 end
