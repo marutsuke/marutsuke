@@ -15,6 +15,6 @@
 %hr
   - LessonGroup.for_school_buildings_belonged_to(current_teacher).each do |lesson_group|
     .flex
-      .mr16= lesson_group.name
+      .mr16= "#{ lesson_group.name }・#{ lesson_group.school_building.name }"
       = link_to '編集', edit_teacher_lesson_group_path(lesson_group)
     %hr
