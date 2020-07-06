@@ -1,0 +1,15 @@
+講座一覧
+%hr= link_to '講座新規作成・編集', new_teacher_lesson_group_path
+.mb48
+%hr
+- if @lesson_groups.size == 0
+  現在講座は登録されていません。
+-else
+  - @lesson_groups.each do |lesson_group|
+    .flex
+      .mr16= "#{ lesson_group.name }・#{ lesson_group.school_building.name }"
+      .mr16
+        = link_to '詳細', teacher_lesson_group_path(lesson_group)
+      .mr16
+        = link_to '編集', edit_teacher_lesson_group_path(lesson_group)
+    %hr

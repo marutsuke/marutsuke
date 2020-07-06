@@ -10,5 +10,9 @@ FactoryBot.define do
     activation_digest 'fljahfljdshalf'
     activated true
     association :school, factory: [:school]
+    after(:create) do |teacher|
+      school_building = create(:school_building, school: teacher.school)
+      create(:school_building_teacher, teacher: teacher, school_building: school_building, main: true)
+    end
   end
 end

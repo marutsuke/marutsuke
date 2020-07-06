@@ -4,16 +4,18 @@
       = image_tag ('marutsuke_logo_w.png'), art: 'marutsuke'
   = link_to teacher_lessons_path do
     .teacher_sidebar__element 提出課題管理
-  = link_to new_teacher_lesson_path do
-    .teacher_sidebar__element 授業・課題作成
+  = link_to teacher_lesson_groups_path do
+    .teacher_sidebar__element 講座作成
   = link_to teacher_users_path do
     .teacher_sidebar__element 生徒管理
-  = link_to new_teacher_tag_path do
-    .teacher_sidebar__element タグ管理
   = link_to teacher_teachers_path do
     .teacher_sidebar__element 教員管理
   = link_to edit_teacher_school_path(current_school) do
     .teacher_sidebar__element 学校情報
+  = link_to teacher_school_buildings_path do
+    .teacher_sidebar__element 校舎管理
+  .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building.name})"
+
   = link_to teacher_logout_path, method: :delete do
     .teacher_sidebar__element ログアウト
   .teacher_sidebar__space
