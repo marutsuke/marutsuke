@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class Teacher::TeachersController < Teacher::Base
+  before_action :set_teacher, only: %i[show edit update]
+
   def index
     @teachers = current_school.teachers
   end
+
+  def show; end
 
   def new
     @teacher = Teacher.new
@@ -24,7 +28,6 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def update
-    @teacher = current_school.teachers.find(params[:id])
     if @teacher.update(teacher_update_params)
       flash[:success] = "#{@teacher.name}先生の情報を更新しました。"
       redirect_to teacher_teachers_path
@@ -34,13 +37,16 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def resend_activation_mail
-    @teacher = current_school.teachers.find(params[:id])
     @teacher.resend_activation_mail
     flash[:success] = "#{@teacher.name}のアドレス宛にアカウント承認メールを送りました。ご確認ください。"
     redirect_to teacher_teachers_path
   end
 
   private
+
+  def set_teacher
+    @teacher = current_school.teachers.find(params[:id])
+  end
 
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password, :password_confirmation)

@@ -1,6 +1,7 @@
 %table.users_account_table.ml24
   %thead.users_account_table__thead
     %th.users_account_table__th= Teacher.human_attribute_name(:name)
+    %th.users_account_table__th 所属校
     %th.users_account_table__th= Teacher.human_attribute_name(:email)
     %th.users_account_table__th= Teacher.human_attribute_name(:start_at)
     %th.users_account_table__th= Teacher.human_attribute_name(:end_at)
@@ -8,7 +9,14 @@
     %th.users_account_table__th 認証メール再送信
   - @teachers.each do |teacher|
     %tr.users_account_table__tr
-      %td.users_account_table__tr= link_to teacher.name, edit_teacher_teacher_path(teacher)
+      %td.users_account_table__tr= link_to teacher.name, teacher_teacher_path(teacher)
+      %td.users_account_table__tr
+        - teacher.school_building_teachers.main_order.each do |s_b_t|
+          - if s_b_t.main?
+            = "#{s_b_t.school_building.name}(所属)"
+          - else
+            = s_b_t.school_building.name
+
       %td.users_account_table__tr= teacher.decorate.email
       %td.users_account_table__tr= teacher.decorate.start_at
       %td.users_account_table__tr= teacher.decorate.end_at

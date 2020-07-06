@@ -14,7 +14,7 @@
       %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
       %td.lesson_table__tr= lesson.teacher.name
       %td.lesson_table__tr= lesson.decorate.start_to_end_time
-      %td.lesson_table__tr= User.attendees_at(lesson).size
+      %td.lesson_table__tr ''
       %td.lesson_table__tr= lesson.questions.size
       %td.lesson_table__tr= lesson.decorate.complete_rate
       %td.lesson_table__tr= lesson.not_submitted_count

@@ -6,8 +6,6 @@
     %th.users_account_table__th= User.human_attribute_name(:start_at)
     %th.users_account_table__th= User.human_attribute_name(:end_at)
     %th.users_account_table__th= User.human_attribute_name(:activated)
-    - current_school.tags.each do |tag|
-      %th.users_account_table__th= tag.name
   - @users.each do |user|
     %tr.users_account_table__tr
       %td.users_account_table__tr= link_to user.name, teacher_user_path(user)
@@ -16,5 +14,3 @@
       %td.users_account_table__tr= user.decorate.start_at
       %td.users_account_table__tr= user.decorate.end_at
       %td.users_account_table__tr= user.decorate.activated_status
-      - current_school.tags.each do |tag|
-        %td.users_account_table__th= tag.decorate.user_tagged_mark(user)

@@ -9,10 +9,8 @@ class Lesson < ApplicationRecord
   before_save { end_at_set }
   belongs_to :school
   belongs_to :teacher
+  belongs_to :lesson_group
   has_many :questions, dependent: :destroy
-  has_many :lesson_tags
-  has_many :tags, through: :lesson_tags
-  accepts_nested_attributes_for :lesson_tags, allow_destroy: true
 
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
 
@@ -35,20 +33,6 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
-  # タグで判定するそのuserの出席可能なlesson
-  # ユーザーが持っているタグが、lessonの持っているタグを含む
-  scope :possible_attend_for, lambda { |user|
-    ng_lessons =
-      user
-      .school
-      .lessons
-      .includes(:tags)
-      .where.not(tags: { id: user.tags.pluck(:id) })
-    ng_ids = ng_lessons.pluck(:id)
-    where(school_id: user.school_id)
-      .where.not(id: ng_ids)
-  }
-
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
@@ -62,7 +46,7 @@ class Lesson < ApplicationRecord
   end
 
   def not_submitted_count
-    (User.attendees_at(self).size * questions.size) -
+    questions.size -
       checking_count -
       submit_again_count -
       complete_count
