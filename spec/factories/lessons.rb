@@ -7,7 +7,6 @@ FactoryBot.define do
     end_at 1.year.since
     association :teacher, factory: [:teacher]
     association :school, factory: [:school]
-    association :school_building, factory: [:school_building]
     association :lesson_group, factory: [:lesson_group]
 
     trait(:going_to) { start_at { 1.hour.since } }
