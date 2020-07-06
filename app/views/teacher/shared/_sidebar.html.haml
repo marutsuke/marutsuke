@@ -14,7 +14,7 @@
     .teacher_sidebar__element 学校情報
   = link_to teacher_school_buildings_path do
     .teacher_sidebar__element 校舎管理
-  .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building.name})"
+  .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building&.name || 'なし'})"
 
   = link_to teacher_logout_path, method: :delete do
     .teacher_sidebar__element ログアウト

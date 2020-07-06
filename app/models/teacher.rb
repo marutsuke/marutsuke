@@ -59,7 +59,7 @@ class Teacher < ApplicationRecord
   end
 
   def main_school_building
-    school_building_teachers.find_by(main: true).school_building
+    school_building_teachers.find_by(main: true)&.school_building
   end
 
   private
