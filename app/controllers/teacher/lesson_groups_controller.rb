@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 class Teacher::LessonGroupsController < Teacher::Base
-  before_action :set_lesson_groups, only: %i[index new]
+  before_action :set_lesson_groups, only: %i[index new create]
   before_action :set_lesson_group, only: %i[show edit]
 
-  def index
-  end
+  def index; end
 
-  def show
-
-  end
+  def show; end
 
   def new
     @lesson_group = LessonGroup.new
