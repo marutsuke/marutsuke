@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class Teacher::LessonGroupsController < Teacher::Base
+  before_action :set_lesson_groups, only: %i[index new]
+  before_action :set_lesson_group, only: %i[show edit]
+
   def index
-    @lesson_groups = LessonGroup.all
+  end
+
+  def show
+
   end
 
   def new
@@ -25,5 +31,14 @@ class Teacher::LessonGroupsController < Teacher::Base
 
   def lesson_group_params
     params.require(:lesson_group).permit(:name, :school_building_id)
+  end
+
+  def set_lesson_groups
+    @lesson_groups = LessonGroup.for_school_buildings_belonged_to(current_teacher)
+  end
+
+  def set_lesson_group
+    set_lesson_groups
+    @lesson_group = @lesson_groups.find(parmas[:id])
   end
 end
