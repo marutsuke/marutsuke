@@ -21,6 +21,15 @@ describe Teacher::SessionsController, type: :request do
       expect(response.body).to include("#{teacher.name}先生、こんにちは!")
       expect(session[:teacher_id]).to eq teacher.id
     end
+
+    it 'フレンドリーフォワーディング' do
+      get teacher_lesson_groups_path
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to teacher_login_path
+      post teacher_login_path, params: { session: session_params }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to teacher_lesson_groups_path
+    end
   end
 
   describe '/admin/logout#destroy ' do

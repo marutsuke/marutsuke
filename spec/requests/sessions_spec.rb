@@ -24,6 +24,19 @@ RSpec.describe 'SessionsController', type: :request do
       { password: user.password, school_login_path: user.school.login_path }
     end
     let(:another_school) { create(:school) }
+    let(:lesson) { create(:lesson, school: user.school) }
+
+    it 'フレンドリーフォワーディング' do
+      user_log_in user
+      user_log_out
+      get lesson_path(lesson)
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to school_login_path(login_path: user.school.login_path)
+      session_params[:email_or_login_id] = user.email
+      post login_post_path(user.school.login_path), params: { session: session_params }
+      expect(response).to have_http_status(302)
+      expect(response).to redirect_to lesson_path(lesson)
+    end
 
     it 'メールアドレスでログインできる' do
       session_params[:email_or_login_id] = user.email
