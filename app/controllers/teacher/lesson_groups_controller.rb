@@ -22,7 +22,9 @@ class Teacher::LessonGroupsController < Teacher::Base
     end
   end
 
-  def edit; end
+  def edit
+    @lesson = @lesson_group.lessons.new(school_building_id: @lesson_group.school_building.id)
+  end
 
   def update
     if @lesson_group.update(lesson_group_params)
