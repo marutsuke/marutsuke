@@ -24,5 +24,4 @@
         = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, include_blank: true
         = f.label :end_at_min, '分'
       = f.hidden_field :lesson_group_id
-      = f.hidden_field :school_building_id
     = f.submit '登録する', class: 'lesson_form__submit_btn'

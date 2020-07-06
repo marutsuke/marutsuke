@@ -32,7 +32,7 @@ class Teacher::LessonsController < Teacher::Base
     params.require(:lesson).permit(
       :name, :teacher_id, :start_at_date, :start_at_hour,
       :start_at_min, :end_at_date, :end_at_hour, :end_at_min,
-      :lesson_group_id, :school_building_id
+      :lesson_group_id
     )
   end
 end
