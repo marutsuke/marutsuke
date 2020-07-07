@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Teacher::SchoolBuildingsController < Teacher::Base
+  skip_before_action :school_must_have_school_building
+
   def index
     @school_buildings = current_school.school_buildings
   end
