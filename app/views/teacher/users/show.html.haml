@@ -14,7 +14,4 @@
   .flex
     .teacher_user_show__th.mr8= User.human_attribute_name(:activated) + ':'
     .teacher_user_show__ele= @user.activated_status
-#js-user_tag_form
-  = render 'user_tag_form', user: @user
-
 = link_to '編集', edit_teacher_user_path(@user)
