@@ -36,4 +36,8 @@
       .user_form__label_and_input
         = f.label :email
         = f.email_field :email
+      = f.fields_for @school_building_user do |ff|
+        .user_form__label_and_input
+          = ff.label :school_building_id, '所属校', class: 'required'
+          = ff.select :school_building_id, current_teacher.decorate.school_building_select_array, selected: current_teacher.main_school_building
     = f.submit '登録する', class: 'user_form__submit_btn'
