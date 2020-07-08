@@ -1,4 +1,4 @@
-= "#{@user.name}さんの所属校・兼務校登録"
+= "#{@user.name}さんの所属校・他校受講校登録"
 .user_form
   = form_with url: teacher_user_school_building_users_path(@user), model: @school_building_user, local: true do |f|
     = render 'shared/error_messages', model_object: @school_building_user
