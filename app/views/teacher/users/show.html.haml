@@ -15,3 +15,6 @@
     .teacher_user_show__th.mr8= User.human_attribute_name(:activated) + ':'
     .teacher_user_show__ele= @user.activated_status
 = link_to '編集', edit_teacher_user_path(@user)
+.teacher_user_show
+  %hr
+  = link_to '所属校追加', new_teacher_user_school_building_user_path(@user)
