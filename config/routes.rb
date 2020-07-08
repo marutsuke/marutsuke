@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy' # テスト済み
     resources :users, only: %i[index new create show edit update] do
       resources :school_building_users, only: %i[new create destroy]
+      resources :lesson_group_users, only: %i[new create destroy]
     end
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
