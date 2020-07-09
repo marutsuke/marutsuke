@@ -21,6 +21,13 @@ class Teacher::LessonGroupUsersController < Teacher::Base
     end
   end
 
+  def destroy
+    @lesson_group_user = @user.lesson_group_users.find(params[:id])
+    @lesson_group_user.destroy
+    flash[:danger] = '削除に成功しました。'
+    redirect_to new_teacher_user_lesson_group_user_path(@user)
+  end
+
   private
 
   def lesson_group_user_params

@@ -9,10 +9,8 @@
     = f.submit '登録する', class: 'user_form__submit_btn'
 %hr
 %hr
-- @user.school_building_users.where.not(id: nil).main_order.each do |school_building_user|
-  = school_building_user.school_building.name
-  - if school_building_user.main?
-    (所属校)
-  - else
-    = link_to '削除', teacher_user_school_building_user_path(@user, school_building_user), method: :delete, class: 'btn  btn-samll btn-danger'
+- @user.lesson_group_users.where.not(id: nil).each do |lesson_group_user|
+  .mr8
+  = lesson_group_user.lesson_group.name
+  = link_to '削除', teacher_user_lesson_group_user_path(@user, lesson_group_user), method: :delete, class: 'btn  btn-samll btn-danger', data: {confirm: "本当に削除しますか？"}
   %hr

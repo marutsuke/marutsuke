@@ -16,5 +16,5 @@
   - if school_building_user.main?
     (所属校)
   - else
-    = link_to '削除', teacher_user_school_building_user_path(@user, school_building_user), method: :delete, class: 'btn  btn-samll btn-danger'
+    = link_to '削除', teacher_user_school_building_user_path(@user, school_building_user), method: :delete, class: 'btn  btn-samll btn-danger', data: {confirm: "本当に削除しますか？"}
   %hr
