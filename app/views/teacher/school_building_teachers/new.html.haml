@@ -3,7 +3,7 @@
   = form_with url: teacher_teacher_school_building_teachers_path(@teacher), model: @school_building_teacher, local: true do |f|
     = render 'shared/error_messages', model_object: @school_building_teacher
     .user_form__label_and_input
-      = f.label :name, class: 'required'
+      = f.label :school_building_id, class: 'required'
       = f.select :school_building_id, (current_school.school_buildings - @teacher.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
     .user_form__label_and_input--checkbox
       = f.label :main
