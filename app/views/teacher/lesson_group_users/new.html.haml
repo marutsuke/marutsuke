@@ -1,0 +1,16 @@
+= "#{@user.name}さん受講講座登録ページ"
+
+.user_form
+  = form_with url: teacher_user_lesson_group_users_path(@user), model: @lesson_group_user, local: true do |f|
+    = render 'shared/error_messages', model_object: @lesson_group_user
+    .user_form__label_and_input
+      = f.label :lesson_group_id, class: 'required'
+      = f.select :lesson_group_id, @lesson_groups.map{|l_g| [l_g.name, l_g.id]}, include_blank: true
+    = f.submit '登録する', class: 'user_form__submit_btn'
+%hr
+%hr
+- @user.lesson_group_users.where.not(id: nil).each do |lesson_group_user|
+  .mr8
+  = lesson_group_user.lesson_group.name
+  = link_to '削除', teacher_user_lesson_group_user_path(@user, lesson_group_user), method: :delete, class: 'btn  btn-samll btn-danger', data: {confirm: "本当に削除しますか？"}
+  %hr

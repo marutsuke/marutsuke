@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe Teacher::UsersController, type: :request do
-  before { teacher_log_in }
+  let!(:teacher) { create(:teacher) }
+  before { teacher_log_in teacher }
 
   describe '/teacher/users#new ' do
     it 'ログインしていなければ、リダイレクトされる' do
@@ -29,7 +30,8 @@ describe Teacher::UsersController, type: :request do
     end
   end
 
-  describe '/teacher/teachers/new#create' do
+  describe '/teacher/users/new#create' do
+    let!(:school_building_user) { create(:school_building_user) }
     let(:user_params) do
       {
         name: 'テスト',
@@ -42,7 +44,10 @@ describe Teacher::UsersController, type: :request do
         end_at_hour: '12',
         end_at_min: '30',
         password: 'password',
-        password_confirmation: 'password'
+        password_confirmation: 'password',
+        school_building_user: {
+          school_building_id: school_building_user.school_building_id
+        }
       }
     end
     it '教師が生徒を追加作成できる' do

@@ -3,6 +3,7 @@
 class Teacher::SchoolBuildingTeachersController < Teacher::Base
   before_action :main_setting, only: :create
   before_action :set_teacher
+  skip_before_action :teacher_must_belong_to_school_building
   def new
     @school_building_teacher = @teacher.school_building_teachers.new
   end

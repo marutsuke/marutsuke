@@ -11,10 +11,8 @@ class TeacherDecorator < Draper::Decorator
     school_building_teachers
       .main_order
       .map do |school_building_teacher|
-       [school_building_teacher.school_building.name, school_building_teacher.school_building.id]
+        [school_building_teacher.school_building.name,
+         school_building_teacher.school_building.id]
       end
   end
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
 end

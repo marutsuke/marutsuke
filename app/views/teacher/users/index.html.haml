@@ -1,3 +1,5 @@
+=link_to '生徒新規作成', new_teacher_user_path
+%hr
 %table.users_account_table.ml24
   %thead.users_account_table__thead
     %th.users_account_table__th= User.human_attribute_name(:name)
@@ -6,6 +8,7 @@
     %th.users_account_table__th= User.human_attribute_name(:start_at)
     %th.users_account_table__th= User.human_attribute_name(:end_at)
     %th.users_account_table__th= User.human_attribute_name(:activated)
+    %th.users_account_table__th 受講講座
   - @users.each do |user|
     %tr.users_account_table__tr
       %td.users_account_table__tr= link_to user.name, teacher_user_path(user)
@@ -14,3 +17,4 @@
       %td.users_account_table__tr= user.decorate.start_at
       %td.users_account_table__tr= user.decorate.end_at
       %td.users_account_table__tr= user.decorate.activated_status
+      %td.users_account_table__tr= user.lesson_groups.map{|l_g| l_g.name}.join(',').present? || 'なし'

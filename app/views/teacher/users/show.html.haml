@@ -14,7 +14,10 @@
   .flex
     .teacher_user_show__th.mr8= User.human_attribute_name(:activated) + ':'
     .teacher_user_show__ele= @user.activated_status
-#js-user_tag_form
-  = render 'user_tag_form', user: @user
-
 = link_to '編集', edit_teacher_user_path(@user)
+.teacher_user_show
+  %hr
+  = link_to '所属校追加', new_teacher_user_school_building_user_path(@user)
+.teacher_user_show
+  %hr
+  = link_to '受講科目追加', new_teacher_user_lesson_group_user_path(@user)
