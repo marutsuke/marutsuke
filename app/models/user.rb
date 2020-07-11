@@ -51,6 +51,10 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  def main_school_building
+    school_building_users.find_by(main: true)&.school_building
+  end
+
   private
 
   def start_at_set
