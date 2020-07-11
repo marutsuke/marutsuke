@@ -12,6 +12,9 @@ class Teacher::SchoolBuildingUsersController < Teacher::Base
       @user
       .school_building_users
       .new(school_building_user_params)
+    if @user.main_school_building.nil?
+      @school_building_user.update(main: true)
+    end
     if @school_building_user.save
       flash[:success] = '登録に成功しました。'
       redirect_to new_teacher_user_school_building_user_path(@user)
