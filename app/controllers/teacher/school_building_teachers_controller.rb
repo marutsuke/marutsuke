@@ -15,7 +15,7 @@ class Teacher::SchoolBuildingTeachersController < Teacher::Base
       .new(school_building_teacher_params)
     if @teacher.main_school_building.nil?
       @school_building_teacher.update(main: true)
-      end
+    end
     if @school_building_teacher.save
       flash[:success] = '登録に成功しました。'
       redirect_to new_teacher_teacher_school_building_teacher_path(@teacher)
