@@ -11,4 +11,8 @@ class LessonGroup < ApplicationRecord
   scope :for_school_buildings_belonged_to_teacher, lambda { |teacher|
     where(school_building_id: teacher.school_building_teachers.pluck(:school_building_id))
   }
+
+  scope :for_school_buildings_belonged_to_user, lambda { |user|
+    where(school_building_id: user.school_building_users.pluck(:school_building_id))
+  }
 end
