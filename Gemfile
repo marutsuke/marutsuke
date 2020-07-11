@@ -84,6 +84,7 @@ group :production do
   gem 'unicorn', '5.4.1'
 end
 
+gem 'bullet'
 gem 'enum_help'
 gem 'fog-aws'
 gem 'haml-rails', '~> 2.0'
