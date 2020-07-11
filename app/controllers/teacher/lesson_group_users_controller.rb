@@ -5,7 +5,7 @@ class Teacher::LessonGroupUsersController < Teacher::Base
 
   def new
     @lesson_group_user = @user.lesson_group_users.new
-    @lesson_groups = LessonGroup.for_school_buildings_belonged_to_teacher(current_teacher) - @user.lesson_groups
+    @lesson_groups = LessonGroup.for_school_buildings_belonged_to_teacher_and_user(current_teacher, @user) - @user.lesson_groups
   end
 
   def create
