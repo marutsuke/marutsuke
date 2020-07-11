@@ -47,7 +47,7 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def set_lesson_groups
-    @lesson_groups = LessonGroup.for_school_buildings_belonged_to(current_teacher)
+    @lesson_groups = LessonGroup.for_school_buildings_belonged_to_teacher(current_teacher)
   end
 
   def set_lesson_group

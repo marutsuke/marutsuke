@@ -13,8 +13,8 @@ RSpec.describe LessonGroup, type: :model do
   it { is_expected.to validate_length_of(:name).is_at_most(30) }
 
   describe 'scope' do
-    describe '#for_school_buildings_belonged_to' do
-      subject { LessonGroup.for_school_buildings_belonged_to(teacher) }
+    describe '#for_school_buildings_belonged_to_teacher' do
+      subject { LessonGroup.for_school_buildings_belonged_to_teacher(teacher) }
       let(:teacher) { create(:teacher) }
       let(:school_building) { create(:school_building) }
       let(:lesson_group) do
