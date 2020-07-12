@@ -15,13 +15,13 @@ RSpec.describe SchoolBuildingTeacher, type: :model do
       create(:school_building_teacher, teacher: teacher, school_building: school_building)
     end
 
-    it '同じユーザーで、同じ校舎は、ダメ' do
+    it '同じ教員で、同じ校舎は、ダメ' do
       school_building_teacher2 = build(
         :school_building_teacher, teacher: teacher, school_building: school_building
       )
       expect(school_building_teacher2).to_not be_valid
     end
-    it '同じユーザーで、違う校舎は、OK' do
+    it '同じ教員で、違う校舎は、OK' do
       school_building_teacher2 = build(
         :school_building_teacher, teacher: teacher, school_building: another_school_building
       )
