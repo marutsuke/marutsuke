@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class SchoolBuildingTeacher < ApplicationRecord
   belongs_to :teacher
   belongs_to :school_building
 
-  scope :main_order, -> {
+  validates :school_building_id, uniqueness: { scope: :teacher_id }
+
+  scope :main_order, lambda {
     order(main: 'desc')
   }
 end
