@@ -4,6 +4,8 @@ class SchoolBuildingUser < ApplicationRecord
   belongs_to :user
   belongs_to :school_building
 
+  validates :school_building_id, uniqueness: { scope: :user_id }
+
   scope :main_order, lambda {
     order(main: 'desc')
   }
