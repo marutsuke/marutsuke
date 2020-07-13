@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      lesson_group: 講座
+    attributes:
+      lesson_group:
+        name: 講座名
+        school_building_id: 校舎
