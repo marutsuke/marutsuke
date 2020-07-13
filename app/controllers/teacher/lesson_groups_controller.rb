@@ -24,9 +24,11 @@ class Teacher::LessonGroupsController < Teacher::Base
 
   def edit
     @lesson = @lesson_group.lessons.new
+    @lessons = @lesson_group.lessons
   end
 
   def update
+    @lessons = @lesson_group.lessons
     if @lesson_group.update(lesson_group_params)
       flash[:success] = "#{@lesson_group.name}を更新しました。"
       redirect_to edit_teacher_lesson_group_path(@lesson_group)
