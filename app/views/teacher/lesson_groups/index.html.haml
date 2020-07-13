@@ -7,9 +7,9 @@
 -else
   - @lesson_groups.each do |lesson_group|
     .flex
-      .mr16= "#{ lesson_group.name }・#{ lesson_group.school_building.name }"
-      .mr16
+      .mr32= "#{ lesson_group.name }・#{ lesson_group.school_building.name }"
+      .mr24
         = link_to '詳細', teacher_lesson_group_path(lesson_group)
       .mr16
-        = link_to '編集', edit_teacher_lesson_group_path(lesson_group)
+        = link_to '編集・授業追加', edit_teacher_lesson_group_path(lesson_group)
     %hr
