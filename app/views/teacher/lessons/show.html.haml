@@ -1,0 +1,14 @@
+.lesson_show
+  .lesson_show_title= "#{LessonGroup.human_attribute_name(:name)}: #{@lesson.lesson_group.name}(#{@lesson.lesson_group.school_building.name})"
+  .lesson_show_title= Lesson.human_attribute_name(:name) + ':　' + @lesson.name
+  .lesson_show_start_at= Lesson.human_attribute_name(:start_at) + ':　' + @lesson.decorate.start_at
+  .lesson_show_end_at= Lesson.human_attribute_name(:end_at) + ':　' + @lesson.decorate.end_at
+.question_infos
+  - @questions.display_order&.each do |question|
+    = link_to teacher_question_path(question.id), class: 'question_info' do
+      .flex
+        .question_info__title= "タイトル: #{ question.title } "
+        .question_info__display_order= "表示順位: #{question.display_order}"
+      - if question.image.present?
+        = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
+      .question_info__text= "説明: #{ question.text } "
