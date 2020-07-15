@@ -9,8 +9,8 @@ class AnswersController < ApplicationController
   end
 
   def show
-    # @question = Question.find(params[:id])
-    # @lesson = current_school&.lessons&.find(@question.lesson_id)
+    @question = Question.find(params[:id])
+    @lesson = current_school&.lessons&.find(@question.lesson_id)
     # @answers = current_user&.answers&.where(id: @question.answer_ids)
   end
 
