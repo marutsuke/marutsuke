@@ -8,6 +8,12 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new
   end
 
+  def show
+    # @question = Question.find(params[:id])
+    # @lesson = current_school&.lessons&.find(@question.lesson_id)
+    # @answers = current_user&.answers&.where(id: @question.answer_ids)
+  end
+
   def create
     @answer = current_user.answers.new(answer_params)
     if @answer.save
