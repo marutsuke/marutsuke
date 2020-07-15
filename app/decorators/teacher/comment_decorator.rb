@@ -1,13 +1,15 @@
 class Teacher::CommentDecorator < ApplicationDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def updated_at
+    super&.strftime('%F-%R')
+  end
 
+  def commented_at
+    time_format(updated_at)
+  end
+
+  def time_format(time)
+    Time.parse(time).strftime("%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
+  end
 end
