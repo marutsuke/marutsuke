@@ -38,7 +38,7 @@ RSpec.describe Lesson, type: :model do
       it { is_expected.to eq 3 }
     end
 
-    context '別の講座の問題のチェック中のものができても2つ' do
+    context '別の授業の問題のチェック中のものができても2つ' do
       let!(:question_status_3_checking) do
         create(:question_status, :checking, question: question_3)
       end
