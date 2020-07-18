@@ -11,6 +11,25 @@ RSpec.describe Lesson, type: :model do
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_most(30) }
 
+  describe 'scope' do
+    describe '#to_check' do
+      subject { Lesson.to_check }
+      let!(:lesson) { create(:lesson) }
+      let!(:question_1) { create(:question, lesson: lesson) }
+
+      context '元々、授業は含まれない' do
+        it { is_expected.not_to include lesson }
+      end
+
+      context 'チェック中の問題がある時に、含まれる' do
+        let!(:question_status_checking) do
+          create(:question_status, :checking, question: question_1)
+        end
+        it { is_expected.to include lesson }
+      end
+    end
+  end
+
   describe '#checking_count' do
     subject { lesson.checking_count }
 

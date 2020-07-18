@@ -33,6 +33,11 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
+  scope :to_check, lambda {
+    joins(:questions)
+      .merge(Question.checking)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
