@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Teacher::QuestionsController < Teacher::Base
+  def new
+    @lesson = current_school.lessons.find(params[:lesson_id])
+    @question = @lesson.questions.build
+    @questions = @lesson.questions
+  end
+
   def show
     @question = Question.find(params[:id])
     @lesson = current_school&.lessons.find_by(id: @question.lesson_id)

@@ -3,6 +3,28 @@
   .lesson_show_title= Lesson.human_attribute_name(:name) + ':　' + @lesson.name
   .lesson_show_start_at= Lesson.human_attribute_name(:start_at) + ':　' + @lesson.decorate.start_at
   .lesson_show_end_at= Lesson.human_attribute_name(:end_at) + ':　' + @lesson.decorate.end_at
+.question_new_form__title.mt24.ml16
+  問題追加
+.question_new_form.ml24
+  = form_with model: [:teacher, @question], local: true do |f|
+    =render 'shared/error_messages', model_object: @question
+    - display_order_now = @lesson.questions.index(@question) + 1
+    .question_form__label_and_input
+      = f.label :display_order, class: 'required'
+      = f.select :display_order, (1..@questions.length + 5) , value: display_order_now
+    .question_form__label_and_input
+      = f.label :title, class: 'required'
+      = f.text_field :title
+    .question_form__label_and_input
+      = f.label :text
+      = f.text_area :text, rows: '10', cols: '100'
+    .question_form__label_and_input
+      .flex
+        = f.label :image
+        %span (最大5MBまで)
+      = f.file_field :image
+    = f.hidden_field :lesson_id, value: @lesson.id
+    = f.submit '登録する', class: 'question_form__submit_btn'
 .question_infos
   - @questions.display_order&.each do |question|
     = link_to teacher_question_path(question.id), class: 'question_info' do
