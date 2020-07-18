@@ -35,6 +35,7 @@ class Lesson < ApplicationRecord
 
   scope :to_check, lambda {
     joins(:questions)
+      .includes(:questions)
       .merge(Question.checking)
   }
 
