@@ -43,10 +43,11 @@ class Teacher::AnswerChecksController < Teacher::Base
       [@lesson.id]
       if @next_lesson_exist = @next_lessons_ids.present?
         @next_lesson_path =
-        checking_teacher_lesson_answer_checks_path(
-          lesson_id: @next_lessons_ids.first
-        )
+          checking_teacher_lesson_answer_checks_path(
+            lesson_id: @next_lessons_ids.first
+          )
       end
     @next_answer_exist = @page < @question_statuses.size
+    @back_answer_exist = @page > 1
   end
 end
