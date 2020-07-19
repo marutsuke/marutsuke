@@ -11,4 +11,11 @@ class QuestionStatus < ApplicationRecord
     submit_again: 30,
     complete: 40
   }
+
+  scope :order_by_lesson, lambda { |lesson|
+    includes(:question)
+      .where(question_id: lesson.questions.pluck[:id])
+      .order('questions.display_order asc')
+  }
+
 end
