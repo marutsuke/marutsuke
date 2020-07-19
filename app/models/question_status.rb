@@ -17,4 +17,8 @@ class QuestionStatus < ApplicationRecord
       .where(question_id: lesson.questions.pluck(:id))
       .order('questions.display_order asc')
   }
+
+  def answers
+    Answer.where(user_id: user_id, question_id: question_id)
+  end
 end

@@ -3,6 +3,11 @@
     -# .answer_checking_backs_link= link_to '次の解答へ', @next_url
     -# .answer_checking_backs_link= link_to '次の課題へ', @next_url
     -# .answer_checking_backs_link= link_to '次の授業へ', @next_url
-  .answer_cheking_card
+  .answer_cheking_cards
+    - @answers&.each do |answer|
+      .answer_cheking_card
+        .answer_cheking_card__title= answer.text
+        - answer&.answer_images&.each do |answer_image|
+          .answer_cheking_card__image= image_tag answer_image&.image, class: 'answer__image'
     -# .answer_cheking_image= @answer.text
 -# その問題に関するquestion_statusで、chekingのものを見ていく。chekingのuser_idと、question_idを見て、answerを選ぶ。
