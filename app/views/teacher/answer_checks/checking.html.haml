@@ -1,7 +1,7 @@
 .flex
   .answer_checking_backs
     - if @back_answer_exist
-      .answer_checking_backs_link= link_to '前の解答へ', @back_answer_path
+      .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path
   .answer_cheking_cards
     - @answers&.each do |answer|
       .answer_cheking_card
@@ -10,6 +10,6 @@
           .answer_cheking_card__image= image_tag answer_image&.image, class: 'answer__image'
   .answer_checking_next
     - if @next_answer_exist
-      .answer_checking_backs_link= link_to '次の解答へ', @next_answer_path
+      .answer_checking_next__link= link_to '次の解答へ', @next_answer_path
     - if @next_lesson_exist
-      .answer_checking_backs_link= link_to '次の授業へ', @next_lesson_path
+      .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path
