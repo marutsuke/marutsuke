@@ -2,13 +2,24 @@ class Teacher::AnswerChecksController < Teacher::Base
   before_action :set_question_and_lesson
 
   def checking
-    @page = params[:page] || 1
   end
 
   private
 
   def set_question_and_lesson
-    @question = Question.find(params[:question_id])
-    @lesson = current_teacher.lessons.find(@question.lesson.id)
+
+  end
+
+  def set_page
+    @page = params[:page] || 1
+  end
+
+  def set_lesson
+    @lesson = current_teacher.lessons.find(pramas[:lesson_id])
+  end
+
+  def set_answer
+    @question_status =
+      QuestionStatus.order_by_question_order_at(@lesson)
   end
 end
