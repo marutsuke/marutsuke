@@ -6,4 +6,8 @@ class Answer < ApplicationRecord
   belongs_to :question
   has_many :answer_images
   has_many :comments
+
+  scope :new_order, -> {
+    order(created_at: :desc)
+  }
 end

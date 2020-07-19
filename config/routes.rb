@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       resources :school_building_teachers, only: %i[new create destroy]
     end
     resources :lessons, only: %i[index show new create] do # テスト済み
+      resources :answer_checks, only: [] do
+        get :checking, on: :collection
+      end
       resources :questions, only: :new
     end
     resources :questions, only: %i[create show] # createテスト済み

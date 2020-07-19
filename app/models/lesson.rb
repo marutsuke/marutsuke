@@ -33,6 +33,12 @@ class Lesson < ApplicationRecord
 
   scope :done, -> { where('end_at < ?', Time.zone.now) }
 
+  scope :to_check, lambda {
+    joins(:questions)
+      .includes(:questions)
+      .merge(Question.checking)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
@@ -62,6 +68,10 @@ class Lesson < ApplicationRecord
 
   def complete_count
     questions.complete.size
+  end
+
+  def first_question_to_check
+    questions.checking_distinct.first
   end
 
   private
