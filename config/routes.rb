@@ -37,6 +37,9 @@ Rails.application.routes.draw do
     end
     resources :lessons, only: %i[index show new create] do # テスト済み
       resources :questions, only: :new
+      resources :answer_checks, only: [] do
+        get :checking, on: :collection
+      end
     end
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
