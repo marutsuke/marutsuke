@@ -12,10 +12,9 @@ class QuestionStatus < ApplicationRecord
     complete: 40
   }
 
-  scope :order_by_lesson, lambda { |lesson|
+  scope :order_by_question_order_at, lambda { |lesson|
     includes(:question)
-      .where(question_id: lesson.questions.pluck[:id])
+      .where(question_id: lesson.questions.pluck(:id))
       .order('questions.display_order asc')
   }
-
 end
