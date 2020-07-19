@@ -1,0 +1,6 @@
+.flex
+  .answer_checking_back= link_to '次へ', checking_teacher_question_answer_checks_path(question_id: @question.id, page: @page + 1)
+  .answer_cheking_card
+    .answer_cheking_image
+      = @question.answers[@page - 1].text
+  .answer_checking_forward

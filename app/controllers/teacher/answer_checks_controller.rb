@@ -1,16 +1,14 @@
 class Teacher::AnswerChecksController < Teacher::Base
-  before_action :set_lesson
+  before_action :set_question_and_lesson
 
   def checking
-    @questions =
-      @lesson
-      .questions
-      .checking_distinct
+    @page = params[:page] || 1
   end
 
   private
 
-  def set_lesson
-    @lesson = current_teacher.lessons.to_check.find(params[:lesson_id])
+  def set_question_and_lesson
+    @question = Question.find(params[:question_id])
+    @lesson = current_teacher.lessons.find(@question.lesson.id)
   end
 end

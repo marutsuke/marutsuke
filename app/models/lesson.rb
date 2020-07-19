@@ -70,6 +70,10 @@ class Lesson < ApplicationRecord
     questions.complete.size
   end
 
+  def first_question_to_check
+    questions.checking_distinct.first
+  end
+
   private
 
   def start_at_set

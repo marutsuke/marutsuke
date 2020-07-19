@@ -16,13 +16,31 @@ class Question < ApplicationRecord
       .where(question_statuses: { status: :checking })
   }
 
+  scope :checking_distinct, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
+      .where(question_statuses: { status: :checking })
+  }
+
   scope :submit_again, lambda {
     joins(:question_statuses)
       .where(question_statuses: { status: :submit_again })
   }
 
+  scope :submit_again_distinct, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
+      .where(question_statuses: { status: :submit_again })
+  }
+
   scope :complete, lambda {
     joins(:question_statuses)
+      .where(question_statuses: { status: :complete })
+  }
+
+  scope :complete_distinct, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
       .where(question_statuses: { status: :complete })
   }
 
