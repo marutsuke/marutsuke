@@ -13,6 +13,6 @@
     %th.lesson_table__th 講座期間
   - @lessons.each do |lesson|
     %tr.lesson_table__tr
-      %td.lesson_table__tr= link_to lesson.name, teacher_lesson_path(lesson)
+      %td.lesson_table__tr= link_to "#{ lesson.lesson_group.name }/#{lesson.name}", teacher_lesson_path(lesson)
       %td.lesson_table__tr= lesson.teacher.name
       %td.lesson_table__tr= lesson.decorate.start_to_end_time
