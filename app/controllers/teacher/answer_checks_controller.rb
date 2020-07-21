@@ -29,9 +29,7 @@ class Teacher::AnswerChecksController < Teacher::Base
   def active_page_check
     return if @question_status
 
-    redirect_to checking_teacher_lesson_answer_checks_path(
-      lesson_id: @lesson.id
-    )
+    redirect_to teacher_lessons_path
   end
 
   def set_page_paths
