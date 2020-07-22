@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :teacher do
-    name { Faker::Name.unique.name }
+    name { Faker::Name.unique.name[0..10] }
     email { Faker::Internet.unique.email }
     password { 'password' }
     start_at { 1.day.ago }
