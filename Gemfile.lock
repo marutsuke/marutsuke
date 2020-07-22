@@ -146,8 +146,8 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
-    faker (1.9.1)
-      i18n (>= 0.7)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     ffi (1.13.1-java)
     ffi (1.13.1-x64-mingw32)
@@ -453,7 +453,7 @@ DEPENDENCIES
   draper
   enum_help
   factory_bot_rails
-  faker (= 1.9.1)
+  faker
   fog-aws
   font-awesome-sass
   haml-rails (~> 2.0)
