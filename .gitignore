@@ -33,3 +33,10 @@ public/uploads/tmp/1558684595-16779-0003-2521/hat2.jpg
 
 public/uploads
 *.jpg
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
