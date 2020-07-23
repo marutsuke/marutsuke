@@ -9,7 +9,7 @@ class User < ApplicationRecord
   before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 12 }
   validates :login_id, presence: true
-  validates :login_id, uniqueness: { scope: :school_id }
+  validates :login_id, uniqueness: { scope: :school_id, case_sensitive: true }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },

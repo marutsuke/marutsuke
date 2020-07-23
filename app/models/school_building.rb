@@ -8,5 +8,5 @@ class SchoolBuilding < ApplicationRecord
   has_many :teachers, through: :school_building_teachers
   has_many :lesson_groups
   validates :name, presence: true, length: { maximum: 20 }
-  validates :name, uniqueness: { scope: :school_id }
+  validates :name, uniqueness: { scope: :school_id, case_sensitive: true }
 end

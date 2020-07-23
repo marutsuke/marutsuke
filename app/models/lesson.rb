@@ -18,16 +18,16 @@ class Lesson < ApplicationRecord
     where('start_at <= ?', Time.zone.now)
       .where('end_at >= ?', Time.zone.now)
       .or(
-        Lesson.where('start_at <= ?', Time.zone.now)
-            .where(end_at: nil)
+        where('start_at <= ?', Time.zone.now)
+          .where(end_at: nil)
       )
       .or(
-        Lesson.where('end_at >= ?', Time.zone.now)
-        .where(start_at: nil)
+        where('end_at >= ?', Time.zone.now)
+          .where(start_at: nil)
       )
       .or(
-        Lesson.where(end_at: nil)
-        .where(start_at: nil)
+        where(end_at: nil)
+          .where(start_at: nil)
       )
   }
 

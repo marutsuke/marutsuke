@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :lesson do
     name { Faker::Book.genre[0..10] }
-    start_at 1.day.ago
-    end_at 1.year.since
+    start_at { 1.day.ago }
+    end_at { 1.year.since }
     association :teacher, factory: [:teacher]
     association :school, factory: [:school]
     association :lesson_group, factory: [:lesson_group]
