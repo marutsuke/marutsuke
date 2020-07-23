@@ -1,5 +1,6 @@
 .comment_area {
   border: 1px solid #999999;
+  margin-bottom: 80px;
   &__header {
     height: 40px;
     line-height: 40px;
@@ -9,20 +10,21 @@
     padding: 0 16px;
   }
   &__container {
+    padding: 8px 0 0;
   }
   &__submitted_at {
-    padding: 8px 16px 0;
+    padding: 12px 16px 0;
     a {
       font-size: 0.9rem;
       @include link(darken(#98b4ff, 10%));
     }
   }
   &__comment_body {
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 2px solid #cccccc;
     padding: 12px 16px;
-    margin: 12px 0 0;
   }
   &__comment_text {
+    padding-bottom: 12px;
   }
   &__comment_image {
     width: 100%;
@@ -34,7 +36,19 @@
       object-fit: cover;
     }
   }
+  &__bottom {
+    width: 100%;
+    border-top: 1px solid #cccccc;
+    margin-top: 8px;
+    padding: 12px 0 0;
+    color: #777777;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  &__commented_at {
+    display: inline;
+  }
   &__teacher_name {
-    text-align: right;
+    display: inline;
   }
 }
