@@ -88,7 +88,8 @@ end
 gem 'bullet'
 gem 'enum_help'
 gem 'fog-aws'
-gem 'haml-rails', '~> 2.0'
+# gem 'haml-rails', '~> 2.0' 2020/07/23 特に問題内容なら、消す TODO
+gem 'hamlit'
 gem 'i18n_generators'
 gem 'nokogiri', '~> 1.11.0.rc1'
 gem 'sendgrid-ruby'
