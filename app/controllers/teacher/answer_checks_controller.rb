@@ -6,6 +6,7 @@ class Teacher::AnswerChecksController < Teacher::Base
                 :set_page_paths
 
   def checking
+    @comment = current_teacher.comments.new
   end
 
   private
