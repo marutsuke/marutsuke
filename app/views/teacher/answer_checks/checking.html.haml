@@ -1,13 +1,16 @@
 .flex
+  .answer_groups
+    - @answers&.each do |answer|
+      .answer_group
+        .answer_cheking_card.flex
+          .answer_cheking_card__title= answer.text
+          - answer&.answer_images&.each do |answer_image|
+            .answer_cheking_card__image= image_tag answer_image&.image_url, class: 'answer__image'
+
   .answer_checking_backs
     - if @back_answer_exist
       .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path
-  .answer_cheking_cards
-    - @answers&.each do |answer|
-      .answer_cheking_card
-        .answer_cheking_card__title= answer.text
-        - answer&.answer_images&.each do |answer_image|
-          .answer_cheking_card__image= image_tag answer_image&.image_url, class: 'answer__image'
+
   .answer_checking_next
     - if @next_answer_exist
       .answer_checking_next__link= link_to '次の解答へ', @next_answer_path
