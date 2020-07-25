@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      comment: 講座
+    attributes:
+      comment:
+        text: 本文
+        image: 画像
+        teacher_id: 教員
