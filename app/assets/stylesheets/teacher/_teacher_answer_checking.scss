@@ -1,0 +1,99 @@
+.answer_groups {
+  max-width: 1200px;
+  min-width: 800px;
+  width: 80%;
+  border-right: 1px blue solid;
+  overflow: scroll;
+  height: 100vh;
+}
+.answer_num {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 16px;
+}
+
+.answer_group {
+  display: flex;
+  padding: 16px;
+  border-bottom: blue 1px solid;
+  justify-content: center;
+  &__text {
+    width: 30%;
+    margin-right: 24px;
+    min-width: 160px;
+  }
+  &__images {
+    width: 70%;
+    min-width: 600px;
+    max-width: 720px;
+    border: 1px pink solid;
+  }
+  &__image {
+    width: 100%;
+  }
+}
+
+.answer_check_area {
+  padding: 16px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.answer_check_question_info {
+  &__lesson {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  &__question {
+    margin: 24px 0;
+    font-size: 16px;
+  }
+}
+
+.answer_check_form {
+  &__text {
+  }
+  &__text_area {
+    height: 300px;
+    width: 100%;
+    min-width: 240px;
+  }
+  &__evaluation {
+    height: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__evaluation_radio_btn_group {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+  &__evaluation_radio_btn {
+    height: 24px;
+    width: 16px;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+    &:checked + label {
+      font-weight: bold;
+    }
+  }
+  &__evaluation_label {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0;
+  }
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  &__submit_btn {
+    height: 32px;
+    width: 72px;
+    background-color: blue;
+  }
+}
