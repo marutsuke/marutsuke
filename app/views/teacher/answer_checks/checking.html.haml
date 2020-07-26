@@ -1,15 +1,49 @@
 .flex
-  .answer_checking_backs
-    - if @back_answer_exist
-      .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path
-  .answer_cheking_cards
-    - @answers&.each do |answer|
-      .answer_cheking_card
-        .answer_cheking_card__title= answer.text
-        - answer&.answer_images&.each do |answer_image|
-          .answer_cheking_card__image= image_tag answer_image&.image_url, class: 'answer__image'
-  .answer_checking_next
-    - if @next_answer_exist
-      .answer_checking_next__link= link_to '次の解答へ', @next_answer_path
-    - if @next_lesson_exist
-      .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path
+  .answer_groups
+    - @answers&.each_with_index do |answer, i|
+      .answer_info
+        .answer_info__num= "答案[#{ @answers.size - i }]"
+        .answer_info__user= "#{answer.user.name}さん"
+      .answer_group
+        .answer_group__text= simple_format( answer.text )
+        - if answer.answer_images.present?
+          .answer_group__images
+            - answer&.answer_images&.each do |answer_image|
+              .answer_group__image= image_tag answer_image&.image_url, class: 'answer_group__image'
+
+  .answer_check_area
+    .answer_check_question_info
+      .answer_check_question_info__lesson= "#{@lesson.lesson_group.name}　#{@lesson.name}"
+      .answer_check_question_info__question= "#{@question.text}"
+    - @answers&.each.with_index(1) do |answer, i|
+      - if i == 1 ## 本当は、どの解答に対するコメントか、指定したいところではある。が、現状、最新答案に対するコメントとする。
+        .answer_check_form
+          =form_with model: @comment, url: check_teacher_answer_answer_checks_path(answer_id: answer.id), local: true do |f|
+            =render 'shared/error_messages', model_object: @comment
+            .answer_check_form__text
+              %div
+                = f.label "answer_text--#{i}", 'コメント本文', class: 'required'
+              = f.text_area :text, class: 'answer_check_form__text_area', id: "comment_answer_text--#{i}"
+            .answer_check_form__evaluation
+              .answer_check_form__evaluation_radio_btn_group
+                = f.radio_button :evaluation, :complete, class: 'answer_check_form__evaluation_radio_btn', checked: true, id: "comment_evaluation_complete--#{i}"
+                = f.label "evaluation_complete--#{i}", '完了', class: 'answer_check_form__evaluation_label'
+              .answer_check_form__evaluation_radio_btn_group
+                = f.radio_button :evaluation, :submit_again, class: 'answer_check_form__evaluation_radio_btn', id: "comment_evaluation_submit_again--#{i}"
+                = f.label "evaluation_submit_again--#{i}", '再提出', class: 'answer_check_form__evaluation_label'
+            .answer_check_form__submit
+              = f.submit '送信', class: 'answer_check_form__submit_btn'
+
+    .answer_check_form_button_area
+      .answer_check_page_buttons
+        - if @back_answer_exist
+          .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path, class: 'answer_check_page_buttons__for_answer'
+        - else
+          - if @back_lesson_exist
+            .answer_checking_next__link= link_to '前の授業へ', @back_lesson_path, class: 'answer_check_page_buttons__for_lesson'
+      .answer_check_page_buttons
+        - if @next_answer_exist
+          .answer_checking_next__link= link_to '次の解答へ', @next_answer_path, class: 'answer_check_page_buttons__for_answer'
+        - else
+          - if @next_lesson_exist
+            .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path, class: 'answer_check_page_buttons__for_lesson'

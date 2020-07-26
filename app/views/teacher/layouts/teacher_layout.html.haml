@@ -1,9 +1,10 @@
 !!!
 %html
   =render 'layouts/application_head'
+  %head
+    = stylesheet_link_tag 'teacher', media: 'all', 'data-turbolinks-track': 'reload'
   %body
-    .flex
-      =render 'teacher/shared/sidebar'
-      .main_with_sidebar
-        =render 'layouts/notification'
-        = yield
+    =render 'layouts/notification'
+    =render 'teacher/shared/header'
+    .main_with_sidebar
+      = yield

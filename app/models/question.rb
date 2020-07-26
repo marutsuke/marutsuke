@@ -3,7 +3,7 @@
 class Question < ApplicationRecord
   mount_uploader :image, ImageUploader
 
-  validates :title, presence: true, length: { maximum: 20 }
+  validates :title, length: { maximum: 20 }
   validate :image_size
   belongs_to :lesson
   has_many :answers
