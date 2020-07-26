@@ -1,13 +1,21 @@
-.header_for_teacher.mb24.mt8
-  .teacher_link.flex.flex-sparo
-    - if current_teacher
-      = link_to "#{User.model_name.human}一覧", teacher_users_path
-      = link_to "#{Lesson.model_name.human}一覧", teacher_lessons_path
-      = link_to "#{Lesson.model_name.human}新規作成", new_teacher_lesson_path
-      = link_to '受講生追加', new_teacher_user_path
-      = link_to '教師追加', new_teacher_teacher_path
-      = link_to '学校情報編集', edit_teacher_school_path(current_school)
-      %p= "#{current_school.name}： #{current_teacher.name}先生"
-      = link_to '教師ログアウト', teacher_logout_path, method: :delete
-    - else
-      = link_to '教師ログイン', teacher_login_path
+.teacher_sidebar
+  = link_to teacher_path do
+    .teacher_sidebar__logo
+      = image_tag ('marutsuke_logo_w.png'), art: 'marutsuke'
+  = link_to teacher_lessons_path do
+    .teacher_sidebar__element 提出課題管理
+  = link_to teacher_lesson_groups_path do
+    .teacher_sidebar__element 講座作成
+  = link_to teacher_users_path do
+    .teacher_sidebar__element 生徒管理
+  = link_to teacher_teachers_path do
+    .teacher_sidebar__element 教員管理
+  = link_to edit_teacher_school_path(current_school) do
+    .teacher_sidebar__element 学校情報
+  = link_to teacher_school_buildings_path do
+    .teacher_sidebar__element 校舎管理
+  .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building&.name || 'なし'})"
+
+  = link_to teacher_logout_path, method: :delete do
+    .teacher_sidebar__element ログアウト
+  .teacher_sidebar__space
