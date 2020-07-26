@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('turbolinks:load', function() {
   'use strict';
   {
     const modal = document.getElementById('modal');
