@@ -1,7 +1,9 @@
 .flex
   .answer_groups
     - @answers&.each_with_index do |answer, i|
-      .answer_num= "答案[#{ @answers.size - i }]"
+      .answer_info
+        .answer_info__num= "答案[#{ @answers.size - i }]"
+        .answer_info__user= "#{answer.user.name}さん"
       .answer_group
         .answer_group__text= simple_format( answer.text )
         - if answer.answer_images.present?

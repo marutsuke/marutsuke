@@ -8,10 +8,19 @@
   overflow: scroll;
   height: 100vh;
 }
-.answer_num {
-  font-size: 24px;
-  font-weight: bold;
-  padding: 16px;
+.answer_info {
+  display: flex;
+  justify-content: space-between;
+  &__num {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px;
+  }
+  &__user {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px;
+  }
 }
 
 .answer_group {
