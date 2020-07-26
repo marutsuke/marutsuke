@@ -11,7 +11,7 @@ class Teacher::SessionsController < Teacher::Base
       teacher_log_in(teacher)
       flash[:success] = "#{teacher.name}先生、こんにちは!"
       params[:session][:remember_me] == '1' ? remember_teacher(teacher) : forget_teacher(teacher)
-      redirect_to new_teacher_teacher_path
+      redirect_back_or new_teacher_teacher_url
     else
       flash.now[:danger] = 'メールアドレスまたはパスワードが間違っています。'
       render :new

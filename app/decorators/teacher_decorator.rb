@@ -7,7 +7,12 @@ class TeacherDecorator < Draper::Decorator
     activated ? '有効' : '無効'
   end
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
+  def school_building_select_array
+    school_building_teachers
+      .main_order
+      .map do |school_building_teacher|
+        [school_building_teacher.school_building.name,
+         school_building_teacher.school_building.id]
+      end
+  end
 end

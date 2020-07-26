@@ -12,6 +12,8 @@ class Teacher < ApplicationRecord
   belongs_to :school
   has_many :lessons, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :school_building_teachers
+  has_many :school_buildings, through: :school_building_teachers
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -54,6 +56,10 @@ class Teacher < ApplicationRecord
 
   def inactive
     update_columns(activated: false)
+  end
+
+  def main_school_building
+    school_building_teachers.find_by(main: true)&.school_building
   end
 
   private

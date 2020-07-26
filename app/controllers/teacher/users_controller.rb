@@ -2,17 +2,21 @@
 
 class Teacher::UsersController < Teacher::Base
   def index
-    @users = current_school.users
+    @users = current_school
+             .users
+             .includes(:lesson_groups, lesson_group_users: [:lesson_group])
   end
 
   def new
     @user = User.new
+    @school_building_user = @user.school_building_users.build
   end
 
   def create
     @user = current_school.users.new(user_params)
     @user.email = nil if @user.email == ''
-    if @user.save
+    @school_building_user = @user.school_building_users.new(school_building_user_params)
+    if @user.save && @school_building_user.save
       flash[:success] = "#{@user.name}を作成しました"
       redirect_to new_teacher_user_path
     else
@@ -54,5 +58,11 @@ class Teacher::UsersController < Teacher::Base
       :password,
       :password_confirmation
     )
+  end
+
+  def school_building_user_params
+    params.require(:user).permit(
+      school_building_user: [:school_building_id]
+    )[:school_building_user]
   end
 end

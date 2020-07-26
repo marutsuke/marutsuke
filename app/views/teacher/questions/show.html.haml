@@ -1,6 +1,7 @@
 = @question.title
 = @question.text
-= image_tag @question&.image_url, alt: @question.title
+- if @question&.image_url
+  = image_tag @question.image_url, alt: @question.title
 
 -# 本当はユーザーごとに提出した答え一覧を表示したい。
 -# lesson.users.each ... みたいな。

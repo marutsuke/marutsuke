@@ -1,10 +1,10 @@
 ja:
   activerecord:
     models:
-      lesson: 授業・講座
+      lesson: 授業
     attributes:
       lesson:
-        name: 授業・講座名
+        name: 授業名
         start_at: 開始日時
         start_at_date: 開始日時
         end_at: 課題提出停止日時

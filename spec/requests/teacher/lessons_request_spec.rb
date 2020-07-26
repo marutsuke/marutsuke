@@ -44,6 +44,7 @@ RSpec.describe 'Teacher::Lessons', type: :request do
 
   describe '/teacher/lessons#create' do
     let(:teacher) { create(:teacher) }
+    let(:lesson_group) { create(:lesson_group) }
     let(:lesson_params) do
       {
         name: 'テスト',
@@ -53,7 +54,8 @@ RSpec.describe 'Teacher::Lessons', type: :request do
         end_at_date: '2021-02-01',
         end_at_hour: '12',
         end_at_min: '30',
-        teacher_id: teacher.id
+        teacher_id: teacher.id,
+        lesson_group_id: lesson_group.id
       }
     end
     it '講座を作成できる' do
@@ -61,7 +63,7 @@ RSpec.describe 'Teacher::Lessons', type: :request do
         post teacher_lessons_path, params: { lesson: lesson_params }
       end.to change(Lesson, :count).by(1)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to new_teacher_lesson_path
+      expect(response).to redirect_to edit_teacher_lesson_group_path(lesson_group)
     end
     it '名前がないと作成できない' do
       lesson_params[:name] = ''
@@ -70,20 +72,6 @@ RSpec.describe 'Teacher::Lessons', type: :request do
       end.to change(Lesson, :count).by(0)
       expect(response).to have_http_status(200)
       expect(response.body).to include('を入力してください。')
-    end
-
-    context 'tagの登録' do
-      let!(:tag_1) { create(:tag, name: 'tag1', school: teacher.school) }
-      let!(:tag_2) { create(:tag, name: 'tag2', school: teacher.school) }
-      let!(:tag_3) { create(:tag, name: 'tag3', school: teacher.school) }
-      it 'タグを登録' do
-        lesson_params[:tag_ids] = [tag_1.id, tag_2.id]
-        expect do
-          post teacher_lessons_path, params: { lesson: lesson_params }
-        end.to change(Lesson, :count).by(1).and change(LessonTag, :count).by(2)
-
-        expect(response).to have_http_status(302)
-      end
     end
   end
 

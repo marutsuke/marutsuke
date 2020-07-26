@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   root 'lessons#index' # テスト済み
 
@@ -24,23 +22,31 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み
     delete '/logout', to: 'sessions#destroy' # テスト済み
-    resources :users, only: %i[index new create show edit update] # テスト済み show, editはまだ
+    resources :users, only: %i[index new create show edit update] do
+      resources :school_building_users, only: %i[new create destroy]
+      resources :lesson_group_users, only: %i[new create destroy]
+    end
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
-    resources :teachers, only: %i[index new create edit update] do # index, edit, update以外テスト済み
+    resources :teachers, only: %i[index new create edit update show] do # index, edit, update以外テスト済み
       member do
         post :resend_activation_mail
       end
+      resources :school_building_teachers, only: %i[new create destroy]
     end
-    resources :lessons, only: %i[index show new create] # テスト済み
+    resources :lessons, only: %i[index show new create] do # テスト済み
+      resources :answer_checks, only: [] do
+        get :checking, on: :collection
+      end
+      resources :questions, only: :new
+    end
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
-    resources :tags, only: %i[new create]
-    resources :user_tags, only: %i[create]
-    get '/tags', to: 'tags#new'
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[create] # テスト済み
+    resources :school_buildings, only: %i[index new create]
+    resources :lesson_groups, only: %i[index new show create edit update]
   end
 
   namespace :admin do

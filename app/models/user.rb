@@ -9,7 +9,7 @@ class User < ApplicationRecord
   before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 12 }
   validates :login_id, presence: true
-  validates :login_id, uniqueness: { scope: :school_id }
+  validates :login_id, uniqueness: { scope: :school_id, case_sensitive: true }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
@@ -19,9 +19,13 @@ class User < ApplicationRecord
 
   belongs_to :school
   has_many :answers
-  has_many :user_tags
-  has_many :tags, through: :user_tags
   has_many :question_statuses
+  has_many :questions, through: :question_statuses
+  has_many :school_building_users
+  has_many :school_buildings, through: :school_building_users
+  has_many :lesson_group_users
+  has_many :lesson_groups, through: :lesson_group_users
+  accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -47,20 +51,9 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def tagged_for?(tag)
-    user_tags.exists?(tag_id: tag.id)
+  def main_school_building
+    school_building_users.find_by(main: true)&.school_building
   end
-
-  # タグで判定するそのlessonnに出席可能なuser
-  # lessonが持ってるタグを全て持っているユーザーに絞る
-  scope :attendees_at, lambda { |lesson|
-    return lesson.school.users if lesson.tags.empty?
-
-    tags = lesson.tags
-    user_having_tag_list_array = tags.map { |tag| tag.users.pluck(:id) }
-    required_user_ids = user_having_tag_list_array.inject(:&)
-    where(id: required_user_ids)
-  }
 
   private
 
