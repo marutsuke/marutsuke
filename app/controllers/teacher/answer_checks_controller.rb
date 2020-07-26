@@ -34,7 +34,8 @@ class Teacher::AnswerChecksController < Teacher::Base
 
   def active_page_check
     return if @question_status
-
+    # ロールバーの警告など入れたい
+    flash[:warning] = '答案が見つかりませんでした'
     redirect_to teacher_lessons_path
   end
 
