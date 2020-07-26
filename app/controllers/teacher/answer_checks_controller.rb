@@ -57,9 +57,11 @@ class Teacher::AnswerChecksController < Teacher::Base
         )
     end
     if @back_lesson_exist = current_lesson_index > 0
+      back_lesson = Lesson.find(@lessons_ids[current_lesson_index - 1])
+      back_lesson_page = QuestionStatus.order_by_question_order_at(back_lesson).size
       @back_lesson_path =
         checking_teacher_lesson_answer_checks_path(
-          lesson_id: @lessons_ids[current_lesson_index - 1]
+          lesson_id: @lessons_ids[current_lesson_index - 1], page: back_lesson_page
         )
     end
   end
