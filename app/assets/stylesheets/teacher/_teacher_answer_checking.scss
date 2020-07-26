@@ -1,3 +1,5 @@
+@import "./import";
+
 .answer_groups {
   max-width: 1200px;
   min-width: 800px;
@@ -94,6 +96,6 @@
   &__submit_btn {
     height: 32px;
     width: 72px;
-    background-color: blue;
+    background-color: $blue_4;
   }
 }
