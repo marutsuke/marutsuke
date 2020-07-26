@@ -33,9 +33,15 @@
               = f.submit '送信', class: 'answer_check_form__submit_btn'
 
     .answer_check_form_button_area
-      - if @back_answer_exist
-        .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path
-      - if @next_answer_exist
-        .answer_checking_next__link= link_to '次の解答へ', @next_answer_path
-      - if @next_lesson_exist
-        .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path
+      .answer_check_page_buttons
+        - if @back_answer_exist
+          .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path, class: 'answer_check_page_buttons__for_answer'
+        - else
+          - if @back_lesson_exist
+            .answer_checking_next__link= link_to '前の授業へ', @back_lesson_path, class: 'answer_check_page_buttons__for_lesson'
+      .answer_check_page_buttons
+        - if @next_answer_exist
+          .answer_checking_next__link= link_to '次の解答へ', @next_answer_path, class: 'answer_check_page_buttons__for_answer'
+        - else
+          - if @next_lesson_exist
+            .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path, class: 'answer_check_page_buttons__for_lesson'

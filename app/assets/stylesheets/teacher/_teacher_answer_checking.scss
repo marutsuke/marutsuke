@@ -74,11 +74,12 @@
     margin-top: 8px;
   }
   &__evaluation_radio_btn {
-    height: 24px;
-    width: 16px;
+    height: 18px;
+    width: 18px;
     display: flex;
     align-items: center;
     margin-right: 4px;
+    margin-left: 8px;
     &:checked + label {
       font-weight: bold;
     }
@@ -86,7 +87,7 @@
   &__evaluation_label {
     font-size: 18px;
     line-height: 24px;
-    margin: 0;
+    margin: 0 8px 0 0;
   }
   &__submit {
     display: flex;
@@ -101,5 +102,43 @@
     box-shadow: 1px 1px #000910;
     background-color: $blue_0;
     color: white;
+  }
+}
+.answer_check_form_button_area {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 120px;
+}
+.answer_check_page_buttons {
+  &__for_answer {
+    display: block;
+    border: 1px solid $blue_0;
+    border-radius: 4px;
+    width: 96px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    color: $blue_0;
+    &:hover {
+      opacity: 0.6;
+      color: $blue_0;
+      text-decoration: none;
+    }
+  }
+  &__for_lesson {
+    display: block;
+    background-color: $blue_0;
+    border-radius: 4px;
+    width: 96px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    color: white;
+    box-shadow: 1px 1px #000910;
+    &:hover {
+      opacity: 0.6;
+      color: $white;
+      text-decoration: none;
+    }
   }
 }

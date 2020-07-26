@@ -1,12 +1,17 @@
 class Teacher::AnswerChecksController < Teacher::Base
-  before_action :set_lesson,
-                :set_page,
+  before_action :set_page,
+                :set_lesson,
                 :set_question_and_answers,
                 :active_page_check,
-                :set_page_paths
+                :set_answer_page_paths,
+                :set_lesson_page_paths
 
   def checking
     @comment = current_teacher.comments.new
+  end
+
+  def check
+
   end
 
   private
@@ -33,20 +38,29 @@ class Teacher::AnswerChecksController < Teacher::Base
     redirect_to teacher_lessons_path
   end
 
-  def set_page_paths
+  def set_answer_page_paths
     @next_answer_path = checking_teacher_lesson_answer_checks_path(lesson_id: @lesson.id, page: @page + 1)
     @back_answer_path = checking_teacher_lesson_answer_checks_path(lesson_id: @lesson.id, page: @page - 1)
 
-    @next_lessons_ids =
-      current_teacher.lessons.to_check.pluck(:id) -
-      [@lesson.id]
-      if @next_lesson_exist = @next_lessons_ids.present?
-        @next_lesson_path =
-          checking_teacher_lesson_answer_checks_path(
-            lesson_id: @next_lessons_ids.first
-          )
-      end
     @next_answer_exist = @page < @question_statuses.size
     @back_answer_exist = @page > 1
+  end
+
+  def set_lesson_page_paths
+    @lessons_ids =
+      current_teacher.lessons.to_check.pluck(:id).uniq
+    current_lesson_index = @lessons_ids.index(@lesson.id)
+    if @next_lesson_exist = @lessons_ids[current_lesson_index + 1].present?
+      @next_lesson_path =
+        checking_teacher_lesson_answer_checks_path(
+          lesson_id: @lessons_ids[current_lesson_index + 1]
+        )
+    end
+    if @back_lesson_exist = current_lesson_index > 0
+      @back_lesson_path =
+        checking_teacher_lesson_answer_checks_path(
+          lesson_id: @lessons_ids[current_lesson_index - 1]
+        )
+    end
   end
 end
