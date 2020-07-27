@@ -6,6 +6,10 @@
   &__name {
     font-size: 1.4rem;
     margin-left: 16px;
+    &:link, :visited, :hover, :active {
+      color: $black;
+      @include link($black);
+    }
   }
   &__teacher {
     color: #555555;
