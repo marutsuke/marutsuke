@@ -1,0 +1,7 @@
+ja:
+  activemodel:
+    attributes:
+      teacher/answer_check_form:
+        text: 本文
+        evaluation: 評価
+        image: 画像

@@ -7,14 +7,28 @@ class Teacher::AnswerChecksController < Teacher::Base
                 :set_lesson_page_paths
 
   def checking
-    @comment = current_teacher.comments.new
+    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, nil)
   end
 
   def check
-
+    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, answer_check_params)
+    if @answer_check_form.save
+      redirect_after_check
+    else
+      render :checking
+    end
   end
 
   private
+
+  def answer_check_params
+    params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
+  end
+
+  def redirect_after_check
+    # TODO: 仮実装。解答がなくなった時の処理などを書きたい。
+    redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id])
+  end
 
   def set_page
     @page = params[:page]&.to_i || 1
