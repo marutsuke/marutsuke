@@ -32,7 +32,7 @@ class Teacher::AnswerCheckForm
   end
 
   def comment
-    @comment ||= @teacher&.comments.new(text: text, image: image, teacher_id: @teacher.id, answer_id: answer_id)
+    @comment ||= @teacher&.comments.new(text: text, image: image, teacher_id: @teacher.id, answer_id: answer_id, evaluation: evaluation)
   end
 
   private
