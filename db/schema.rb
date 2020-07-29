@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_22_170240) do
+ActiveRecord::Schema.define(version: 2020_07_29_154600) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_07_22_170240) do
     t.string "image"
     t.bigint "teacher_id"
     t.bigint "answer_id"
+    t.integer "evaluation", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_comments_on_answer_id"
