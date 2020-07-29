@@ -32,6 +32,12 @@
                 = f.radio_button :evaluation, :submit_again, class: 'answer_check_form_evaluation_radio_btn', id: "teacher_answer_check_form_evaluation_submit_again--#{i}"
                 = f.label "evaluation_submit_again--#{i}", QuestionStatus.statuses_i18n[:submit_again], class: 'answer_check_form__evaluation_label'
             = f.hidden_field :answer_id, value: answer.id
+            - if @next_answer_exist
+              =hidden_field_tag :next_answer_page, @page, {}
+            - else
+              - if @next_lesson_exist
+                =hidden_field_tag :next_lesson_id, @next_lesson_id, {}
+
             .answer_check_form__submit
               = f.submit '送信', class: 'answer_check_form__submit_btn'
 
