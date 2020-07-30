@@ -29,11 +29,16 @@ class Teacher::AnswerChecksController < Teacher::Base
   def redirect_after_check
     # TODO: 仮実装。解答がなくなった時の処理などを書きたい。
     flash[:success] = "コメント作成に成功しました。"
-      if params[:next_lesson_id]
-      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:next_lesson_id])
+    if next_lesson_id = params[:next_lesson_id]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: next_lesson_id)
     elsif page = params[:next_answer_page]
-      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id], page: page.to_i + 1)
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id], page: page.to_i)
+    elsif page = params[:back_answer_page]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id], page: page.to_i)
+    elsif back_lesson_id = params[:back_lesson_id]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: back_lesson_id)
     else
+      flash[:success] = "全ての提出課題にコメントしました。"
       redirect_to teacher_path
     end
   end
@@ -47,8 +52,7 @@ class Teacher::AnswerChecksController < Teacher::Base
   end
 
   def set_question_and_answers
-    @question_statuses =
-      QuestionStatus.order_by_question_order_at(@lesson)
+    @question_statuses = @lesson.question_statuses_to_check
     @question_status = @question_statuses[@page - 1]
     @question = @question_status&.question
     @answers = @question_status&.answers&.new_order
@@ -81,8 +85,9 @@ class Teacher::AnswerChecksController < Teacher::Base
         )
     end
     if @back_lesson_exist = current_lesson_index > 0
-      back_lesson = Lesson.find(@lessons_ids[current_lesson_index - 1])
-      back_lesson_page = QuestionStatus.order_by_question_order_at(back_lesson).size
+      @back_lesson_id = @lessons_ids[current_lesson_index - 1]
+      back_lesson = Lesson.find(@back_lesson_id)
+      back_lesson_page = back_lesson.question_statuses_to_check.size
       @back_lesson_path =
         checking_teacher_lesson_answer_checks_path(
           lesson_id: @lessons_ids[current_lesson_index - 1], page: back_lesson_page

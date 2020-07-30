@@ -74,6 +74,10 @@ class Lesson < ApplicationRecord
     questions.checking_distinct.first
   end
 
+  def question_statuses_to_check
+    QuestionStatus.checking.order_by_question_order_at(self)
+  end
+
   private
 
   def start_at_set
