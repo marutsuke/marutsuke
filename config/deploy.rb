@@ -2,7 +2,7 @@
 lock '3.14.1'
 
 set :application, "marutsuke"
-set :repo_url, "https://github.com/marutsuke/marutsuke.git"
+set :repo_url, "git@github.com:shoichinishiguchi/marutsuke.git"
 set :linked_files, %w{config/master.key}
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
