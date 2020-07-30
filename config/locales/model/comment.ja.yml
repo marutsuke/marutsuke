@@ -7,3 +7,9 @@ ja:
         text: 本文
         image: 画像
         teacher_id: 教員
+  enums:
+    comment:
+      evaluation:
+        not_submitted: 不明
+        submit_again: 再提出
+        complete: 完了

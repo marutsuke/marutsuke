@@ -7,14 +7,41 @@ class Teacher::AnswerChecksController < Teacher::Base
                 :set_lesson_page_paths
 
   def checking
-    @comment = current_teacher.comments.new
+    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, nil)
   end
 
   def check
-
+    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, answer_check_params)
+    if @answer_check_form.save
+      redirect_after_check
+    else
+      flash[:danger] = 'コメントに失敗しました。'
+      render :checking
+    end
   end
 
   private
+
+  def answer_check_params
+    params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
+  end
+
+  def redirect_after_check
+    # TODO: 仮実装。解答がなくなった時の処理などを書きたい。
+    flash[:success] = "コメント作成に成功しました。"
+    if next_lesson_id = params[:next_lesson_id]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: next_lesson_id)
+    elsif page = params[:next_answer_page]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id], page: page.to_i)
+    elsif page = params[:back_answer_page]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: params[:lesson_id], page: page.to_i)
+    elsif back_lesson_id = params[:back_lesson_id]
+      redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: back_lesson_id)
+    else
+      flash[:success] = "全ての提出課題にコメントしました。"
+      redirect_to teacher_path
+    end
+  end
 
   def set_page
     @page = params[:page]&.to_i || 1
@@ -25,8 +52,7 @@ class Teacher::AnswerChecksController < Teacher::Base
   end
 
   def set_question_and_answers
-    @question_statuses =
-      QuestionStatus.order_by_question_order_at(@lesson)
+    @question_statuses = @lesson.question_statuses_to_check
     @question_status = @question_statuses[@page - 1]
     @question = @question_status&.question
     @answers = @question_status&.answers&.new_order
@@ -50,16 +76,18 @@ class Teacher::AnswerChecksController < Teacher::Base
   def set_lesson_page_paths
     @lessons_ids =
       current_teacher.lessons.to_check.pluck(:id).uniq
-    current_lesson_index = @lessons_ids.index(@lesson.id)
+    current_lesson_index = @lessons_ids.index(@lesson.id) || 0
     if @next_lesson_exist = @lessons_ids[current_lesson_index + 1].present?
+      @next_lesson_id = @lessons_ids[current_lesson_index + 1]
       @next_lesson_path =
         checking_teacher_lesson_answer_checks_path(
-          lesson_id: @lessons_ids[current_lesson_index + 1]
+          lesson_id: @next_lesson_id
         )
     end
     if @back_lesson_exist = current_lesson_index > 0
-      back_lesson = Lesson.find(@lessons_ids[current_lesson_index - 1])
-      back_lesson_page = QuestionStatus.order_by_question_order_at(back_lesson).size
+      @back_lesson_id = @lessons_ids[current_lesson_index - 1]
+      back_lesson = Lesson.find(@back_lesson_id)
+      back_lesson_page = back_lesson.question_statuses_to_check.size
       @back_lesson_path =
         checking_teacher_lesson_answer_checks_path(
           lesson_id: @lessons_ids[current_lesson_index - 1], page: back_lesson_page
