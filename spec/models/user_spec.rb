@@ -41,20 +41,20 @@ RSpec.describe User, type: :model do
       let(:school_2) { create(:school, name: 'test_schol_2') }
       let!(:user) { create(:user, login_id: 'login_id', school: school_1) }
 
-      it '同じ学校で、同じ名前のログインIDは、ダメ' do
-        user_2 = build(:user, login_id: 'login_id', school: school_1)
-        expect(user_2).to_not be_valid
-      end
-      it '違う学校で、同じログインIDは、OK' do
-        user_3 = build(:user, login_id: 'login_id', school: school_2)
-        expect(user_3).to be_valid
-      end
+      # it '同じ学校で、同じ名前のログインIDは、ダメ' do
+      #   user_2 = build(:user, login_id: 'login_id', school: school_1)
+      #   expect(user_2).to_not be_valid
+      # end
+      # it '違う学校で、同じログインIDは、OK' do
+      #   user_3 = build(:user, login_id: 'login_id', school: school_2)
+      #   expect(user_3).to be_valid
+      # end
     end
   end
   it { is_expected.to have_secure_password }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:school) }
+    it { is_expected.to have_many(:school_users) }
   end
   describe 'before_save' do
     describe '#email_downcase' do
