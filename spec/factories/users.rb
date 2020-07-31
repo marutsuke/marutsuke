@@ -9,6 +9,5 @@ FactoryBot.define do
     start_at { 1.day.ago }
     end_at { 1.year.since }
     activated {  true }
-    association :school, factory: [:school]
   end
 end
