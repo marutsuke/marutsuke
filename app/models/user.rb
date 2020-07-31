@@ -17,7 +17,6 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, on: :create
   has_secure_password
 
-  belongs_to :school
   has_many :answers
   has_many :question_statuses
   has_many :questions, through: :question_statuses
