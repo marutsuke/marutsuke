@@ -52,8 +52,8 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def main_school_building
-    school_building_users.find_by(main: true)&.school_building
+  def main_school_building(school)
+    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true)).first
   end
 
   private
