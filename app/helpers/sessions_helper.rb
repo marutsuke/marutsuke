@@ -5,9 +5,11 @@ module SessionsHelper
     session[:teacher_id] = teacher.id
   end
 
-  def user_log_in(user)
+  def user_log_in(user, school)
+    return unless user.school_ids.include?(school.id)
+
     session[:user_id] = user.id
-    cookies.permanent.signed[:school_id] = user.school.id
+    cookies.permanent.signed[:school_id] = school.id
   end
 
   def remember_user(user)
@@ -41,7 +43,7 @@ module SessionsHelper
   end
 
   def current_school
-    current_user&.school
+    current_user.schools.find_by(id: cookies.signed[:school_id])
   end
 
   def store_location

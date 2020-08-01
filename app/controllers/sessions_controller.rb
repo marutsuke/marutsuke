@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     @school = School.find_by(login_path: session_params[:school_login_path])
     user = search_user_from_email_or_login_id(@school)
     if user&.authenticate(session_params[:password])
-      user_log_in(user)
+      user_log_in(user, @school)
       login_count_up(user)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       flash[:success] = "#{user.name}さん、こんにちは!"
