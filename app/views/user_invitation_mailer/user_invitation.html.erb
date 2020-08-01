@@ -1,5 +1,4 @@
-<h1>UserInvitation#user_invitation</h1>
+%p= "#{ @school_user.school.name }への招待が届いています"
+%br 参加する場合は、以下よりアクセスをしましょう！
 
-<p>
-  <%= @greeting %>, find me in app/views/user_invitation_mailer/user_invitation.html.erb
-</p>
+= link_to 'ここをクリック', edit_teacher_account_activation_url(@teacher.teacher_activation_token, email: @teacher.email)

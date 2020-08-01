@@ -5,9 +5,8 @@ class UserInvitationMailer < ApplicationMailer
   #
   #   en.user_invitation_mailer.user_invitation.subject
   #
-  def user_invitation
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def user_invitation(school_user)
+    @school_user = school_user
+    mail to: school_user.email, subject: "[Marutsuke]#{school.name}への招待メール"
   end
 end
