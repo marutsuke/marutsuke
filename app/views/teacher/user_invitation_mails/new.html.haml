@@ -1,5 +1,6 @@
 .user_invitation_form
   =form_with model: @school_user, url: teacher_user_invitation_mails_path, local: true do |f|
+    = render 'shared/error_messages', model_object: f.object
     = f.label :email, '招待するユーザーのメールアドレス'
     = f.email_field :email
     = f.submit '招待する'
