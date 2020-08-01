@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 module RequestSpecHelper
-  def user_log_in(user = nil)
+  def user_log_in(user = nil, school = nil)
     user ||= create(:user)
-    session_params = { email_or_login_id: user.email, password: user.password, school_login_path: user.school.login_path }
-    post login_post_path(user.school.login_path), params: { session: session_params }
+    school ||= user.schools.first
+    session_params = { email_or_login_id: user.email, password: user.password, school_login_path: school.login_path }
+    post login_post_path(school.login_path), params: { session: session_params }
   end
 
   def user_log_out
