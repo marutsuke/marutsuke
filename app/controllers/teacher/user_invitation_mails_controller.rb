@@ -6,11 +6,19 @@ class Teacher::UserInvitationMailsController < Teacher::Base
 
   def create
     @school_user = current_school.school_users.new(school_user_params)
-    if user = User.find_by(@school_user.email)
-      @teacher.resend_activation_mail
-      flash[:success] = "#{@teacher.name}のアドレス宛にアカウント承認メールを送りました。ご確認ください。"
-      redirect_to teacher_path
+    if @school_user.save
+      if user = User.find_by(email: @school_user.email)
+        @school_user.send_user_invitation
+        flash[:success] = "#{@school_user.email}宛に招待メールを送りました。"
+        @school_user.update(user_id: user.id)
+        redirect_to teacher_users_path
+      else
+        flash[:success] = "#{@school_user.email}宛に新規登録案内 & 招待メールを送りました。"
+        @school_user.send_new_user_invitation
+        redirect_to teacher_users_path
+      end
     else
+      render :new
     end
   end
 
