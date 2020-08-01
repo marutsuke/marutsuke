@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create] # テスト済み
     resources :school_buildings, only: %i[index new create]
     resources :lesson_groups, only: %i[index new show create edit update]
+    resources :user_invitation_mails, only: %i[new create]
   end
 
   namespace :admin do
