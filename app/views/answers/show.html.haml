@@ -3,3 +3,8 @@
 
 -# TO DO ここに提出済みの解答を表示する
 answers#show
+.question_title= @answer.question.title
+.mt24= @answer.text
+.mt16
+  -@answer.answer_images.each_with_index do |image, i|
+    = image_tag image.image_url, alt: "解答画像#{i}"

@@ -14,7 +14,7 @@
       - @answers.each do |answer|
         .comment_area__container
           .comment_area__submitted_at
-            =link_to "#{answer.decorate.submitted_at} 提出済み", question_answer_path(answer)
+            =link_to "#{answer.decorate.submitted_at} 提出済み", answer_path(answer)
           - answer.comments.each do |comment|
             .comment_area__comment_body
               .comment_area__comment_text= "#{comment.text}"
