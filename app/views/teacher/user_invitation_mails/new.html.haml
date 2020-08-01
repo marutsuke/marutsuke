@@ -1,3 +1,5 @@
-=form_with model: @school_user, url: teacher_user_invitation_mails_path, local: true do
-  = f.email_field :email
-  =f.submit '招待する'
+.user_invitation_form
+  =form_with model: @school_user, url: teacher_user_invitation_mails_path, local: true do |f|
+    = f.label :email, '招待するユーザーのメールアドレス'
+    = f.email_field :email
+    = f.submit '招待する'
