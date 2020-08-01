@@ -14,7 +14,23 @@ class SchoolUser < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def send_user_invitation
+    UserInvitationMailer.user_invitation(self).deliver_now
+  end
+
+  def send_new_user_invitation
+    UserInvitationMailer.new_user_invitation(self).deliver_now
+  end
+
   private
+
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def create_activation_digest
     self.school_user_activation_token = self.class.new_token
