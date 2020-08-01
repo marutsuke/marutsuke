@@ -1,0 +1,4 @@
+= "#{ @school_user.school.name }への招待が届いています"
+\参加する場合は、以下より新規登録をしましょう！
+
+= new_school_user_activation_url(token: @school_user.school_user_activation_token, email: @school_user.email)
