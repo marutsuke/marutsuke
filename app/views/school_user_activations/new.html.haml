@@ -2,8 +2,9 @@
   .user_form_session__logo
     =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
   .user_form_session__container
-    .user_form_session__title= "#{ @school.name }新規登録"  
+    .user_form_session__title= "#{ @school.name }新規登録"
     = form_with model: @new_user_activation_form, url: school_user_activations_path, local: true do |f|
+      =render 'shared/error_messages', model_object: @new_user_activation_form
       .user_form_session__label_and_input
         = f.label :name
         = f.text_field :name
