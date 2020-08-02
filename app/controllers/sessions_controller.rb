@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       flash[:success] = "#{user.name}さん、こんにちは!"
       redirect_back_or root_path
     else
-      flash.now[:danger] = 'ログインに失敗しました。正しいか確認してもう一度お願いします。'
+      flash.now[:danger] = 'ログインに失敗しました。正しいか確認してもう一度ログインをお願いします。'
       render :new
     end
   end
