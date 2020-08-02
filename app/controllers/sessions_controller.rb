@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
 
   def create
     @school = School.find_by(login_path: session_params[:school_login_path])
-    user = search_user_from_email_or_login_id(@school)
+    user = search_user_from_email(@school)
     if user&.authenticate(session_params[:password])
       user_log_in(user, @school)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
@@ -33,14 +33,12 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session)
-          .permit(:password, :email_or_login_id, :school_login_path)
+          .permit(:password, :email, :school_login_path)
   end
 
-  def search_user_from_email_or_login_id(school)
+  def search_user_from_email(school)
     return nil if school.nil?
 
-    user = school.users.find_by(login_id: session_params[:email_or_login_id]) ||
-           school.users.find_by(email: session_params[:email_or_login_id])
-    user
+    user = school.users.find_by(email: session_params[:email])
   end
 end

@@ -7,8 +7,8 @@
       %span>専用ログイン画面
     = form_with scope: :session, url: login_post_path(@school.login_path), local: true do |f|
       .user_form_session__label_and_input
-        = f.label :email_or_login_id, "#{User.human_attribute_name(:email)}または#{User.human_attribute_name(:login_id)}"
-        = f.text_field :email_or_login_id
+        = f.label :email, "#{User.human_attribute_name(:email)}"
+        = f.email_field :email
       .user_form_session__label_and_input
         = f.label :password, User.human_attribute_name(:password), class: 'required'
         = f.password_field :password

@@ -48,7 +48,6 @@ class Teacher::UsersController < Teacher::Base
     params.require(:user).permit(
       :name,
       :email,
-      :login_id,
       :start_at_date,
       :start_at_hour,
       :start_at_min,
