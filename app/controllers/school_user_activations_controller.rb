@@ -32,11 +32,16 @@ class SchoolUserActivationsController < ApplicationController
 
   def create
     @new_user_activation_form = NewUserActivationForm.new(@school_user, new_user_activation_form_params)
+    @school = @school_user.school
+    @token = @new_user_activation_form.school_user_activation_token
+
     if @new_user_activation_form.save
       user = @school_user.user
       user_log_in(user, @school_user.school)
       params[:remember_me] == '1' ? remember_user(user) : forget_user(user)
-      flash[:success] = "#{school.name}へ参加しました!"
+      @school_user.activate
+      user_log_in(user, @school)
+      flash[:success] = "#{@school.name}へ参加しました!"
       redirect_to root_path
     else
       render :new
