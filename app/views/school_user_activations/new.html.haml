@@ -1,0 +1,21 @@
+.user_form_session
+  .user_form_session__logo
+    =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
+  .user_form_session__container
+    .user_form_session__title= "#{ @school.name }新規登録"  
+    = form_with model: @new_user_activation_form, url: school_user_activations_path, local: true do |f|
+      .user_form_session__label_and_input
+        = f.label :name
+        = f.text_field :name
+      .user_form_session__label_and_input
+        = f.label :password
+        = f.password_field :password
+      .user_form_session__label_and_input
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+        = f.hidden_field :school_user_activation_token, value: @token
+      .user_form_session__label_and_input--checkbox
+        = check_box_tag :remember_me
+        = label_tag :remember_me, '次回から自動的にログイン'
+        = hidden_field_tag :school_user_id, @school_user.id
+      = f.submit '登録', class: 'user_form_session__submit_btn mt32'
