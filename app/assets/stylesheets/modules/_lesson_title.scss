@@ -1,11 +1,15 @@
-.lesson_show_for_user_header {
+.lesson_title {
   padding: 8px 0;
   border-bottom: 1px solid #999999;
   max-width: 800px;
   margin: 0 auto;
   &__name {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-left: 16px;
+    &:link, :visited, :hover, :active {
+      color: $black;
+      @include link($black);
+    }
   }
   &__teacher {
     color: #555555;

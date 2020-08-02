@@ -1,0 +1,41 @@
+#modal-open, #modal-close {
+  cursor: pointer;
+}
+
+#modal-mask {
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#modal {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  z-index: 2;
+  transition: 0.4s;
+  position: fixed;
+  img {
+    display: block;
+    max-width: 100%;
+    min-width: 280px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(50%) translateY(50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+#modal-mask.hidden {
+  display: none;
+}
+
+#modal.hidden {
+  display: none;
+}

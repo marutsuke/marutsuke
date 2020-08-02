@@ -1,6 +1,10 @@
 @mixin link($color) {
-  &:link, :visited, :hover, :active {
+  &:link, &:visited, &:hover, &:active {
     color: $color;
     text-decoration: none;
+    transition: .2s;
+  }
+  &:hover {
+    color: lighten($color, 10%);
   }
 }

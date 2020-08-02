@@ -1,0 +1,23 @@
+.kadomaru-button {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 8px;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+  &--pk-wh {
+    @extend .kadomaru-button;
+    background-color: $pink_2;
+    color: #ffffff;
+    transition: .5s;
+    &:hover {
+      background-color: darken($pink_2, 5%);
+      color: #ffffff;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-class Teacher::CommentDecorator < ApplicationDecorator
+class CommentDecorator < Draper::Decorator
   delegate_all
 
   def updated_at
@@ -10,6 +10,6 @@ class Teacher::CommentDecorator < ApplicationDecorator
   end
 
   def time_format(time)
-    Time.parse(time).strftime("%m/%d(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
+    Time.parse(time).strftime("%-m/%-d(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
   end
 end

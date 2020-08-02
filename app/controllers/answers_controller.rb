@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class AnswersController < ApplicationController
+
+  def new
+    @question = Question.find(params[:question_id])
+    @lesson = current_school&.lessons&.find(@question.lesson_id)
+    @answer = current_user.answers.new
+  end
+
+  def show
+    @answer = current_user.answers.find(params[:id])
+    @question = @answer.question
+    @lesson = @question.lesson
+  end
+
   def create
     @answer = current_user.answers.new(answer_params)
     if @answer.save
