@@ -4,7 +4,7 @@ class SchoolUser < ApplicationRecord
   before_create :create_activation_digest
   belongs_to :user, optional: true
   belongs_to :school
-  validates :user_id, uniqueness: { scope: :school_id, case_sensitive: true }
+  validates :user_id, uniqueness: { scope: :school_id, case_sensitive: true }, allow_blank: true
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { scope: :school_id, case_sensitive: false },
