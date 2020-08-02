@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SchoolUser, type: :model do
   describe 'Associations' do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user).optional }
     it { is_expected.to belong_to(:school) }
   end
   describe 'user_unique_scope_school_building' do
