@@ -23,6 +23,6 @@ class Teacher::UserInvitationMailsController < Teacher::Base
   end
 
   def school_user_params
-    params.require(:school_user).permit(:email)
+    params.require(:school_user).permit(:email, :invited_school_building_id)
   end
 end

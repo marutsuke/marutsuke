@@ -9,6 +9,7 @@ class SchoolUser < ApplicationRecord
                     length: { maximum: 50 },
                     uniqueness: { scope: :school_id, case_sensitive: false },
                     allow_blank: true
+  validates :invited_school_building_id, presence: true
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
