@@ -48,15 +48,6 @@ RSpec.describe 'SessionsController', type: :request do
       expect(session[:user_id]).to eq user.id
     end
 
-    it 'ログインIDでログインできる' do
-      session_params[:email] = user.login_id
-      post login_post_path(school.login_path), params: { session: session_params }
-      expect(response).to have_http_status(302)
-      follow_redirect!
-      expect(response.body).to include("#{user.name}さん")
-      expect(session[:user_id]).to eq user.id
-    end
-
     it '他校の生徒は、ログインできない' do
       session_params[:email] = user.email
       session_params[:school_login_path] = another_school.login_path
@@ -69,7 +60,7 @@ RSpec.describe 'SessionsController', type: :request do
   describe '/logout#destroy ' do
     let(:user) { create(:user) }
     let(:school) { user.schools.first }
-    let(:session_params) { { email: user.login_id, password: user.password, school_login_path: school.login_path } }
+    let(:session_params) { { email: user.email, password: user.password, school_login_path: school.login_path } }
 
     it 'remember meしないでログイン・ログアウトできる' do
       session_params[:remember_me] = '0'
