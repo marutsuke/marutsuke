@@ -8,7 +8,8 @@ class User < ApplicationRecord
   before_save { start_at_set }
   before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 12 }
-  validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
+  validates :email, presence: true,
+                    format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
