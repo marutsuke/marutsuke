@@ -20,8 +20,8 @@
         = f.text_area :text, required: true, class: 'user_answer_form__input', placeholder: '解答を入力してください'
         = f.hidden_field :question_id, value: @question.id
 
-  # .user_answer_form__past_answers
-  #   - current_user&.answers&.where(question_id: @question.id)&.each do |answer|
-  #     .taaaaaaa= answer.text
-  #     - answer&.answer_images&.each do |image|
-  #       .answer_image= image_tag image&.image_url, alt: '解答画像'
+.user_answer_form__past_answers
+  - current_user&.answers&.where(question_id: @question.id)&.each do |answer|
+    .taaaaaaa= answer.text
+    - answer&.answer_images&.each do |image|
+      .answer_image= image_tag image&.image_url, alt: '解答画像'
