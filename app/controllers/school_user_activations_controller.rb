@@ -1,10 +1,10 @@
 class SchoolUserActivationsController < ApplicationController
   def edit
-    @school_user = SchoolUser.find_by(email: params[:email])
+    @school_user = SchoolUser.find(params[:id])
     user = @school_user.user
     school = @school_user.school
 
-    if @school_user&.authenticated?(:activation, params[:id]) && @school_user.activated_at.nil?
+    if @school_user&.authenticated?(:activation, params[:token]) && @school_user.activated_at.nil?
       @school_user.activate
       user_log_in(user, school)
       flash[:success] = "#{school.name}へ参加しました"
