@@ -2,8 +2,9 @@
   &:link, &:visited, &:hover, &:active {
     color: $color;
     text-decoration: none;
+    transition: .2s;
   }
   &:hover {
-    text-decoration: underline;
+    color: lighten($color, 10%);
   }
 }
