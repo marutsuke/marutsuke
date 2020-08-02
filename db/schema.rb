@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_115617) do
+ActiveRecord::Schema.define(version: 2020_08_02_120213) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -183,13 +183,10 @@ ActiveRecord::Schema.define(version: 2020_08_02_115617) do
     t.datetime "end_at"
     t.boolean "activated", default: true, null: false
     t.string "remember_digest"
-    t.bigint "school_id"
     t.index ["email"], name: "index_users_on_email"
-    t.index ["school_id"], name: "index_users_on_school_id"
   end
 
   add_foreign_key "lessons", "schools"
   add_foreign_key "lessons", "teachers"
   add_foreign_key "teachers", "schools"
-  add_foreign_key "users", "schools"
 end
