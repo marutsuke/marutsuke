@@ -1,9 +1,8 @@
-=link_to '生徒新規作成', new_teacher_user_path
+=link_to '生徒を招待する', new_teacher_user_invitation_mail_path
 %hr
 %table.users_account_table.ml24
   %thead.users_account_table__thead
     %th.users_account_table__th= User.human_attribute_name(:name)
-    %th.users_account_table__th= User.human_attribute_name(:login_id)
     %th.users_account_table__th= User.human_attribute_name(:email)
     %th.users_account_table__th= User.human_attribute_name(:start_at)
     %th.users_account_table__th= User.human_attribute_name(:end_at)
@@ -12,7 +11,6 @@
   - @users.each do |user|
     %tr.users_account_table__tr
       %td.users_account_table__tr= link_to user.name, teacher_user_path(user)
-      %td.users_account_table__tr= user.login_id
       %td.users_account_table__tr= user.decorate.email
       %td.users_account_table__tr= user.decorate.start_at
       %td.users_account_table__tr= user.decorate.end_at

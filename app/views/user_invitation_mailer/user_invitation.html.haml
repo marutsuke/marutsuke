@@ -1,0 +1,6 @@
+%p= "#{@school_user.user.name}さん"
+
+%p= "#{ @school_user.school.name }への招待が届いています"
+%br 参加する場合は、以下よりアクセスをしましょう！
+
+= link_to 'ここをクリック', edit_school_user_activation_url(@school_user, token: @school_user.school_user_activation_token)

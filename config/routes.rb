@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get :mypage # テスト済み
     end
   end
+  resources :school_user_activations, only: %i[edit new create]
 
   namespace :teacher do
     get '', to: 'lessons#index' # テスト済み
@@ -43,12 +44,6 @@ Rails.application.routes.draw do
       resources :questions, only: :new
     end
 
-    # resources :answers, only: [] do
-    #   resources :answer_checks, only: [] do
-    #     post :check, on: :collection
-    #   end
-    # end
-
     resources :questions, only: %i[create show] # createテスト済み
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
@@ -56,6 +51,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create] # テスト済み
     resources :school_buildings, only: %i[index new create]
     resources :lesson_groups, only: %i[index new show create edit update]
+    resources :user_invitation_mails, only: %i[new create]
   end
 
   namespace :admin do

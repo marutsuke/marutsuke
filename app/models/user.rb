@@ -8,21 +8,21 @@ class User < ApplicationRecord
   before_save { start_at_set }
   before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 12 }
-  validates :login_id, presence: true
-  validates :login_id, uniqueness: { scope: :school_id, case_sensitive: true }
-  validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
+  validates :email, presence: true,
+                    format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
   validates :password, presence: true, length: { minimum: 6 }, on: :create
   has_secure_password
 
-  belongs_to :school
   has_many :answers
   has_many :question_statuses
   has_many :questions, through: :question_statuses
   has_many :school_building_users
   has_many :school_buildings, through: :school_building_users
+  has_many :school_users
+  has_many :schools, through: :school_users
   has_many :lesson_group_users
   has_many :lesson_groups, through: :lesson_group_users
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
@@ -51,8 +51,8 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  def main_school_building
-    school_building_users.find_by(main: true)&.school_building
+  def main_school_building(school)
+    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true)).first
   end
 
   private

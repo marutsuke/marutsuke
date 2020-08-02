@@ -1,0 +1,10 @@
+.user_invitation_form
+  =form_with model: @school_user, url: teacher_user_invitation_mails_path, local: true do |f|
+    = render 'shared/error_messages', model_object: f.object
+    .user_invitation_form__group
+      = f.label :email, '招待するユーザーのメールアドレス'
+      = f.email_field :email
+    .user_invitation_form__group
+      = f.label :invited_school_building_id, '所属校', class: 'required'
+      = f.select :invited_school_building_id, current_teacher.decorate.school_building_select_array, selected: current_teacher.main_school_building
+    = f.submit '招待する'

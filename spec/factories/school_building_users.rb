@@ -5,5 +5,7 @@ FactoryBot.define do
     association :user, factory: [:user]
     association :school_building, factory: [:school_building]
     main  { true }
+
+    trait(:sub) { main { false } }
   end
 end
