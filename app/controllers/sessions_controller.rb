@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
     user = search_user_from_email_or_login_id(@school)
     if user&.authenticate(session_params[:password])
       user_log_in(user, @school)
-      login_count_up(user)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       flash[:success] = "#{user.name}さん、こんにちは!"
       redirect_back_or root_path
@@ -35,11 +34,6 @@ class SessionsController < ApplicationController
   def session_params
     params.require(:session)
           .permit(:password, :email_or_login_id, :school_login_path)
-  end
-
-  def login_count_up(user)
-    login_count = user.login_count + 1
-    user.update_attribute(:login_count, login_count)
   end
 
   def search_user_from_email_or_login_id(school)
