@@ -26,6 +26,17 @@ class SchoolUser < ApplicationRecord
     UserInvitationMailer.new_user_invitation(self).deliver_now
   end
 
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  def authenticated?(attribute, school_user_token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(school_user_token)
+  end
+
   private
 
   def downcase_email

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get :mypage # テスト済み
     end
   end
+  resources :school_user_activations, only: %i[edit new]
 
   namespace :teacher do
     get '', to: 'lessons#index' # テスト済み
