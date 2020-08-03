@@ -9,6 +9,7 @@ class SchoolUserActivationsController < ApplicationController
 
     if @school_user&.authenticated?(:activation, params[:token]) && @school_user.activated_at.nil?
       @school_user.activate
+      @school_user.main_school_building_user_create!
       user_log_in(user, school)
       flash[:success] = "#{school.name}へ参加しました"
       redirect_to root_path

@@ -31,6 +31,10 @@ class SchoolUser < ApplicationRecord
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
+  def main_school_building_user_create!
+    SchoolBuildingUser.create!(user_id: user_id, school_building_id: invited_school_building_id, main: true)
+  end
+
   def authenticated?(attribute, school_user_token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?

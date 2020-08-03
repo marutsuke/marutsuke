@@ -18,7 +18,7 @@ class NewUserActivationForm
 
     user.save!
     @school_user.update!(user_id: user.id)
-    SchoolBuildingUser.create!(user_id: user.id, school_building_id: @school_user.invited_school_building_id, main: true)
+    @school_user.main_school_building_user_create!
 
     true
   end
