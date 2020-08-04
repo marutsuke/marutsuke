@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み
     delete '/logout', to: 'sessions#destroy' # テスト済み
-    resources :users, only: %i[index new create show edit update] do
+    resources :users, only: %i[index show] do
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
     end
