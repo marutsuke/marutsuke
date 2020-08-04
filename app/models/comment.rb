@@ -10,7 +10,7 @@ class Comment < ApplicationRecord
   belongs_to :answer
 
   enum evaluation: {
-    not_submitted: 10, #データとして発生しないはず。
+    will_submit: 10, #データとして発生しないはず。
     checking: 20,
     submit_again: 30,
     complete: 40

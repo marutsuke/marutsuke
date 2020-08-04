@@ -10,6 +10,6 @@ ja:
   enums:
     comment:
       evaluation:
-        not_submitted: 不明
+        will_submit: 不明
         submit_again: 再提出
         complete: 完了

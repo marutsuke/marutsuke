@@ -44,7 +44,7 @@ class Question < ApplicationRecord
       .where(question_statuses: { status: :complete })
   }
 
-  scope :not_submitted, lambda {
+  scope :will_submit, lambda {
     left_outer_joins(:question_statuses)
       .where(question_statuses: { id: nil })
   }

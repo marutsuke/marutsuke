@@ -51,7 +51,7 @@ class Lesson < ApplicationRecord
     checking_count.positive? ? 'lesson_table__tr--red' : 'lesson_table__tr'
   end
 
-  def not_submitted_count
+  def will_submit_count
     questions.size -
       checking_count -
       submit_again_count -

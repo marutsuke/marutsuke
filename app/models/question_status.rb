@@ -6,7 +6,7 @@ class QuestionStatus < ApplicationRecord
   validates :status, presence: true
   validates :user_id, uniqueness: { scope: :question_id, case_sensitive: true }
   enum status: {
-    not_submitted: 10, #データとして発生しないはず。
+    will_submit: 10, #データとして発生しないはず。
     checking: 20,
     submit_again: 30,
     complete: 40

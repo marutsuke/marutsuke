@@ -13,7 +13,7 @@ RSpec.describe Question, type: :model do
     it { expect(Question.checking).not_to include(question) }
     it { expect(Question.submit_again).not_to include(question) }
     it { expect(Question.complete).not_to include(question) }
-    it { expect(Question.not_submitted).to include(question) }
+    it { expect(Question.will_submit).to include(question) }
 
     context 'chekingの問題' do
       let!(:question_status) do
