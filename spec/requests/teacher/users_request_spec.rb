@@ -23,4 +23,14 @@ describe Teacher::UsersController, type: :request do
       end
     end
   end
+  describe 'teacher/user/:id#show' do
+    context 'userがいる時' do
+      let!(:user) { create(:user) }
+      let!(:school) { user.schools.first }
+      it 'user一覧を表示' do
+        get teacher_user_path(user)
+        expect(response).to have_http_status(200)
+      end
+    end
+  end
 end
