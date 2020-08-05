@@ -55,6 +55,10 @@ class User < ApplicationRecord
     school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true)).first
   end
 
+  def school_buildings_name_in(school)
+    school_buildings.where(school_id: school.id).map(&:name).join(',')
+  end
+
   private
 
   def start_at_set
