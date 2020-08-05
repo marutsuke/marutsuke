@@ -5,9 +5,6 @@ FactoryBot.define do
     name { Faker::Name.unique.name[0..10] }
     email { Faker::Internet.unique.email }
     password  { 'password' }
-    start_at { 1.day.ago }
-    end_at { 1.year.since }
-    activated {  true }
     after(:create) do |user|
       school = create(:school)
       school_2 = create(:school)

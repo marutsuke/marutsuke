@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_120213) do
+ActiveRecord::Schema.define(version: 2020_08_04_134953) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -175,13 +175,10 @@ ActiveRecord::Schema.define(version: 2020_08_02_120213) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "名前なし", null: false
     t.string "email", default: ""
+    t.date "birth_day"
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "login_count", default: 0
-    t.datetime "start_at", default: "2020-01-01 00:00:00"
-    t.datetime "end_at"
-    t.boolean "activated", default: true, null: false
     t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email"
   end

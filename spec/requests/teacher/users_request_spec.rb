@@ -3,88 +3,33 @@
 require 'rails_helper'
 
 describe Teacher::UsersController, type: :request do
-  let!(:teacher) { create(:teacher) }
+  let!(:teacher) { create(:teacher, school: school) }
   before { teacher_log_in teacher }
 
-  describe '/teacher/users#new ' do
-    it 'ログインしていなければ、リダイレクトされる' do
-      teacher_log_out
-      get '/teacher/users'
-      expect(response).to have_http_status(302)
-      follow_redirect!
-      expect(response.body).to include('ログインしてください')
-    end
-  end
-
-  describe '/teacher/users#new ' do
-    it 'createエラー後更新してもアクセスできる' do
-      get '/teacher/users'
-      expect(response).to have_http_status(200)
-    end
-  end
-
-  describe '/teacher/users#new ' do
-    it 'アクセスできる' do
-      get new_teacher_user_path
-      expect(response).to have_http_status(200)
-    end
-  end
-
-  describe '/teacher/users/new#create' do
-    let!(:school_building_user) { create(:school_building_user) }
-    let(:user_params) do
-      {
-        name: 'テスト',
-        login_id: 'test_id',
-        email: 'test_mail@test.com',
-        start_at_date: '2020-02-01',
-        start_at_hour: '12',
-        start_at_min: '30',
-        end_at_date: '2021-02-01',
-        end_at_hour: '12',
-        end_at_min: '30',
-        password: 'password',
-        password_confirmation: 'password',
-        school_building_user: {
-          school_building_id: school_building_user.school_building_id
-        }
-      }
-    end
-    it '教師が生徒を追加作成できる' do
-      expect do
-        post teacher_users_path, params: { user: user_params }
-      end.to change(User, :count).by(1)
-      expect(response).to have_http_status 302
-      expect(response).to redirect_to new_teacher_user_path
-    end
-
-    context 'パスワード確認を間違えた時' do
-      before { user_params[:password] = 'fail_password' }
-
-      it '管理者を作成に失敗したらエラーがでる' do
-        expect do
-          post teacher_users_path, params: { user: user_params }
-        end.to change(User, :count).by(0)
-        expect(response).to have_http_status 200
-        expect(body).to include('パスワード(確認)と入力が一致しません。')
+  describe 'teacher/users#index' do
+    context 'userがいる時' do
+      let!(:user) { create(:user) }
+      let!(:school) { user.schools.first }
+      it 'user一覧を表示' do
+        get teacher_users_path
+        expect(response).to have_http_status(200)
       end
     end
-    context 'アカウント終了日時に関して' do
-      it 'end_dateの入力に漏れがある時、終了日時が登録されない' do
-        user_params[:end_at_date] = ''
-        expect do
-          post teacher_users_path, params: { user: user_params }
-        end.to change(User, :count).by(1)
-        expect(response).to have_http_status 302
-        expect(User.last.end_at).to eq nil
+    context 'userがいない時' do
+      let!(:school) { create(:school) }
+      it 'user一覧を表示' do
+        get teacher_users_path
+        expect(response.body).to include('生徒はまだいません')
       end
-
-      it 'end_dateの入力に漏れがない時、終了日時が登録される' do
-        expect do
-          post teacher_users_path, params: { user: user_params }
-        end.to change(User, :count).by(1)
-        expect(response).to have_http_status 302
-        expect(User.last.end_at).to eq Time.zone.parse('2021-02-01 12:30:00')
+    end
+  end
+  describe 'teacher/user/:id#show' do
+    context 'userがいる時' do
+      let!(:user) { create(:user) }
+      let!(:school) { user.schools.first }
+      it 'user一覧を表示' do
+        get teacher_user_path(user)
+        expect(response).to have_http_status(200)
       end
     end
   end

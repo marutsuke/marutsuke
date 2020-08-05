@@ -10,7 +10,7 @@ ja:
   enums:
     question_status:
       status:
-        not_submitted: 未提出
+        will_submit: 未提出
         checking: 確認中
         submit_again: 再提出
         complete: 完了

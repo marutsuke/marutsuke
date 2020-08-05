@@ -6,12 +6,9 @@
     .teacher_user_show__th.mr8= User.human_attribute_name(:email) + ':'
     .teacher_user_show__ele= @user.email
   .flex
-    .teacher_user_show__th.mr8= User.human_attribute_name(:start_at) + ':'
-    .teacher_user_show__ele= @user.start_at
-  .flex
-    .teacher_user_show__th.mr8= User.human_attribute_name(:activated) + ':'
-    .teacher_user_show__ele= @user.activated_status
-= link_to '編集', edit_teacher_user_path(@user)
+    .teacher_user_show__th.mr8 所属校:
+    .teacher_user_show__ele= @user.main_and_sub_school_buildings_names_in(current_school)
+
 .teacher_user_show
   %hr
   = link_to '所属校追加', new_teacher_user_school_building_user_path(@user)
