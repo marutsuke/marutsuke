@@ -52,14 +52,24 @@ class User < ApplicationRecord
   end
 
   def main_school_building(school)
-    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true)).first
+    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true, user_id: id)).first
   end
 
-  def school_buildings_name_in(school)
-    school_buildings.where(school_id: school.id).map(&:name).join(',')
+  def main_and_sub_school_buildings_names_in(school)
+    "#{main_school_building_name_in(school)}(所属校), #{sub_school_buildings_name_in(school)}"
   end
+
 
   private
+
+  def main_school_building_name_in(school)
+    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true, user_id: id)).first.name
+  end
+
+  def sub_school_buildings_name_in(school)
+    sub_school_buildings = school_buildings.where.not(id: main_school_building(school).id)
+    sub_school_buildings.where(school_id: school.id).map(&:name).join(',')
+  end
 
   def start_at_set
     if start_at_date.present? && start_at_hour.present? && start_at_min.present?
