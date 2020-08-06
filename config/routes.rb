@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new] do
     collection do
       get :mypage # テスト済み
+      post :change_school
     end
   end
   resources :school_user_activations, only: %i[edit new create]

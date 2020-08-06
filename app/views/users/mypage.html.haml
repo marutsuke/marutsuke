@@ -1,1 +1,6 @@
 = link_to 'ログアウト', logout_path, method: :delete
+
+=form_with url: change_school_users_path do |f|
+  = f.label :school_id, '学校切り替え'
+  = f.select :school_id, current_user.decorate.change_school_select_array
+  =f.submit '切り替え'
