@@ -36,8 +36,10 @@ module SessionsHelper
       @current_user ||= User.find_by(id: user_id)
     elsif user_id = cookies.signed[:user_id]
       user = User.find_by(id: user_id)
+      school_id = cookies.signed[:school_id]
+      school = user&.schools&.find_by(id: school_id)
       if user&.authenticated?(cookies[:user_remember_token])
-        user_log_in(user)
+        user_log_in(user, school)
         @current_user = user
       end
     end
