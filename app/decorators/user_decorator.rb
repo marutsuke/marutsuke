@@ -31,6 +31,10 @@ class UserDecorator < Draper::Decorator
     "#{time_format(start_at) || ''} ~ #{time_format(end_at) || ''}"
   end
 
+  def change_school_select_array(excepts = [])
+    (schools - excepts).map{ |school| [school.name, school.id] }
+  end
+
   private
 
   def time_format(time)

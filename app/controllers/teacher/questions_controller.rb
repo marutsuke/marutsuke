@@ -2,20 +2,20 @@
 
 class Teacher::QuestionsController < Teacher::Base
   def new
-    @lesson = current_school.lessons.find(params[:lesson_id])
+    @lesson = current_teacher_school.lessons.find(params[:lesson_id])
     @question = @lesson.questions.build
     @questions = @lesson.questions
   end
 
   def show
     @question = Question.find(params[:id])
-    @lesson = current_school&.lessons.find_by(id: @question.lesson_id)
+    @lesson = current_teacher_school&.lessons.find_by(id: @question.lesson_id)
 
     render 'errors/not_found' unless @lesson
   end
 
   def create
-    @question = current_school
+    @question = current_teacher_school
                   &.lessons
                   &.find(question_params[:lesson_id])
                   &.questions.new(question_params)

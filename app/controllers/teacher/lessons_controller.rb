@@ -3,12 +3,12 @@
 class Teacher::LessonsController < Teacher::Base
   def index
     @lessons_to_check = current_teacher.lessons.to_check
-    @lessons = current_school
+    @lessons = current_teacher_school
                .lessons.includes(:teacher)
   end
 
   def show
-    @lesson = current_school.lessons.find(params[:id])
+    @lesson = current_teacher_school.lessons.find(params[:id])
     @question = @lesson.questions.build
     @questions = @lesson.questions
   end
@@ -18,7 +18,7 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def create
-    @lesson = current_school.lessons.new(lesson_params)
+    @lesson = current_teacher_school.lessons.new(lesson_params)
     @lesson_group = @lesson.lesson_group
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"

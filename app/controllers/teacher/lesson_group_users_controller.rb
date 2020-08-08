@@ -35,6 +35,6 @@ class Teacher::LessonGroupUsersController < Teacher::Base
   end
 
   def set_user
-    @user = current_school.users.find(params[:user_id])
+    @user = current_teacher_school.users.find(params[:user_id])
   end
 end
