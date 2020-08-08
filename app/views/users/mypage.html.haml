@@ -1,6 +1,11 @@
-= link_to 'ログアウト', logout_path, method: :delete
+.div=  "#{current_user.name}さん"
+.div= "現在の学校: #{current_school.name}#{session[:school_id]}"
+%hr
 
 =form_with url: change_school_users_path do |f|
-  = f.label :school_id, '学校切り替え'
-  = f.select :school_id, current_user.decorate.change_school_select_array
-  =f.submit '切り替え'
+  .div
+    = f.label :school_id, '学校切り替え'
+  = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
+  =f.submit '学校を切り替える', class: 'ml24'
+
+.mt40= link_to 'ログアウト', logout_path, method: :delete
