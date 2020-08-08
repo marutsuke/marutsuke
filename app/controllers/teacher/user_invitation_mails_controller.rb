@@ -1,11 +1,11 @@
 class Teacher::UserInvitationMailsController < Teacher::Base
 
   def new
-    @school_user = current_school.school_users.new
+    @school_user = current_teacher_school.school_users.new
   end
 
   def create
-    @school_user = current_school.school_users.new(school_user_params)
+    @school_user = current_teacher_school.school_users.new(school_user_params)
     if @school_user.save
       if user = User.find_by(email: @school_user.email)
         @school_user.update(user_id: user.id)

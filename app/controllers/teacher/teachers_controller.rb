@@ -4,7 +4,7 @@ class Teacher::TeachersController < Teacher::Base
   before_action :set_teacher, only: %i[show edit update]
 
   def index
-    @teachers = current_school.teachers
+    @teachers = current_teacher_school.teachers
   end
 
   def show; end
@@ -14,7 +14,7 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def create
-    @teacher = current_school.teachers.new(teacher_params)
+    @teacher = current_teacher_school.teachers.new(teacher_params)
     if @teacher.save
       flash[:success] = "#{@teacher.name}先生を作成しました"
       redirect_to new_teacher_teacher_path
@@ -24,7 +24,7 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def edit
-    @teacher = current_school.teachers.find(params[:id])
+    @teacher = current_teacher_school.teachers.find(params[:id])
   end
 
   def update
@@ -45,7 +45,7 @@ class Teacher::TeachersController < Teacher::Base
   private
 
   def set_teacher
-    @teacher = current_school.teachers.find(params[:id])
+    @teacher = current_teacher_school.teachers.find(params[:id])
   end
 
   def teacher_params

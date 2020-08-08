@@ -21,7 +21,7 @@ class Teacher::Base < ApplicationController
 
   def school_must_have_school_building
     return unless current_teacher
-    return unless current_school.school_buildings.empty?
+    return unless current_teacher_school.school_buildings.empty?
 
     flash[:info] = '校舎を登録してください。'
     redirect_to new_teacher_school_building_path
@@ -29,7 +29,7 @@ class Teacher::Base < ApplicationController
 
   def teacher_must_belong_to_school_building
     return unless current_teacher
-    return if current_school.school_buildings.empty?
+    return if current_teacher_school.school_buildings.empty?
     return unless current_teacher.school_buildings.empty?
 
     flash[:info] = '所属校を登録してください。'

@@ -44,6 +44,6 @@ class Teacher::SchoolBuildingTeachersController < Teacher::Base
   end
 
   def set_teacher
-    @teacher = current_school.teachers.find(params[:teacher_id])
+    @teacher = current_teacher_school.teachers.find(params[:teacher_id])
   end
 end
