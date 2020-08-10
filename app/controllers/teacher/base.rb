@@ -5,7 +5,6 @@ class Teacher::Base < ApplicationController
   before_action :teacher_login_required
   before_action :teacher_must_belong_to_school_building
   before_action :school_must_have_school_building
-  skip_before_action :user_login_required
 
   layout 'teacher/layouts/teacher_layout'
 

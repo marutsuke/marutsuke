@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LessonsController < ApplicationController
+class LessonsController < UserBase
   before_action :set_lessons_scope, only: [:index]
   def index
     @lessons = current_school&.lessons&.send(@scope)
