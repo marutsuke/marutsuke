@@ -4,7 +4,7 @@ class UserBase < ApplicationController
   include UserSessionsHelper
   before_action :user_login_required
 
-  # layout 'layouts/user_layout'
+  layout 'layouts/user_layout'
 
   private
 
