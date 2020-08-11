@@ -3,6 +3,7 @@
 class Teacher::QuestionsController < Teacher::Base
   def new
     @lesson = current_teacher_school.lessons.find(params[:lesson_id])
+    @lesson_group = @lesson.lesson_group
     @question = @lesson.questions.build
     @questions = @lesson.questions
   end
