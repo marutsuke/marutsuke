@@ -6,7 +6,6 @@ RSpec.describe Question, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:lesson) }
   end
-  it { is_expected.to validate_length_of(:title).is_at_most(20) }
 
   describe 'question_status関連のスコープ' do
     let!(:question) { create(:question) }
