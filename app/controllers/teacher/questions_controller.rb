@@ -33,6 +33,6 @@ class Teacher::QuestionsController < Teacher::Base
   private
 
   def question_params
-    params.require(:question).permit(:title, :text, :image, :lesson_id, :display_order)
+    params.require(:question).permit(:text, :image, :lesson_id, :display_order, :publish)
   end
 end

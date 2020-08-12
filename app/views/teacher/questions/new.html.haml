@@ -18,6 +18,9 @@
             = f.label :image
             %span (最大5MBまで)
           = f.file_field :image
+        .question_form__label_and_input
+          = f.check_box :publish, {}, false, true
+          = f.label :publish, '非公開で保存'
         = f.hidden_field :lesson_id, value: @lesson.id
         = f.submit '登録する', class: 'question_form__submit_btn'
 
@@ -26,8 +29,8 @@
 
 
   .question_new_questions
-
-
+    - @lesson.questions.each do |question|
+      .qustion_table= question.text
 
 
 
