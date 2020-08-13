@@ -30,7 +30,19 @@
 
   .question_new_questions
     - @lesson.questions.each do |question|
-      .qustion_table= question.text
+      .qustion_section
+        .question_section__left
+          .question_num.mb40= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
+          .question_text= question.text
+          .flex
+            = link_to '編集', '#', class: 'btn_edit'
+            -if question.publish?
+              = link_to '非公開', '#', class: 'btn_unpublish'
+            - else
+              = link_to '公開', '#', class: 'btn_publish'
+        -if question.image.present?
+          .question_section__right
+            = image_tag question.iamge_url, alt: '', height: '', width: ''
 
 
 
