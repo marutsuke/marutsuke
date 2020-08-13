@@ -14,12 +14,12 @@
           = f.label :text
           = f.text_area :text, rows: '10', class: 'question_form__text_area'
         .question_form__label_and_input
+          = f.file_field :image
           .flex
             = f.label :image
             %span (最大5MBまで)
-          = f.file_field :image
-        .question_form__label_and_input
-          = f.check_box :publish, {}, false, true
+        .question_form__check_box
+          = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
           = f.label :publish, '非公開で保存'
         = f.hidden_field :lesson_id, value: @lesson.id
         = f.submit '登録する', class: 'question_form__submit_btn'

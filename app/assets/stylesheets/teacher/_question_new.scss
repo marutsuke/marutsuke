@@ -17,6 +17,7 @@
   // align-items: center;
   &__text_area {
     width: 100%;
+    margin-bottom: 8px;
   }
 
   &__label_and_input {
@@ -34,6 +35,19 @@
       height: 32px;
       margin-bottom: 16px;
       background-color: white;
+    }
+  }
+  &__check_box {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    & input {
+      margin: 0;
+      width: 1rem;
+      height: 1rem;
+    }
+    & label {
+      margin: 0 0.5rem;
     }
   }
   &__submit_btn {
