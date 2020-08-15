@@ -29,20 +29,21 @@
 
 
   .question_new_questions
-    - @lesson.questions.each do |question|
-      .qustion_section
+    - @questions.each do |question|
+      .question_section
         .question_section__left
-          .question_num.mb40= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
-          .question_text= question.text
-          .flex
-            = link_to '編集', '#', class: 'btn_edit'
+          .question_section__title.mb40= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
+          .question_section__text= simple_format(question.text)
+          .question_section__buttons
+            = link_to '編集', '#', class: 'question_section__button_edit'
             -if question.publish?
-              = link_to '非公開', '#', class: 'btn_unpublish'
+              = link_to '非公開', '#', class: 'question_section__button_unpublish'
             - else
               = link_to '公開', '#', class: 'btn_publish'
         -if question.image.present?
           .question_section__right
-            = image_tag question.iamge_url, alt: '', height: '', width: ''
+            = image_tag question.image_url, alt: '', height: '', width: '100%'
+      %hr
 
 
 
