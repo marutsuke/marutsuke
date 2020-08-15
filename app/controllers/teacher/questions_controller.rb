@@ -5,7 +5,7 @@ class Teacher::QuestionsController < Teacher::Base
     @lesson = current_teacher_school.lessons.find(params[:lesson_id])
     @lesson_group = @lesson.lesson_group
     @question = @lesson.questions.build
-    @questions = @lesson.questions
+    @questions = @lesson.questions.display_order
   end
 
   def show
@@ -22,7 +22,7 @@ class Teacher::QuestionsController < Teacher::Base
                   &.questions.new(question_params)
     if @question.save
       flash[:success] = "#{@question.title}を作成しました。"
-      redirect_to teacher_lesson_path(@question.lesson)
+      redirect_to new_teacher_lesson_question_path(@question.lesson)
     else
       @lesson = @question.lesson
       @questions = @lesson.questions
