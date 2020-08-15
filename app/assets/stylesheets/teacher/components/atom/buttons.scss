@@ -1,0 +1,32 @@
+.a-button {
+  display: block;
+  width: 72px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 18px;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 4px;
+  &:hover {
+    text-decoration: none;
+    opacity: 0.6;
+  }
+}
+.a-button--edit {
+  color: $indigo_2;
+  border: 1px solid $indigo_2;
+}
+.a-button--primary {
+  color: $indigo_6;
+  background-color: $blue_0;
+  &:hover {
+    color: $indigo_6;
+  }
+}
+.a-button--cancel {
+  color: $blue_0;
+  border: 1px solid $blue_0;
+  &:hover {
+    color: $blue_0;
+  }
+}
