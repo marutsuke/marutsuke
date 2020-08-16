@@ -14,17 +14,18 @@ class Teacher::QuestionsController < Teacher::Base
   end
 
   def create
-    @question = current_teacher_school
-                  &.lessons
-                  &.find(question_params[:lesson_id])
-                  &.questions.new(question_params)
+    @lesson = current_teacher_school
+              &.lessons
+              &.find(question_params[:lesson_id])
+    @lesson_group = @lesson.lesson_group
+    @question = @lesson&.questions.new(question_params)
     if @question.save
-      flash[:success] = "#{@question.title}を作成しました。"
+      flash[:success] = "課題#{@question.display_order}を作成しました。"
       redirect_to new_teacher_lesson_question_path(@question.lesson)
     else
       @lesson = @question.lesson
       @questions = @lesson.questions
-      render template: 'teacher/lessons/show'
+      render :new
     end
   end
 
