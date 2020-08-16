@@ -13,6 +13,8 @@ FactoryBot.define do
     after(:create) do |teacher|
       school_building = create(:school_building, school: teacher.school)
       create(:school_building_teacher, teacher: teacher, school_building: school_building, main: true)
+      lesson_group = create(:lesson_group, school_building: school_building)
+      lesson = create(:lesson, lesson_group: lesson_group, teacher: teacher, school: teacher.school)
     end
   end
 end
