@@ -18,15 +18,14 @@
   padding: 16px;
 }
 .question_section {
-  min-height: 80vh;
   min-width: 600px;
   display: flex;
   &__left {
     min-width: 50%;
-    min-height: 80vh;
+    min-height: 600px;
   }
   &__text {
-    min-height: calc(80vh - 60px);
+    min-height: 540px;
   }
   &__buttons {
     margin: 16px 0;
