@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :school_user_activations, only: %i[edit new create]
 
   namespace :teacher do
-    get '', to: 'lessons#index' # テスト済み
+    get '', to: 'top#top' # テスト済み
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み
     delete '/logout', to: 'sessions#destroy' # テスト済み

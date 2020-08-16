@@ -1,0 +1,8 @@
+- if @lessons_to_check.present?
+  .lessons_to_check
+    .lessons_to_check__title 未チェックがあります！！
+    .lessons_to_check__lessons
+      - @lessons_to_check.each do |lesson|
+        .lessons_to_check__lesson= link_to "#{ lesson.name }(#{ lesson.checking_count })", checking_teacher_lesson_answer_checks_path(lesson_id: lesson.id)
+
+
