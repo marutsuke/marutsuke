@@ -21,8 +21,9 @@
           = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
           = f.label :publish, '非公開で保存'
         = f.hidden_field :lesson_id, value: @lesson.id
-        = f.submit '更新する', class: 'question_form__submit_btn'
-
+        .flex.flex-end
+          = f.submit '更新する', class: 'a-button a-button--primary mr16'
+          = link_to 'もどる', new_teacher_lesson_question_path(lesson_id: @lesson.id), class: 'a-button a-button--cancel'
 
 
 
