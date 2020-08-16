@@ -30,7 +30,7 @@
 
   .question_new_questions
     - @questions.each do |question|
-      .question_section
+      .question_section{id: "js-question_section--#{question.id}"}
         .question_section__left
           .question_section__title.mb40{class: question.decorate.unpublish_opacity_class}= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
           .question_section__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
