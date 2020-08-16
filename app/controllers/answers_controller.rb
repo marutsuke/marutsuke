@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AnswersController < ApplicationController
+class AnswersController < UserBase
 
   def new
     @question = Question.find(params[:question_id])

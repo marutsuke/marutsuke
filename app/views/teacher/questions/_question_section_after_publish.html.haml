@@ -1,0 +1,12 @@
+.question_section__left
+  .question_section__title= "課題#{question.display_order}"
+  .question_section__publish_flash.mb40 公開しました
+  .question_section__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+  .question_section__buttons
+    = link_to '編集', '#', class: 'a-button a-button--edit mr16'
+    -if !question.publish?
+      = link_to '公開', publish_teacher_question_path(question), method: :post, class: 'a-button a-button--primary'
+-if question.image.present?
+  .question_section__right{class: question.decorate.unpublish_opacity_class}
+    = image_tag question.image_url, alt: '', height: '', width: '100%'
+

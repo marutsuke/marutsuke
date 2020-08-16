@@ -1,5 +1,5 @@
 .div=  "#{current_user.name}さん"
-.div= "現在の学校: #{current_school.name}"
+.div= "現在の学校: #{ current_school.name }"
 %hr
 
 =form_with url: change_school_users_path do |f|

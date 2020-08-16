@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SchoolsController < ApplicationController
+class SchoolsController < UserBase
   skip_before_action :user_login_required
 
   def new

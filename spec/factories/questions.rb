@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :question do
-    title { Faker::Book.genre[0..10] }
     text { 'testtesttesttesttesttesttesttest' }
     image { Faker::File.file_name }
     display_order  { 1 }

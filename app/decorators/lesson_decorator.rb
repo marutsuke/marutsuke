@@ -13,21 +13,21 @@ class LessonDecorator < Draper::Decorator
     super&.strftime('%F-%R') || '未設定'
   end
 
-  def start_at_for_user
-    time_format(start_at) || '未設定'
-  end
-
-  def end_at_for_user
-    time_format(end_at) || '未設定'
-  end
-
   def start_to_end_time
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
 
-  def complete_rate
-    "#{complete_count}/"
+  def display_order_select_array(selected: nil)
+    used_display_orders = questions.pluck(:display_order)
+    max_display_order = used_display_orders.max
+    return_array = (1..max_display_order + 2).to_a - used_display_orders
+    if selected
+      return_array = (return_array + [selected]).sort
+    end
+    return_array
   end
+
+
 
   private
 

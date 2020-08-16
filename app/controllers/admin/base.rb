@@ -3,7 +3,6 @@
 class Admin::Base < ApplicationController
   include Admin::SessionsHelper
   before_action :admin_login_required
-  skip_before_action :user_login_required
 
   private
 
