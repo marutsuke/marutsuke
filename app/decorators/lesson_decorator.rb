@@ -17,9 +17,13 @@ class LessonDecorator < Draper::Decorator
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
 
-  def complete_rate
-    "#{complete_count}/"
+  def display_order_select_array
+    used_display_orders = questions.pluck(:display_order)
+    max_display_order = used_display_orders.max
+    (1..max_display_order + 2).to_a - used_display_orders
   end
+
+
 
   private
 

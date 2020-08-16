@@ -9,7 +9,7 @@
         - display_order_now = @lesson.questions.index(@question) + 1
         .question_form__label_and_input
           = f.label :display_order, class: 'required'
-          = f.select :display_order, (1..@questions.length + 5) , value: display_order_now
+          = f.select :display_order, @lesson.decorate.display_order_select_array , value: display_order_now
         .question_form__label_and_input
           = f.label :text
           = f.text_area :text, rows: '10', class: 'question_form__text_area'
