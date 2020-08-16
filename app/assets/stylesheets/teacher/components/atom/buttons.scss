@@ -1,7 +1,8 @@
 .a-button {
   display: block;
-  width: 72px;
-  height: 32px;
+  width: 80px;
+  height: 40px;
+  padding: 4px;
   line-height: 32px;
   font-size: 18px;
   text-align: center;
@@ -19,7 +20,9 @@
 .a-button--primary {
   color: $indigo_6;
   background-color: $blue_0;
+  border: none;
   &:hover {
+    border: none;
     color: $indigo_6;
   }
 }
