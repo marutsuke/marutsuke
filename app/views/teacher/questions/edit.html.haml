@@ -2,7 +2,7 @@
   .question_form_group
     .question_new_title
       .question_new_title__lesson_title= "#{@lesson_group.name}/#{@lesson.name}"
-      .question_new_title__description 課題作成
+      .question_new_title__description 課題編集
     .question_form
       = form_with model: [:teacher, @question], local: true do |f|
         =render 'shared/error_messages', model_object: @question
