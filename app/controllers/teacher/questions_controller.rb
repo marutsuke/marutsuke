@@ -30,7 +30,6 @@ class Teacher::QuestionsController < Teacher::Base
   end
 
   def edit
-
   end
 
   def update
@@ -60,6 +59,8 @@ class Teacher::QuestionsController < Teacher::Base
   def set_question_and_lesson
     @question = Question.find(params[:id])
     @lesson = current_teacher_school&.lessons.find_by(id: @question.lesson_id)
+    @lesson_group = @lesson.lesson_group
+
     render 'errors/not_found' unless @lesson
   end
 end
