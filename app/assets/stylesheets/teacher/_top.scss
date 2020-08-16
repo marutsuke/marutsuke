@@ -1,0 +1,9 @@
+.teacher_top {
+  height: 100vh;
+  padding: 40px;
+  &__to_check {
+    margin: 0 auto;
+    border: solid 1px $indigo_0;
+    max-width: 800px;
+  }
+}
