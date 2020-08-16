@@ -17,10 +17,14 @@ class LessonDecorator < Draper::Decorator
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
 
-  def display_order_select_array
+  def display_order_select_array(selected: nil)
     used_display_orders = questions.pluck(:display_order)
     max_display_order = used_display_orders.max
-    (1..max_display_order + 2).to_a - used_display_orders
+    return_array = (1..max_display_order + 2).to_a - used_display_orders
+    if selected
+      return_array = (return_array + [selected]).sort
+    end
+    return_array
   end
 
 
