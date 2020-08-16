@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::QuestionsController < Teacher::Base
-  before_action :set_question_and_lesson, only: %i[show publish]
+  before_action :set_question_and_lesson, only: %i[show publish edit update]
 
   def new
     @lesson = current_teacher_school.lessons.find(params[:lesson_id])
@@ -26,6 +26,19 @@ class Teacher::QuestionsController < Teacher::Base
       @lesson = @question.lesson
       @questions = @lesson.questions
       render :new
+    end
+  end
+
+  def edit
+
+  end
+
+  def update
+    if @question.update(question_params)
+      flash[:success] = "課題#{@question.display_order}を更新しました。"
+      redirect_to edit_teacher_question_path(@question)
+    else
+      render :edit
     end
   end
 
