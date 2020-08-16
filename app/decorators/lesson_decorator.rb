@@ -13,14 +13,6 @@ class LessonDecorator < Draper::Decorator
     super&.strftime('%F-%R') || '未設定'
   end
 
-  def start_at_for_user
-    time_format(start_at) || '未設定'
-  end
-
-  def end_at_for_user
-    time_format(end_at) || '未設定'
-  end
-
   def start_to_end_time
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
