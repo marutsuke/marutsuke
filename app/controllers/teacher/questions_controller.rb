@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Teacher::QuestionsController < Teacher::Base
+  before_action :set_question_and_lesson, only: %i[show publish]
+
   def new
     @lesson = current_teacher_school.lessons.find(params[:lesson_id])
     @lesson_group = @lesson.lesson_group
@@ -9,10 +11,6 @@ class Teacher::QuestionsController < Teacher::Base
   end
 
   def show
-    @question = Question.find(params[:id])
-    @lesson = current_teacher_school&.lessons.find_by(id: @question.lesson_id)
-
-    render 'errors/not_found' unless @lesson
   end
 
   def create
@@ -30,9 +28,24 @@ class Teacher::QuestionsController < Teacher::Base
     end
   end
 
+  def publish
+    if @question.update(publish: true)
+      respond_to { |format| format.js } # publish.js.coffee
+    else
+      flash[:success] = "#{@question.title}の公開に失敗しました。"
+      render :new
+    end
+  end
+
   private
 
   def question_params
     params.require(:question).permit(:text, :image, :lesson_id, :display_order, :publish)
+  end
+
+  def set_question_and_lesson
+    @question = Question.find(params[:id])
+    @lesson = current_teacher_school&.lessons.find_by(id: @question.lesson_id)
+    render 'errors/not_found' unless @lesson
   end
 end

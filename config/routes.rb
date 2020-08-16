@@ -45,7 +45,9 @@ Rails.application.routes.draw do
       resources :questions, only: :new
     end
 
-    resources :questions, only: %i[create show] # createテスト済み
+    resources :questions, only: %i[create show] do # createテスト済み
+      post :publish, on: :member
+    end
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
     resources :account_activations, only: %i[edit]
