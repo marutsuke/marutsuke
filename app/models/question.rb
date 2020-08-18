@@ -7,8 +7,12 @@ class Question < ApplicationRecord
   belongs_to :lesson
   has_many :answers
   has_many :question_statuses
+
   scope :not_nil, -> { where.not(id: nil) }
   scope :display_order, -> { not_nil.order(display_order: :asc) }
+  scope :published, -> { where(publish: true) }
+  scope :unpublish, -> { where(publish: false) }
+
 
   scope :checking, lambda {
     joins(:question_statuses)

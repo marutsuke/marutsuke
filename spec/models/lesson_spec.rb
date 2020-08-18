@@ -41,6 +41,28 @@ RSpec.describe Lesson, type: :model do
         it { is_expected.not_to include lesson }
       end
     end
+
+    describe 'has_unpublish_question' do
+      subject { Lesson.has_unpublish_question }
+      let!(:lesson) { create(:lesson) }
+
+      context '課題がない' do
+        it { is_expected.not_to include lesson }
+      end
+      context '課題がある' do
+        context '公開済みの課題のみ' do
+          let!(:question) { create(:question, :published, lesson: lesson) }
+          let!(:question_2) { create(:question, :published, lesson: lesson) }
+          it { is_expected.not_to include lesson }
+        end
+
+        context '公開済みの課題と非公開の課題' do
+          let!(:question) { create(:question, :published, lesson: lesson) }
+          let!(:question_2) { create(:question, :unpublish, lesson: lesson) }
+          it { is_expected.to include lesson }
+        end
+      end
+    end
   end
 
   describe '#checking_count' do
