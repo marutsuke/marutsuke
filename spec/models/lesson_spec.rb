@@ -28,6 +28,19 @@ RSpec.describe Lesson, type: :model do
         it { is_expected.to include lesson }
       end
     end
+
+    describe 'no_question' do
+      subject { Lesson.no_question }
+      let!(:lesson) { create(:lesson) }
+
+      context '課題がない' do
+        it { is_expected.to include lesson }
+      end
+      context '課題がある' do
+        let!(:question) { create(:question, lesson: lesson) }
+        it { is_expected.not_to include lesson }
+      end
+    end
   end
 
   describe '#checking_count' do
