@@ -36,6 +36,11 @@
       -if @question.image.present?
         .question_section__right{class: @question.decorate.unpublish_opacity_class}
           = image_tag @question.image_url, alt: '', height: '', width: '100%'
+    .question_section__delete_button
+      %div
+      = link_to '削除', teacher_question_path(@question), method: :delete, class: 'a-button a-button--danger'
+
+
 
 
 
