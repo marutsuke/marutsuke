@@ -33,3 +33,10 @@
     color: $blue_0;
   }
 }
+.a-button--danger {
+  color: $pink_0;
+  border: 1px solid $pink_0;
+  &:hover {
+    color: $pink_0;
+  }
+}
