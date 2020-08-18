@@ -18,6 +18,8 @@ class LessonDecorator < Draper::Decorator
   end
 
   def display_order_select_array(selected: nil)
+    return (1..3) if questions.not_nil.blank?
+
     used_display_orders = questions.pluck(:display_order)
     max_display_order = used_display_orders.max
     return_array = (1..max_display_order + 2).to_a - used_display_orders
