@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::QuestionsController < Teacher::Base
-  before_action :set_question_and_lesson, only: %i[show publish edit update]
+  before_action :set_question_and_lesson, only: %i[show publish edit update destroy]
 
   def new
     @lesson = current_teacher_school.lessons.find(params[:lesson_id])
@@ -21,7 +21,7 @@ class Teacher::QuestionsController < Teacher::Base
     @question = @lesson&.questions.new(question_params)
     if @question.save
       flash[:success] = "課題#{@question.display_order}を作成しました。"
-      redirect_to new_teacher_lesson_question_path(@question.lesson)
+      redirect_to new_teacher_lesson_question_path(@lesson)
     else
       @lesson = @question.lesson
       @questions = @lesson.questions
@@ -39,6 +39,12 @@ class Teacher::QuestionsController < Teacher::Base
     else
       render :edit
     end
+  end
+
+  def destroy
+    @question.destroy
+    flash[:success] = "課題#{@question.display_order}を削除しました。"
+    redirect_to new_teacher_lesson_question_path(@lesson)
   end
 
   def publish

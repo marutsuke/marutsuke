@@ -37,6 +37,10 @@
   &__publish_flash {
     color: $pink_0;
   }
+  &__delete_button {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .question_form {
