@@ -39,6 +39,17 @@ class Lesson < ApplicationRecord
       .merge(Question.checking)
   }
 
+  scope :no_question, lambda {
+    left_outer_joins(:questions)
+      .where(questions: { id: nil })
+  }
+
+  scope :has_unpublish_question, lambda{
+    joins(:questions)
+      .includes(:questions)
+      .merge(Question.unpublish)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
