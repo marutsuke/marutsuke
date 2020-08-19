@@ -29,8 +29,8 @@ class LessonDecorator < Draper::Decorator
     return_array
   end
 
-  def name_with_lesson_group
-    "#{ lesson_group.name }/#{ name }"
+  def name_with_lesson_group_and_school_building
+    "#{ lesson_group.name }/#{ name } (#{ lesson_group.school_building.name })"
   end
 
 
