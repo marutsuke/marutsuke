@@ -29,6 +29,9 @@ class LessonDecorator < Draper::Decorator
     return_array
   end
 
+  def name_with_lesson_group
+    "#{ lesson_group.name }/#{ name }"
+  end
 
 
   private
