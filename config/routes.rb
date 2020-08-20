@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
+    resources :manage_menus, only: %i[index]
     resources :teachers, only: %i[index new create edit update show] do # index, edit, update以外テスト済み
       member do
         post :resend_activation_mail
