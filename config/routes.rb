@@ -52,7 +52,7 @@ Rails.application.routes.draw do
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
     resources :account_activations, only: %i[edit]
-    resources :comments, only: %i[create] # テスト済み
+    resources :comments, only: %i[index create] # テスト済み
     resources :school_buildings, only: %i[index new create]
     resources :lesson_groups, only: %i[index new show create edit update]
     resources :user_invitation_mails, only: %i[new create]
