@@ -1,10 +1,11 @@
 .m-label-and-input {
+  display: flex;
   &__label {
     color: $indigo_0;
-    padding: 8px 16px;
+    padding: 8px 24px 16px;
     display: inline-block;
     min-width: 120px;
-    text-align: right;
+    text-align: left;
   }
   &__input {
     border: 1px solid $indigo_2;
