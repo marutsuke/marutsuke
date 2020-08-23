@@ -3,14 +3,22 @@
 %hr
 
 = search_form_for(@q, url: teacher_users_path) do |f|
-  = f.label :name_cont, '名前'
-  = f.search_field :name_cont
-  = f.label :school_building_users_school_building_id_eq, '所属校'
-  = f.select :school_building_users_school_building_id_eq,  current_teacher.decorate.school_building_select_array, { include_blank: '-', selected: '-' }, { prompt: '-'}
+  .m-label-and-input
+    = f.label :school_users_id_eq, '生徒ID', class: 'm-label-and-input__label'
+    = f.search_field :school_users_id_eq, class: 'm-label-and-input__input'
+  .m-label-and-input
+    = f.label :name_cont, '名前', class: 'm-label-and-input__label'
+    = f.search_field :name_cont, class: 'm-label-and-input__input'
+  .m-label-and-input
+    = f.label :school_building_users_school_building_id_eq, '所属校', class: 'm-label-and-input__label'
+    = f.select :school_building_users_school_building_id_eq,  current_teacher.decorate.school_building_select_array, { include_blank: '', selected: @school_building_id || '' }, {  class: 'm-label-and-input__input' }
+  .m-label-and-input
+    = f.label :lesson_group_users_lesson_group_id_eq, '受講講座', class: 'm-label-and-input__label'
+    = f.select :lesson_group_users_lesson_group_id_eq,  current_teacher.decorate.lesson_groups_search_select_array, { include_blank: '', selected: @lesson_group_id || '' }, { class: 'm-label-and-input__input' }
   = f.hidden_field :school_building_users_main_eq, value: true
-  = f.label :lesson_group_users_lesson_group_id_eq, '受講講座'
-  = f.select :lesson_group_users_lesson_group_id_eq,  current_teacher.decorate.lesson_groups_search_select_array, { include_blank: '-', selected: '-' }, { prompt: '-'}
-  = f.submit
+  .m-button-set
+    = f.submit '検索', class: 'a-button a-button--primary'
+    = link_to 'クリア', teacher_users_path, class: 'a-button a-button--cancel'
 %hr
 - if @users.present?
   = paginate @users

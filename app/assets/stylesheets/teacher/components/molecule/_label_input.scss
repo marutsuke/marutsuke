@@ -1,0 +1,17 @@
+.m-label-and-input {
+  &__label {
+    color: $indigo_0;
+    padding: 8px 16px;
+    display: inline-block;
+    min-width: 120px;
+    text-align: right;
+  }
+  &__input {
+    border: 1px solid $indigo_2;
+    border-radius: 4px;
+    max-width: 400px;
+    min-width: 240px;
+    height: 32px;
+    padding: 4px 8px;
+  }
+}
