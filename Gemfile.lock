@@ -264,6 +264,8 @@ GEM
     nokogiri (1.11.0.rc2-java)
     nokogiri (1.11.0.rc2-x64-mingw32)
     nokogiri (1.11.0.rc2-x86-mingw32)
+    polyamorous (2.3.2)
+      activerecord (>= 5.2.1)
     popper_js (1.16.0)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -312,6 +314,11 @@ GEM
       thor (>= 0.20.3, < 2.0)
     raindrops (0.19.1)
     rake (13.0.1)
+    ransack (2.3.2)
+      activerecord (>= 5.2.1)
+      activesupport (>= 5.2.1)
+      i18n
+      polyamorous (= 2.3.2)
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -482,6 +489,7 @@ DEPENDENCIES
   pry-rails
   puma (~> 3.12)
   rails (= 6.0.3)
+  ransack
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
