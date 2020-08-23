@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      school_user: 受講生
+    attributes:
+      school_user:
+        id: 生徒ID
+        name_at_school: 氏名
+        email: メールアドレス
+        school_id: 学校ID
+        start_at: アカウント開始日時
+        end_at: アカウント終了日時
+        activated: アカウント有効化
+        activated_at: アカウント有効日時
