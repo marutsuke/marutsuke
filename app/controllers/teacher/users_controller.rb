@@ -14,7 +14,6 @@ class Teacher::UsersController < Teacher::Base
   private
 
   def search_users
-
     @q = current_teacher_school
     .users.ransack(params[:q])
     @users = @q.result(distinct: true)

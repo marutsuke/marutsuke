@@ -5,6 +5,11 @@
 = search_form_for(@q, url: teacher_users_path) do |f|
   = f.label :name_cont, '名前'
   = f.search_field :name_cont
+  = f.label :school_building_users_school_building_id_eq, '所属校'
+  = f.select :school_building_users_school_building_id_eq,  current_teacher.decorate.school_building_select_array, { include_blank: '-', selected: '-' }, { prompt: '-'}
+  = f.hidden_field :school_building_users_main_eq, value: true
+  = f.label :lesson_group_users_lesson_group_id_eq, '受講講座'
+  = f.select :lesson_group_users_lesson_group_id_eq,  current_teacher.decorate.lesson_groups_search_select_array, { include_blank: '-', selected: '-' }, { prompt: '-'}
   = f.submit
 %hr
 - if @users.present?
