@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :lesson_groups, through: :lesson_group_users
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
+  paginates_per 20
+
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
