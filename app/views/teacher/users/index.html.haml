@@ -1,6 +1,7 @@
 =link_to '生徒を招待する', new_teacher_user_invitation_mail_path
 %hr
 - if @users.present?
+  = paginate @users
   %table.o-table-simple
     %thead.o-table-simple__thead
       %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
@@ -15,5 +16,7 @@
         %td.o-table-simple__td= link_to user.name, teacher_user_path(user)
         %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
         %td.o-table-simple__td= school_user.decorate.activated_at
+  = paginate @users
+
 - else
   %p 生徒はまだいません

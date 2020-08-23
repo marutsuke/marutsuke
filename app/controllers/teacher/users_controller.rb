@@ -4,7 +4,7 @@ class Teacher::UsersController < Teacher::Base
   def index
     @users = current_teacher_school
               .users
-              .includes(:lesson_groups, lesson_group_users: [:lesson_group])
+              .page(params[:page])
   end
 
   def show
