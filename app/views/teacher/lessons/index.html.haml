@@ -1,12 +1,14 @@
 %table.o-table-simple
   %thead.o-table-simple__thead
+    %th.o-table-simple__th= LessonGroup.human_attribute_name(:name)
     %th.o-table-simple__th= Lesson.human_attribute_name(:name)
     %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
     %th.o-table-simple__th 講座開始
     %th.o-table-simple__th 講座終了
   - @lessons.each do |lesson|
     %tr.o-table-simple__tr
-      %td.o-table-simple__td= link_to "#{ lesson.lesson_group.name }/#{lesson.name}", teacher_lesson_path(lesson)
+      %td.o-table-simple__td= link_to lesson.lesson_group.name, teacher_lesson_group_path(lesson)
+      %td.o-table-simple__td= link_to lesson.name, teacher_lesson_path(lesson)
       %td.o-table-simple__td= lesson.teacher.name
       %td.o-table-simple__td= lesson.decorate.start_time_with_y
       %td.o-table-simple__td= lesson.decorate.end_time_with_y
