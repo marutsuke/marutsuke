@@ -4,7 +4,7 @@ class Teacher::LessonsController < Teacher::Base
   def index
     @lessons_to_check = current_teacher.lessons.to_check
     @lessons = current_teacher_school
-               .lessons.includes(:teacher)
+               .lessons.includes(:teacher, :lesson_group)
   end
 
   def show
