@@ -1,3 +1,23 @@
+.o-search-form
+  %h3.o-search-form__title 授業検索
+  = search_form_for(@q, url: teacher_lessons_path) do |f|
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :lesson_group_name_cont, '講座名', class: 'm-label-and-input__label'
+        = f.search_field :lesson_group_name_cont, class: 'm-label-and-input__input'
+      .m-label-and-input
+        = f.label :name_cont, '授業回', class: 'm-label-and-input__label'
+        = f.search_field :name_cont, class: 'm-label-and-input__input'
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :teacher_name_cont, '担当講師', class: 'm-label-and-input__label'
+        = f.search_field :teacher_name_cont, class: 'm-label-and-input__input'
+    .o-search-form__button_area
+      .m-button-set
+        = link_to 'クリア', teacher_lessons_path, class: 'a-button a-button--cancel'
+        = f.submit '検索', class: 'a-button a-button--primary'
+
+
 - if @lessons.present?
   = paginate @lessons
   %table.o-table-simple
