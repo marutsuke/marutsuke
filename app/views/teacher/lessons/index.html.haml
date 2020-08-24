@@ -1,10 +1,12 @@
-%table.lesson_table.ml24
-  %thead.lesson_table__thead
-    %th.lesson_table__th= Lesson.human_attribute_name(:name)
-    %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-    %th.lesson_table__th 講座期間
+%table.o-table-simple
+  %thead.o-table-simple__thead
+    %th.o-table-simple__th= Lesson.human_attribute_name(:name)
+    %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
+    %th.o-table-simple__th 講座開始
+    %th.o-table-simple__th 講座終了
   - @lessons.each do |lesson|
-    %tr.lesson_table__tr
-      %td.lesson_table__tr= link_to "#{ lesson.lesson_group.name }/#{lesson.name}", teacher_lesson_path(lesson)
-      %td.lesson_table__tr= lesson.teacher.name
-      %td.lesson_table__tr= lesson.decorate.start_to_end_time
+    %tr.o-table-simple__tr
+      %td.o-table-simple__td= link_to "#{ lesson.lesson_group.name }/#{lesson.name}", teacher_lesson_path(lesson)
+      %td.o-table-simple__td= lesson.teacher.name
+      %td.o-table-simple__td= lesson.decorate.start_time_with_y
+      %td.o-table-simple__td= lesson.decorate.end_time_with_y
