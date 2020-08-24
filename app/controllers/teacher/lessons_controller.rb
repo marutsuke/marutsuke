@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Teacher::LessonsController < Teacher::Base
+  before_action :search_lessons, only: :index
   def index
-    @lessons_to_check = current_teacher.lessons.to_check
-    @lessons = current_teacher_school
-               .lessons.includes(:teacher)
+    @lessons = @lessons.page(params[:page])
   end
 
   def show
@@ -29,6 +28,14 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   private
+
+  def search_lessons
+    @q = current_teacher_school
+          .lessons
+          .includes(:teacher, lesson_group: [:school_building])
+          .ransack(params[:q])
+    @lessons = @q.result(distinct: true)
+  end
 
   def lesson_params
     params.require(:lesson).permit(

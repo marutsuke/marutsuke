@@ -12,6 +12,8 @@ class Lesson < ApplicationRecord
   belongs_to :lesson_group
   has_many :questions, dependent: :destroy
 
+  paginates_per 20
+
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
 
   scope :doing, lambda {
