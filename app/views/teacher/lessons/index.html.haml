@@ -12,6 +12,9 @@
       .m-label-and-input
         = f.label :teacher_name_cont, '担当講師', class: 'm-label-and-input__label'
         = f.search_field :teacher_name_cont, class: 'm-label-and-input__input'
+      .m-label-and-input
+        = f.label :lesson_group_school_building_name_cont, '校舎名', class: 'm-label-and-input__label'
+        = f.search_field :lesson_group_school_building_name_cont, class: 'm-label-and-input__input'
     .o-search-form__button_area
       .m-button-set
         = link_to 'クリア', teacher_lessons_path, class: 'a-button a-button--cancel'
