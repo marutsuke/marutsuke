@@ -25,12 +25,12 @@
   = paginate @lessons
   %table.o-table-simple
     %thead.o-table-simple__thead
-      %th.o-table-simple__th= SchoolBuilding.human_attribute_name(:name)
-      %th.o-table-simple__th= LessonGroup.human_attribute_name(:name)
-      %th.o-table-simple__th= Lesson.human_attribute_name(:name)
-      %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
-      %th.o-table-simple__th 講座開始
-      %th.o-table-simple__th 講座終了
+      %th.o-table-simple__th= sort_link(@q, :lesson_group_school_building_name, SchoolBuilding.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :lesson_group_name, LessonGroup.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :name, Lesson.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :teacher_name, Lesson.human_attribute_name(:teacher_id))
+      %th.o-table-simple__th= sort_link(@q, :start_at,  '講座開始')
+      %th.o-table-simple__th= sort_link(@q, :end_at,  '講座終了')
     - @lessons.each do |lesson|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= lesson.lesson_group.school_building.name
