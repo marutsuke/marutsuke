@@ -88,20 +88,23 @@
   &__slide_in {
     position: fixed;
     width: 100%;
+    max-width: 800px;
     bottom: -100%;
     background-color: #eeeeee;
     z-index: 10;
     transition: .5s;
     height: calc(100vh - 120px);
+    padding-bottom: 48px;
     &.open {
       transition: .5s;
       bottom: 0;
     }
     &__container {
       overflow: scroll;
-      padding: 20px 16px;
+      padding: 20px 16px 68px;
       margin: 0 auto;
       max-width: 800px;
+      height: 100%;
     }
     &--toggle {
       display: flex;
@@ -113,11 +116,42 @@
       z-index: 11;
       height: 48px;
       width: 100%;
+      max-width: 800px;
       border-top: 1px solid #eeeeee;
       transition: .5s;
       &:hover {
         cursor: pointer;
         background-color: #eeeeee;
+      }
+      &.open {
+        background-color: #eeeeee;
+        border-top: 1px solid #999999;
+    box-shadow: 12px 0 10px -6px rgba(0,0,0,.3);
+
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        border-left: 3px solid #999999;
+        border-top: 3px solid #999999;
+        width: 12px;
+        top: 22px;
+        right: 16px;
+        height: 12px;
+        transform: rotate(45deg);
+        &.open {
+          content: "";
+          position: absolute;
+          border-right: 3px solid #999999;
+          border-bottom: 3px solid #999999;
+          border-left: 0;
+          border-top: 0;
+          width: 12px;
+          top: 17px;
+          right: 16px;
+          height: 12px;
+          transform: rotate(45deg);
+        }
       }
     }
   }

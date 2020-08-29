@@ -6,6 +6,7 @@ $(document).on('turbolinks:load', function() {
   if (slideIn) {
     toggle.onclick = function() {
       slideIn.classList.toggle('open');
+      toggle.classList.toggle('open');
       if (slideIn.classList.contains('open')) {
         toggleMessage.innerText = '閉じる';
       } else {
