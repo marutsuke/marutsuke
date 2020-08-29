@@ -34,7 +34,7 @@
       %th.o-table-simple__th 所属校舎
       %th.o-table-simple__th アカウント有効日
     - @users.each do |user|
-      - school_user = current_teacher_school.school_users.find_by(user_id: user.id)
+      - school_user = user.school_user(current_teacher_school)
       %tr.o-table-simple__tr
         %td.o-table-simple__td= school_user.id
         %td.o-table-simple__td= link_to user.name, teacher_user_path(user)

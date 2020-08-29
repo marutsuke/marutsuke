@@ -61,6 +61,10 @@ class User < ApplicationRecord
     "#{main_school_building_name_in(school)}(所属校), #{sub_school_buildings_name_in(school)}"
   end
 
+  def school_user(school)
+    school_users.find_by(school_id: school.id)
+  end
+
 
   private
 
