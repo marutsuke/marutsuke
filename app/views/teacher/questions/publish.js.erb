@@ -1,0 +1,6 @@
+$("<%="#js-question_section--#{@question.id}"%>")
+  .html("<%= j render(
+    partial: 'teacher/questions/question_section_after_publish',
+    locals: {
+      question: @question
+    }) %>");

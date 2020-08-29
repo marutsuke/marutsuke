@@ -1,0 +1,19 @@
+.o-table-simple {
+  &__thead {
+    border-bottom: 1px solid $indigo_3;
+  }
+  &__th {
+    padding: 16px 24px;
+    color: $indigo_2;
+    & a {
+      color: $indigo_2;
+    }
+  }
+  &__tr {
+    border-bottom: 1px solid $indigo_5;
+  }
+  &__td {
+    padding: 16px 24px;
+    color: $indigo_0;
+  }
+}

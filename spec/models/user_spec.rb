@@ -41,20 +41,20 @@ RSpec.describe User, type: :model do
       let(:school_2) { create(:school, name: 'test_schol_2') }
       let!(:user) { create(:user, login_id: 'login_id', school: school_1) }
 
-      it '同じ学校で、同じ名前のログインIDは、ダメ' do
-        user_2 = build(:user, login_id: 'login_id', school: school_1)
-        expect(user_2).to_not be_valid
-      end
-      it '違う学校で、同じログインIDは、OK' do
-        user_3 = build(:user, login_id: 'login_id', school: school_2)
-        expect(user_3).to be_valid
-      end
+      # it '同じ学校で、同じ名前のログインIDは、ダメ' do
+      #   user_2 = build(:user, login_id: 'login_id', school: school_1)
+      #   expect(user_2).to_not be_valid
+      # end
+      # it '違う学校で、同じログインIDは、OK' do
+      #   user_3 = build(:user, login_id: 'login_id', school: school_2)
+      #   expect(user_3).to be_valid
+      # end
     end
   end
   it { is_expected.to have_secure_password }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:school) }
+    it { is_expected.to have_many(:school_users) }
   end
   describe 'before_save' do
     describe '#email_downcase' do
@@ -65,5 +65,22 @@ RSpec.describe User, type: :model do
     end
   end
   describe 'scope' do
+  end
+
+  describe '#main_school_building' do
+    let!(:user) { create(:user) }
+    let!(:school){ create(:school) }
+    let!(:school_2){ create(:school) }
+    let!(:school_user) { create(:school_user, user: user, school: school ) }
+    let!(:school_user_2) { create(:school_user, user: user, school: school_2 ) }
+    let!(:school_building_1) { create(:school_building, school: school) }
+    let!(:school_building_2) { create(:school_building, school: school) }
+    let!(:school_building_2_1) { create(:school_building, school: school_2) }
+    let!(:school_building_2_2) { create(:school_building, school: school_2) }
+    let!(:school_building_user_1){ create(:school_building_user, school_building: school_building_1, user: user, main: true) }
+    let!(:school_building_user_2){ create(:school_building_user, :sub, school_building: school_building_2, user: user) }
+    let!(:school_building_user_2_1){ create(:school_building_user, school_building: school_building_2_1, user: user, main: true) }
+    let!(:school_building_user_2_2){ create(:school_building_user, :sub, school_building: school_building_2_2, user: user, main: true) }
+    it { expect(user.main_school_building(school)).to eq school_building_1 }
   end
 end

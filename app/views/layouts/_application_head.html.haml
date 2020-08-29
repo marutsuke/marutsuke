@@ -8,10 +8,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-154235866-1', {
-        'custom_map': {'dimension1': 'current_school'},
-        'current_school': "#{current_user.present? ? current_user.school.name : ''}"
-      });
+      gtag('config', 'UA-154235866-1', {});
   %title Marutsuke
   = favicon_link_tag 'favicons/maru.ico'
   = favicon_link_tag 'favicons/maru180x180.png', rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png'

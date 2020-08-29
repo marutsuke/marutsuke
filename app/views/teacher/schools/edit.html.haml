@@ -1,6 +1,6 @@
 .user_form
-  = form_with model: [:teacher, current_school], local: true do |f|
-    =render 'shared/error_messages', model_object: current_school
+  = form_with model: [:teacher, current_teacher_school], local: true do |f|
+    =render 'shared/error_messages', model_object: current_teacher_school
     .user_form__label_and_input
       = f.label :name, class: 'required'
       = f.text_field :name
@@ -10,4 +10,4 @@
     = f.submit '更新する', class: 'user_form__submit_btn'
     .school_login_path.mt16
       .url 生徒用ログインURL
-      = link_to "#{root_url}login/#{current_school.login_path}", "#{root_url}login/#{current_school.login_path}"
+      = link_to "#{root_url}login/#{current_teacher_school.login_path}", "#{root_url}login/#{current_teacher_school.login_path}"

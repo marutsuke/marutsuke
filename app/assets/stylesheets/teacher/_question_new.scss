@@ -1,0 +1,93 @@
+.question_form_group {
+  width: 50vw;
+  min-width: 400px;
+  border-right: 1px solid $indigo_0;
+  padding: 24px;
+}
+.question_new_title {
+  display: flex;
+  &__lesson_title {
+    margin-right: 40px;
+  }
+}
+.question_new_questions {
+  height: 100vh;
+  width: 50vw;
+  min-width: 400px;
+  overflow: scroll;
+  padding: 16px;
+}
+.question_section {
+  min-width: 600px;
+  display: flex;
+  &__left {
+    min-width: 50%;
+    min-height: 600px;
+  }
+  &__text {
+    min-height: 540px;
+  }
+  &__buttons {
+    margin: 16px 0;
+    display: flex;
+  }
+  &__right {
+    width: 50%;
+  }
+  &__publish_flash {
+    color: $pink_0;
+  }
+  &__delete_button {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.question_form {
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  &__text_area {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  &__label_and_input {
+    & label {
+      margin-bottom: 8px;
+      display: block;
+      &.required:after {
+        content: "*";
+        padding-left: 2px;
+        color: $red;
+      }
+    }
+    & select {
+      width: 80px;
+      height: 32px;
+      margin-bottom: 16px;
+      background-color: white;
+    }
+  }
+  &__check_box {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    & input {
+      margin: 0;
+      width: 1rem;
+      height: 1rem;
+    }
+    & label {
+      margin: 0 0.5rem;
+    }
+  }
+  &__submit_btn {
+    width: 80%;
+    height: 40px;
+    border: solid 1px $gray;
+    background-color: $btn_blue;
+    color: $white;
+    margin-top: 16px;
+  }
+}

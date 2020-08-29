@@ -1,68 +1,26 @@
 # frozen_string_literal: true
 
 class Teacher::UsersController < Teacher::Base
+  before_action :search_users, only: :index
+
   def index
-    @users = current_school
-             .users
-             .includes(:lesson_groups, lesson_group_users: [:lesson_group])
-  end
-
-  def new
-    @user = User.new
-    @school_building_user = @user.school_building_users.build
-  end
-
-  def create
-    @user = current_school.users.new(user_params)
-    @user.email = nil if @user.email == ''
-    @school_building_user = @user.school_building_users.new(school_building_user_params)
-    if @user.save && @school_building_user.save
-      flash[:success] = "#{@user.name}を作成しました"
-      redirect_to new_teacher_user_path
-    else
-      render :new
-    end
+    @users = @users.page(params[:page])
   end
 
   def show
-    @user = current_school.users.find(params[:id]).decorate
-  end
-
-  def edit
-    @user = current_school.users.find(params[:id])
-  end
-
-  def update
-    @user = current_school.users.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = "#{@user.name}の情報を更新しました"
-      redirect_to edit_teacher_user_path(@user)
-    else
-      render :edit
-    end
+    @user = current_teacher_school.users.find(params[:id]).decorate
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(
-      :name,
-      :email,
-      :login_id,
-      :start_at_date,
-      :start_at_hour,
-      :start_at_min,
-      :end_at_date,
-      :end_at_hour,
-      :end_at_min,
-      :password,
-      :password_confirmation
-    )
+  def search_users
+    @q = current_teacher_school.users.ransack(params[:q])
+    @users = @q.result(distinct: true)
+    # セレクトボックスの初期値設定のため
+    if params[:q]
+      @lesson_group_id = params[:q][:lesson_group_users_lesson_group_id_eq]
+      @school_building_id = params[:q][:school_building_users_school_building_id_eq]
+    end
   end
 
-  def school_building_user_params
-    params.require(:user).permit(
-      school_building_user: [:school_building_id]
-    )[:school_building_user]
-  end
 end

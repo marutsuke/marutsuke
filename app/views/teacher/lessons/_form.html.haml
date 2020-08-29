@@ -6,7 +6,7 @@
       = f.text_field :name, value: ''
     .lesson_form__label_and_input
       = f.label :teacher_id, class: 'required'
-      = f.select :teacher_id, current_school.decorate.teachers_select_array, selected: current_teacher.id
+      = f.select :teacher_id, current_teacher_school.decorate.teachers_select_array, selected: current_teacher.id
     .lesson_form__label_and_input
       = f.label :start_at_date
       .lesson_form__datetime_select

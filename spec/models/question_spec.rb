@@ -6,15 +6,13 @@ RSpec.describe Question, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:lesson) }
   end
-  it { is_expected.to validate_presence_of(:title) }
-  it { is_expected.to validate_length_of(:title).is_at_most(20) }
 
   describe 'question_status関連のスコープ' do
     let!(:question) { create(:question) }
     it { expect(Question.checking).not_to include(question) }
     it { expect(Question.submit_again).not_to include(question) }
     it { expect(Question.complete).not_to include(question) }
-    it { expect(Question.not_submitted).to include(question) }
+    it { expect(Question.will_submit).to include(question) }
 
     context 'chekingの問題' do
       let!(:question_status) do

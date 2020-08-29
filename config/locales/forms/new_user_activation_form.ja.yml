@@ -1,0 +1,7 @@
+ja:
+  activemodel:
+    attributes:
+      new_user_activation_form:
+        name: 名前
+        password: パスワード
+        password_confirmation: パスワード確認

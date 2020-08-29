@@ -1,0 +1,29 @@
+nav.pagination {
+  margin: 8px 16px;
+  display: inline-block;
+  span.page,
+  span.first,
+  span.prev,
+  span.next,
+  span.last {
+    min-width: 24px;
+    padding: 4px;
+    text-align: center;
+    display: inline-block;
+    color: $indigo_2;
+    a {
+      color: $indigo_2;
+      text-decoration: none;
+    }
+  }
+  span.current {
+    background-color: $indigo_6;
+    color: $pink_1;
+    border: 1px solid $pink_1;
+    border-radius: 4px;
+  }
+  span.disabled {
+    background-color: $indigo_6;
+    color: $indigo_5;
+  }
+}
