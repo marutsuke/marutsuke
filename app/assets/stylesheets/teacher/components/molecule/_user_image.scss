@@ -1,0 +1,11 @@
+.m-user-image {
+  & img {
+    background-color: gray;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  &__name {
+    margin-top: 24px;
+  }
+}

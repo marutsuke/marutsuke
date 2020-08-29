@@ -1,3 +1,15 @@
+.m-user-image
+  = image_tag AnswerImage.last.image_url
+  .m-user-image__name
+    .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
+  .m-user-image__kana
+    .a-text-secondary.a-text-medium (ふりがなかりかり)
+  .m-user-image__id
+    .a-text-secondary.a-text-medium= "生徒ID: #{ @user.school_user(current_teacher_school).id }"
+
+
+
+
 .teacher_user_show
   .flex
     .teacher_user_show__th.mr8= User.human_attribute_name(:name) + ':'
