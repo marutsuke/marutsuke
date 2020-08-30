@@ -1,14 +1,67 @@
-.m-user-image
-  = image_tag AnswerImage.last.image_url
-  .m-user-image__name
-    .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
-  .m-user-image__kana
-    .a-text-secondary.a-text-medium (ふりがなかりかり)
-  .m-user-image__id
-    .a-text-secondary.a-text-medium= "生徒ID: #{ @user.school_user(current_teacher_school).id }"
-
-
-
+.o-profile
+  .o-profile__user_image
+    .m-user-image
+      = image_tag AnswerImage.last.image_url
+      .m-user-image__name
+        .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
+      .m-user-image__kana
+        .a-text-secondary.a-text-medium (ふりがなかりかり)
+      .m-user-image__id
+        .a-text-secondary.a-text-medium= "生徒ID: #{ @school_user.id }"
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge プロフィール
+        .m-heading__button
+          = link_to '編集', edit_teacher_user_path(@user), class: 'a-button a-button--edit'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 学年
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge 小5(仮)
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= User.human_attribute_name(:email)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @user.email
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 所属校
+        .m-profile-item__body
+          %ul
+            %li.a-text-primary.a-text-large= "#{ @user.main_school_building(current_teacher_school).name }(所属)"
+            - @user.sub_school_buildings(current_teacher_school).each  do |school_building|
+              %li.a-text-primary.a-text-large= school_building.name
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:start_at)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @school_user.start_at || '-'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:end_at)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @school_user.end_at || '-'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:activated_at)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @school_user.decorate.activated_at
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 受講講座
+        .m-profile-item__body
+          %ul
+            - @lesson_groups.each  do |lesson_group|
+              %li.a-text-primary.a-text-large= lesson_group.name
 
 .teacher_user_show
   .flex
