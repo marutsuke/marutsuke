@@ -1,21 +1,31 @@
 = render 'shared/lessons_header'
-= render 'shared/lesson_title'
 
-.p-4
-  = form_with model: @answer, local: true do |f|
+.user_answer_form
+  .user_answer_form__error_messages
     = render 'shared/error_messages', model_object: @answer
-    .answer_form__label_and_input
-      = f.label :text
-      = f.text_area :text
-    = f.fields_for @answer.answer_images.build do |ff|
-      .answer_images_form__label_and_input
-        .flex
-          = ff.label :image
-          %span (最大5MBまで・複数投稿できます)
-        = ff.file_field :image, multiple: true
-    = f.hidden_field :question_id, value: @question.id
-    = f.submit '登録する'
-  - current_user&.answers&.where(question_id: @question.id)&.each do |answer|
-    .taaaaaaa= answer.text
-    - answer&.answer_images&.each do |image|
-      .answer_image= image_tag image&.image_url, alt: '解答画像'
+  .user_answer_form__items
+    = form_with model: @answer, local: true do |f|
+      .user_answer_form__head
+        .user_answer_form__title 解答欄
+        .user_answer_form__image
+          = f.fields_for @answer.answer_images.build do |ff|
+            = image_tag 'add_photo_white.svg', class: 'user_answer_form__image_icon', onClick:"$('#upfile').click()"
+            = ff.file_field :image, multiple: true, style:"display: none;", id:"upfile"
+        #baloon
+          .user_answer_form__image_caption.d-none
+            %span (最大5MBまで・複数投稿できます)
+        .user_answer_form__submit
+          = f.submit '提出する', class: 'kadomaru-button--pk-wh'
+      .user_answer_form__body
+        = f.text_area :text, required: true, class: 'user_answer_form__input', placeholder: '解答を入力してください'
+        = f.hidden_field :question_id, value: @question.id
+
+    .user_answer_form__slide_in--toggle#slide_in_toggle
+      #slide_in_toggle_message 問題を見る
+    .user_answer_form__slide_in#slide_in
+      .user_answer_form__slide_in__container
+        .question_info
+          .question_info__title= "#{ @question.title } "
+          .question_info__text= "#{ @question.text } "
+          - if @question.image.present?
+            = image_tag @question&.image_url, alt: @question.title, class: 'question_info__image', id: "modal-open"

@@ -25,7 +25,7 @@
                 .comment_area__commented_at= "#{comment.decorate.commented_at}"
                 .comment_area__teacher_name= "#{comment.teacher.name}"
     - else
-      .comment_area__container.px-3.pb-2 解答が作成されていません。
+      .comment_area__container.px-3.p-2 解答が作成されていません。
   - if @question.image.present?
     #modal-mask.hidden
       %section#modal.hidden
