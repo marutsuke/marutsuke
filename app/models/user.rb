@@ -73,6 +73,9 @@ class User < ApplicationRecord
     school_users.find_by(school_id: school.id)
   end
 
+  def lesson_groups_in(school)
+    lesson_groups.for_school(school)
+  end
 
   private
 
