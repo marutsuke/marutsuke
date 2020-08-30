@@ -1,7 +1,10 @@
 .o-profile
   .o-profile__user_image
     .m-user-image
-      = image_tag AnswerImage.last.image_url
+      - if nil # ユーザーに画像を登録させる。
+        = image_tag AnswerImage.last.image_url
+      - else
+        .m-user-image__no-image No Image
       .m-user-image__name
         .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
       .m-user-image__kana

@@ -1,9 +1,16 @@
 .m-user-image {
   & img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  }
+  &__no-image {
     background-color: gray;
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    line-height: 120px;
+    text-align: center;
   }
   &__name {
     margin-top: 24px;
