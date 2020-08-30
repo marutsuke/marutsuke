@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Teacher::CommentsController < Teacher::Base
+
+  def index
+    @comments = current_teacher.comments
+  end
+
   def create
     @comment = current_teacher.comments.new(comment_params)
     if @comment.save

@@ -5,6 +5,7 @@
 @import "./mixin/mixin";
 @import "./mixin/flex";
 @import "./mixin/margin";
+@import "./mixin/opacity";
 @import "./mixin/text-decoration";
 @import "./modules/header";
 @import "./modules/footer";
@@ -24,7 +25,6 @@
 @import "./modules/lessons";
 @import "./modules/lessons_header";
 @import "./modules/lessons_tab";
-@import "./modules/teacher_sidebar";
 @import "./modules/errors";
 @import "./modules/button-components";
 @import "./modules/comment_area";

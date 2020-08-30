@@ -15,20 +15,23 @@ Rails.application.routes.draw do
   resources :users, only: [:new] do
     collection do
       get :mypage # テスト済み
+      post :change_school
     end
   end
+  resources :school_user_activations, only: %i[edit new create]
 
   namespace :teacher do
-    get '', to: 'lessons#index' # テスト済み
+    get '', to: 'top#top' # テスト済み
     get '/login', to: 'sessions#new' # テスト済み
     post '/login', to: 'sessions#create' # テスト済み
     delete '/logout', to: 'sessions#destroy' # テスト済み
-    resources :users, only: %i[index new create show edit update] do
+    resources :users, only: %i[index show  edit] do
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
     end
     get 'users', to: 'users#new' # テスト済み
     resources :schools, only: %i[edit update]
+    resources :manage_menus, only: %i[index]
     resources :teachers, only: %i[index new create edit update show] do # index, edit, update以外テスト済み
       member do
         post :resend_activation_mail
@@ -38,16 +41,21 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[index show new create] do # テスト済み
       resources :answer_checks, only: [] do
         get :checking, on: :collection
+        post :check, on: :collection
       end
       resources :questions, only: :new
     end
-    resources :questions, only: %i[create show] # createテスト済み
+
+    resources :questions, only: %i[create show edit update destroy] do # createテスト済み
+      post :publish, on: :member
+    end
     get '/questions', to: 'lessons#index' # テスト済み
     get '/teachers', to: 'teachers#new' # テスト済み
     resources :account_activations, only: %i[edit]
-    resources :comments, only: %i[create] # テスト済み
+    resources :comments, only: %i[index create] # テスト済み
     resources :school_buildings, only: %i[index new create]
     resources :lesson_groups, only: %i[index new show create edit update]
+    resources :user_invitation_mails, only: %i[new create]
   end
 
   namespace :admin do

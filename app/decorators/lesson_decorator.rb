@@ -13,21 +13,42 @@ class LessonDecorator < Draper::Decorator
     super&.strftime('%F-%R') || '未設定'
   end
 
-  def start_at_for_user
-    time_format(start_at) || '未設定'
-  end
-
-  def end_at_for_user
-    time_format(end_at) || '未設定'
-  end
-
   def start_to_end_time
     "#{time_format(start_at) || ''}  −  #{time_format(end_at) || ''}"
   end
 
-  def complete_rate
-    "#{complete_count}/"
+  def start_time
+    time_format(start_at) || '-'
   end
+
+  def end_time
+    time_format(end_at) || '-'
+  end
+
+  def start_time_with_y
+    time_format_with_y(start_at) || '-'
+  end
+
+  def end_time_with_y
+    time_format_with_y(end_at) || '-'
+  end
+
+  def display_order_select_array(selected: nil)
+    return (1..3) if questions.not_nil.blank?
+
+    used_display_orders = questions.pluck(:display_order)
+    max_display_order = used_display_orders.max
+    return_array = (1..max_display_order + 2).to_a - used_display_orders
+    if selected
+      return_array = (return_array + [selected]).sort
+    end
+    return_array
+  end
+
+  def name_with_lesson_group_and_school_building
+    "#{ lesson_group.name }/#{ name } (#{ lesson_group.school_building.name })"
+  end
+
 
   private
 
@@ -35,5 +56,11 @@ class LessonDecorator < Draper::Decorator
     return nil if time == '未設定' || time.nil?
 
     Time.parse(time).strftime("%-m/%-e(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
+  end
+
+  def time_format_with_y(time)
+    return nil if time == '未設定' || time.nil?
+
+    Time.parse(time).strftime("%-y/%-m/%-e(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
   end
 end

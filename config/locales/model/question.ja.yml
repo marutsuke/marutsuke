@@ -4,7 +4,6 @@ ja:
       question: 課題・問題
     attributes:
       question:
-        title: 課題名・問題名
-        text: 課題文・問題文
+        text: 内容
         image: 画像
-        display_order: 表示順位
+        display_order: 課題番号

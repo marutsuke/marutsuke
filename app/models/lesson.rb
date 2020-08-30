@@ -12,6 +12,8 @@ class Lesson < ApplicationRecord
   belongs_to :lesson_group
   has_many :questions, dependent: :destroy
 
+  paginates_per 20
+
   scope :going_to, -> { where('start_at > ?', Time.zone.now) }
 
   scope :doing, lambda {
@@ -39,6 +41,17 @@ class Lesson < ApplicationRecord
       .merge(Question.checking)
   }
 
+  scope :no_question, lambda {
+    left_outer_joins(:questions)
+      .where(questions: { id: nil })
+  }
+
+  scope :has_unpublish_question, lambda{
+    joins(:questions)
+      .includes(:questions)
+      .merge(Question.unpublish)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
@@ -51,7 +64,7 @@ class Lesson < ApplicationRecord
     checking_count.positive? ? 'lesson_table__tr--red' : 'lesson_table__tr'
   end
 
-  def not_submitted_count
+  def will_submit_count
     questions.size -
       checking_count -
       submit_again_count -
@@ -72,6 +85,10 @@ class Lesson < ApplicationRecord
 
   def first_question_to_check
     questions.checking_distinct.first
+  end
+
+  def question_statuses_to_check
+    QuestionStatus.checking.order_by_question_order_at(self)
   end
 
   private

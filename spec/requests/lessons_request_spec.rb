@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'LessonsController', type: :request do
   let(:user) { create(:user) }
-  before { user_log_in user }
+  let(:school) { user.schools.first }
+  before { user_log_in(user, school) }
   describe '/lessons#index' do
     it 'アクセスできる' do
       get lessons_path
@@ -15,12 +16,12 @@ RSpec.describe 'LessonsController', type: :request do
         user_log_out
         get lessons_path
         expect(response).to have_http_status 302
-        expect(response).to redirect_to school_login_path(login_path: user.school.login_path)
+        expect(response).to redirect_to school_login_path(login_path: school.login_path)
       end
     end
 
     context '開催予定の授業だけがある' do
-      let!(:going_lesson) { create(:lesson, :going_to, school: user.school) }
+      let!(:going_lesson) { create(:lesson, :going_to, school: school) }
       it '開催予定の授業が表示される' do
         get lessons_path(scope: 'going_to')
         expect(response).to have_http_status(200)
@@ -34,7 +35,7 @@ RSpec.describe 'LessonsController', type: :request do
       end
     end
     context '開催中の授業だけがある' do
-      let!(:doing_lesson) { create(:lesson, :doing, school: user.school) }
+      let!(:doing_lesson) { create(:lesson, :doing, school: school) }
       it '開催中の授業が表示される' do
         get lessons_path(scope: 'going_to')
         expect(response).to have_http_status(200)
@@ -48,7 +49,7 @@ RSpec.describe 'LessonsController', type: :request do
       end
     end
     context '開催終了の授業だけがある' do
-      let!(:done_lesson) { create(:lesson, :done, school: user.school) }
+      let!(:done_lesson) { create(:lesson, :done, school: school) }
       it '開催終了の授業が表示される' do
         get lessons_path(scope: 'going_to')
         expect(response).to have_http_status(200)
@@ -80,7 +81,7 @@ RSpec.describe 'LessonsController', type: :request do
   end
 
   describe '/lessons#show' do
-    let(:lesson) { create(:lesson, school: user.school) }
+    let(:lesson) { create(:lesson, school: school) }
     it 'アクセスできる' do
       get lesson_path(lesson)
       expect(response).to have_http_status(200)

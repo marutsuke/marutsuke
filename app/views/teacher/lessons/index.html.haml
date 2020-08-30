@@ -1,18 +1,42 @@
-- if @lessons_to_check.present?
-  .lessons_to_check
-    .lessons_to_check__title 未チェックがあります！！
-    .lessons_to_check__lessons
-      - @lessons_to_check.each do |lesson|
-        .lessons_to_check__lesson= link_to "#{ lesson.name }(#{ lesson.checking_count })", checking_teacher_lesson_answer_checks_path(lesson_id: lesson.id)
+.o-search-form
+  %h3.o-search-form__title 授業検索
+  = search_form_for(@q, url: teacher_lessons_path) do |f|
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :lesson_group_name_cont, '講座名', class: 'm-label-and-input__label'
+        = f.search_field :lesson_group_name_cont, class: 'm-label-and-input__input'
+      .m-label-and-input
+        = f.label :name_cont, '授業回', class: 'm-label-and-input__label'
+        = f.search_field :name_cont, class: 'm-label-and-input__input'
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :teacher_name_cont, '担当講師', class: 'm-label-and-input__label'
+        = f.search_field :teacher_name_cont, class: 'm-label-and-input__input'
+      .m-label-and-input
+        = f.label :lesson_group_school_building_name_cont, '校舎名', class: 'm-label-and-input__label'
+        = f.search_field :lesson_group_school_building_name_cont, class: 'm-label-and-input__input'
+    .o-search-form__button_area
+      .m-button-set
+        = link_to 'クリア', teacher_lessons_path, class: 'a-button a-button--cancel'
+        = f.submit '検索', class: 'a-button a-button--primary'
 
 
-%table.lesson_table.ml24
-  %thead.lesson_table__thead
-    %th.lesson_table__th= Lesson.human_attribute_name(:name)
-    %th.lesson_table__th= Lesson.human_attribute_name(:teacher_id)
-    %th.lesson_table__th 講座期間
-  - @lessons.each do |lesson|
-    %tr.lesson_table__tr
-      %td.lesson_table__tr= link_to "#{ lesson.lesson_group.name }/#{lesson.name}", teacher_lesson_path(lesson)
-      %td.lesson_table__tr= lesson.teacher.name
-      %td.lesson_table__tr= lesson.decorate.start_to_end_time
+- if @lessons.present?
+  = paginate @lessons
+  %table.o-table-simple
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th= sort_link(@q, :lesson_group_school_building_name, SchoolBuilding.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :lesson_group_name, LessonGroup.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :name, Lesson.human_attribute_name(:name))
+      %th.o-table-simple__th= sort_link(@q, :teacher_name, Lesson.human_attribute_name(:teacher_id))
+      %th.o-table-simple__th= sort_link(@q, :start_at,  '講座開始')
+      %th.o-table-simple__th= sort_link(@q, :end_at,  '講座終了')
+    - @lessons.each do |lesson|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= lesson.lesson_group.school_building.name
+        %td.o-table-simple__td= link_to lesson.lesson_group.name, teacher_lesson_group_path(lesson)
+        %td.o-table-simple__td= link_to lesson.name, teacher_lesson_path(lesson)
+        %td.o-table-simple__td= link_to lesson.teacher.name, teacher_teacher_path(lesson.teacher)
+        %td.o-table-simple__td= lesson.decorate.start_time_with_y
+        %td.o-table-simple__td= lesson.decorate.end_time_with_y
+  = paginate @lessons

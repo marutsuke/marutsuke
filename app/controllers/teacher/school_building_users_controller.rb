@@ -12,7 +12,7 @@ class Teacher::SchoolBuildingUsersController < Teacher::Base
       @user
       .school_building_users
       .new(school_building_user_params)
-    if @user.main_school_building.nil?
+    if @user.main_school_building(current_teacher_school).nil?
       @school_building_user.update(main: true)
     end
     if @school_building_user.save
@@ -45,6 +45,6 @@ class Teacher::SchoolBuildingUsersController < Teacher::Base
   end
 
   def set_user
-    @user = current_school.users.find(params[:user_id])
+    @user = current_teacher_school.users.find(params[:user_id])
   end
 end

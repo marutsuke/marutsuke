@@ -4,9 +4,9 @@
 
 # environment
 
-### Rails 5.2.3
+### Rails 6.0.3
 
-### ruby 2.6.3
+### ruby 2.7.1
 
 # Overview
 
@@ -20,16 +20,6 @@
 
 ### ・必要十分な機能性
 
-## 教員にできること
-
-### ・教員の作成
-
-### ・生徒の作成
-
-### ・授業の作成・設定
-
-### ・授業の課題の設定
-
 ### ・生徒の提出物に評価・コメントができる
 
 ## 生徒にできること
@@ -38,20 +28,10 @@
 
 ### ・教員からの評価を受け取る
 
-# フロー図
+# ER 図 (ユーザー・教員周り 2020/8/22)
 
-# ER 図 (2020/7/7 現在)
+![ER図](wiki/images/user_teacher_school_er.png "user_teacher_school_er")
 
-![ER図](wiki/images/er11.png "fllow")
+# ER 図 (授業・ユーザー周り 2020/8/22)
 
-## ログイン・サインアップフロー
-
-![ログイン・サインアップフロー](wiki/images/login_sign_up_flow.png "flow")
-
-## 学校&教員作成フロー(6/20)
-
-![学校&教員作成フロー](wiki/images/school_and_teacher_create_flow.png "flow")
-
-## レッスンフロー
-
-![レッスンフロー](wiki/images/lesson_flow.png "flow")
+![ER図](wiki/images/lessons_er.png "lessons_er")

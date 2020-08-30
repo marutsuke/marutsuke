@@ -10,7 +10,6 @@ RSpec.describe 'Teacher::Questions', type: :request do
     let(:lesson) { create(:lesson, teacher: teacher, school: teacher.school) }
     let(:question_params) do
       {
-        title: 'テスト',
         text: 'aaaaaaaaaaaaaa',
         image: '',
         lesson_id: lesson.id
@@ -21,7 +20,7 @@ RSpec.describe 'Teacher::Questions', type: :request do
         post teacher_questions_path, params: { question: question_params }
       end.to change(Question, :count).by(1)
       expect(response).to have_http_status 302
-      expect(response).to redirect_to teacher_lesson_path(lesson)
+      expect(response).to redirect_to new_teacher_lesson_question_path(lesson)
     end
   end
 end

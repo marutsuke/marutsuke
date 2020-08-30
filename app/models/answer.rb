@@ -10,4 +10,8 @@ class Answer < ApplicationRecord
   scope :new_order, -> {
     order(created_at: :desc)
   }
+
+  def question_status
+    QuestionStatus.find_by(user_id: user_id, question_id: question_id)
+  end
 end

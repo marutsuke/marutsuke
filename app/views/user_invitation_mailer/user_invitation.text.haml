@@ -1,0 +1,5 @@
+= "#{@school_user.user.name}さん"
+= "#{ @school_user.school.name }への招待が届いています"
+\参加する場合は、以下よりアクセスをしましょう！
+
+= edit_school_user_activation_url(@school_user, token: @school_user.school_user_activation_token)

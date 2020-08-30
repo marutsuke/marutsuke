@@ -35,7 +35,7 @@ module Teacher::SessionsHelper
     end
   end
 
-  def current_school
+  def current_teacher_school
     current_teacher&.school
   end
 end

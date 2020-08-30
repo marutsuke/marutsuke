@@ -2,14 +2,17 @@
 
 class Question < ApplicationRecord
   mount_uploader :image, ImageUploader
-
-  validates :title, presence: true, length: { maximum: 20 }
+  validates :text, presence: true, length: { maximum: 3000 }
   validate :image_size
   belongs_to :lesson
   has_many :answers
   has_many :question_statuses
+
   scope :not_nil, -> { where.not(id: nil) }
-  scope :display_order, -> { where.not(id: nil).order(display_order: :asc) }
+  scope :display_order, -> { not_nil.order(display_order: :asc) }
+  scope :published, -> { where(publish: true) }
+  scope :unpublish, -> { where(publish: false) }
+
 
   scope :checking, lambda {
     joins(:question_statuses)
@@ -44,10 +47,15 @@ class Question < ApplicationRecord
       .where(question_statuses: { status: :complete })
   }
 
-  scope :not_submitted, lambda {
+  scope :will_submit, lambda {
     left_outer_joins(:question_statuses)
       .where(question_statuses: { id: nil })
   }
+
+  def title
+    title = text[0..10]
+    title += '...' if text.length  > 10
+  end
 
   private
 
