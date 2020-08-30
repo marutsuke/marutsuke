@@ -8,6 +8,6 @@ class SchoolUserDecorator < Draper::Decorator
   end
 
   def activated_at
-    super&.strftime('%F') || '未設定'
+    super&.strftime('%F-%R') || '未設定'
   end
 end

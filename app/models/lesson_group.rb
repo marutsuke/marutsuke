@@ -22,4 +22,9 @@ class LessonGroup < ApplicationRecord
   scope :for_school_buildings_belonged_to_user, lambda { |user|
     where(school_building_id: user.school_building_users.pluck(:school_building_id))
   }
+
+  scope :for_school, lambda { |school|
+    joins(:school_building).merge(school.school_buildings)
+  }
+
 end
