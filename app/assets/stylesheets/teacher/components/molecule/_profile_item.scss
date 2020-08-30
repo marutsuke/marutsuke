@@ -1,0 +1,16 @@
+.m-profile-item {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid $indigo_5;
+  &__title {
+    padding: 8px;
+    width: 240px;
+    display: flex;
+    align-items: center;
+  }
+  &__body {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+  }
+}

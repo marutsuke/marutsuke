@@ -1,0 +1,12 @@
+.m-heading {
+  display: flex;
+  min-width: 600px;
+  justify-content: space-between;
+  padding: 8px;
+  &--line {
+    border-bottom: 1px solid $indigo_0;
+  }
+  &__text {
+    font-weight: bold;
+  }
+}

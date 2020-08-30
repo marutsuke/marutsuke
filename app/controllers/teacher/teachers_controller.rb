@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::TeachersController < Teacher::Base
-  before_action :set_teacher, only: %i[show edit update]
+  before_action :set_teacher, only: %i[show edit update resend_activation_mail]
 
   def index
     @teachers = current_teacher_school.teachers

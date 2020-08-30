@@ -61,6 +61,21 @@ class User < ApplicationRecord
     "#{main_school_building_name_in(school)}(所属校), #{sub_school_buildings_name_in(school)}"
   end
 
+  def school_buildings_main_order(school)
+    school_buildings.includes(:school_building_users).where(school_id: school.id).order('school_building_users.main desc')
+  end
+
+  def sub_school_buildings(school)
+    school_buildings.includes(:school_building_users).where(school_id: school.id).where('school_building_users.main = ?', false)
+  end
+
+  def school_user(school)
+    school_users.find_by(school_id: school.id)
+  end
+
+  def lesson_groups_in(school)
+    lesson_groups.for_school(school)
+  end
 
   private
 
