@@ -83,4 +83,29 @@ RSpec.describe User, type: :model do
     let!(:school_building_user_2_2){ create(:school_building_user, :sub, school_building: school_building_2_2, user: user, main: true) }
     it { expect(user.main_school_building(school)).to eq school_building_1 }
   end
+
+  describe '#lesson_groups_in(school)' do
+    subject { user.lesson_groups_in(school) }
+    let(:user) { create(:user) }
+    let!(:school){ create(:school) }
+    let!(:school_2){ create(:school) }
+    let!(:school_building) { create(:school_building, school: school) }
+    let!(:school_building_in_other_school) { create(:school_building, school: school_2) }
+
+    context "その学校の講座の時、含む" do
+      let!(:lesson_group) {  create(:lesson_group, school_building: school_building) }
+      let!(:lesson_group_user) { create(:lesson_group_user, user: user,  lesson_group: lesson_group) }
+
+      it { is_expected.to include(lesson_group)}
+    end
+
+    context "他の学校の講座の時、含まない" do
+      let!(:lesson_group) {  create(:lesson_group, school_building: school_building_in_other_school) }
+      let!(:lesson_group_user) { create(:lesson_group_user, user: user,  lesson_group: lesson_group) }
+
+      it { is_expected.not_to include(lesson_group)}
+    end
+
+  end
+
 end
