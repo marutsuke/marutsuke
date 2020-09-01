@@ -71,8 +71,8 @@ class LineApiController < UserBase
       req.url uri.path
       req.headers['Authorization'] = "Bearer #{access_token}"
     end
-    user_id = JSON.parse(response.body)["userId"]
-    p user_id
+    line_user_id = JSON.parse(response.body)["userId"]
+    current_user.update(line_user_id: line_user_id)
   end
 
   def get_user_id_redirect_url
