@@ -8,4 +8,8 @@
   = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
   =f.submit '学校を切り替える', class: 'ml24'
 
+
+= image_tag ('line_btn_base.png'), art: 'line'
+= link_to 'LINE通知登録', line_api_index_path, method: :post
+
 .mt40= link_to 'ログアウト', logout_path, method: :delete

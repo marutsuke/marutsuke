@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   attr_accessor :user_remember_token,
+                :user_line_state_token,
                 :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min
   before_save { email&.downcase! }
@@ -47,6 +48,17 @@ class User < ApplicationRecord
     return false if remember_digest.nil?
 
     BCrypt::Password.new(remember_digest).is_password?(user_remember_token)
+  end
+
+  def line_state_save
+    self.user_line_state_token = self.class.new_token
+    update_attribute(:line_state_digest, self.class.digest(user_line_state_token))
+  end
+
+  def line_authenticated?(user_line_state_token)
+    return false if line_state_digest.nil?
+
+    BCrypt::Password.new(line_state_digest).is_password?(user_line_state_token)
   end
 
   def forget
