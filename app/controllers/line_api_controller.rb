@@ -1,3 +1,6 @@
+require 'net/http'
+require 'uri'
+
 class LineApiController < UserBase
   include LineApiHelper
 
@@ -13,8 +16,8 @@ class LineApiController < UserBase
 
     user_line_state_token = params[:state]
     if current_user&.line_authenticated?(user_line_state_token)
-      # get_and_save_user_access_token 設定必須
       flash[:success] = 'LINE通知を設定しました！'
+      get_and_save_user_access_token
       redirect_to mypage_users_path
     else
       flash[:success] = 'LINE通知の設定に失敗しました。'
@@ -33,6 +36,50 @@ class LineApiController < UserBase
   end
 
   def get_and_save_user_access_token
-    # アクセストークンwp
+    client_secret = Rails.application.credentials.line_login[:channel_secret]
+
+    uri = URI.parse("https://api.line.me/oauth2/v2.1/token")
+    request = Net::HTTP::Post.new(uri)
+    request.content_type = "application/x-www-form-urlencoded"
+    request.set_form_data(
+      grant_type: 'authorization_code',
+      code: params[:code],
+      redirect_uri:redirect_uri,
+      client_id: Rails.application.credentials.line_login[:channel_id],
+      client_secret: client_secret,
+    )
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+    access_token = JSON.parse(response.body)["access_token"]
+
+    save_line_user_id(access_token)
+
+  end
+
+  def save_line_user_id(access_token)
+    client_secret = Rails.application.credentials.line_login[:channel_secret]
+
+    uri = URI.parse("https://api.line.me/v2/profile")
+    http = Faraday.new(url: "#{uri.scheme}://#{uri.host}")
+    response = http.get do |req|
+      req.url uri.path
+      req.headers['Authorization'] = "Bearer #{access_token}"
+    end
+    user_id = JSON.parse(response.body)["userId"]
+    p user_id
+  end
+
+  def get_user_id_redirect_url
+    if Rails.env.production?
+      'https://marutsukeapp.com/users/mypage'
+    elsif Rails.env.development?
+      'http://localhost:3000/users/mypage'
+    end
   end
 end
