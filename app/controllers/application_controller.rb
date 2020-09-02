@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include LineApiHelper
 
   class Forbidden < ActionController::ActionControllerError; end
   class LoginRequired < ActionController::ActionControllerError; end

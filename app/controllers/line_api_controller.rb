@@ -2,7 +2,6 @@ require 'net/http'
 require 'uri'
 
 class LineApiController < UserBase
-  include LineApiHelper
 
   def create
     if current_user.line_state_save
@@ -40,10 +39,13 @@ class LineApiController < UserBase
       text: 'hello world from line'
     }
     client = Line::Bot::Client.new { |config|
-      config.channel_secret = "<channel secret>"
-      config.channel_token = "<channel access token>"
-    }
+      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
 
+      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
+    }
+    response = client.push_message(current_user.line_user_id, message)
+    flash[:success] = 'LINEメッセージを送ったはず'
+    redirect_to mypage_users_path
   end
 
   private

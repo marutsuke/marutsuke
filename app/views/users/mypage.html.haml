@@ -12,4 +12,7 @@
 = image_tag ('line_btn_base.png'), art: 'line'
 = link_to 'LINE通知登録', line_api_index_path, method: :post
 
+.mt40
+  = link_to 'LINE通知テスト', send_message_line_api_index_path, method: :post
+
 .mt40= link_to 'ログアウト', logout_path, method: :delete
