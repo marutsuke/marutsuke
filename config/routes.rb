@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     end
   end
   resources :school_user_activations, only: %i[edit new create]
-  resources :line_api, only: %i[create new]
+  resources :line_api, only: %i[create new] do
+    collection do
+      post :send_message
+    end
+  end
 
   namespace :teacher do
     get '', to: 'top#top' # テスト済み

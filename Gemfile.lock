@@ -216,6 +216,7 @@ GEM
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
     kgio (2.11.3)
+    line-bot-api (1.16.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -487,6 +488,7 @@ DEPENDENCIES
   jquery-rails
   jwt
   kaminari
+  line-bot-api
   listen (>= 3.0.5, < 3.2)
   mailcatcher
   mini_magick

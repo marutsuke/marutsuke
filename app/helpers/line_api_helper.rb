@@ -4,9 +4,10 @@ module LineApiHelper
 
   def line_authorize_request_url(state)
     client_id = Rails.application.credentials.line_login[:channel_id]
+    bot_prompt = 'aggressive'
     scope = 'profile'
 
-    "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&scope=#{scope}"
+    "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&bot_prompt=#{bot_prompt}&scope=#{scope}&prompt=consent"
   end
 
   def redirect_uri

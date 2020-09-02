@@ -2,7 +2,6 @@ require 'net/http'
 require 'uri'
 
 class LineApiController < UserBase
-  include LineApiHelper
 
   def create
     if current_user.line_state_save
@@ -15,14 +14,38 @@ class LineApiController < UserBase
     return if error_present?
 
     user_line_state_token = params[:state]
+    friendship_status_changed = params[:friendship_status_changed] ==  'true'
+
     if current_user&.line_authenticated?(user_line_state_token)
-      flash[:success] = 'LINE通知を設定しました！'
-      get_and_save_user_access_token
-      redirect_to mypage_users_path
+      if get_and_save_line_user_id && friendship_status_changed
+        flash[:success] = 'LINE通知を設定しました！'
+        redirect_to mypage_users_path
+      else
+        flash[:info] = 'すでに設定されていました'
+        redirect_to mypage_users_path
+      end
     else
-      flash[:success] = 'LINE通知の設定に失敗しました。'
+      flash[:danger] = 'LINE通知の設定に失敗しました。'
       redirect_to mypage_users_path
     end
+  end
+
+  def send_message
+    return unless current_user.line_user_id
+
+
+    message = {
+      type: 'text',
+      text: 'hello world from line'
+    }
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
+
+      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
+    }
+    response = client.push_message(current_user.line_user_id, message)
+    flash[:success] = 'LINEメッセージを送ったはず'
+    redirect_to mypage_users_path
   end
 
   private
@@ -35,9 +58,9 @@ class LineApiController < UserBase
     end
   end
 
-  def get_and_save_user_access_token
+  def get_and_save_line_user_id
     client_secret = Rails.application.credentials.line_login[:channel_secret]
-
+    client_id = Rails.application.credentials.line_login[:channel_id]
     uri = URI.parse("https://api.line.me/oauth2/v2.1/token")
     request = Net::HTTP::Post.new(uri)
     request.content_type = "application/x-www-form-urlencoded"
@@ -45,7 +68,7 @@ class LineApiController < UserBase
       grant_type: 'authorization_code',
       code: params[:code],
       redirect_uri:redirect_uri,
-      client_id: Rails.application.credentials.line_login[:channel_id],
+      client_id: client_id,
       client_secret: client_secret,
     )
 
@@ -59,7 +82,6 @@ class LineApiController < UserBase
     access_token = JSON.parse(response.body)["access_token"]
 
     save_line_user_id(access_token)
-
   end
 
   def save_line_user_id(access_token)
