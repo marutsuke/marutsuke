@@ -7,7 +7,7 @@ module LineApiHelper
     bot_prompt = 'aggressive'
     scope = 'profile'
 
-    "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&bot_prompt=#{bot_prompt}&scope=#{scope}"
+    "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&bot_prompt=#{bot_prompt}&scope=#{scope}&prompt=consent"
   end
 
   def redirect_uri
