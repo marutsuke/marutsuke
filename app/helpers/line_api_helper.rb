@@ -18,4 +18,19 @@ module LineApiHelper
     end
   end
 
+  def simple_line_message(to:, text:)
+    return if to.line_user_id.nil?
+
+    message = {
+      type: 'text',
+      text: text
+    }
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
+
+      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
+    }
+    client.push_message(to.line_user_id, message)
+  end
+
 end

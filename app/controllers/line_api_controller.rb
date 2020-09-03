@@ -34,16 +34,7 @@ class LineApiController < UserBase
     return unless current_user.line_user_id
 
 
-    message = {
-      type: 'text',
-      text: 'hello world from line'
-    }
-    client = Line::Bot::Client.new { |config|
-      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
-
-      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
-    }
-    response = client.push_message(current_user.line_user_id, message)
+    response = simple_line_message(to: current_user, text: 'テスト')
     flash[:success] = 'LINEメッセージを送ったはず'
     redirect_to mypage_users_path
   end
