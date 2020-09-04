@@ -32,5 +32,4 @@ module LineApiHelper
     }
     client.push_message(to.line_user_id, message)
   end
-
 end
