@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
+class UsersController < UserBase
   def mypage; end
 
   def change_school
@@ -8,5 +8,9 @@ class UsersController < ApplicationController
     user_log_in(current_user, school)
     flash[:success] = "#{school.name}に切り替えました"
     redirect_to root_path
+  end
+
+  def edit
+
   end
 end

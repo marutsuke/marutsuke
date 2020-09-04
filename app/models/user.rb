@@ -29,6 +29,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
   paginates_per 20
+  mount_uploader :image, ImageUploader
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

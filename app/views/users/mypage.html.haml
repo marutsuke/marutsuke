@@ -1,3 +1,5 @@
+= render 'shared/lessons_header'
+
 .div=  "#{current_user.name}さん"
 .div= "現在の学校: #{ current_school.name }"
 %hr
@@ -15,6 +17,10 @@
 .mt40
   = link_to 'LINE通知テスト', send_message_line_api_index_path, method: :post
 
+.mt40
+  = link_to '情報編集', edit_users_path
+
+
+
 .mt40= link_to 'ログアウト', logout_path, method: :delete
 
-.mt40= link_to 'トップ', root_path

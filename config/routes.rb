@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   resources :answers, only: %i[show create]
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
-  resources :users, only: [:new] do
+  resources :users, only: [] do
     collection do
       get :mypage # テスト済み
+      get :edit
+      patch :update
       post :change_school
     end
   end
