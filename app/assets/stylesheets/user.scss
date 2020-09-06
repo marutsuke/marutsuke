@@ -1,7 +1,15 @@
 @import "./application.scss";
 @import "./user/user_layout";
-@import "./user/components/molecule/header";
+
+// atoms
 @import "./user/components/atom/text";
+@import "./user/components/atom/user_image";
+
+// molecules
+@import "./user/components/molecule/header";
 @import "./user/components/molecule/heading";
-@import "./user/components/organism/profile";
 @import "./user/components/molecule/profile_item";
+@import "./user/components/molecule/user_image_form";
+
+// organism
+@import "./user/components/organism/profile";

@@ -1,0 +1,48 @@
+.m-user-image-form {
+  display: flex;
+  &__iamge {
+    margin-right: 24px;
+  }
+  &__file-field {
+    display: none;
+  }
+  &__file-field--show {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  &__label {
+    display: flex;
+    align-items: center;
+  }
+  &__label-text {
+    display: none;
+    &--display {
+      display: block;
+      color: $moss_3;
+    }
+  }
+  &__icon {
+    border-radius: 50%;
+    color: $white_green;
+    background-color: $white_green;
+    border: 3px solid $moss_3;
+  }
+  &__submit-button {
+    display: none;
+    &--display {
+      background-color: $green_0;
+      color: $white_green;
+      font-size: 1.25rem;
+      display: block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      width: 80px;
+      height: 40px;
+      border: none;
+    }
+  }
+}

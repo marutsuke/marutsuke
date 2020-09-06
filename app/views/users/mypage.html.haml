@@ -4,9 +4,33 @@
     .m-heading-line
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 基本情報
-        -# = link_to edit_users_path do
-          -# %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
+        = link_to edit_users_path do
+          %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
   .o-profile__body
+    .o-profile__item
+      .m-profile-item
+        = form_with model: current_user, url: users_path, local: true do |f|
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 画像
+          .m-profile-item__body
+            .m-profile-item__item
+              .m-user-image-form
+                .m-user-image-form__image
+                  - if current_user.image.present? # ユーザーに画像を登録させる。
+                    - submit_button_word = '変更'
+                    = image_tag current_user.image_url, class: 'a-user-image'
+                  - else
+                    - submit_button_word = '登録'
+                    .a-user-image--no-image No Image
+                .m-user-image-form__form
+                  = render 'shared/error_messages', model_object: current_user
+                  = f.label :upfile, class: 'm-user-image-form__label' do
+                    = image_tag 'add_photo_black.svg', class: 'm-user-image-form__icon'
+                    #js-label--text.m-user-image-form__label-text 画像が選択されました
+                  = f.file_field :image, id: 'user_upfile', onChange: "getElementById('js-label--text').classList.add('m-user-image-form__label-text--display'); getElementById('js-user-image-submit').classList.add('m-user-image-form__submit-button--display');", class: 'm-user-image-form__file-field'
+                  = hidden_field_tag :button_word, submit_button_word
+                  = f.submit submit_button_word, class:'m-user-image-form__submit-button', id: 'js-user-image-submit'
+
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
