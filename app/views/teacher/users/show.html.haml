@@ -2,8 +2,8 @@
   .o-profile__user_image
     .m-user-image
       .m-user-image__image
-        - if nil # ユーザーに画像を登録させる。
-          = image_tag AnswerImage.last.image_url, class: 'a-user-image'
+        - if @user.image.present? # ユーザーに画像を登録させる。
+          = image_tag @user.image_url, class: 'a-user-image'
         - else
           .a-user-image--no-image No Image
       .m-user-image__name
