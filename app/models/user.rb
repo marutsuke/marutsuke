@@ -15,6 +15,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
   validates :password, presence: true, length: { minimum: 6 }, on: :create
+  validate :image_size
+
   has_secure_password
 
   has_many :answers
@@ -29,6 +31,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
   paginates_per 20
+  mount_uploader :image, ImageUploader
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -110,5 +113,10 @@ class User < ApplicationRecord
     if end_at_date.present? && end_at_hour.present? && end_at_min.present?
       self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
     end
+  end
+
+  private
+  def image_size
+    errors.add(:image, 'サイズは5MBまでです。') if image.size > 5.megabytes
   end
 end

@@ -2,21 +2,21 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500;800&family=Open+Sans:wght@300;400;600;800&display=swap");
 @import "./mixin/mixin";
 @import "./mixin/flex";
 @import "./mixin/margin";
 @import "./mixin/opacity";
 @import "./mixin/text-decoration";
-@import "./modules/header";
-@import "./modules/footer";
 @import "./config/color";
+
+// 本当は以下を消したい
 @import "./modules/admin_new_user";
 @import "./modules/admin_edit_user";
 @import "./modules/session_login";
 @import "./modules/user_form";
 @import "./modules/object_form";
 @import "./modules/error_message";
-@import "./modules/debug";
 @import "./modules/users_account_table";
 @import "./modules/lesson_table_card";
 @import "./modules/question_infos";

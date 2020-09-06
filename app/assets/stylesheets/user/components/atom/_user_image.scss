@@ -1,0 +1,15 @@
+.a-user-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+.a-user-image--no-image {
+  background-color: $moss_6;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  line-height: 120px;
+  text-align: center;
+  border: 1px solid $moss_4;
+  color: $moss_4;
+}

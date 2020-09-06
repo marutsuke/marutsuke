@@ -1,20 +1,138 @@
-.div=  "#{current_user.name}さん"
-.div= "現在の学校: #{ current_school.name }"
-%hr
 
-=form_with url: change_school_users_path do |f|
-  .div
-    = f.label :school_id, '学校切り替え'
-  = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
-  =f.submit '学校を切り替える', class: 'ml24'
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 基本情報
+        = link_to edit_users_path do
+          %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
+  .o-profile__body
+    .o-profile__item
+      .m-profile-item
+        = form_with model: current_user, url: users_path, local: true do |f|
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 画像
+          .m-profile-item__body
+            .m-profile-item__item
+              .m-user-image-form
+                .m-user-image-form__image
+                  - if current_user.image.present? # ユーザーに画像を登録させる。
+                    - submit_button_word = '変更'
+                    = image_tag current_user.image_url, class: 'a-user-image'
+                  - else
+                    - submit_button_word = '登録'
+                    .a-user-image--no-image No Image
+                .m-user-image-form__form
+                  = render 'shared/error_messages', model_object: current_user
+                  = f.label :upfile, class: 'm-user-image-form__label' do
+                    = image_tag 'add_photo_black.svg', class: 'm-user-image-form__icon'
+                    #js-label--text.m-user-image-form__label-text 画像が選択されました
+                  = f.file_field :image, id: 'user_upfile', onChange: "getElementById('js-label--text').classList.add('m-user-image-form__label-text--display'); getElementById('js-user-image-submit').classList.add('m-user-image-form__submit-button--display');", class: 'm-user-image-form__file-field'
+                  = hidden_field_tag :button_word, submit_button_word
+                  = f.submit submit_button_word, class:'m-user-image-form__submit-button', id: 'js-user-image-submit'
 
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 名前
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.name
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium かな
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.name_kana || '---'
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium メールアドレス
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.email
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 生年月日
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.birth_day || '---'
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 学校・塾情報
+  .o-profile__body
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 学校名
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_school.name
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 所属校
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= "#{ current_user.main_school_building(current_school).name} (所属)"
+          - current_user.sub_school_buildings(current_school).each do |school_building|
+            .m-profile-item__item
+              .a-text-primary.a-text-xlarge= school_building.name
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 受講講座
+        .m-profile-item__body
+          -if current_user.lesson_groups_in(current_school).blank?
+            .m-profile-item__item
+              .a-text-secondary.a-text-small 受講講座はまだありません
+          - current_user.lesson_groups_in(current_school).each do |lesson_group|
+            .m-profile-item__item
+              .a-text-primary.a-text-xlarge= lesson_group.name
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium= SchoolUser.human_attribute_name(:activated_at)
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.school_user(current_school).decorate.activated_at
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge その他設定
+  .o-profile__body
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium LINE連携
+        .m-profile-item__body
+          .m-profile-item__item
+            = image_tag ('line_btn_base.png'), art: 'line'
+            = link_to 'LINE通知登録', line_api_index_path, method: :post
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium LINE連携確認
+        .m-profile-item__body
+          .m-profile-item__item
+            = link_to 'ここを押すとメッセージが届きます。', send_message_line_api_index_path, method: :post
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge ログアウト
+  .o-profile__body
+    .o-profile__item
+      = link_to 'ログアウトする', logout_path, method: :delete
 
-= image_tag ('line_btn_base.png'), art: 'line'
-= link_to 'LINE通知登録', line_api_index_path, method: :post
+-# =form_with url: change_school_users_path do |f|
+-#   .div
+-#     = f.label :school_id, '学校切り替え'
+-#   = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
+-#   =f.submit '学校を切り替える', class: 'ml24'
 
-.mt40
-  = link_to 'LINE通知テスト', send_message_line_api_index_path, method: :post
-
-.mt40= link_to 'ログアウト', logout_path, method: :delete
-
-.mt40= link_to 'トップ', root_path

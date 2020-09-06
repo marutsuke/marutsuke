@@ -1,5 +1,8 @@
 .teacher_main {
   background-color: $indigo_6;
   color: $indigo_0;
-  padding: 24px;
+  min-height: 100vh;
+}
+body {
+  font-family: "Open Sans", "M PLUS 1p", sans-serif;
 }
