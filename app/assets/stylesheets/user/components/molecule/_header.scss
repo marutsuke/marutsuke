@@ -1,0 +1,30 @@
+.user_header {
+  background-color: $green_0;
+  height: 50px;
+  width: 100%;
+  line-height: 36px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  &__logo {
+    img {
+      display: block;
+      height: 100%;
+      transition: 0.5s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  &__icon {
+    width: 34px;
+    img {
+      display: block;
+      height: 100%;
+      transition: 0.5s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

@@ -8,16 +8,15 @@
 @import "./mixin/margin";
 @import "./mixin/opacity";
 @import "./mixin/text-decoration";
-@import "./modules/header";
-@import "./modules/footer";
 @import "./config/color";
+
+// 本当は以下を消したい
 @import "./modules/admin_new_user";
 @import "./modules/admin_edit_user";
 @import "./modules/session_login";
 @import "./modules/user_form";
 @import "./modules/object_form";
 @import "./modules/error_message";
-@import "./modules/debug";
 @import "./modules/users_account_table";
 @import "./modules/lesson_table_card";
 @import "./modules/question_infos";
