@@ -1,0 +1,36 @@
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 基本情報編集
+  = form_with model: current_user, url: users_path, method: :patch, local: true do |f|
+    .o-profile__body
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 現在の画像
+          .m-profile-item__body
+            .m-profile-item__item
+              .m-user-image-form
+                .m-user-image-form__image
+                  - if current_user.image.present? # ユーザーに画像を登録させる。
+                    = image_tag current_user.image_url, class: 'a-user-image'
+                  - else
+                    .a-user-image--no-image No Image
+                .m-user-image-form__form.ml16
+                  = f.label :upfile, class: 'm-user-image-form__label' do
+                    = image_tag 'add_photo_black.svg', class: 'm-user-image-form__icon'
+                    #js-label--text.m-user-image-form__label-text 選択済み
+                  = f.file_field :image, id: 'user_upfile', onChange: "getElementById('js-label--text').classList.add('m-user-image-form__label-text--display');", class: 'm-user-image-form__file-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium= f.label :name
+          .m-profile-item__body
+            .m-profile-item__item= f.text_field :name, {}
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium= f.label :name_kana
+          .m-profile-item__body
+            .m-profile-item__item= f.text_field :name_kana, {}
