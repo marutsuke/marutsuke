@@ -15,9 +15,8 @@ class UsersController < UserBase
   end
 
   def update
-    submit_word = params[:button_word]
     if current_user.update(user_params)
-      flash[:success] = "#{submit_word}しました。"
+      flash[:success] = "更新しました。"
       redirect_to mypage_users_path
     else
       flash[:success] = '更新に失敗しました'
@@ -27,7 +26,7 @@ class UsersController < UserBase
 
   private
   def user_params
-    params.require(:user).permit(:image, :name_kana, :birth_day)
+    params.require(:user).permit(:image, :name, :name_kana, :email, :birth_day)
   end
 
 end
