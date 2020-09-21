@@ -20,62 +20,18 @@ RSpec.describe 'LessonsController', type: :request do
       end
     end
 
-    context '開催予定の授業だけがある' do
+    context '未確認の課題をもった授業がある' do
       let!(:going_lesson) { create(:lesson, :going_to, school: school) }
-      it '開催予定の授業が表示される' do
-        get lessons_path(scope: 'going_to')
-        expect(response).to have_http_status(200)
-        expect(response.body).to include(going_lesson.name)
-        get lessons_path(scope: 'done')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(going_lesson.name)
-        get lessons_path(scope: 'doing')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(going_lesson.name)
+      xit '新しい課題の授業が表示される' do
       end
     end
-    context '開催中の授業だけがある' do
+    context '提出予定の課題がある' do
       let!(:doing_lesson) { create(:lesson, :doing, school: school) }
-      it '開催中の授業が表示される' do
-        get lessons_path(scope: 'going_to')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(doing_lesson.name)
-        get lessons_path(scope: 'done')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(doing_lesson.name)
-        get lessons_path(scope: 'doing')
-        expect(response).to have_http_status(200)
-        expect(response.body).to include(doing_lesson.name)
+      xit '提出予定の課題の授業が表示される' do
       end
     end
-    context '開催終了の授業だけがある' do
-      let!(:done_lesson) { create(:lesson, :done, school: school) }
-      it '開催終了の授業が表示される' do
-        get lessons_path(scope: 'going_to')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(done_lesson.name)
-        get lessons_path(scope: 'done')
-        expect(response).to have_http_status(200)
-        expect(response.body).to include(done_lesson.name)
-        get lessons_path(scope: 'doing')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(done_lesson.name)
-      end
-    end
-    context '他の学校の授業だけがある' do
-      let!(:going_lesson) { create(:lesson, :going_to) }
-      let!(:doing_lesson) { create(:lesson, :doing) }
-      let!(:done_lesson) { create(:lesson, :done) }
-      it '開催中の授業はない' do
-        get lessons_path(scope: 'going_to')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(done_lesson.name)
-        get lessons_path(scope: 'done')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(done_lesson.name)
-        get lessons_path(scope: 'doing')
-        expect(response).to have_http_status(200)
-        expect(response.body).not_to include(done_lesson.name)
+    context '新しい課題も提出予定の課題もない' do
+      xit '特に課題は表示されない' do
       end
     end
   end
