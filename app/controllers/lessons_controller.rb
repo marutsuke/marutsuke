@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LessonsController < UserBase
-  before_action :set_lessons_scope, only: [:index]
+  before_action :set_lesson_and_questions, only: [:show]
   def index
     lesson_group_ids = current_user.lesson_groups.for_school(current_school).pluck(:id)
     @new_lessons = current_school
@@ -12,23 +12,18 @@ class LessonsController < UserBase
   end
 
   def show
-    @lesson = current_school&.lessons&.find(params[:id])
-    @questions = @lesson&.questions
   end
 
   private
 
-  def set_lessons_scope
-    case params[:scope]
-    when 'going_to'
-      @scope = 'going_to'
-      @scope_text = '予定'
-    when 'done'
-      @scope = 'done'
-      @scope_text = '期間中'
-    else
-      @scope = 'doing'
-      @scope_text = '期間中'
+  def set_lesson_and_questions
+    @lesson = current_school&.lessons&.find(params[:id])
+    @questions = @lesson.questions.published
+
+    if @questions.blank?
+      flash[:danger] = '課題のない授業です'
+      redirect_to lessons_path
     end
   end
+
 end
