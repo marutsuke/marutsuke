@@ -3,7 +3,8 @@
 class LessonsController < UserBase
   before_action :set_lessons_scope, only: [:index]
   def index
-    @lessons = current_school&.lessons&.send(@scope)
+    lesson_group_ids = current_user.lesson_groups.for_school(current_school).pluck(:id)
+    @new_lessons = current_school.lessons.where(lesson_group_id: lesson_group_ids).includes(:teacher)
   end
 
   def show
