@@ -38,9 +38,20 @@ RSpec.describe 'LessonsController', type: :request do
 
   describe '/lessons#show' do
     let(:lesson) { create(:lesson, school: school) }
-    it 'アクセスできる' do
-      get lesson_path(lesson)
-      expect(response).to have_http_status(200)
+    context '公開中の課題があるとき' do
+      let!(:question) { create(:question, :published, lesson: lesson) }
+      it 'アクセスできる' do
+        get lesson_path(lesson)
+        expect(response).to have_http_status(200)
+      end
+    end
+    context '公開中の課題がないとき' do
+      let!(:question) { create(:question, :unpublish, lesson: lesson) }
+      it 'アクセスできる' do
+        get lesson_path(lesson)
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to lessons_path
+      end
     end
   end
 end
