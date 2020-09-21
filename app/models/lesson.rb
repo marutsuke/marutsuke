@@ -52,6 +52,12 @@ class Lesson < ApplicationRecord
       .merge(Question.unpublish)
   }
 
+  scope :has_published_question, lambda{
+    joins(:questions)
+      .includes(:questions)
+      .merge(Question.published)
+  }
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end

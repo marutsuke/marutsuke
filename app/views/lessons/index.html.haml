@@ -1,13 +1,13 @@
-= render 'shared/lessons_tab'
-
-- if @lessons&.length == 0
-  .user_lesson_card--no_lessons
-    .user_lesson_card--no_lessons__title= "現在、開催#{ @scope_text }の授業・講座は登録されていません。"
-- else
-  - @lessons.each do |lesson|
-    =link_to lesson_path(lesson), class: 'user_lesson_card' do
-      .user_lesson_card__content
-        %div{class: "user_lesson_card__time--#{lesson.duration_judge_word}"}= lesson.decorate.start_to_end_time
-        .user_lesson_card__body
-          .user_lesson_card__title= lesson.name
-          .user_lesson_card__teacher= "担当: #{lesson.teacher.name}"
+-# = render 'shared/lessons_tab'
+.o-top-page
+  - if @new_lessons&.length > 0
+    .o-top-page__heading
+      .m-heading-line.mt8
+        .m-heading-line__text
+          %h1.a-text-secondary.a-text-xlarge 新しい課題
+    .o-top-page__body
+      - @new_lessons.each do |lesson|
+        = link_to lesson_path(lesson) do
+          .m-lesson-card.mb16
+            %h2.m-lesson-card__title= "#{ lesson.lesson_group.name}/#{lesson.name}"
+            .m-lesson-card__info= "#{lesson.decorate.start_to_end_time}　#{lesson.teacher.name}"

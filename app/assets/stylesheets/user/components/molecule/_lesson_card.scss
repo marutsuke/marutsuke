@@ -1,0 +1,12 @@
+.m-lesson-card {
+  border: 1px solid $moss_2;
+  border-radius: 4px;
+  padding: 0.5rem;
+  &__title {
+    font-size: 1.5rem;
+    color: $moss_1;
+  }
+  &__info {
+    color: $moss_2;
+  }
+}

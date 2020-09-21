@@ -5,6 +5,8 @@ ja:
     attributes:
       user:
         name: 名前
+        name_kana: かな
+        birth_day: 生年月日
         login_id: ログインID
         email: メールアドレス
         password: パスワード
