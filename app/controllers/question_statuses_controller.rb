@@ -1,0 +1,2 @@
+class QuestionStatusesController < UserBase
+end
