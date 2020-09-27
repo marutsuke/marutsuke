@@ -117,6 +117,10 @@ class Question < ApplicationRecord
       .where(question_statuses: { id: nil })
   }
 
+  def question_status_of(user)
+    question_statuses.find_by(user_id: user.id)
+  end
+
   def title
     title = text[0..10]
     title += '...' if text.length  > 10
