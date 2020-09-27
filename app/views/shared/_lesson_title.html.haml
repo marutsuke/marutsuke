@@ -2,4 +2,4 @@
   .lesson_title__term= @lesson.decorate.start_to_end_time
   .lesson_title__teacher= "担当: #{@lesson.teacher.name}"
   .lesson_title__name
-    =link_to "#{@lesson.name}" , lesson_path(@lesson)
+    =link_to "#{@lesson.lesson_group.name}/#{@lesson.name}" , lesson_path(@lesson)
