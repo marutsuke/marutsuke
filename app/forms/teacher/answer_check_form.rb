@@ -6,11 +6,10 @@ class Teacher::AnswerCheckForm
   mount_uploader :image, ImageUploader
 
   attribute :text, :string
-  attribute :evaluation, :string
   attribute :answer_id, :integer
   attribute :image, :string
   validates :text, length: { maximum: 400 }
-  validates :evaluation, :answer_id, presence: true
+  validates :answer_id, presence: true
   validate :image_size
 
   def initialize(teacher, params = {})
@@ -21,7 +20,7 @@ class Teacher::AnswerCheckForm
   def save
     return false if invalid?
 
-    question_status.update!(status: evaluation)
+    question_status.update!(status: 'commented')
     comment.save!
 
     true
@@ -32,7 +31,7 @@ class Teacher::AnswerCheckForm
   end
 
   def comment
-    @comment ||= @teacher&.comments.new(text: text, image: image, teacher_id: @teacher.id, answer_id: answer_id, evaluation: evaluation)
+    @comment ||= @teacher&.comments.new(text: text, image: image, teacher_id: @teacher.id, answer_id: answer_id)
   end
 
   private

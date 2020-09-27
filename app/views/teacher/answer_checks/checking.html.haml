@@ -24,13 +24,6 @@
               %div
                 = f.label "answer_text--#{i}", 'コメント本文', class: 'required'
               = f.text_area :text, class: 'answer_check_form__text_area', id: "comment_answer_text--#{i}"
-            .answer_check_form__evaluation
-              .answer_check_form__evaluation_radio_btn_group
-                = f.radio_button :evaluation, :complete, class: 'answer_check_form__evaluation_radio_btn', checked: true, id: "teacher_answer_check_form_evaluation_complete--#{i}"
-                = f.label "evaluation_complete--#{i}", QuestionStatus.statuses_i18n[:complete], class: 'answer_check_form__evaluation_label'
-              .answer_check_form__evaluation_radio_btn_group
-                = f.radio_button :evaluation, :submit_again, class: 'answer_check_form_evaluation_radio_btn', id: "teacher_answer_check_form_evaluation_submit_again--#{i}"
-                = f.label "evaluation_submit_again--#{i}", QuestionStatus.statuses_i18n[:submit_again], class: 'answer_check_form__evaluation_label'
             = f.hidden_field :answer_id, value: answer.id
             - if @next_answer_exist
               =hidden_field_tag :next_answer_page, @page
