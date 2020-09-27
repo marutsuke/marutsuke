@@ -8,7 +8,7 @@
     - @questions.display_order&.each do |question|
       =link_to question_path(question) do
         .user_question_card__item
-          .user_question_card__tag--status01 未提出
+          .user_question_card__tag= question.question_status_of(current_user).status_i18n
           .user_question_card__title #{question.title}
           .user_question_card__description
             %p #{question.text}
