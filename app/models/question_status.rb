@@ -15,7 +15,7 @@ class QuestionStatus < ApplicationRecord
     commented: 60,
     comment_checked: 70,
     complete: 80,
-    will_do_again: 90
+    will_submit_again: 90
   }
 
   scope :order_by_question_order_at, lambda { |lesson|
