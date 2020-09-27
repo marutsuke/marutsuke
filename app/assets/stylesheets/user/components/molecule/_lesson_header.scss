@@ -1,0 +1,30 @@
+.m-lesson-header {
+  padding: 8px 0;
+  border-bottom: 1px solid $moss_4;
+  max-width: 800px;
+  margin: 0 auto;
+  &__name {
+    font-size: 1.4rem;
+    margin-left: 16px;
+    color: $moss_1;
+    &:link,
+    :visited,
+    :hover,
+    :active {
+      color: $moss_1;
+      @include link($moss_1);
+    }
+  }
+  &__teacher {
+    color: $moss_2;
+    font-size: 0.9rem;
+    margin-right: 16px;
+    text-align: right;
+  }
+  &__term {
+    color: $moss_2;
+    font-size: 0.9rem;
+    margin-right: 16px;
+    text-align: right;
+  }
+}
