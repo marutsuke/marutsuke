@@ -5,11 +5,15 @@ class QuestionStatus < ApplicationRecord
   belongs_to :question
   validates :status, presence: true
   validates :user_id, uniqueness: { scope: :question_id, case_sensitive: true }
+
   enum status: {
-    will_submit: 10, #データとして発生しないはず。
-    checking: 20,
-    submit_again: 30,
-    complete: 40
+    unselected: 10,
+    will_do: 20,
+    maybe_do: 30,
+    will_not_do: 40,
+    checking: 50,
+    commented: 60,
+    comment_checked: 70
   }
 
   scope :order_by_question_order_at, lambda { |lesson|
