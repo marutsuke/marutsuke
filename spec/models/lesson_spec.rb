@@ -95,7 +95,7 @@ RSpec.describe Lesson, type: :model do
     let!(:question_2) { create(:question, lesson: lesson) }
     let!(:question_3) { create(:question) }
     let!(:question_status_1_not) do
-      create(:question_status, :will_submit, question: question_1)
+      create(:question_status, :will_do, question: question_1)
     end
     let!(:question_status_1_checking) do
       create(:question_status, :checking, question: question_1)

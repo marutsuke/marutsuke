@@ -13,41 +13,106 @@ class Question < ApplicationRecord
   scope :published, -> { where(publish: true) }
   scope :unpublish, -> { where(publish: false) }
 
-
-  scope :checking, lambda {
-    joins(:question_statuses)
-      .where(question_statuses: { status: :checking })
+  scope :unselected, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :unselected })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :unselected })
+    end
   }
 
-  scope :checking_distinct, lambda {
-    joins(:question_statuses)
-      .includes(:question_statuses)
-      .where(question_statuses: { status: :checking })
+  scope :will_do, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :will_do })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :will_do })
+    end
   }
 
-  scope :submit_again, lambda {
-    joins(:question_statuses)
-      .where(question_statuses: { status: :submit_again })
+  scope :maybe_do, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :maybe_do })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :maybe_do })
+    end
   }
 
-  scope :submit_again_distinct, lambda {
-    joins(:question_statuses)
-      .includes(:question_statuses)
-      .where(question_statuses: { status: :submit_again })
+  scope :will_not_do, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :will_not_do })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :will_not_do })
+    end
   }
 
-  scope :complete, lambda {
-    joins(:question_statuses)
-      .where(question_statuses: { status: :complete })
+  scope :checking, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :checking })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :checking })
+    end
   }
 
-  scope :complete_distinct, lambda {
-    joins(:question_statuses)
-      .includes(:question_statuses)
-      .where(question_statuses: { status: :complete })
+  scope :commented, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :commented })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :commented })
+    end
   }
 
-  scope :will_submit, lambda {
+  scope :comment_checked, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :comment_checked })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :comment_checked })
+    end
+  }
+
+  scope :complete, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :complete })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :complete })
+    end
+  }
+
+  scope :will_submit_again, ->  (distinct: false) {
+    if distinct
+      joins(:question_statuses)
+        .includes(:question_statuses)
+        .where(question_statuses: { status: :will_submit_again })
+    else
+      joins(:question_statuses)
+        .where(question_statuses: { status: :will_submit_again })
+    end
+  }
+
+  scope :any_user_unchecked, lambda {
     left_outer_joins(:question_statuses)
       .where(question_statuses: { id: nil })
   }

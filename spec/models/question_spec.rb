@@ -10,9 +10,9 @@ RSpec.describe Question, type: :model do
   describe 'question_status関連のスコープ' do
     let!(:question) { create(:question) }
     it { expect(Question.checking).not_to include(question) }
-    it { expect(Question.submit_again).not_to include(question) }
+    it { expect(Question.will_submit_again).not_to include(question) }
     it { expect(Question.complete).not_to include(question) }
-    it { expect(Question.will_submit).to include(question) }
+    it { expect(Question.any_user_unchecked).to include(question) }
 
     context 'chekingの問題' do
       let!(:question_status) do
@@ -20,11 +20,11 @@ RSpec.describe Question, type: :model do
       end
       it { expect(Question.checking).to include(question) }
     end
-    context 'submit_againの問題' do
+    context 'will_submit_againの問題' do
       let!(:question_status) do
-        create(:question_status, status: :submit_again, question: question)
+        create(:question_status, status: :will_submit_again, question: question)
       end
-      it { expect(Question.submit_again).to include(question) }
+      it { expect(Question.will_submit_again).to include(question) }
     end
     context 'completeの問題' do
       let!(:question_status) do
