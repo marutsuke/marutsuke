@@ -4,9 +4,9 @@
   max-width: 800px;
   margin: 0 auto;
   &__name {
-    font-size: 1.4rem;
-    margin-left: 16px;
-    color: $moss_1;
+    font-size: 1.375rem;
+    margin-left: 1rem;
+    color: $moss_0;
     &:link,
     :visited,
     :hover,
@@ -16,15 +16,11 @@
     }
   }
   &__teacher {
-    color: $moss_2;
-    font-size: 0.9rem;
-    margin-right: 16px;
+    padding-right: 1rem;
     text-align: right;
   }
   &__term {
-    color: $moss_2;
-    font-size: 0.9rem;
-    margin-right: 16px;
+    padding-right: 1rem;
     text-align: right;
   }
 }
