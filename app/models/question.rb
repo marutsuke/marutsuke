@@ -126,6 +126,11 @@ class Question < ApplicationRecord
     title += '...' if text.length  > 10
   end
 
+  def image_alt
+    lesson_group = lesson.lesson_group
+    "#{ lesson_group.name }/#{ lesson.name }: #{ title }"
+  end
+
   private
 
   def image_size

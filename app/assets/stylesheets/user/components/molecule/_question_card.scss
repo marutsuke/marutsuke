@@ -1,0 +1,44 @@
+.m-question-card {
+  margin-bottom: 3rem;
+  &__question_num {
+    font-size: 1.125rem;
+    color: $moss_1;
+  }
+  &__question_link_wrap {
+    margin: 1rem 0;
+    max-height: 6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__image {
+    height: 6rem;
+  }
+  &__text {
+    width: 70%;
+    height: 6rem;
+    color: $moss_2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__button-left {
+    width: 35%;
+  }
+  &__button-center {
+    width: 25%;
+    font-size: 0.5rem;
+    & .a-button-secondary {
+      height: 2.125rem;
+      line-height: 1.5rem;
+    }
+  }
+  &__button-right {
+    width: 35%;
+  }
+}
