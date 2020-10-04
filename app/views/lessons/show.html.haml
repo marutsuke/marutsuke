@@ -1,14 +1,20 @@
 = render 'shared/lesson_title'
-.user_question_card
-  .user_question_card__head 課題一覧
+.pr16.pl16.mt24
   - if @questions&.length == 0
-    .user_question_card--no_questions
-      現在、設定されている課題はありません。
+    .mt24 現在、設定されている課題はありません。
   - else
     - @questions.display_order&.each do |question|
-      =link_to question_path(question) do
-        .user_question_card__item
-          .user_question_card__tag--status01 未提出
-          .user_question_card__title #{question.title}
-          .user_question_card__description
-            %p #{question.text}
+      .m-question-card
+        .m-question-card__question_num= "課題#{ question.display_order }"
+        = link_to question_path(question), class: 'm-question-card__question_link_wrap' do
+          - if question.image.present?
+            =image_tag question&.image_url, alt: question.image_alt, class: 'm-question-card__image'
+          .m-question-card__text= question.text[0..200]
+        .m-question-card__buttons
+          .m-question-card__button-left
+            = link_to 'やる', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
+          .m-question-card__button-center
+            = link_to "やれたらやる", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
+          .m-question-card__button-right
+            = link_to 'やらない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true
+      -# .user_question_card__tag= question.question_status_of(current_user).status_i18n

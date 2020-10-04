@@ -1,0 +1,29 @@
+.a-button-primary {
+  display: block;
+  color: $white_green;
+  background-color: $green_0;
+  border: 1px solid $green_0;
+  padding: 4px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.a-button-secondary {
+  display: block;
+  color: $moss_4;
+  background-color: $white_green;
+  padding: 4px;
+  border: 1px solid $moss_4;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.a-button-danger {
+  display: block;
+  color: $pink_0;
+  background-color: $white_green;
+  padding: 4px;
+  border: 1px solid $pink_0;
+  border-radius: 4px;
+  text-align: center;
+}

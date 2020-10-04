@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   resources :lessons, only: %i[index show] # テスト済み
   resources :questions, only: %i[show] do
     resources :answers, only: :new
+    resources :question_statuses, only: [] do
+      collection do
+        post :will_do
+        post :maybe_do
+        post :will_not_do
+      end
+    end
   end
   resources :answers, only: %i[show create]
   resources :schools, only: %i[new create] # テスト済み

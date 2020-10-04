@@ -10,7 +10,12 @@ ja:
   enums:
     question_status:
       status:
-        will_submit: 未提出
+        unselected: 未選択
+        will_do: やる
+        maybe_do: できたらやる
+        will_not_do: やらない
         checking: 確認中
-        submit_again: 再提出
+        commented: コメントあり
+        comment_checked: コメント確認済み
         complete: 完了
+        submit_again: もう一度出す

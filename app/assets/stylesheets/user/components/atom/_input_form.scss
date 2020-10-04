@@ -1,8 +1,10 @@
-.a-submit-button {
-  width: 100%;
-  color: $white_green;
-  background-color: $moss_2;
+.a-text-field {
+  color: $moss_1;
   padding: 4px;
-  border: 1px solid $moss_2;
+  border: 1px solid $moss_4;
   border-radius: 4px;
+  &:focus {
+    border: 2px solid $green_0;
+    outline: 0;
+  }
 }
