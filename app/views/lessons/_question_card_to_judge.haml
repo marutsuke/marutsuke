@@ -1,4 +1,14 @@
-.m-question-card
+
+:ruby
+  status = question.question_status_of(current_user).status
+  option_card_class = case status
+                  when 'will_not_do'
+                    'm-question-card--opacity-02'
+                  when 'maybe_do'
+                    'm-question-card--opacity-09'
+                  end
+
+.m-question-card{ class: option_card_class }
   .m-question-card__card-header
     .m-question-card__question-num.mr8= "課題#{ question.display_order }"
     .m-question-card__question-status= question.question_status_of(current_user).decorate.status_label
@@ -6,11 +16,12 @@
     - if question.image.present?
       =image_tag question&.image_url, alt: question.image_alt, class: 'm-question-card__image'
     .m-question-card__text= question.text[0..200]
-  .m-question-card__buttons
-    .m-question-card__button-left
-      = link_to 'やる', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
-    .m-question-card__button-center
-      = link_to "できたらやる", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
-    .m-question-card__button-right
-      = link_to 'やらない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true
--# .user_question_card__tag= question.question_status_of(current_user).status_i18n
+
+  - if status == 'unselected'
+    .m-question-card__buttons
+      .m-question-card__button-left
+        = link_to 'やる', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
+      .m-question-card__button-center
+        = link_to "できたらやる", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
+      .m-question-card__button-right
+        = link_to 'やらない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true

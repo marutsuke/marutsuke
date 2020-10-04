@@ -1,6 +1,12 @@
 .m-question-card {
   margin-bottom: 3rem;
   padding-bottom: 1rem;
+  &--opacity-09 {
+    opacity: 0.9;
+  }
+  &--opacity-02 {
+    opacity: 0.2;
+  }
   &__card-header {
     border-bottom: 1px solid $moss_4;
     display: flex;
@@ -45,5 +51,8 @@
   }
   &__button-right {
     width: 35%;
+  }
+  &__show-link {
+    text-align: right;
   }
 }
