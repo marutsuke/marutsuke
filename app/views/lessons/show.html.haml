@@ -3,5 +3,5 @@
   - if @questions&.length == 0
     .mt24 現在、設定されている課題はありません。
   - else
-    - @questions.display_order&.each do |question|
+    - @questions&.each do |question|
       = render 'question_card_to_judge', question: question

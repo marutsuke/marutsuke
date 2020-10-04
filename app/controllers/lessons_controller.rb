@@ -19,7 +19,7 @@ class LessonsController < UserBase
 
   def set_lesson_and_questions
     @lesson = current_school&.lessons&.find(params[:id])
-    @questions = @lesson.questions.published
+    @questions = @lesson.questions&.published&.display_order
 
     if @questions.blank?
       flash[:danger] = '課題のない授業です'
