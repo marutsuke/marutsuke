@@ -1,0 +1,9 @@
+$("<%="#js-primary-question--#{@question.id}"%>").html('');
+
+$("<%="#js-tertiary-question--#{@question.id}"%>")
+  .html("<%= j render(
+    partial: 'lessons/question_card_tertiary',
+    locals: {
+      question: @question,
+      status: @status
+    }) %>");

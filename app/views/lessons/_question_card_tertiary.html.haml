@@ -1,0 +1,8 @@
+.m-question-card.m-question-card--opacity-02
+  .m-question-card__card-header
+    .m-question-card__question-num.mr8= "課題#{ question.display_order }"
+    .m-question-card__question-status= question.question_status_of(current_user).decorate.status_label
+  = link_to question_path(question), class: 'm-question-card__question-link-wrap' do
+    - if question.image.present?
+      =image_tag question&.image_url, alt: question.image_alt, class: 'm-question-card__image'
+    .m-question-card__text= question.text[0..200]

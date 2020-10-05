@@ -1,0 +1,7 @@
+$("<%="#js-primary-question--#{@question.id}"%>")
+  .html("<%= j render(
+    partial: 'lessons/question_card_primary',
+    locals: {
+      question: @question,
+      status: @status
+    }) %>");
