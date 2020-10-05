@@ -1,12 +1,21 @@
 .m-question-card {
   margin-bottom: 3rem;
   padding-bottom: 1rem;
-  &__question_num {
+  &--opacity-09 {
+    opacity: 0.9;
+  }
+  &--opacity-02 {
+    opacity: 0.2;
+  }
+  &__card-header {
+    border-bottom: 1px solid $moss_4;
+    display: flex;
+  }
+  &__question-num {
     font-size: 1.125rem;
     color: $moss_2;
-    border-bottom: 1px solid $moss_4;
   }
-  &__question_link_wrap {
+  &__question-link-wrap {
     margin: 1rem 0;
     max-height: 6rem;
     display: flex;
@@ -42,5 +51,8 @@
   }
   &__button-right {
     width: 35%;
+  }
+  &__show-link {
+    text-align: right;
   }
 }
