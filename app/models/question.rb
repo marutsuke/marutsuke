@@ -3,6 +3,7 @@
 class Question < ApplicationRecord
   mount_uploader :image, ImageUploader
   validates :text, presence: true, length: { maximum: 3000 }
+  validates :display_order, uniqueness: { scope: :lesson_id, case_sensitive: true }
   validate :image_size
   belongs_to :lesson
   has_many :answers
