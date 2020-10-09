@@ -9,6 +9,7 @@
 @import "./user/components/atom/buttons";
 @import "./user/components/atom/label";
 @import "./user/components/atom/image";
+@import "./user/components/atom/question_text";
 
 // molecules
 @import "./user/components/molecule/header";
@@ -18,6 +19,7 @@
 @import "./user/components/molecule/lesson_card";
 @import "./user/components/molecule/lesson_header";
 @import "./user/components/molecule/question_card";
+@import "./user/components/molecule/button_wrap";
 
 // organism
 @import "./user/components/organism/profile";
