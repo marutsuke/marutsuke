@@ -4,7 +4,13 @@ class QuestionStatusesController < UserBase
   def will_do
     if @question.question_status_of(current_user).update(status: :will_do)
       @status = @question.question_status_of(current_user).reload.status
-      respond_to { |format| format.js }
+      respond_to do |format|
+        format.js
+        format.html {
+          flash[:success] = 'することになりました。'
+          redirect_to @question
+        }
+      end
     else
       flash[:notice] = '更新エラー'
       redirect_to @lesson
@@ -14,7 +20,13 @@ class QuestionStatusesController < UserBase
   def maybe_do
     if @question.question_status_of(current_user).update(status: :maybe_do)
       @status = @question.question_status_of(current_user).reload.status
-      respond_to { |format| format.js }
+      respond_to do |format|
+        format.js
+        format.html {
+          flash[:success] = 'できたらすることになりました。'
+          redirect_to @question
+        }
+      end
     else
       flash[:notice] = '更新エラー'
       redirect_to @lesson
@@ -24,7 +36,13 @@ class QuestionStatusesController < UserBase
   def will_not_do
     if @question.question_status_of(current_user).update(status: :will_not_do)
       @status = @question.question_status_of(current_user).reload.status
-      respond_to { |format| format.js }
+      respond_to do |format|
+        format.js
+        format.html {
+          flash[:success] = 'しないことになりました。'
+          redirect_to @question
+        }
+      end
     else
       flash[:notice] = '更新エラー'
       redirect_to @lesson
