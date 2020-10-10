@@ -12,24 +12,24 @@ class QuestionStatusesController < UserBase
   end
 
   def maybe_do
-  if @question.question_status_of(current_user).update(status: :maybe_do)
-    @status = @question.question_status_of(current_user).reload.status
-    respond_to { |format| format.js }
-  else
-    flash[:notice] = '更新エラー'
-    redirect_to @lesson
+    if @question.question_status_of(current_user).update(status: :maybe_do)
+      @status = @question.question_status_of(current_user).reload.status
+      respond_to { |format| format.js }
+    else
+      flash[:notice] = '更新エラー'
+      redirect_to @lesson
+    end
   end
-end
 
   def will_not_do
-  if @question.question_status_of(current_user).update(status: :will_not_do)
-    @status = @question.question_status_of(current_user).reload.status
-    respond_to { |format| format.js }
-  else
-    flash[:notice] = '更新エラー'
-    redirect_to @lesson
+    if @question.question_status_of(current_user).update(status: :will_not_do)
+      @status = @question.question_status_of(current_user).reload.status
+      respond_to { |format| format.js }
+    else
+      flash[:notice] = '更新エラー'
+      redirect_to @lesson
+    end
   end
-end
 
   private
   def set_question_and_status
