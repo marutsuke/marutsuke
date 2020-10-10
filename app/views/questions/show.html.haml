@@ -12,12 +12,24 @@
     =link_to "提出する", new_question_answer_path(@question.id), class: "a-button-primary pb8 pt8"
   - if @answers.present?
     .a-border-secondary.mb24
-    - @answers.each do |answer|
-      .comment_area__container
-        .comment_area__submitted_at
-          =link_to "#{answer.decorate.submitted_at} 提出済み", answer_path(answer)
-        - answer.comments.each do |comment|
-          .comment_area__comment_body
+    .pl8.pr8
+      - @answers.each do |answer|
+        .m-conversation-card
+          .m-conversation-card__user-image
+            - if current_user.image.present?
+              = image_tag current_user.image_url, class: 'a-user-image--size100per'
+            - else
+              .a-user-image--no-image-size100per.a-text-xsmall No Image
+          .m-conversation-card__card
+            .m-conversation-card__text= simple_format(answer.text)
+            .m-conversation-card__sub-info
+              .m-conversation-card__submited-at
+                .a-text-secondary= answer.decorate.submitted_at
+              - if answer.answer_images.present?
+                .m-conversation-card__image-link
+                  = link_to '画像をみる', '#'
+
+          - answer.comments.each do |comment|
             .comment_area__comment_text= "#{comment.text}"
             - if comment.image.present?
               .comment_area__comment_image

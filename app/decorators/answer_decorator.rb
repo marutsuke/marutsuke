@@ -10,6 +10,6 @@ class AnswerDecorator < ApplicationDecorator
   end
 
   def time_format(time)
-    Time.parse(time).strftime("%-m/%e(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
+    Time.parse(time).strftime("%-y/%-m/%e(#{I18n.t('date.abbr_day_names')[Time.parse(time).wday]}) %R")
   end
 end
