@@ -18,8 +18,10 @@
           .m-conversation-card__user-image
             - if current_user.image.present?
               = image_tag current_user.image_url, class: 'a-user-image--size100per'
+              .a-text-secondary.a-text-small.mt8 あなた
             - else
               .a-user-image--no-image-size100per.a-text-xsmall No Image
+              .a-text-secondary.a-text-small.mt8 あなた
           .m-conversation-card__card
             .m-conversation-card__text= simple_format(answer.text)
             .m-conversation-card__sub-info
