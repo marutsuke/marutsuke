@@ -23,16 +23,26 @@
   &__text {
     color: $moss_0;
     font-size: 0.75rem;
+    @media (min-width: $ipad) {
+      font-size: 1rem;
+    }
   }
   &__sub-info {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
   }
   &__submited-at {
     color: $moss_4;
     font-size: 0.5rem;
+    @media (min-width: $ipad) {
+      font-size: 0.75rem;
+    }
   }
   &__image-link {
     font-size: 0.75rem;
+    @media (min-width: $ipad) {
+      font-size: 1rem;
+    }
   }
 }
