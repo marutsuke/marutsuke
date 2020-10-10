@@ -9,9 +9,9 @@
     .m-question-card__text= question.text[0..200]
   - if status == 'unselected'
     .m-question-card__buttons
-      .m-question-card__button-right
-        = link_to 'しない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true
-      .m-question-card__button-center
-        = link_to "できたらする", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
       .m-question-card__button-left
-        = link_to 'する', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
+        = will_not_do_button('しない', question, remote: true)
+      .m-question-card__button-center
+        = maybe_do_button('できたらする', question, remote: true)
+      .m-question-card__button-right
+        = will_do_button('する', question, remote: true)
