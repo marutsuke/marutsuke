@@ -10,8 +10,8 @@
   - if status == 'unselected'
     .m-question-card__buttons
       .m-question-card__button-right
-        = link_to 'やらない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true
+        = link_to 'しない', will_not_do_question_question_statuses_path(question), class: 'a-button-danger', method: :post, remote: true
       .m-question-card__button-center
-        = link_to "できたらやる", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
+        = link_to "できたらする", maybe_do_question_question_statuses_path(question), class: 'a-button-secondary', method: :post, remote: true
       .m-question-card__button-left
-        = link_to 'やる', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
+        = link_to 'する', will_do_question_question_statuses_path(question), class: 'a-button-primary', method: :post, remote: true
