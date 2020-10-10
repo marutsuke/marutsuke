@@ -11,9 +11,9 @@ ja:
     question_status:
       status:
         unselected: 未選択
-        will_do: やる
-        maybe_do: できたらやる
-        will_not_do: やらない
+        will_do: する
+        maybe_do: できたらする
+        will_not_do: しない
         checking: 確認中
         commented: コメントあり
         comment_checked: コメント確認済み
