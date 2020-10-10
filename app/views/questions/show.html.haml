@@ -1,9 +1,8 @@
 = render 'shared/lesson_title'
-
-
 .user-basic-contaier
-  .mt16.ml8.a-text-primary= "課題#{@question.display_order}"
-
+  .flex.mt16.ml8
+    .m-question-card__question-num.mr8= "課題#{ @question.display_order }"
+    .m-question-card__question-status= @question.question_status_of(current_user).decorate.status_label
   - if @question.image.present?
     = image_tag @question&.image_url, alt: @question.image_alt, class: 'a-question-image-on-user mt8'
   .pr8.pl8.mt8
@@ -11,27 +10,40 @@
       .a-text-primary= simple_format(@question.text)
   .mt24.mb24.m-submit-answer-button-wrap
     =link_to "提出する", new_question_answer_path(@question.id), class: "a-button-primary pb8 pt8"
-  .comment_area
-    .comment_area__header 解答とコメント
-    - if @answers.present?
-      - @answers.each do |answer|
-        .comment_area__container
-          .comment_area__submitted_at
-            =link_to "#{answer.decorate.submitted_at} 提出済み", answer_path(answer)
-          - answer.comments.each do |comment|
-            .comment_area__comment_body
-              .comment_area__comment_text= "#{comment.text}"
-              - if comment.image.present?
-                .comment_area__comment_image
-                  = image_tag "#{comment.image}"
-              .comment_area__bottom
-                .comment_area__commented_at= "#{comment.decorate.commented_at}"
-                .comment_area__teacher_name= "#{comment.teacher.name}"
-    - else
-      .comment_area__container.px-3.p-2 解答が作成されていません。
-  - if @question.image.present?
-    #modal-mask.hidden
-      %section#modal.hidden
-        = image_tag @question&.image_url
-        #modal-close
-          .cancel
+  - if @answers.present?
+    .a-border-secondary.mb24
+    - @answers.each do |answer|
+      .comment_area__container
+        .comment_area__submitted_at
+          =link_to "#{answer.decorate.submitted_at} 提出済み", answer_path(answer)
+        - answer.comments.each do |comment|
+          .comment_area__comment_body
+            .comment_area__comment_text= "#{comment.text}"
+            - if comment.image.present?
+              .comment_area__comment_image
+                = image_tag "#{comment.image}"
+            .comment_area__bottom
+              .comment_area__commented_at= "#{comment.decorate.commented_at}"
+              .comment_area__teacher_name= "#{comment.teacher.name}"
+  .a-border-secondary.mb24
+  .mt24
+  .pb16
+    - if @status == 'unselected'
+      .m-actually__buttons
+        .m-question-card__button-right
+          = will_not_do_button('しない', @question)
+        .m-question-card__button-center
+          = maybe_do_button('できたらする', @question)
+        .m-question-card__button-left
+          = will_do_button('する', @question)
+    - elsif ['will_do', 'maybe_do', 'will_not_do'].include?(@status)
+      .m-actually__buttons
+        - unless @status == 'will_not_do'
+          .m-actually__button
+            = will_not_do_button('やっぱりしない', @question)
+        - unless @status == 'maybe_do'
+          .m-actually__button
+            = maybe_do_button('できたらする', @question)
+        - unless @status == 'will_do'
+          .m-actually__button
+            = will_do_button('やっぱりする', @question)
