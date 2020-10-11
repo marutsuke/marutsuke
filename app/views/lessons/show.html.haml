@@ -11,7 +11,7 @@
     - @questions&.each do |question|
       - status = question.question_status_of(current_user).status
       %div{ id: "js-secondary-question--#{question.id}"}
-        - if ['maybe_do', 'comment_checked', 'complete'].include?(status)
+        - if ['maybe_do', 'comment_checked', 'checking', 'complete'].include?(status)
           = render 'question_card_secondary', question: question, status: status
     - @questions&.each do |question|
       - status = question.question_status_of(current_user).status

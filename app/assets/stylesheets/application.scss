@@ -10,6 +10,7 @@
 @import "./mixin/opacity";
 @import "./mixin/text-decoration";
 @import "./config/color";
+@import "./config/media";
 
 // 本当は以下を消したい
 @import "./modules/admin_new_user";
@@ -28,7 +29,6 @@
 @import "./modules/lessons_tab";
 @import "./modules/errors";
 @import "./modules/button-components";
-@import "./modules/comment_area";
 @import "./modules/modal";
 @import "./modules/lesson_group_forms";
 @import "./modules/user_answer_form";

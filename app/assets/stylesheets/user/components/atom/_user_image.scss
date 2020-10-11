@@ -3,12 +3,30 @@
   height: 120px;
   border-radius: 50%;
 }
+.a-user-image--size100per {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 .a-user-image--no-image {
   background-color: $moss_6;
   width: 120px;
   height: 120px;
   border-radius: 50%;
   line-height: 120px;
+  text-align: center;
+  border: 1px solid $moss_4;
+  color: $moss_4;
+}
+
+.a-user-image--no-image-size100per {
+  background-color: $moss_6;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   border: 1px solid $moss_4;
   color: $moss_4;

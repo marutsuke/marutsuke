@@ -1,0 +1,48 @@
+.m-conversation-card {
+  display: flex;
+  justify-content: space-between;
+  &__user-image {
+    width: 18vw;
+    height: 18vw;
+    text-align: center;
+    @media (min-width: $ipad) {
+      width: 144px;
+      height: 144px;
+    }
+  }
+  &__card {
+    background-color: $moss_6;
+    padding: 0.5rem;
+    border: 1px $moss_4 solid;
+    border-radius: 0.5rem;
+    width: calc(82vw - 2rem);
+    @media (min-width: $ipad) {
+      width: calc(100% - 152px);
+    }
+  }
+  &__text {
+    color: $moss_0;
+    font-size: 0.75rem;
+    @media (min-width: $ipad) {
+      font-size: 1rem;
+    }
+  }
+  &__sub-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  &__submited-at {
+    color: $moss_4;
+    font-size: 0.5rem;
+    @media (min-width: $ipad) {
+      font-size: 0.75rem;
+    }
+  }
+  &__image-link {
+    font-size: 0.75rem;
+    @media (min-width: $ipad) {
+      font-size: 1rem;
+    }
+  }
+}

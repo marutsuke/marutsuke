@@ -129,7 +129,7 @@ class Question < ApplicationRecord
 
   def image_alt
     lesson_group = lesson.lesson_group
-    "#{ lesson_group.name }/#{ lesson.name }: #{ title }"
+    "#{ lesson_group.name }/#{ lesson.name }/課題#{ display_order }"
   end
 
   private

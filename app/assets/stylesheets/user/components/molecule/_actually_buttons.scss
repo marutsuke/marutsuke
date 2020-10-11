@@ -1,0 +1,11 @@
+.m-actually {
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    max-width: 600px;
+  }
+  &__button {
+    width: 45%;
+  }
+}

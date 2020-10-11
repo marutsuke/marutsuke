@@ -17,9 +17,9 @@ class QuestionStatusDecorator < ApplicationDecorator
       html_class = 'a-label--commented'
     when 'comment_checked'
       html_class = 'a-label--comment-checked'
-    when :complete
+    when 'complete'
       html_class = 'a-label--complete'
-    when :will_submit_again
+    when 'will_submit_again'
       html_class = 'a-label--will-submit-again'
     end
     h.content_tag :span, class: "a-label #{ html_class }" do
