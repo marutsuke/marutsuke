@@ -14,7 +14,7 @@
     .a-border-secondary.mb24
     .pl8.pr8
       - @answers.each do |answer|
-        .m-conversation-card.mb16
+        .m-conversation-card.mb32
           .m-conversation-card__user-image
             - if current_user.image.present?
               = image_tag current_user.image_url, class: 'a-user-image--size100per'
@@ -33,7 +33,7 @@
         %div{ id: "js-answer-image-#{answer.id}" }
         - answer.comments.each do |comment|
 
-          .m-conversation-card.mb16
+          .m-conversation-card.mb16.mb32
             .m-conversation-card__card
               .m-conversation-card__text= simple_format(comment.text)
               .m-conversation-card__sub-info
