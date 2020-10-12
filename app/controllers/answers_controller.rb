@@ -8,10 +8,10 @@ class AnswersController < UserBase
     @answer = current_user.answers.new
   end
 
-  def show
+  def image_show
     @answer = current_user.answers.find(params[:id])
-    @question = @answer.question
-    @lesson = @question.lesson
+    @answer_images = @answer.answer_images
+    respond_to { |format| format.js }
   end
 
   def create

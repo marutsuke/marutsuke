@@ -1,0 +1,8 @@
+$("<%="#js-answer-image--#{@answer.id}"%>")
+  .html("<%= j render(
+    partial: 'questions/answer_images',
+    locals: {
+      answer_images: @answer_images
+    }) %>");
+$("<%="#js-image-show-link--#{@answer.id}"%>")
+  .html('');

@@ -16,7 +16,11 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :answers, only: %i[show create]
+  resources :answers, only: %i[create] do
+    member do
+      get :image_show
+    end
+  end
   resources :schools, only: %i[new create] # テスト済み
   get '/schools', to: 'schools#new' # テスト済み
   resources :users, only: [] do
