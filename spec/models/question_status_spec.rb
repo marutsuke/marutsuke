@@ -45,29 +45,24 @@ RSpec.describe QuestionStatus, type: :model do
 
         it '問題の順番通り' do
           expect(
-            QuestionStatus.order_by_question_order_at(lesson1)
-          .first).to eq(question_status1)
+            QuestionStatus.order_by_question_order_at(lesson1).first).to eq(question_status1)
+          expect(
+            QuestionStatus.order_by_question_order_at(lesson1).last).to eq(question_status2)
+        end
+      end
+      context "display_order問題変更して" do
+        let!(:question_status1) { create(:question_status, question: question1_2) }
+        let!(:question_status2) { create(:question_status, question: question1_1) }
+
+        it '問題の順番変更した通り' do
           expect(
             QuestionStatus.order_by_question_order_at(lesson1)
-          .last).to eq(question_status2)
-        end
-
-        context '問題の順番を変更' do
-          before do
-            question1_1.update(display_order: 2)
-            question1_2.update(display_order: 1)
-          end
-          it '問題の順番変更した通り' do
-            expect(
-              QuestionStatus.order_by_question_order_at(lesson1)
-            .first).to eq(question_status2)
-            expect(
-              QuestionStatus.order_by_question_order_at(lesson1)
-            .last).to eq(question_status1)
-          end
+          .first).to eq(question_status2)
+          expect(
+            QuestionStatus.order_by_question_order_at(lesson1)
+          .last).to eq(question_status1)
         end
       end
     end
   end
-
 end
