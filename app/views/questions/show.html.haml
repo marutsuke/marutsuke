@@ -1,5 +1,5 @@
 = render 'shared/lesson_title'
-.user-basic-contaier
+.u-user-contaier
   .flex.mt16.ml8
     .m-question-card__question-num.mr8= "課題#{ @question.display_order }"
     .m-question-card__question-status= @question.question_status_of(current_user).decorate.status_label
