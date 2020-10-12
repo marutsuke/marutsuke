@@ -28,9 +28,9 @@
               .m-conversation-card__submited-at
                 .a-text-secondary= answer.decorate.submitted_at
               - if answer.answer_images.present?
-                .m-conversation-card__image-link
-                  = link_to '画像をみる', image_show_answer_path, remote: true
-        %div{ id: "js-answer-image-#{answer.id}" }
+                .m-conversation-card__image-link{ id: "js-image-show-link--#{ answer.id }"}
+                  = link_to '画像をみる', image_show_answer_path(answer), remote: true
+        %div{ id: "js-answer-image--#{answer.id}" }
         - answer.comments.each do |comment|
 
           .m-conversation-card.mb16.mb32
