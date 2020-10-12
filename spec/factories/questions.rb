@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :question do
     text { 'testtesttesttesttesttesttesttest' }
     image { Faker::File.file_name }
-    display_order  { 1 }
+    display_order  { Faker::Number.between(from: 1, to: 1000) }
     publish { true }
     association :lesson, factory: [:lesson]
   end
