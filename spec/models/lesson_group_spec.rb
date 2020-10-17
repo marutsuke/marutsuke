@@ -80,5 +80,25 @@ RSpec.describe LessonGroup, type: :model do
         it { is_expected.to include(lesson_group) }
       end
     end
+    describe '#for_school' do
+      subject { LessonGroup.for_school(school) }
+      let(:school_building) { create(:school_building) }
+      let(:school) { school_building.school }
+      let(:lesson_group) do
+        create(:lesson_group, school_building: school_building)
+      end
+      let(:other_school) { create(:school) }
+      let(:other_school_building) { create(:school_building, school: other_school) }
+      let(:other_lesson_group) do
+        create(:lesson_group, school_building: other_school_building)
+      end
+      context '学校のものでない講座は含まない' do
+        it { is_expected.not_to include(other_lesson_group) }
+      end
+      context '学校の講座は含む' do
+        it { is_expected.to include(lesson_group) }
+      end
+    end
+
   end
 end
