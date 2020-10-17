@@ -14,6 +14,7 @@ RSpec.describe QuestionStatus, type: :model do
       let(:lesson2) { create(:lesson) }
       let!(:question1_1) { create(:question, lesson: lesson1, display_order: 1) }
       let!(:question1_2) { create(:question, lesson: lesson1, display_order: 2) }
+      let!(:question1_3) { create(:question, lesson: lesson1, display_order: 3) }
       let(:question2_1) { create(:question, lesson: lesson2, display_order: 1) }
       context "lesson内の問題のstatusは" do
         let!(:question_status) { create(:question_status, question: question1_1) }
@@ -42,17 +43,18 @@ RSpec.describe QuestionStatus, type: :model do
       context "display_orderが違う問題のstatus" do
         let!(:question_status1) { create(:question_status, question: question1_1) }
         let!(:question_status2) { create(:question_status, question: question1_2) }
+        let!(:question_status3) { create(:question_status, question: question1_3) }
 
         it '問題の順番通り' do
           expect(
             QuestionStatus.order_by_question_order_at(lesson1).first).to eq(question_status1)
           expect(
-            QuestionStatus.order_by_question_order_at(lesson1).last).to eq(question_status2)
+            QuestionStatus.order_by_question_order_at(lesson1).last).to eq(question_status3)
         end
       end
       context "display_order問題変更して" do
-        let!(:question_status1) { create(:question_status, question: question1_2) }
-        let!(:question_status2) { create(:question_status, question: question1_1) }
+        let!(:question_status1) { create(:question_status, question: question1_3) }
+        let!(:question_status2) { create(:question_status, question: question1_2) }
 
         it '問題の順番変更した通り' do
           expect(
