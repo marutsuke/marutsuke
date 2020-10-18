@@ -47,6 +47,8 @@
         =render 'shared/error_messages', model_object: @comment
         = f.label :text, class: 'required'
         = f.text_area :text, class: 'answer_check_form__text_area'
+        = f.label :image, class: 'required'
+        = f.file_field :image, {}
         = f.hidden_field :answer_id, value: @target_answer.id
         - if @next_answer_exist
           =hidden_field_tag :next_answer_page, @page
