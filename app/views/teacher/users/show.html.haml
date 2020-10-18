@@ -5,7 +5,7 @@
         - if @user.image.present? # ユーザーに画像を登録させる。
           = image_tag @user.image_url, class: 'a-user-image'
         - else
-          .a-user-image--no-image No Image
+          .a-user-no-image No Image
       .m-user-image__name
         .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
       .m-user-image__kana
