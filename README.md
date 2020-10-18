@@ -38,4 +38,4 @@
 
 # ER 図自動生成(2020/10/18)
 
-![ER図](wiki/images/20201018erd.jpg "20201018_erd")
+![ER図](wiki/images/20201018erd.png "20201018_erd")
