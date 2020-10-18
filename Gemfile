@@ -50,6 +50,7 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'rails-erd'
 end
 
 group :development do

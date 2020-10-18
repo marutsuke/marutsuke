@@ -35,3 +35,7 @@
 # ER 図 (授業・ユーザー周り 2020/8/22)
 
 ![ER図](wiki/images/lessons_er.png "lessons_er")
+
+# ER 図自動生成(2020/10/18)
+
+![ER図](wiki/images/20201018erd.jpg "20201018_erd")
