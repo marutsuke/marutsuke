@@ -52,4 +52,22 @@
   }
   &__comment-form {
   }
+  &__text_area {
+    height: 300px;
+    width: 100%;
+    min-width: 240px;
+  }
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  &__page-buttons-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+  }
+  &__page-button {
+    width: 120px;
+  }
 }
