@@ -23,7 +23,7 @@
       - answer.comments&.each do |comment|
         .o-checking__conversation-wrap
           .o-checking__answer-wrap
-            .o-checking__answer-text
+            .o-checking__comment-text
               .a-text-primary.a-text-large= simple_format(comment.text)
             - if comment.image.present?
               .o-checking__answer-images
