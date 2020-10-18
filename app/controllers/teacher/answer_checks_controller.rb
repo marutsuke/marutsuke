@@ -25,9 +25,10 @@ class Teacher::AnswerChecksController < Teacher::Base
 
   private
 
-  def answer_check_params
-    params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
-  end
+  # TODO: いらないので消すが、コードを一旦残す。
+  # def answer_check_params
+  #   params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
+  # end
 
   def redirect_after_check
     flash[:success] = "コメント作成に成功しました。"
