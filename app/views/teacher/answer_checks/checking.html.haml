@@ -11,7 +11,8 @@
                 .a-user-no-image.a-user-no-image--small No Image
             .m-user-image__name--small
               .a-text-primary.a-text-small= answer.user.name
-              .flex.flex-cen さん
+              .flex.flex-cen
+                .a-text-primary.a-text-small さん
         .o-checking__answer-wrap
           .o-checking__answer-text
             .a-text-primary.a-text-large= simple_format(answer.text)
@@ -36,12 +37,13 @@
                   .a-user-no-image.a-user-no-image--small No Image
               .m-user-image__name--small
                 .a-text-primary.a-text-small= comment.teacher.name
-                .flex.flex-cen さん
+                .flex.flex-cen
+                  .a-text-primary.a-text-small さん
   .o-checking__right-container
     .o-checking__question-title
       .a-text-primary.a-text-xlarge= @target_answer.question.name
     .o-checking__comment-form
-      =form_with model: @comment, url: teacher_comments_path, local: true do |f|
+      =form_with model: @comment, url: check_teacher_lesson_answer_checks_path(lesson_id: @lesson.id), local: true do |f|
         =render 'shared/error_messages', model_object: @comment
         = f.label :text, class: 'required'
         = f.text_area :text, class: 'answer_check_form__text_area'
@@ -68,60 +70,3 @@
           .answer_checking_next__link= link_to '次の解答へ', @next_answer_path, class: 'answer_check_page_buttons__for_answer'
         - elsif @next_lesson_exist
           .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path, class: 'answer_check_page_buttons__for_lesson'
-
-
-
-
-
-
-
--# .flex
--#   .answer_groups
--#     - @answers&.each_with_index do |answer, i|
--#       .answer_info
--#         .answer_info__num= "答案[#{ @answers.size - i }]"
--#         .answer_info__user= "#{answer.user.name}さん"
--#       .answer_group
--#         .answer_group__text= simple_format( answer.text )
--#         - if answer.answer_images.present?
--#           .answer_group__images
--#             - answer&.answer_images&.each do |answer_image|
--#               .answer_group__image= image_tag answer_image&.image_url, class: 'answer_group__image'
-
--#   .answer_check_area
--#     .answer_check_question_info
--#       .answer_check_question_info__lesson= "#{@lesson.lesson_group.name}　#{@lesson.name}"
--#       .answer_check_question_info__question= "#{@question.text}"
--#     - @answers&.each.with_index(1) do |answer, i|
--#       - if i == 1 ## 本当は、どの解答に対するコメントか、指定したいところではある。が、現状、最新答案に対するコメントとする。
--#         .answer_check_form
--#           =form_with model: @answer_check_form, url: check_teacher_lesson_answer_checks_path(lesson_id: @lesson.id), local: true do |f|
--#             =render 'shared/error_messages', model_object: @answer_check_form
--#             .answer_check_form__text
--#               %div
--#                 = f.label "answer_text--#{i}", 'コメント本文', class: 'required'
--#               = f.text_area :text, class: 'answer_check_form__text_area', id: "comment_answer_text--#{i}"
--#             = f.hidden_field :answer_id, value: answer.id
--#             - if @next_answer_exist
--#               =hidden_field_tag :next_answer_page, @page
--#             - elsif @next_lesson_exist
--#               =hidden_field_tag :next_lesson_id, @next_lesson_id
--#             - elsif @back_answer_exist
--#               =hidden_field_tag :back_answer_page, @page - 1
--#             - elsif @back_lesson_exist
--#               =hidden_field_tag :back_lesson_id, @back_lesson_id
--#             .answer_check_form__submit
--#               = f.submit '送信', class: 'answer_check_form__submit_btn'
-
--#     .answer_check_form_button_area
--#       .answer_check_page_buttons
--#         - if @back_answer_exist
--#           .answer_checking_backs__link= link_to '前の解答へ', @back_answer_path, class: 'answer_check_page_buttons__for_answer'
--#         - elsif @back_lesson_exist
--#           .answer_checking_next__link= link_to '前の授業へ', @back_lesson_path, class: 'answer_check_page_buttons__for_lesson'
--#       .answer_check_page_buttons
--#         - if @next_answer_exist
--#           .answer_checking_next__link= link_to '次の解答へ', @next_answer_path, class: 'answer_check_page_buttons__for_answer'
--#         - elsif @next_lesson_exist
--#           .answer_checking_next__link= link_to '次の授業へ', @next_lesson_path, class: 'answer_check_page_buttons__for_lesson'
--# #bottom

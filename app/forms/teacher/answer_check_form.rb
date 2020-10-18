@@ -1,3 +1,5 @@
+# TODO: 使ってないので、消す予定だが、コード例として残したい気がして。
+
 class Teacher::AnswerCheckForm
   include ActiveModel::Model
   include ActiveModel::Attributes
