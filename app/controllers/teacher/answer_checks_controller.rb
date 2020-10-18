@@ -7,7 +7,9 @@ class Teacher::AnswerChecksController < Teacher::Base
                 :set_lesson_page_paths
 
   def checking
-    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, nil)
+    @target_answer = @answers.last
+    @comment = current_teacher.comments.new(answer_id: @target_answer.id)
+    # @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, nil)
   end
 
   def check
@@ -27,7 +29,6 @@ class Teacher::AnswerChecksController < Teacher::Base
   end
 
   def redirect_after_check
-    # TODO: 仮実装。解答がなくなった時の処理などを書きたい。
     flash[:success] = "コメント作成に成功しました。"
     if next_lesson_id = params[:next_lesson_id]
       redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: next_lesson_id)

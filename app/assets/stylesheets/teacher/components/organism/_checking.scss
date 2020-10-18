@@ -1,0 +1,49 @@
+.o-checking {
+  display: flex;
+  &__left-container {
+    max-width: 1200px;
+    min-width: 800px;
+    width: 80%;
+    border-right: 1px $indigo_4 solid;
+    overflow: scroll;
+    height: 100vh;
+    padding: 1rem;
+  }
+  &__right-container {
+    padding: 1rem;
+    min-width: 400px;
+    max-width: 600px;
+  }
+  &__conversation-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__user-image {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  &__answer-wrap {
+    width: calc(100% - 100px);
+  }
+  &__answer-comment {
+    width: calc(100% - 100px);
+  }
+  &__answer-text {
+    background-color: $blue_4;
+    border: 1px solid $indigo_4;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  &__answer-images {
+  }
+  &__answer-image {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  &__question-title {
+    margin-bottom: 1.5rem;
+  }
+  &__comment-form {
+  }
+}
