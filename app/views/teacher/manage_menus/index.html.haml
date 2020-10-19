@@ -1,8 +1,14 @@
-= link_to '講座作成', teacher_lesson_groups_path
-= link_to '生徒管理', teacher_users_path
-= link_to '教員管理', teacher_teachers_path
-= link_to '学校情報', edit_teacher_school_path(current_teacher_school)
-= link_to '校舎管理', teacher_school_buildings_path
+.flex.flex-sparo.mt24
+  .ele
+    = link_to '講座作成', teacher_lesson_groups_path
+  .ele
+    = link_to '生徒管理', teacher_users_path
+  .ele
+    = link_to '教員管理', teacher_teachers_path
+  .ele
+    = link_to '学校情報', edit_teacher_school_path(current_teacher_school)
+  .ele
+    = link_to '校舎管理', teacher_school_buildings_path
 
 -# = link_to teacher_users_path do
 -#   .teacher_header__element 生徒管理
