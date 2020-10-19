@@ -72,3 +72,11 @@
           = link_to '次の解答へ', @next_answer_path, class: 'a-button a-button--primary'
         - elsif @next_lesson_exist
           = link_to '次の授業へ', @next_lesson_path, class: 'a-button a-button--primary'
+    .o-checking__question-area
+      .o-checking__question-head
+        .a-text-secondary.a-text-large 課題内容
+      .o-checking__question-text
+        .a-text-primary= simple_format(@target_answer.question.text)
+    - if @target_answer.question.image.present? # comment.teacher.image.present? 教員にimageを登録させたい。
+      .o-checking__question-image-wrap
+        = image_tag @target_answer.question.image_url, class: 'o-checking__question-image'

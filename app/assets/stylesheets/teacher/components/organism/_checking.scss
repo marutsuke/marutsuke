@@ -13,6 +13,9 @@
     padding: 1rem;
     min-width: 400px;
     max-width: 600px;
+    overflow: scroll;
+    height: 100vh;
+    padding: 1rem;
   }
   &__conversation-wrap {
     display: flex;
@@ -69,5 +72,23 @@
   }
   &__page-button {
     width: 120px;
+  }
+  &__question-area {
+    margin-top: 3rem;
+  }
+  &__question-head {
+    border-bottom: solid 1px $blue_2;
+  }
+  &__question-text {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: $blue_4;
+    border: solid 1px $blue_1;
+  }
+  &__question-image-wrap {
+  }
+  &__question-image {
+    width: 100%;
   }
 }
