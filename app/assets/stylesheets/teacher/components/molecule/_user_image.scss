@@ -1,16 +1,10 @@
 .m-user-image {
   &__image {
   }
-  &__no-image {
-    background-color: $indigo_6;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    line-height: 120px;
-    text-align: center;
-    border: 1px solid $indigo_4;
-  }
   &__name {
     margin-top: 24px;
+  }
+  &__name--small {
+    margin-top: 8px;
   }
 }

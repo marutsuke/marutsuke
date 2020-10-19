@@ -1,0 +1,94 @@
+.o-checking {
+  display: flex;
+  &__left-container {
+    max-width: 1200px;
+    min-width: 800px;
+    width: 80%;
+    border-right: 1px $indigo_4 solid;
+    overflow: scroll;
+    height: 100vh;
+    padding: 1rem;
+  }
+  &__right-container {
+    padding: 1rem;
+    min-width: 400px;
+    max-width: 600px;
+    overflow: scroll;
+    height: 100vh;
+    padding: 1rem;
+  }
+  &__conversation-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__user-image {
+    width: 80px;
+    margin-bottom: 1rem;
+  }
+  &__answer-wrap {
+    width: calc(100% - 100px);
+  }
+  &__answer-comment {
+    width: calc(100% - 100px);
+  }
+  &__answer-text {
+    background-color: $blue_4;
+    border: 1px solid $indigo_4;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  &__comment-text {
+    background-color: $green_4;
+    border: 1px solid $moss_4;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  &__answer-images {
+  }
+  &__answer-image {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  &__question-title {
+    margin-bottom: 1.5rem;
+  }
+  &__comment-form {
+  }
+  &__text_area {
+    height: 300px;
+    width: 100%;
+    min-width: 240px;
+  }
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  &__page-buttons-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
+  }
+  &__page-button {
+    width: 120px;
+  }
+  &__question-area {
+    margin-top: 3rem;
+  }
+  &__question-head {
+    border-bottom: solid 1px $blue_2;
+  }
+  &__question-text {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: $blue_4;
+    border: solid 1px $blue_1;
+  }
+  &__question-image-wrap {
+  }
+  &__question-image {
+    width: 100%;
+  }
+}

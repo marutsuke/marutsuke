@@ -2,8 +2,12 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  &--small {
+    width: 80px;
+    height: 80px;
+  }
 }
-.a-user-image--no-image {
+.a-user-no-image {
   background-color: $indigo_6;
   width: 120px;
   height: 120px;
@@ -12,4 +16,10 @@
   text-align: center;
   border: 1px solid $indigo_4;
   color: $indigo_4;
+  &--small {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+  }
 }

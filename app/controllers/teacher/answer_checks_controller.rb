@@ -7,12 +7,15 @@ class Teacher::AnswerChecksController < Teacher::Base
                 :set_lesson_page_paths
 
   def checking
-    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, nil)
+    @target_answer = @answers.last
+    @comment = current_teacher.comments.new(answer_id: @target_answer.id)
   end
 
   def check
-    @answer_check_form = Teacher::AnswerCheckForm.new(current_teacher, answer_check_params)
-    if @answer_check_form.save
+    @comment = current_teacher.comments.new(comment_params)
+
+    if @comment.save
+      @comment.answer.question_status.update(status: 'commented')
       redirect_after_check
     else
       flash[:danger] = 'コメントに失敗しました。'
@@ -22,12 +25,12 @@ class Teacher::AnswerChecksController < Teacher::Base
 
   private
 
-  def answer_check_params
-    params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
-  end
+  # TODO: いらないので消すが、コードを一旦残す。
+  # def answer_check_params
+  #   params.require(:teacher_answer_check_form).permit(:text, :evaluation, :answer_id, :image)
+  # end
 
   def redirect_after_check
-    # TODO: 仮実装。解答がなくなった時の処理などを書きたい。
     flash[:success] = "コメント作成に成功しました。"
     if next_lesson_id = params[:next_lesson_id]
       redirect_to checking_teacher_lesson_answer_checks_path(lesson_id: next_lesson_id)
@@ -55,7 +58,7 @@ class Teacher::AnswerChecksController < Teacher::Base
     @question_statuses = @lesson.question_statuses_to_check
     @question_status = @question_statuses[@page - 1]
     @question = @question_status&.question
-    @answers = @question_status&.answers&.new_order
+    @answers = @question_status&.answers
   end
 
   def active_page_check
@@ -93,5 +96,9 @@ class Teacher::AnswerChecksController < Teacher::Base
           lesson_id: @lessons_ids[current_lesson_index - 1], page: back_lesson_page
         )
     end
+  end
+
+  def comment_params
+    params.require(:comment).permit(:text, :image, :answer_id)
   end
 end

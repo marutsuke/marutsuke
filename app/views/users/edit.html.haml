@@ -16,7 +16,7 @@
                   - if current_user.image.present? # ユーザーに画像を登録させる。
                     = image_tag current_user.image_url, class: 'a-user-image'
                   - else
-                    .a-user-image--no-image No Image
+                    .a-user-no-image No Image
                 .m-user-image-form__form.ml16
                   = f.label :upfile, class: 'm-user-image-form__label' do
                     = image_tag 'add_photo_black.svg', class: 'm-user-image-form__icon'
