@@ -1,5 +1,29 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: lessons
+#
+#  id              :bigint           not null, primary key
+#  end_at          :datetime
+#  name            :string(255)
+#  start_at        :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  lesson_group_id :integer
+#  school_id       :bigint
+#  teacher_id      :bigint
+#
+# Indexes
+#
+#  index_lessons_on_school_id   (school_id)
+#  index_lessons_on_teacher_id  (teacher_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (school_id => schools.id)
+#  fk_rails_...  (teacher_id => teachers.id)
+#
 class Lesson < ApplicationRecord
   attr_accessor :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min

@@ -1,5 +1,32 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id                :bigint           not null, primary key
+#  activated         :boolean          default(FALSE)
+#  activated_at      :datetime
+#  activation_digest :string(255)
+#  email             :string(255)      not null
+#  end_at            :datetime
+#  name              :string(255)      not null
+#  password_digest   :string(255)      not null
+#  remember_digest   :string(255)
+#  start_at          :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  school_id         :bigint
+#
+# Indexes
+#
+#  index_teachers_on_email      (email) UNIQUE
+#  index_teachers_on_school_id  (school_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (school_id => schools.id)
+#
 class Teacher < ApplicationRecord
   attr_accessor :teacher_remember_token, :teacher_activation_token
   before_save :downcase_email

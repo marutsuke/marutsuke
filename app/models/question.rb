@@ -1,5 +1,22 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: questions
+#
+#  id            :bigint           not null, primary key
+#  display_order :integer          default(1), not null
+#  image         :string(255)
+#  publish       :boolean          default(FALSE), not null
+#  text          :text(65535)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  lesson_id     :bigint
+#
+# Indexes
+#
+#  index_questions_on_lesson_id  (lesson_id)
+#
 class Question < ApplicationRecord
   mount_uploader :image, ImageUploader
   validates :text, presence: true, length: { maximum: 3000 }

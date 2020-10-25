@@ -1,5 +1,26 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id                :bigint           not null, primary key
+#  birth_day         :date
+#  email             :string(255)      default("")
+#  image             :string(255)
+#  line_state_digest :string(255)
+#  name              :string(255)      default("名前なし"), not null
+#  name_kana         :string(255)
+#  password_digest   :string(255)      not null
+#  remember_digest   :string(255)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  line_user_id      :string(255)
+#
+# Indexes
+#
+#  index_users_on_email  (email)
+#
 class User < ApplicationRecord
   attr_accessor :user_remember_token,
                 :user_line_state_token,

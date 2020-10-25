@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: question_statuses
+#
+#  id          :bigint           not null, primary key
+#  status      :integer          default("unselected"), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  question_id :bigint
+#  user_id     :bigint
+#
+# Indexes
+#
+#  index_question_statuses_on_question_id  (question_id)
+#  index_question_statuses_on_user_id      (user_id)
+#
 class QuestionStatus < ApplicationRecord
   belongs_to :user
   belongs_to :question

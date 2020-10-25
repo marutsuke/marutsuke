@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: school_users
+#
+#  id                         :bigint           not null, primary key
+#  activated                  :boolean
+#  activated_at               :datetime
+#  activation_digest          :string(255)
+#  email                      :string(255)
+#  end_at                     :datetime
+#  name_at_school             :string(255)
+#  start_at                   :datetime
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  invited_school_building_id :integer
+#  school_id                  :bigint
+#  user_id                    :bigint
+#
+# Indexes
+#
+#  index_school_users_on_email      (email)
+#  index_school_users_on_school_id  (school_id)
+#  index_school_users_on_user_id    (user_id)
+#
 class SchoolUser < ApplicationRecord
   attr_accessor :school_user_activation_token
   before_save :downcase_email
