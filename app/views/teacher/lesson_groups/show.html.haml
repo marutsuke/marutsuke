@@ -1,0 +1,39 @@
+.flex.mt24
+  .mr16= @lesson_group.name
+  .div= @lesson_group.school_building.name
+.flex.mt40
+  - if @lessons.present?
+    = paginate @lessons
+    %table.o-table-simple.mr40
+      %thead.o-table-simple__thead
+        %th.o-table-simple__th= Lesson.human_attribute_name(:name)
+        %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
+        %th.o-table-simple__th= '講座開始'
+        %th.o-table-simple__th= '講座終了'
+      - @lessons.each do |lesson|
+        %tr.o-table-simple__tr
+          %td.o-table-simple__td= link_to lesson.name, teacher_lesson_path(lesson)
+          %td.o-table-simple__td= link_to lesson.teacher.name, teacher_teacher_path(lesson.teacher)
+          %td.o-table-simple__td= lesson.decorate.start_time_with_y
+          %td.o-table-simple__td= lesson.decorate.end_time_with_y
+    = paginate @lessons
+  - if @users.present?
+    = paginate @users
+    %table.o-table-simple
+      %thead.o-table-simple__thead
+        %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
+        %th.o-table-simple__th= User.human_attribute_name(:name)
+        -# %th.o-table-simple__th 学年
+        %th.o-table-simple__th 所属校舎
+        %th.o-table-simple__th アカウント有効日
+      - @users.each do |user|
+        - school_user = user.school_user(current_teacher_school)
+        %tr.o-table-simple__tr
+          %td.o-table-simple__td= school_user.id
+          %td.o-table-simple__td= link_to user.name, teacher_user_path(user)
+          %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
+          %td.o-table-simple__td= school_user.decorate.activated_at
+    = paginate @users
+
+  - else
+    %p 生徒はまだいません

@@ -6,7 +6,10 @@ class Teacher::LessonGroupsController < Teacher::Base
 
   def index; end
 
-  def show; end
+  def show
+    @lessons = @lesson_group.lessons.page(params[:page])
+    @users = @lesson_group.users.page(params[:page])
+  end
 
   def new
     @lesson_group = LessonGroup.new
