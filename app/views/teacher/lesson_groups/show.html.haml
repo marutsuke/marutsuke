@@ -1,6 +1,8 @@
 .flex.mt24.ml16
   .mr16.a-text-large= @lesson_group.name
-  .div.a-text-large= @lesson_group.school_building.name
+  .mr16.a-text-large= "#{@lesson_group.school_year}年度"
+  .mr16.a-text-large= "対象: #{ @lesson_group.target_school_grade }"
+  .mr16.a-text-large= @lesson_group.school_building.name
   .ml24.a-text-large= link_to '編集', edit_teacher_lesson_group_path(@lesson_group)
 .flex.mt40
   - if @lessons.present?
