@@ -13,17 +13,38 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def new
-    @lesson = Lesson.new
+    @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
+    @lessons = @lesson_group.lessons.where.not(id: nil)
+    @lesson = @lesson_group.lessons.new
   end
 
   def create
     @lesson = current_teacher_school.lessons.new(lesson_params)
     @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons.where.not(id: nil)
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"
-      redirect_to edit_teacher_lesson_group_path(@lesson_group)
+      redirect_to new_teacher_lesson_group_lesson_path(@lesson_group)
     else
-      render 'teacher/lesson_groups/edit'
+      render :new
+    end
+  end
+
+  def edit
+    @lesson = current_teacher_school.lessons.find(params[:id])
+    @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons
+  end
+
+  def update
+    @lesson = current_teacher_school.lessons.find(params[:id])
+    @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons
+    if @lesson.update(lesson_params)
+      flash[:success] = "#{@lesson.name}を更新しました。"
+      redirect_to edit_teacher_lesson_path(@lesson)
+    else
+      render :edit
     end
   end
 

@@ -4,9 +4,7 @@ ja:
       lesson: 授業
     attributes:
       lesson:
-        name: 授業回
-        start_at: 開始日時
-        start_at_date: 開始日時
-        end_at: 課題提出停止日時
-        end_at_date: 課題提出停止日時
+        name: 授業名
+        start_at: 提出受付開始
+        end_at: 課題締め切り
         teacher_id: 担当講師

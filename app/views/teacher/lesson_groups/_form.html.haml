@@ -5,6 +5,16 @@
       = f.label :name, class: 'required'
       = f.text_field :name
     .lesson_form__label_and_input
+      - year = Time.zone.now.year - 1
+      = f.label :school_year
+      = f.select :school_year, (year..year + 3), include_blank: true
+    .lesson_form__label_and_input
+      = f.label :min_school_grade, class: 'required'
+      = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, include_blank: true
+    .lesson_form__label_and_input
+      = f.label :max_school_grade
+      = f.select :max_school_grade, SCHOOL_GRADE_HASH.reject{|k,v| k == 4 || k == 20}.invert, include_blank: true
+    .lesson_form__label_and_input
       = f.label :school_building_id, class: 'required'
       = f.select :school_building_id,
          current_teacher.decorate.school_building_select_array,
