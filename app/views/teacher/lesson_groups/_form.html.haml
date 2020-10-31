@@ -13,7 +13,7 @@
       = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, include_blank: true
     .lesson_form__label_and_input
       = f.label :max_school_grade
-      = f.select :max_school_grade, SCHOOL_GRADE_HASH.delete_if{|k,v| k == 4 || k == 20}.invert, include_blank: true
+      = f.select :max_school_grade, SCHOOL_GRADE_HASH.reject{|k,v| k == 4 || k == 20}.invert, include_blank: true
     .lesson_form__label_and_input
       = f.label :school_building_id, class: 'required'
       = f.select :school_building_id,

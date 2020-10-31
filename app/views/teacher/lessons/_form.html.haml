@@ -10,10 +10,10 @@
     .lesson_form__label_and_input
       = f.label :start_at, class: 'required'
       .lesson_form__datetime_select
-        = f.date_field :start_at_date, value: lesson.start_at.to_date || Time.zone.today
-        = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, selected: lesson.start_at.hour || Time.zone.now.hour
+        = f.date_field :start_at_date, value: lesson.start_at&.to_date || Time.zone.today
+        = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, selected: lesson.start_at&.hour || Time.zone.now.hour
         = f.label :start_at_hour, '時'
-        = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, selected: lesson.start_at.min.floor(-1) || Time.zone.now.min.floor(-1)
+        = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, selected: lesson.start_at&.min&.floor(-1) || Time.zone.now.min.floor(-1)
         = f.label :start_at_min, '分'
     .lesson_form__label_and_input
       = f.label :end_at

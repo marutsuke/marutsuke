@@ -4,9 +4,9 @@
   .mr16.a-text-large= "#{@lesson_group.school_year}年度"
   .mr16.a-text-large= "対象: #{ @lesson_group.target_school_grade }"
   .mr16.a-text-large= @lesson_group.school_building.name
-  .ml24.a-text-large= link_to '講座編集', edit_teacher_lesson_group_path(@lesson_group)
-  .ml24.a-text-large= link_to '授業追加', new_teacher_lesson_group_lesson_path(@lesson_group)
-  .ml24.a-text-large= link_to '一覧に戻る', teacher_lesson_groups_path
+  .ml24.a-text-large= link_to '講座情報を編集する', edit_teacher_lesson_group_path(@lesson_group)
+  .ml24.a-text-large= link_to 'この講座に授業を追加する', new_teacher_lesson_group_lesson_path(@lesson_group)
+  .ml24.a-text-large= link_to '講座一覧に戻る', teacher_lesson_groups_path
 .mt40
 .mt16 登録授業一覧
 - if @lessons.present?
@@ -24,7 +24,7 @@
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.decorate.start_time_with_y
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
-        %td.o-table-simple__td= link_to '編集', edit_teacher_lesson_path(lesson)
+        %td.o-table-simple__td= link_to '編集する', edit_teacher_lesson_path(lesson)
   = paginate @lessons
 .mt40
 .mb8 登録生徒一覧
