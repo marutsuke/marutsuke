@@ -29,9 +29,11 @@ class LessonGroup < ApplicationRecord
     joins(:school_building).merge(school.school_buildings)
   }
 
-  def school_grade
-    if min_school_grade.present?
-
+  def target_school_grade
+    if max_school_grade.present?
+      "#{ SCHOOL_GRADE_HASH[min_school_grade] } ~ #{ SCHOOL_GRADE_HASH[max_school_grade] }"
+    else
+      SCHOOL_GRADE_HASH[min_school_grade]
     end
   end
 
