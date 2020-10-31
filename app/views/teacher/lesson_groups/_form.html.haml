@@ -5,6 +5,10 @@
       = f.label :name, class: 'required'
       = f.text_field :name
     .lesson_form__label_and_input
+      - year = Time.zone.now.year
+      = f.label :min_school_grade
+      = f.select :school_year, (year..year + 3), prompt: '-', selected: lesson_group.school_year
+    .lesson_form__label_and_input
       = f.label :school_building_id, class: 'required'
       = f.select :school_building_id,
          current_teacher.decorate.school_building_select_array,

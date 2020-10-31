@@ -6,7 +6,7 @@ class LessonGroup < ApplicationRecord
   has_many :users, through: :lesson_group_users
   has_many :lessons
 
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year] }
 
   scope :for_school_buildings_belonged_to_teacher_and_user,
         lambda { |teacher, user|
