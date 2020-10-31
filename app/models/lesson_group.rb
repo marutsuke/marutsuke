@@ -6,6 +6,7 @@ class LessonGroup < ApplicationRecord
   has_many :users, through: :lesson_group_users
   has_many :lessons
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year] }
+  validates :min_school_grade, presence: true
   validate :min_school_grade_validate
   validate :max_school_grade_validate
 
@@ -27,6 +28,12 @@ class LessonGroup < ApplicationRecord
   scope :for_school, lambda { |school|
     joins(:school_building).merge(school.school_buildings)
   }
+
+  def school_grade
+    if min_school_grade.present?
+
+    end
+  end
 
   private
 

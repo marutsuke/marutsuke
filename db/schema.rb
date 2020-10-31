@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_10_24_111145) do
     t.string "name", null: false
     t.bigint "school_building_id"
     t.integer "school_year"
-    t.integer "min_school_grade"
+    t.integer "min_school_grade", default: 20, null: false
     t.integer "max_school_grade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
