@@ -5,7 +5,7 @@
       = f.label :name
       = f.text_field :name
     .lesson_form__label_and_input
-      - year = Time.zone.now.year
+      - year = Time.zone.now.year - 1
       = f.label :school_year
       = f.select :school_year, (year..year + 3), include_blank: true
     .lesson_form__label_and_input
