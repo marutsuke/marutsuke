@@ -1,6 +1,7 @@
-.flex.mt24
-  .mr16= @lesson_group.name
-  .div= @lesson_group.school_building.name
+.flex.mt24.ml16
+  .mr16.a-text-large= @lesson_group.name
+  .div.a-text-large= @lesson_group.school_building.name
+  .ml24.a-text-large= link_to '編集', edit_teacher_lesson_group_path(@lesson_group)
 .flex.mt40
   - if @lessons.present?
     = paginate @lessons
