@@ -31,7 +31,21 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def edit
-    
+    @lesson = current_teacher_school.lessons.find(params[:id])
+    @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons
+  end
+
+  def update
+    @lesson = current_teacher_school.lessons.find(params[:id])
+    @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons
+    if @lesson.update(lesson_params)
+      flash[:success] = "#{@lesson.name}を更新しました。"
+      redirect_to edit_teacher_lesson_path(@lesson)
+    else
+      render :edit
+    end
   end
 
   private

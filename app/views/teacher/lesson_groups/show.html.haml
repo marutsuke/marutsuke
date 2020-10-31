@@ -24,7 +24,7 @@
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.decorate.start_time_with_y
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
-        %td.o-table-simple__td= link_to '編集', '#'
+        %td.o-table-simple__td= link_to '編集', edit_teacher_lesson_path(lesson)
   = paginate @lessons
 .mt40
 .mb8 登録生徒一覧
