@@ -5,8 +5,9 @@ class LessonGroup < ApplicationRecord
   has_many :lesson_group_users
   has_many :users, through: :lesson_group_users
   has_many :lessons
-
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year] }
+  validate :min_school_grade_validate
+  validate :max_school_grade_validate
 
   scope :for_school_buildings_belonged_to_teacher_and_user,
         lambda { |teacher, user|
@@ -26,5 +27,21 @@ class LessonGroup < ApplicationRecord
   scope :for_school, lambda { |school|
     joins(:school_building).merge(school.school_buildings)
   }
+
+  private
+
+
+  def min_school_grade_validate
+    return if (1..20).include?(min_school_grade)
+
+    errors.add(:min_school_grade, 'は不正な値です。')
+  end
+
+  def max_school_grade_validate
+    return if max_school_grade.nil?
+
+    errors.add(:max_school_grade, 'は対象学年より上の学年にしてください。') unless min_school_grade < max_school_grade
+    errors.add(:max_school_grade, 'は不正な値です。') unless (1..19).include?(max_school_grade)
+  end
 
 end
