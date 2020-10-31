@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       end
       resources :school_building_teachers, only: %i[new create destroy]
     end
-    resources :lessons, only: %i[index show new create] do # テスト済み
+    resources :lessons, only: %i[index show] do # テスト済み
       resources :answer_checks, only: [] do
         get :checking, on: :collection
         post :check, on: :collection
@@ -72,7 +72,9 @@ Rails.application.routes.draw do
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[index create] # テスト済み
     resources :school_buildings, only: %i[index new create]
-    resources :lesson_groups, only: %i[index new show create edit update]
+    resources :lesson_groups, only: %i[index new show create edit update] do
+      resources :lessons, only: %i[new create]
+    end
     resources :user_invitation_mails, only: %i[new create]
   end
 

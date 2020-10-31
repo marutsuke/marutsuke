@@ -2,14 +2,14 @@
   = form_with model: [:teacher, lesson_group], local: true do |f|
     =render 'shared/error_messages', model_object: lesson_group
     .lesson_form__label_and_input
-      = f.label :name
+      = f.label :name, class: 'required'
       = f.text_field :name
     .lesson_form__label_and_input
       - year = Time.zone.now.year - 1
       = f.label :school_year
       = f.select :school_year, (year..year + 3), include_blank: true
     .lesson_form__label_and_input
-      = f.label :min_school_grade
+      = f.label :min_school_grade, class: 'required'
       = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, include_blank: true
     .lesson_form__label_and_input
       = f.label :max_school_grade

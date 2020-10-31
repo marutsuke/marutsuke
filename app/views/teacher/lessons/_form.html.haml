@@ -1,14 +1,14 @@
 .lesson_form
-  = form_with model: [:teacher, lesson], local: true do |f|
+  = form_with model: lesson, url: url, local: true do |f|
     =render 'shared/error_messages', model_object: lesson
     .lesson_form__label_and_input
       = f.label :name, class: 'required'
-      = f.text_field :name, value: ''
+      = f.text_field :name
     .lesson_form__label_and_input
       = f.label :teacher_id, class: 'required'
       = f.select :teacher_id, current_teacher_school.decorate.teachers_select_array, selected: current_teacher.id
     .lesson_form__label_and_input
-      = f.label :start_at_date
+      = f.label :start_at, class: 'required'
       .lesson_form__datetime_select
         = f.date_field :start_at_date, value: Time.zone.today
         = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, selected: Time.zone.now.hour
@@ -16,7 +16,7 @@
         = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, selected: Time.zone.now.min.floor(-1)
         = f.label :start_at_min, '分'
     .lesson_form__label_and_input
-      = f.label :end_at_date
+      = f.label :end_at
       .lesson_form__datetime_select
         = f.date_field :end_at_date
         = f.select :end_at_hour, (8..21).map{|e| [format('%02d', e), e]}, include_blank: true

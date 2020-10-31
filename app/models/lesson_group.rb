@@ -41,7 +41,7 @@ class LessonGroup < ApplicationRecord
 
 
   def min_school_grade_validate
-    return if (1..20).include?(min_school_grade)
+    return if (1..20).include?(min_school_grade) || min_school_grade.nil?
 
     errors.add(:min_school_grade, 'は不正な値です。')
   end

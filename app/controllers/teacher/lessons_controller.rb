@@ -13,7 +13,9 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def new
-    @lesson = Lesson.new
+    @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
+    @lessons = @lesson_group.lessons.where.not(id: nil)
+    @lesson = @lesson_group.lessons.new
   end
 
   def create
