@@ -21,12 +21,17 @@ class Teacher::LessonsController < Teacher::Base
   def create
     @lesson = current_teacher_school.lessons.new(lesson_params)
     @lesson_group = @lesson.lesson_group
+    @lessons = @lesson_group.lessons.where.not(id: nil)
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"
-      redirect_to edit_teacher_lesson_group_path(@lesson_group)
+      redirect_to new_teacher_lesson_group_lesson_path(@lesson_group)
     else
-      render 'teacher/lesson_groups/edit'
+      render :new
     end
+  end
+
+  def edit
+    
   end
 
   private
