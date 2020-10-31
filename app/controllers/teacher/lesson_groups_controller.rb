@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::LessonGroupsController < Teacher::Base
-  before_action :set_lesson_groups, only: %i[index new create]
+  before_action :set_lesson_groups, only: %i[index]
   before_action :set_lesson_group, only: %i[show edit update destroy]
 
   def index; end
@@ -51,7 +51,7 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def set_lesson_groups
-    @lesson_groups = LessonGroup.for_school(current_teacher_school)
+    @lesson_groups = LessonGroup.for_school(current_teacher_school).page(params[:page])
   end
 
   def set_lesson_group

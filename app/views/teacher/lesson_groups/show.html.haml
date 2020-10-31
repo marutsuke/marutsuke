@@ -4,6 +4,7 @@
   .mr16.a-text-large= "対象: #{ @lesson_group.target_school_grade }"
   .mr16.a-text-large= @lesson_group.school_building.name
   .ml24.a-text-large= link_to '編集', edit_teacher_lesson_group_path(@lesson_group)
+  .ml24.a-text-large= link_to '一覧に戻る', teacher_lesson_groups_path
 .flex.mt40
   - if @lessons.present?
     = paginate @lessons

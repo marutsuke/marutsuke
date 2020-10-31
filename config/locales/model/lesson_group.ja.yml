@@ -7,5 +7,6 @@ ja:
         name: 講座名
         school_building_id: 校舎
         school_year: 年度
+        target_school_grade: 対象学年
         min_school_grade: 対象学年
         max_school_grade: 対象学年上限
