@@ -19,8 +19,9 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def create
-    @lesson = current_teacher_school.lessons.new(lesson_params)
-    @lesson_group = @lesson.lesson_group
+    @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
+    @lesson = @lesson_group.lessons.new(lesson_params)
+    illegal_check(@lesson)
     @lessons = @lesson_group.lessons.where.not(id: nil)
     if @lesson.save
       flash[:success] = "#{@lesson.name}を作成しました。"
@@ -61,8 +62,24 @@ class Teacher::LessonsController < Teacher::Base
   def lesson_params
     params.require(:lesson).permit(
       :name, :teacher_id, :start_at_date, :start_at_hour,
-      :start_at_min, :end_at_date, :end_at_hour, :end_at_min,
-      :lesson_group_id
-    )
+      :start_at_min, :end_at_date, :end_at_hour, :end_at_min
+    ).merge(school_id: current_teacher_school.id)
   end
+
+  def illegal_check(lesson)
+    if teacher_school_check(lesson) && lesson_group_school_check(lesson)
+      true
+    else
+      raise '不正な値です。'
+    end
+  end
+
+  def teacher_school_check(lesson)
+    lesson.teacher.school_id == lesson.school_id
+  end
+
+  def lesson_group_school_check(lesson)
+    lesson.lesson_group.school_building.school_id == lesson.school_id
+  end
+
 end
