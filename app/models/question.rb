@@ -9,8 +9,8 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_statuses
 
-  scope :not_nil, -> { where.not(id: nil) }
-  scope :display_order, -> { not_nil.order(display_order: :asc) }
+  scope :id_not_nil, -> { where.not(id: nil) }
+  scope :display_order, -> { id_not_nil.order(display_order: :asc) }
   scope :published, -> { where(publish: true) }
   scope :unpublish, -> { where(publish: false) }
 

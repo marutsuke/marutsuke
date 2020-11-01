@@ -24,7 +24,7 @@ class Teacher::QuestionsController < Teacher::Base
       redirect_to new_teacher_lesson_question_path(@lesson)
     else
       @lesson = @question.lesson
-      @questions = @lesson.questions
+      @questions = @lesson.questions.id_not_nil
       render :new
     end
   end
