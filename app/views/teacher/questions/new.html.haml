@@ -3,6 +3,7 @@
     .question_new_title
       .question_new_title__lesson_title= "#{@lesson_group.name}/#{@lesson.name}"
       .question_new_title__description 課題作成
+      .ml24= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
     .question_form
       = form_with model: [:teacher, @question], local: true do |f|
         =render 'shared/error_messages', model_object: @question
@@ -16,7 +17,7 @@
           = f.file_field :image
           .flex
             = f.label :image
-            %span (最大5MBまで)
+            %span 1枚・最大5MBまで
         .question_form__check_box
           = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
           = f.label :publish, '非公開で保存'
