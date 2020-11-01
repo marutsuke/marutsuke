@@ -1,14 +1,31 @@
-.lesson_show
-  .lesson_show_title= "#{LessonGroup.human_attribute_name(:name)}: #{@lesson.lesson_group.name}(#{@lesson.lesson_group.school_building.name})"
-  .lesson_show_title= Lesson.human_attribute_name(:name) + ':　' + @lesson.name
-  .lesson_show_start_at= Lesson.human_attribute_name(:start_at) + ':　' + @lesson.decorate.start_at
-  .lesson_show_end_at= Lesson.human_attribute_name(:end_at) + ':　' + @lesson.decorate.end_at
-.question_infos
-  - @questions.display_order&.each do |question|
-    = link_to teacher_question_path(question.id), class: 'question_info' do
-      .flex
-        .question_info__title= "タイトル: #{ question.title } "
-        .question_info__display_order= "表示順位: #{question.display_order}"
-      - if question.image.present?
-        = image_tag question&.image_url, alt: question.title, class: 'question_info__image'
-      .question_info__text= "説明: #{ question.text } "
+.mt16.ml16 授業詳細
+.flex.mt24.ml16
+  .mr16.a-text-large= @lesson_group.name
+  .mr16.a-text-large= "#{@lesson_group.school_year}年度"
+  .mr16.a-text-large= "対象: #{ @lesson_group.target_school_grade }"
+  .mr16.a-text-large= @lesson_group.school_building.name
+.ml16
+  .a-text-xlarge= "授業名: #{ @lesson.name }"
+  .a-text-xlarge= "課題受付期間 #{ @lesson.decorate.start_time_with_y } ~ #{ @lesson.decorate.end_time_with_y.gsub('-','') }"
+.ml16.mt16.flex
+  .ml24.a-text-large= link_to '課題を追加・編集', new_teacher_lesson_question_path(@lesson)
+
+- if @questions.present?
+  - @questions.published.each do |question|
+    .mt40.ml16
+      .a-text-primary= "課題番号: #{question.display_order} "
+      %table.o-table-simple.mt16
+        %thead.o-table-simple__thead
+          %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
+          %th.o-table-simple__th= User.human_attribute_name(:name)
+          %th.o-table-simple__th 所属校舎
+          %th.o-table-simple__th ステータス
+          %th.o-table-simple__th 詳細
+        - @lesson_group.users.each do |user|
+          - school_user = user.school_user(current_teacher_school)
+          %tr.o-table-simple__tr
+            %td.o-table-simple__td= school_user.id
+            %td.o-table-simple__td= user.name
+            %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
+            %td.o-table-simple__td= question&.question_status_of(user)&.status_i18n || '未読'
+            %td.o-table-simple__td= link_to '詳細', '#'
