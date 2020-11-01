@@ -122,9 +122,9 @@ class Question < ApplicationRecord
     question_statuses.find_by(user_id: user.id)
   end
 
+  #このメソッドは、消したい。
   def title
-    title = text[0..10]
-    title += '...' if text.length  > 10
+    "課題#{ display_order }"
   end
 
   def image_alt
