@@ -7,8 +7,9 @@ RSpec.describe 'Teacher::Lessons', type: :request do
   before { teacher_log_in(teacher) }
 
   describe '/teacher/lesson#new ' do
+    let(:lesson_group){ create(:lesson_group, school_building: teacher.main_school_building) }
     it 'アクセスできる' do
-      get new_teacher_lesson_path
+      get new_teacher_lesson_group_lesson_path(lesson_group)
       expect(response).to have_http_status(200)
     end
   end
@@ -21,9 +22,10 @@ RSpec.describe 'Teacher::Lessons', type: :request do
   end
 
   describe '/teacher/lesson#new ' do
+    let(:lesson_group){ create(:lesson_group, school_building: teacher.main_school_building) }
     it 'ログインしていなければリダイレクトされる' do
       teacher_log_out
-      get new_teacher_lesson_path
+      get new_teacher_lesson_group_lesson_path(lesson_group)
       expect(response).to have_http_status(302)
     end
   end
@@ -43,8 +45,9 @@ RSpec.describe 'Teacher::Lessons', type: :request do
   end
 
   describe '/teacher/lessons#create' do
-    let(:teacher) { create(:teacher) }
-    let(:lesson_group) { create(:lesson_group) }
+    let(:other_teacher) { create(:teacher) }
+    let!(:lesson_group){ create(:lesson_group, school_building: teacher.main_school_building) }
+
     let(:lesson_params) do
       {
         name: 'テスト',
@@ -55,20 +58,19 @@ RSpec.describe 'Teacher::Lessons', type: :request do
         end_at_hour: '12',
         end_at_min: '30',
         teacher_id: teacher.id,
-        lesson_group_id: lesson_group.id
       }
     end
-    it '講座を作成できる' do
+    it '授業を作成できる' do
       expect do
-        post teacher_lessons_path, params: { lesson: lesson_params }
+        post teacher_lesson_group_lessons_path(lesson_group), params: { lesson: lesson_params }
       end.to change(Lesson, :count).by(1)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to edit_teacher_lesson_group_path(lesson_group)
+      expect(response).to redirect_to new_teacher_lesson_group_lesson_path(lesson_group)
     end
     it '名前がないと作成できない' do
       lesson_params[:name] = ''
       expect do
-        post teacher_lessons_path, params: { lesson: lesson_params }
+        post teacher_lesson_group_lessons_path(lesson_group), params: { lesson: lesson_params }
       end.to change(Lesson, :count).by(0)
       expect(response).to have_http_status(200)
       expect(response.body).to include('を入力してください。')

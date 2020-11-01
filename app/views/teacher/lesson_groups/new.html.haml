@@ -1,12 +1,22 @@
 講座新規作成
 %hr
 = render 'form', lesson_group: @lesson_group
-%hr
-  - @lesson_groups.each do |lesson_group|
-    .flex
-      .mr16= "#{ lesson_group.name }・#{ lesson_group.school_building.name }"
-      .mr16
-        = link_to '詳細', teacher_lesson_group_path(lesson_group)
-      .mr16
-        = link_to '編集', edit_teacher_lesson_group_path(lesson_group)
-    %hr
+
+.mt16.ml16= link_to '講座一覧に戻る', teacher_lesson_groups_path
+
+.mt16.ml16
+  - if @lesson_group.lessons.present?
+    %table.o-table-simple.mr40
+      %thead.o-table-simple__thead
+        %th.o-table-simple__th= LessonGroup.human_attribute_name(:name)
+        %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_building_id)
+        %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_year)
+        %th.o-table-simple__th= LessonGroup.human_attribute_name(:target_school_grade)
+        %th.o-table-simple__th 受講人数
+      - @lesson_groups.each do |lesson_group|
+        %tr.o-table-simple__tr
+          %td.o-table-simple__td= link_to lesson_group.name, teacher_lesson_group_path(lesson_group)
+          %td.o-table-simple__td= lesson_group.school_building.name
+          %td.o-table-simple__td= lesson_group.school_year
+          %td.o-table-simple__td= lesson_group.target_school_grade
+          %td.o-table-simple__td= lesson_group.users.size

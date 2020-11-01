@@ -1,6 +1,6 @@
 .flex.flex-sparo.mt24
   .ele
-    = link_to '講座作成', teacher_lesson_groups_path
+    = link_to '講座管理', teacher_lesson_groups_path
   .ele
     = link_to '生徒管理', teacher_users_path
   .ele
@@ -9,12 +9,3 @@
     = link_to '学校情報', edit_teacher_school_path(current_teacher_school)
   .ele
     = link_to '校舎管理', teacher_school_buildings_path
-
--# = link_to teacher_users_path do
--#   .teacher_header__element 生徒管理
--# = link_to teacher_teachers_path do
--#   .teacher_header__element 教員管理
--# = link_to edit_teacher_school_path(current_teacher_school) do
--#   .teacher_header__element 学校情報
--# = link_to teacher_school_buildings_path do
--#   .teacher_header__element 校舎管理
