@@ -2,13 +2,13 @@
 
 class Teacher::LessonsController < Teacher::Base
   before_action :search_lessons, only: :index
+  before_action :set_lesson, only: %i[show edit update]
   def index
     @lessons = @lessons.page(params[:page])
   end
 
   def show
-    @lesson = current_teacher_school.lessons.find(params[:id])
-    @question = @lesson.questions.build
+    @lesson_group = @lesson.lesson_group
     @questions = @lesson.questions
   end
 
@@ -32,13 +32,11 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   def edit
-    @lesson = current_teacher_school.lessons.find(params[:id])
     @lesson_group = @lesson.lesson_group
     @lessons = @lesson_group.lessons
   end
 
   def update
-    @lesson = current_teacher_school.lessons.find(params[:id])
     @lesson_group = @lesson.lesson_group
     @lessons = @lesson_group.lessons
     if @lesson.update(lesson_params)
@@ -50,6 +48,10 @@ class Teacher::LessonsController < Teacher::Base
   end
 
   private
+
+  def set_lesson
+    @lesson = current_teacher_school.lessons.find(params[:id])
+  end
 
   def search_lessons
     @q = current_teacher_school
