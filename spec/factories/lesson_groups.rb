@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :lesson_group do
-    name { Faker::Book.genre[0..10] }
+    name { Faker::Name.unique.name[0..10] }
     association :school_building, factory: [:school_building]
   end
 end
