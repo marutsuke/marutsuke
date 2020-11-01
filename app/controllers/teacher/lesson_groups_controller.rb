@@ -26,8 +26,6 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def edit
-    @lesson = @lesson_group.lessons.new
-    @lessons = @lesson_group.lessons
   end
 
   def update
@@ -40,7 +38,7 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def destroy
-    @leeson_group.destory
+    # @leeson_group.destory
     redirect_to teacher_lesson_groups_path
   end
 
