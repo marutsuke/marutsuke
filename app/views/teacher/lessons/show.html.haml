@@ -9,6 +9,7 @@
   .a-text-xlarge= "課題受付期間 #{ @lesson.decorate.start_time_with_y } ~ #{ @lesson.decorate.end_time_with_y.gsub('-','') }"
 .ml16.mt16.flex
   .ml24.a-text-large= link_to '課題を追加・編集', new_teacher_lesson_question_path(@lesson)
+  .ml24.a-text-large= link_to '授業一覧に戻る', teacher_lessons_path(@lesson)
 
 - if @questions.present?
   - @questions.published.each do |question|
@@ -28,4 +29,4 @@
             %td.o-table-simple__td= user.name
             %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
             %td.o-table-simple__td= question&.question_status_of(user)&.status_i18n || '未読'
-            %td.o-table-simple__td= link_to '詳細', '#'
+            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.checking_link

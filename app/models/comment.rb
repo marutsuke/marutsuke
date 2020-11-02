@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   mount_uploader :image, ImageUploader
   validate :image_size
   validates :text, length: { maximum: 800 }, allow_nil: true
+  validates :text, presence: true
 
   belongs_to :teacher
   belongs_to :answer

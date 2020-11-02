@@ -40,10 +40,11 @@
                 .flex.flex-cen
                   .a-text-primary.a-text-small さん
   .o-checking__right-container
-    .o-checking__question-title
+    .o-checking__question-title.flex-spbet-end
       .a-text-primary.a-text-xlarge= @target_answer.question.name
+      .ml16= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
     .o-checking__comment-form
-      =form_with model: @comment, url: check_teacher_lesson_answer_checks_path(lesson_id: @lesson.id), local: true do |f|
+      =form_with model: @comment, url: check_teacher_question_status_answer_checks_path(@question_status.id), local: true do |f|
         =render 'shared/error_messages', model_object: @comment
         = f.label :text, class: 'required'
         = f.text_area :text, class: 'o-checking__text_area'
@@ -60,23 +61,3 @@
           =hidden_field_tag :back_lesson_id, @back_lesson_id
         .o-checking__submit
           = f.submit '送信', class: 'a-button a-button--primary'
-
-    .o-checking__page-buttons-area
-      .o-checking__page-button
-        - if @back_answer_exist
-          = link_to '前の解答へ', @back_answer_path, class: 'a-button a-button--primary'
-        - elsif @back_lesson_exist
-          = link_to '前の授業へ', @back_lesson_path, class: 'a-button a-button--primary'
-      .o-checking__page-button
-        - if @next_answer_exist
-          = link_to '次の解答へ', @next_answer_path, class: 'a-button a-button--primary'
-        - elsif @next_lesson_exist
-          = link_to '次の授業へ', @next_lesson_path, class: 'a-button a-button--primary'
-    .o-checking__question-area
-      .o-checking__question-head
-        .a-text-secondary.a-text-large 課題内容
-      .o-checking__question-text
-        .a-text-primary= simple_format(@target_answer.question.text)
-    - if @target_answer.question.image.present? # comment.teacher.image.present? 教員にimageを登録させたい。
-      .o-checking__question-image-wrap
-        = image_tag @target_answer.question.image_url, class: 'o-checking__question-image'
