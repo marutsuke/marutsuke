@@ -79,6 +79,28 @@ class QuestionStatus < ApplicationRecord
     question_status_ids[index + 1]
   end
 
+  def next_question_first_submitted_question_status
+    question
+      .lesson
+      .questions
+      .have_any_question_status_submitted
+      .where('display_order > ?', question.display_order)
+      .first
+      &.question_statuses
+      &.first
+  end
+
+  def prev_question_first_submitted_question_status
+    question
+      .lesson
+      .questions
+      .have_any_question_status_submitted
+      .where('display_order < ?', question.display_order)
+      .last
+      &.question_statuses
+      &.first
+  end
+
   def answers
     Answer.where(user_id: user_id, question_id: question_id)
   end

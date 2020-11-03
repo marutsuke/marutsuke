@@ -43,6 +43,13 @@
     .o-checking__question-title.flex-spbet-end
       .a-text-primary.a-text-xlarge= @target_answer.question.info
       .ml16= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
+    .flex-spbet-end
+      .div
+        - if prev_question_first_status = @question_status.prev_question_first_submitted_question_status
+          = link_to '<< 前の課題', new_teacher_question_status_comment_path(prev_question_first_status), class: ''
+      .div
+        - if next_question_first_status = @question_status.next_question_first_submitted_question_status
+          = link_to '次の課題 >>', new_teacher_question_status_comment_path(next_question_first_status), class: ''
     .o-checking__comment-form
       =form_with model: @comment, url: teacher_question_status_comments_path(@question_status), local: true do |f|
         =render 'shared/error_messages', model_object: @comment
