@@ -41,7 +41,7 @@
                   .a-text-primary.a-text-small さん
   .o-checking__right-container
     .o-checking__question-title.flex-spbet-end
-      .a-text-primary.a-text-xlarge= @target_answer.question.name
+      .a-text-primary.a-text-xlarge= @target_answer.question.info
       .ml16= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
     .o-checking__comment-form
       =form_with model: @comment, url: teacher_question_status_comments_path(@question_status), local: true do |f|

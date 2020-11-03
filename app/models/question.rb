@@ -126,6 +126,7 @@ class Question < ApplicationRecord
     lesson_group = lesson.lesson_group
     "#{ lesson_group.name }/#{ lesson.name }/課題#{ display_order }"
   end
+  alias info image_alt
 
   private
 
