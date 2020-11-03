@@ -52,7 +52,7 @@ class Teacher::QuestionsController < Teacher::Base
     if @question.update(publish: true)
       respond_to { |format| format.js } # publish.js.coffee
     else
-      flash[:success] = "#{@question.title}の公開に失敗しました。"
+      flash[:success] = "#{@question.lesson.name}/課題#{@question.display_order}の公開に失敗しました。"
       render :new
     end
   end

@@ -122,16 +122,10 @@ class Question < ApplicationRecord
     question_statuses.find_by(user_id: user.id)
   end
 
-  #このメソッドは、消したい。
-  def title
-    "課題#{ display_order }"
-  end
-
   def image_alt
     lesson_group = lesson.lesson_group
     "#{ lesson_group.name }/#{ lesson.name }/課題#{ display_order }"
   end
-  alias name image_alt
 
   private
 
