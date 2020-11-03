@@ -61,10 +61,12 @@ Rails.application.routes.draw do
     end
 
     resources :question_statuses, only: [] do
-      resources :answer_checks, only: [] do
-        get :checking, on: :collection
-        post :check, on: :collection
-      end
+      resources :comments, only: %i[new create]
+      # TODO: 不要なので消す予定 2020/11/03
+      # resources :answer_checks, only: [] do
+      #   get :checking, on: :collection
+      #   post :check, on: :collection
+      # end
     end
 
     resources :questions, only: %i[create show edit update destroy] do # createテスト済み

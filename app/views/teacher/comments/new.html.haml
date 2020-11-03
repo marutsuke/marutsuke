@@ -1,0 +1,55 @@
+.o-checking
+  .o-checking__left-container
+    - @answers&.each do |answer|
+      .o-checking__conversation-wrap
+        .o-checking__user-image
+          .m-user-image
+            .m-user-image__image
+              - if answer.user.image.present?# ユーザーに画像を登録させる。
+                = image_tag answer.user.image_url, class: 'a-user-image a-user-image--small'
+              - else
+                .a-user-no-image.a-user-no-image--small No Image
+            .m-user-image__name--small
+              .a-text-primary.a-text-small= answer.user.name
+              .flex.flex-cen
+                .a-text-primary.a-text-small さん
+        .o-checking__answer-wrap
+          .o-checking__answer-text
+            .a-text-primary.a-text-large= simple_format(answer.text)
+          - if answer.answer_images.present?
+            .o-checking__answer-images
+              - answer&.answer_images.each do |answer_image|
+                = image_tag answer_image&.image_url, class: 'o-checking__answer-image'
+      - answer.comments&.each do |comment|
+        .o-checking__conversation-wrap
+          .o-checking__answer-wrap
+            .o-checking__comment-text
+              .a-text-primary.a-text-large= simple_format(comment.text)
+            - if comment.image.present?
+              .o-checking__answer-images
+                = image_tag comment&.image_url, class: 'o-checking__answer-image'
+          .o-checking__user-image
+            .m-user-image
+              .m-user-image__image
+                - if false # comment.teacher.image.present? 教員にimageを登録させたい。
+                  = image_tag comment.teacher.image_url, class: 'a-user-image a-user-image--small'
+                - else
+                  .a-user-no-image.a-user-no-image--small No Image
+              .m-user-image__name--small
+                .a-text-primary.a-text-small= comment.teacher.name
+                .flex.flex-cen
+                  .a-text-primary.a-text-small さん
+  .o-checking__right-container
+    .o-checking__question-title.flex-spbet-end
+      .a-text-primary.a-text-xlarge= @target_answer.question.name
+      .ml16= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
+    .o-checking__comment-form
+      =form_with model: @comment, url: teacher_question_status_comments_path(@question_status), local: true do |f|
+        =render 'shared/error_messages', model_object: @comment
+        = f.label :text, class: 'required'
+        = f.text_area :text, class: 'o-checking__text_area'
+        = f.label :image, class: 'required'
+        = f.file_field :image
+        = f.hidden_field :answer_id, value: @target_answer.id
+        .o-checking__submit
+          = f.submit '送信', class: 'a-button a-button--primary'

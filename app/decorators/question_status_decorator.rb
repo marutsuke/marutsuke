@@ -33,7 +33,7 @@ class QuestionStatusDecorator < ApplicationDecorator
     when 'unselected', 'will_do', 'maybe_do', 'will_not_do'
       ''
     else
-      h.link_to '詳細', checking_teacher_question_status_answer_checks_path(self)
+      h.link_to '詳細', new_teacher_question_status_comment_path(self)
     end
   end
 end
