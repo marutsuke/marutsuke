@@ -16,10 +16,11 @@ class Teacher::CommentsController < Teacher::Base
     commnet_security_check
     if @comment.save
       flash[:success] = 'コメントしました。'
+      @comment.answer.question_status.update(status: 'commented')
       redirect_to new_teacher_question_status_comment_path(@question_status)
     else
       flash[:danger] = 'コメントに失敗しました。'
-      render :new
+        render :new
     end
   end
 
@@ -29,8 +30,7 @@ class Teacher::CommentsController < Teacher::Base
     @question_status = QuestionStatus.find(params[:question_status_id])
     @question = @question_status.question
     @lesson = @question.lesson
-    @user = @question_status.user
-    @answers = @question.answers
+    @answers = @question_status.answers
     @target_answer = @answers.last
   end
 
