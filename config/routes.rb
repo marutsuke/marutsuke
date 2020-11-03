@@ -69,7 +69,7 @@ Rails.application.routes.draw do
       # end
     end
 
-    resources :questions, only: %i[create show edit update destroy] do # createテスト済み
+    resources :questions, only: %i[create edit update destroy] do # createテスト済み
       post :publish, on: :member
     end
     get '/questions', to: 'lessons#index'

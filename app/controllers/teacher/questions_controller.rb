@@ -10,8 +10,9 @@ class Teacher::QuestionsController < Teacher::Base
     @questions = @lesson.questions.display_order
   end
 
-  def show
-  end
+  # TODO: 2020/11/03 使わないアクションなので消す。
+  # def show
+  # end
 
   def create
     @lesson = current_teacher_school
