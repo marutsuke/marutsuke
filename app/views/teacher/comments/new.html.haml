@@ -53,3 +53,19 @@
         = f.hidden_field :answer_id, value: @target_answer.id
         .o-checking__submit
           = f.submit '送信', class: 'a-button a-button--primary'
+    .o-checking__page-buttons-area
+      .o-checking__page-button--long
+        - if prev_check_status = @question_status.prev_question_status_to_check
+          = link_to '<< 前の未チェック', new_teacher_question_status_comment_path(prev_check_status), class: ''
+      .o-checking__page-button--long
+        - if next_check_status = @question_status.next_question_status_to_check
+          = link_to '次の未チェック >>', new_teacher_question_status_comment_path(next_check_status), class: ''
+      - if next_check_status.nil? && prev_check_status.nil?
+        .a-text-note
+    .o-checking__page-buttons-area.mt56
+      .o-checking__page-button--long
+        - if prev_status_submitted = @question_status.prev_question_status_submitted
+          = link_to '< 前の提出物', new_teacher_question_status_comment_path(prev_status_submitted), class: ''
+      .o-checking__page-button--long
+        - if next_status_submitted = @question_status.next_question_status_submitted
+          = link_to '次の提出物 >', new_teacher_question_status_comment_path(next_status_submitted), class: ''
