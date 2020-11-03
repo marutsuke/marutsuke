@@ -49,6 +49,13 @@ class LessonDecorator < Draper::Decorator
     "#{ lesson_group.name }/#{ name } (#{ lesson_group.school_building.name })"
   end
 
+  def question_set_status
+    questions.published.size > 0 ? '設定あり' : '未設定'
+  end
+
+  def has_checked_qeustion_status
+    checking_count > 0 ? '未チェックあり' : ''
+  end
 
   private
 

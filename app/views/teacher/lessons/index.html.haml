@@ -25,24 +25,24 @@
   = paginate @lessons
   %table.o-table-simple
     %thead.o-table-simple__thead
+      %th.o-table-simple__th
       %th.o-table-simple__th= sort_link(@q, :lesson_group_school_building_name, SchoolBuilding.human_attribute_name(:name))
       %th.o-table-simple__th= sort_link(@q, :lesson_group_name, LessonGroup.human_attribute_name(:name))
       %th.o-table-simple__th= sort_link(@q, :name, Lesson.human_attribute_name(:name))
       %th.o-table-simple__th= sort_link(@q, :teacher_name, Lesson.human_attribute_name(:teacher_id))
-      %th.o-table-simple__th= sort_link(@q, :start_at,  '講座開始')
-      %th.o-table-simple__th= sort_link(@q, :end_at,  '講座終了')
-      %th.o-table-simple__th 課題数(下書き数)
-      %th.o-table-simple__th 生徒数
+      %th.o-table-simple__th= sort_link(@q, :start_at,  Lesson.human_attribute_name(:start_at))
+      %th.o-table-simple__th= sort_link(@q, :end_at,  Lesson.human_attribute_name(:end_at))
+      %th.o-table-simple__th 課題設定
       %th.o-table-simple__th
     - @lessons.each do |lesson|
       %tr.o-table-simple__tr
+        %td.o-table-simple__td= lesson.decorate.has_checked_qeustion_status
         %td.o-table-simple__td= lesson.lesson_group.school_building.name
         %td.o-table-simple__td= lesson.lesson_group.name
         %td.o-table-simple__td= lesson.name
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.decorate.start_time_with_y
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
-        %td.o-table-simple__td= "#{lesson.questions.published.size} (#{lesson.questions.unpublish.size})"
-        %td.o-table-simple__td= lesson.lesson_group.users.size
+        %td.o-table-simple__td= lesson.decorate.question_set_status
         %td.o-table-simple__td= link_to '授業詳細', teacher_lesson_path(lesson)
   = paginate @lessons
