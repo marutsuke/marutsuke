@@ -28,6 +28,32 @@ class QuestionStatusDecorator < ApplicationDecorator
     end
   end
 
+  def status_for_teacher
+    case status
+    when 'unselected'
+      '未選択'
+    when 'will_do'
+      'する'
+    when 'maybe_do'
+      'できたらする'
+    when 'will_not_do'
+      'しない'
+    when 'checking'
+      h.content_tag :span, class: "a-text-caution" do
+        '未チェック'
+      end
+    when 'commented'
+      '教員コメント済み'
+    when 'comment_checked'
+      '教員コメント既読'
+    when 'complete'
+      '完了'
+    when 'will_submit_again'
+      '再提出します'
+    end
+  end
+
+
   def checking_link
     case status
     when 'unselected', 'will_do', 'maybe_do', 'will_not_do'
