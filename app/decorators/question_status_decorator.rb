@@ -1,5 +1,6 @@
 class QuestionStatusDecorator < ApplicationDecorator
   delegate_all
+  include Rails.application.routes.url_helpers
 
   def status_label
     case status
@@ -24,6 +25,15 @@ class QuestionStatusDecorator < ApplicationDecorator
     end
     h.content_tag :span, class: "a-label #{ html_class }" do
       status_i18n
+    end
+  end
+
+  def checking_link
+    case status
+    when 'unselected', 'will_do', 'maybe_do', 'will_not_do'
+      ''
+    else
+      h.link_to '詳細', new_teacher_question_status_comment_path(self)
     end
   end
 end

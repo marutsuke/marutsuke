@@ -118,20 +118,21 @@ class Question < ApplicationRecord
       .where(question_statuses: { id: nil })
   }
 
+  scope :have_any_question_status_submitted, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
+      .merge(QuestionStatus.submitted_status)
+  }
+
   def question_status_of(user)
     question_statuses.find_by(user_id: user.id)
-  end
-
-  #このメソッドは、消したい。
-  def title
-    "課題#{ display_order }"
   end
 
   def image_alt
     lesson_group = lesson.lesson_group
     "#{ lesson_group.name }/#{ lesson.name }/課題#{ display_order }"
   end
-  alias name image_alt
+  alias info image_alt
 
   private
 
