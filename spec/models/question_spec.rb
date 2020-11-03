@@ -33,7 +33,7 @@ RSpec.describe Question, type: :model do
 
     context 'commentedの問題' do
       let!(:question_status) do
-        create(:question_status, status: :complete, question: question)
+        create(:question_status, status: :commented, question: question)
       end
       it { expect(Question.complete).not_to include(question) }
       it { expect(Question.any_user_unchecked).not_to include(question) }
