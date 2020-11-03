@@ -118,6 +118,12 @@ class Question < ApplicationRecord
       .where(question_statuses: { id: nil })
   }
 
+  scope :have_any_question_status_submitted, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
+      .merge(QuestionStatus.submitted_status)
+  }
+
   def question_status_of(user)
     question_statuses.find_by(user_id: user.id)
   end

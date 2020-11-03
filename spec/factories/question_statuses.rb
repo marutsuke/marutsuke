@@ -5,6 +5,7 @@ FactoryBot.define do
     association :user, factory: [:user]
     association :question, factory: [:question]
     status  { :unselected }
+    trait(:unselected) { status { :unselected } }
     trait(:will_do) { status { :will_do } }
     trait(:maybe_do) { status { :maybe_do } }
     trait(:will_not_do) { status { :will_not_do } }
