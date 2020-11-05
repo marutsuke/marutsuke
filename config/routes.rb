@@ -23,12 +23,13 @@ Rails.application.routes.draw do
   end
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
-  resources :users, only: [] do
+  resources :users, only: %i[new] do
     collection do
       get :mypage
       get :edit
       patch :update
       post :change_school
+      post :create_by_line
     end
   end
   resources :school_user_activations, only: %i[edit new create]

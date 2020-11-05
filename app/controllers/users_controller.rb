@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < UserBase
+  skip_before_action :user_login_required, only: %i[new create_by_line]
+
   def mypage; end
 
   def change_school
@@ -22,6 +24,14 @@ class UsersController < UserBase
       flash[:success] = '更新に失敗しました'
       render :mypage
     end
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create_by_line
+    redirect_to new_user_path
   end
 
   private
