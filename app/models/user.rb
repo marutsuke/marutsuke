@@ -8,16 +8,26 @@ class User < ApplicationRecord
   before_save { email&.downcase! }
   before_save { start_at_set }
   before_save { end_at_set }
-  validates :name, presence: true, length: { maximum: 12 }
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :name_kana, presence: true, length: { maximum: 20 }
   validates :email, presence: true,
                     format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
-  validates :password, presence: true, length: { minimum: 6 }, on: :create
-  validate :image_size
+  validates :school_grade, presence: true
 
-  has_secure_password
+  has_secure_password validations: false
+
+  validates :password, presence: true, length: { minimum: 8 }, allow_blank: true, on: :email_login
+
+  validate(on: :email_login) do |record|
+    record.errors.add(:password, :blank) unless record.password_digest.present?
+  end
+
+  validates_length_of :password, maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED, on: :emial_login
+
+  validates_confirmation_of :password, allow_blank: true, on: :email_login
 
   has_many :answers
   has_many :question_statuses

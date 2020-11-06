@@ -2,6 +2,11 @@
 
 module UserSessionsHelper
 
+  def line_user_log_in(user)
+    session[:user_id] = user.id
+  end
+
+
   def user_log_in(user, school)
     return unless user.school_ids.include?(school.id)
 

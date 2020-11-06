@@ -2,7 +2,7 @@
 
 module LineApiHelper
 
-  def line_authorize_request_url(state)
+  def line_authorize_request_url(state: , redirect_uri:)
     client_id = Rails.application.credentials.line_login[:channel_id]
     bot_prompt = 'aggressive'
     scope = 'profile'
@@ -15,6 +15,14 @@ module LineApiHelper
       'https://marutsukeapp.com/line_api/new'
     elsif Rails.env.development?
       'http://localhost:3000/line_api/new'
+    end
+  end
+
+  def sign_up_redirect_uri
+    if Rails.env.production?
+      'https://marutsukeapp.com/line_api/line_sign_up_new'
+    elsif Rails.env.development?
+      'http://localhost:3000/line_api/line_sign_up_new'
     end
   end
 

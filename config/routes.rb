@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/login/:login_path', to: 'sessions#new', as: 'school_login'
   post '/login_post/:login_path', to: 'sessions#create', as: 'login_post'
   get '/login_post/:login_path', to: 'sessions#new'
+  get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
   resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
     member do
       get :image_show
     end
-  end
+  end 
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
   resources :users, only: %i[new] do
@@ -35,6 +36,9 @@ Rails.application.routes.draw do
   resources :school_user_activations, only: %i[edit new create]
   resources :line_api, only: %i[create new] do
     collection do
+      get :sign_up_page_by_line
+      get :line_sign_up_new
+      post :sign_up_by_line
       post :send_message
     end
   end
