@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_005247) do
     t.string "name_kana"
     t.string "email", default: ""
     t.date "birth_day"
-    t.integer "school_grade"
+    t.integer "school_grade", default: 20, null: false
     t.string "image"
     t.string "password_digest"
     t.datetime "created_at", null: false
