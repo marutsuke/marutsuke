@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_005247) do
+ActiveRecord::Schema.define(version: 2020_11_07_083410) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_005247) do
     t.string "line_state_digest"
     t.string "line_user_id"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["line_user_id"], name: "index_users_on_line_user_id"
   end
 
   add_foreign_key "lessons", "schools"
