@@ -2,11 +2,14 @@ require 'net/http'
 require 'uri'
 
 class LineApiController < UserBase
+  skip_before_action :user_login_required, only: %i[sign_up_page_by_line sign_up_by_line]
 
   def create
+    return if current_user.line_user_id.present?
+
     if current_user.line_state_save
       state = current_user.user_line_state_token
-      redirect_to line_authorize_request_url(state)
+      redirect_to line_authorize_request_url(state: state, redirect_uri: link_line_account_redirect_uri)
     end
   end
 
@@ -17,7 +20,8 @@ class LineApiController < UserBase
     friendship_status_changed = params[:friendship_status_changed] ==  'true'
 
     if current_user&.line_authenticated?(user_line_state_token)
-      if get_and_save_line_user_id && friendship_status_changed
+      line_user_id = get_line_user_id(redirect_uri: link_line_account_redirect_uri)
+      if current_user.update(line_user_id: line_user_id) && friendship_status_changed
         flash[:success] = 'LINE通知を設定しました！'
         redirect_to mypage_users_path
       else
@@ -39,6 +43,50 @@ class LineApiController < UserBase
     redirect_to mypage_users_path
   end
 
+  def sign_up_page_by_line
+  end
+
+  def sign_up_by_line
+    @user_authentication = UserAuthentication.new(provider: 'line')
+    if save_and_set_id_at_session(@user_authentication)
+      @user_authentication.line_state_save
+      state = @user_authentication.line_state_token
+      redirect_to line_authorize_request_url(state: state, redirect_uri: sign_up_redirect_uri)
+    else
+      render :sign_up_page_by_line
+    end
+  end
+
+  def line_sign_up_new
+    return if sign_up_fail?
+
+    line_state_token = params[:state]
+    friendship_status_changed = params[:friendship_status_changed] ==  'true'
+    set_user_authentication
+
+
+    if @user_authentication.line_authenticated?(line_state_token)
+      line_user_id = get_line_user_id(redirect_uri: sign_up_redirect_uri)
+      old_user_authentication = UserAuthentication.find_by(uid: line_user_id)
+      if user = old_user_authentication&.user
+        flash[:info] = 'すでにアカウントが登録されていました。'
+        user_log_in_without_school(user)
+        redirect_to root_path
+      else
+        @user = User.new(name: '')
+        if old_user_authentication
+          flash[:info] = 'すでに知り合いでしたね。プロフィールを入力してね。'
+        else
+          @user_authentication.update(uid: line_user_id)
+          flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
+        end
+      end
+    else
+      flash[:danger] = 'LINE通知の設定に失敗しました。'
+      redirect_to line_api_sign_up_by_line_path
+    end
+  end
+
   private
 
   def error_present?
@@ -49,7 +97,20 @@ class LineApiController < UserBase
     end
   end
 
-  def get_and_save_line_user_id
+  def sign_up_fail?
+    if params[:error].present?
+      flash[:danger] = 'LINE通知を拒否しました。'
+      redirect_to line_api_sign_up_by_line_path
+      return true
+    end
+  end
+
+  def set_user_authentication
+    @user_authentication = UserAuthentication.find(session[:user_authentication_id])
+    session.delete(:user_authentication_id)
+  end
+
+  def get_line_user_id(redirect_uri:)
     client_secret = Rails.application.credentials.line_login[:channel_secret]
     client_id = Rails.application.credentials.line_login[:channel_id]
     uri = URI.parse("https://api.line.me/oauth2/v2.1/token")
@@ -58,7 +119,7 @@ class LineApiController < UserBase
     request.set_form_data(
       grant_type: 'authorization_code',
       code: params[:code],
-      redirect_uri:redirect_uri,
+      redirect_uri: redirect_uri,
       client_id: client_id,
       client_secret: client_secret,
     )
@@ -72,10 +133,10 @@ class LineApiController < UserBase
     end
     access_token = JSON.parse(response.body)["access_token"]
 
-    save_line_user_id(access_token)
+    line_user_id(access_token)
   end
 
-  def save_line_user_id(access_token)
+  def line_user_id(access_token)
     client_secret = Rails.application.credentials.line_login[:channel_secret]
 
     uri = URI.parse("https://api.line.me/v2/profile")
@@ -85,7 +146,6 @@ class LineApiController < UserBase
       req.headers['Authorization'] = "Bearer #{access_token}"
     end
     line_user_id = JSON.parse(response.body)["userId"]
-    current_user.update(line_user_id: line_user_id)
   end
 
   def get_user_id_redirect_url
@@ -94,5 +154,9 @@ class LineApiController < UserBase
     elsif Rails.env.development?
       'http://localhost:3000/users/mypage'
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :name_kana, :birth_day, :school_grade, :email)
   end
 end

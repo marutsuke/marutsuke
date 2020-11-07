@@ -2,7 +2,7 @@
 
 module UserSessionsHelper
 
-  def line_user_log_in(user)
+  def user_log_in_without_school(user)
     session[:user_id] = user.id
   end
 

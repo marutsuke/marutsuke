@@ -10,7 +10,7 @@ module LineApiHelper
     "https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=#{client_id}&redirect_uri=#{redirect_uri}&state=#{state}&bot_prompt=#{bot_prompt}&scope=#{scope}"
   end
 
-  def redirect_uri
+  def link_line_account_redirect_uri
     if Rails.env.production?
       'https://marutsukeapp.com/line_api/new'
     elsif Rails.env.development?

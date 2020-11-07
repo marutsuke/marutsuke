@@ -3,40 +3,8 @@
     .m-heading-line
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 新規登録
-  = form_with model: @user, url: sign_up_by_line_line_api_index_path,  local: true do |f|
-    = render 'shared/error_messages', model_object: @user
-    .o-profile__body
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name
-          .m-profile-item__body
-            .m-profile-item__item= f.text_field :name,  class: 'a-text-field', value: @user.name.gsub('名前なし', '')
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name_kana
-          .m-profile-item__body
-            .m-profile-item__item= f.text_field :name_kana, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :birth_day
-          .m-profile-item__body
-            .m-profile-item__item= f.date_field :birth_day, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :school_grade
-          .m-profile-item__body
-            .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: '' }, { class: 'a-select' }
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium= f.label :email
-          .m-profile-item__body
-            .m-profile-item__item= f.email_field :email, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__submit_button
-            .m-profile-item__item= f.submit '新規登録', class: 'a-submit-button'
+  .o-profile__body
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__submit_button
+          .m-profile-item__item= link_to 'LINE新規登録',   sign_up_by_line_line_api_index_path, method: :post, class: 'a-submit-button'
