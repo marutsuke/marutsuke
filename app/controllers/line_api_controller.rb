@@ -76,15 +76,21 @@ class LineApiController < UserBase
         @user = User.new(name: '')
         if old_user_authentication
           flash[:info] = 'すでに知り合いでしたね。プロフィールを入力してね。'
+          redirect_to line_sign_up_new_form_line_api_index_path
         else
           @user_authentication.update(uid: line_user_id)
           flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
+          redirect_to line_sign_up_new_form_line_api_index_path
         end
       end
     else
       flash[:danger] = 'LINE通知の設定に失敗しました。'
       redirect_to line_api_sign_up_by_line_path
     end
+  end
+
+  def line_sign_up_new_form
+    @user = User.new(name: '')
   end
 
   private

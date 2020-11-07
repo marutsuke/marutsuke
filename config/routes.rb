@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     collection do
       get :sign_up_page_by_line
       get :line_sign_up_new
+      get :line_sign_up_new_form
       post :sign_up_by_line
       post :send_message
     end
