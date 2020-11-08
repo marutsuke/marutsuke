@@ -48,7 +48,8 @@ class LineApiController < UserBase
 
   def sign_up_by_line
     @user_authentication = UserAuthentication.new(provider: 'line')
-    if save_and_set_id_at_session(@user_authentication)
+    if @user_authentication.save
+        user_authentication_login(@user_authentication)
       @user_authentication.line_state_save
       state = @user_authentication.line_state_token
       redirect_to line_authorize_request_url(state: state, redirect_uri: sign_up_redirect_uri)
@@ -57,27 +58,24 @@ class LineApiController < UserBase
     end
   end
 
+  # line_idが登録済みかどうか検証する場所
   def line_sign_up_new
     return if sign_up_fail?
 
-    line_state_token = params[:state]
-    friendship_status_changed = params[:friendship_status_changed] ==  'true'
-    set_user_authentication
-
-    if @user_authentication.line_authenticated?(line_state_token)
+    if current_user_authentication.line_authenticated?(params[:state])
       line_user_id = get_line_user_id(redirect_uri: sign_up_redirect_uri)
-      old_user_authentication = UserAuthentication.find_by(uid: line_user_id)
-      if user = old_user_authentication&.user
-        flash[:info] = 'すでにアカウントが登録されていました。'
+      old_user_authentication_login(line_user_id)
+      if user = current_user_authentication&.user
+        flash[:info] = 'ログインしました。'
         user_log_in_without_school(user)
         redirect_to root_path
       else
         @user = User.new(name: '')
-        if old_user_authentication
+        if current_user_authentication.uid.present?
           flash[:info] = 'プロフィールを入力してね'
           redirect_to new_line_form_users_path
         else
-          @user_authentication.update(uid: line_user_id)
+          current_user_authentication.update(uid: line_user_id)
           flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
           redirect_to new_line_form_users_path
         end
@@ -101,13 +99,15 @@ class LineApiController < UserBase
   def sign_up_fail?
     if params[:error].present?
       flash[:danger] = 'LINE通知を拒否しました。'
-      redirect_to line_api_sign_up_by_line_path
+      redirect_to sign_up_page_by_line_line_api_index_path
       return true
     end
   end
 
-  def set_user_authentication
-    @user_authentication = UserAuthentication.find(session[:user_authentication_id])
+  def old_user_authentication_login(line_user_id)
+    if old_user_authentication = UserAuthentication.find_by(uid: line_user_id, provider: 'line')
+      user_authentication_login(old_user_authentication)
+    end
   end
 
   def get_line_user_id(redirect_uri:)

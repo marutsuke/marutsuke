@@ -1,6 +1,7 @@
 class UserAuthentication < ApplicationRecord
   attr_accessor :line_state_token
   belongs_to :user, optional: true
+  validates :user_id, uniqueness: true, allow_nil: true
 
   # has_secure_password
 

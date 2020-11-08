@@ -4,6 +4,8 @@ module UserSessionsHelper
 
   def user_log_in_without_school(user)
     session[:user_id] = user.id
+    session.delete(:user_authentication_id)
+    @current_user_authentication = nil
   end
 
 
@@ -13,6 +15,8 @@ module UserSessionsHelper
     session[:user_id] = user.id
     session[:school_id] = school.id
     cookies.permanent.signed[:school_id] = school.id
+    session.delete(:user_authentication_id)
+    @current_user_authentication = nil
   end
 
   def remember_user(user)

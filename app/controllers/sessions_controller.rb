@@ -26,7 +26,7 @@ class SessionsController < UserBase
     @school = current_school
     user_log_out
     flash[:danger] = 'ログアウトしました。'
-    redirect_to school_login_path(@school.login_path)
+    redirect_to new_user_path
   end
 
   private
