@@ -2,7 +2,8 @@ require 'net/http'
 require 'uri'
 
 class LineApiController < UserBase
-  skip_before_action :user_login_required, :school_select_required, only: %i[sign_up_page_by_line sign_up_by_line line_sign_up_new]
+  before_action :user_log_out_required, only: %i[sign_up_page_by_line sign_up_by_line ]
+  skip_before_action :user_login_required, :school_select_required, only: %i[sign_up_page_by_line sign_up_by_line line_sign_up_new line_sign_up_new]
 
   def create
     return if current_user.line_user_id.present?

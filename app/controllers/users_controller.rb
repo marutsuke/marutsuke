@@ -2,7 +2,8 @@
 
 class UsersController < UserBase
   skip_before_action :user_login_required, :school_select_required, only: %i[new new_line_form create_by_line_form mypage]
-
+  before_action :user_log_out_required, only: %i[new new_line_form create_by_line_form]
+  before_action :new_user_permission_check, only: [:new_line_form]
   def mypage; end
 
   def change_school
@@ -38,7 +39,7 @@ class UsersController < UserBase
     @user = User.new(user_params)
     if @user.save
       if current_user_authentication.update(user_id: @user.id)
-        logout_user_authentication
+        user_log_in_without_school(@user)
         redirect_to new_school_user_path
       else
         flash[:danger] = 'エラーです。'
@@ -55,8 +56,9 @@ class UsersController < UserBase
   end
 
   def new_user_permission_check
-    return if current_user_authentication.&user.nil? && !current_user
-    flash[:danger] = '不正なリクエストです'
-    redirect_to root_path
+    if user = current_user_authentication&.user
+      user_log_in_without_school(user)
+      redirect_to root_path
+    end
   end
 end
