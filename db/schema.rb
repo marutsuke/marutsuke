@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_122147) do
+ActiveRecord::Schema.define(version: 2020_11_08_110501) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_122147) do
     t.string "line_state_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider", "uid"], name: "index_user_authentications_on_provider_and_uid", unique: true
     t.index ["uid"], name: "index_user_authentications_on_uid"
     t.index ["user_id"], name: "index_user_authentications_on_user_id"
   end
