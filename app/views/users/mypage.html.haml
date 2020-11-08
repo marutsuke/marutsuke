@@ -40,7 +40,7 @@
           %h2.a-text-secondary.a-text-medium メールアドレス
         .m-profile-item__body
           .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user.email
+            .a-text-primary.a-text-xlarge= current_user&.email || '-'
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
@@ -48,47 +48,60 @@
         .m-profile-item__body
           .m-profile-item__item
             .a-text-primary.a-text-xlarge= current_user.birth_day || '---'
-.o-profile
-  .o-profile__head
-    .m-heading-line
-      .m-heading-line__text
-        %h1.a-text-secondary.a-text-xlarge 学校・塾情報
-  .o-profile__body
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium 学校名
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_school.name
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium 所属校
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= "#{ current_user.main_school_building(current_school).name} (所属)"
-          - current_user.sub_school_buildings(current_school).each do |school_building|
+- if current_school
+  .o-profile
+    .o-profile__head
+      .m-heading-line
+        .m-heading-line__text
+          %h1.a-text-secondary.a-text-xlarge 学校・塾情報
+    .o-profile__body
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 学校名
+          .m-profile-item__body
             .m-profile-item__item
-              .a-text-primary.a-text-xlarge= school_building.name
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium 受講講座
-        .m-profile-item__body
-          -if current_user.lesson_groups_in(current_school).blank?
+              .a-text-primary.a-text-xlarge= current_school&.name
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 所属校
+          .m-profile-item__body
             .m-profile-item__item
-              .a-text-secondary.a-text-small 受講講座はまだありません
-          - current_user.lesson_groups_in(current_school).each do |lesson_group|
+              .a-text-primary.a-text-xlarge= "#{ current_user.main_school_building(current_school).name} (所属)"
+            - current_user.sub_school_buildings(current_school).each do |school_building|
+              .m-profile-item__item
+                .a-text-primary.a-text-xlarge= school_building.name
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 受講講座
+          .m-profile-item__body
+            -if current_user.lesson_groups_in(current_school).blank?
+              .m-profile-item__item
+                .a-text-secondary.a-text-small 受講講座はまだありません
+            - current_user.lesson_groups_in(current_school).each do |lesson_group|
+              .m-profile-item__item
+                .a-text-primary.a-text-xlarge= lesson_group.name
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium= SchoolUser.human_attribute_name(:activated_at)
+          .m-profile-item__body
             .m-profile-item__item
-              .a-text-primary.a-text-xlarge= lesson_group.name
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium= SchoolUser.human_attribute_name(:activated_at)
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user.school_user(current_school).decorate.activated_at
+              .a-text-primary.a-text-xlarge= current_user.school_user(current_school).decorate.activated_at
+- else
+  .o-profile
+    .o-profile__head
+      .m-heading-line
+        .m-heading-line__text
+          %h1.a-text-secondary.a-text-xlarge 学校・塾情報
+    .o-profile__body
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 塾はまだ登録されていません
+
 .o-profile
   .o-profile__head
     .m-heading-line
