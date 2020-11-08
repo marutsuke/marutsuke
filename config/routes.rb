@@ -28,9 +28,10 @@ Rails.application.routes.draw do
     collection do
       get :mypage
       get :edit
+      get :new_line_form
       patch :update
       post :change_school
-      post :create_by_line
+      post :create_by_line_form
     end
   end
   resources :school_user_activations, only: %i[edit new create]
@@ -38,7 +39,6 @@ Rails.application.routes.draw do
     collection do
       get :sign_up_page_by_line
       get :line_sign_up_new
-      get :line_sign_up_new_form
       post :sign_up_by_line
       post :send_message
     end

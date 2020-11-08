@@ -9,15 +9,15 @@ class User < ApplicationRecord
   before_save { start_at_set }
   before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 20 }
-  validates :name_kana, presence: true, length: { maximum: 20 }
+  validates :name_kana, length: { maximum: 20 }
   validates :email, presence: true,
                     format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50 },
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
-  validates :school_grade, presence: true
-
-  has_secure_password validations: false
+                    validates :school_grade, presence: true
+                    validates :birth_day, presence: true
+                    has_secure_password validations: false
 
   validates :password, presence: true, length: { minimum: 8 }, allow_blank: true, on: :email_login
 

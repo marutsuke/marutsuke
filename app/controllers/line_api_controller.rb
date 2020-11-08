@@ -64,7 +64,6 @@ class LineApiController < UserBase
     friendship_status_changed = params[:friendship_status_changed] ==  'true'
     set_user_authentication
 
-
     if @user_authentication.line_authenticated?(line_state_token)
       line_user_id = get_line_user_id(redirect_uri: sign_up_redirect_uri)
       old_user_authentication = UserAuthentication.find_by(uid: line_user_id)
@@ -75,22 +74,18 @@ class LineApiController < UserBase
       else
         @user = User.new(name: '')
         if old_user_authentication
-          flash[:info] = 'すでに知り合いでしたね。プロフィールを入力してね。'
-          redirect_to line_sign_up_new_form_line_api_index_path
+          flash[:info] = 'プロフィールを入力してね'
+          redirect_to new_line_form_users_path
         else
           @user_authentication.update(uid: line_user_id)
           flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
-          redirect_to line_sign_up_new_form_line_api_index_path
+          redirect_to new_line_form_users_path
         end
       end
     else
       flash[:danger] = 'LINE通知の設定に失敗しました。'
       redirect_to line_api_sign_up_by_line_path
     end
-  end
-
-  def line_sign_up_new_form
-    @user = User.new(name: '')
   end
 
   private
@@ -113,7 +108,6 @@ class LineApiController < UserBase
 
   def set_user_authentication
     @user_authentication = UserAuthentication.find(session[:user_authentication_id])
-    session.delete(:user_authentication_id)
   end
 
   def get_line_user_id(redirect_uri:)

@@ -30,13 +30,29 @@ class UsersController < UserBase
     @user = User.new
   end
 
-  def create_by_line
-    redirect_to new_user_path
+  def new_line_form
+    @user = User.new(name: '')
+  end
+
+  def create_by_line_form
+    set_user_authentication
+    @user = User.new(user_params)
+    if @user.save
+      @user_authentication.update(user_id: @user.id)
+      redirect_to root_path
+    else
+      render :new_line_form
+    end
   end
 
   private
   def user_params
-    params.require(:user).permit(:image, :name, :name_kana, :email, :birth_day)
+    params.require(:user).permit(:image, :name, :name_kana, :email, :birth_day, :school_grade)
   end
+
+  def set_user_authentication
+    @user_authentication = UserAuthentication.find(session[:user_authentication_id])
+  end
+
 
 end

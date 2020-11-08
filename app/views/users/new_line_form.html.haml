@@ -1,6 +1,6 @@
 LINEで新規登録完了。情報を入力してください。
 .div
-  = form_with model: @user, url: create_by_line_users_paths,  local: true do |f|
+  = form_with model: @user, url: create_by_line_form_users_path,  local: true do |f|
     = render 'shared/error_messages', model_object: @user
     .o-profile__body
       .o-profile__item
