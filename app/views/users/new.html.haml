@@ -1,13 +1,5 @@
-%nav.navbar.navbar-dark.bg-success
-  .container
-    .navbar-brand
-      %b ログイン
-.py-5
-  .container
-    .row
-      .col-md-4
-      .col-md-4
-        %p このアプリケーションではプロフィール画面にE-mailアドレスを表示するため、LINEに登録されているE-mailを取得します。
-        = link_to create_by_line_users_path, method: :post, id: 'line_login_btn' do
-          = image_tag ('btn_login_base.png'), art: 'line'
-      .col-md-4
+ユーザー新規登録
+.mt24
+  = link_to 'LINEで新規登録', sign_up_page_by_line_line_api_index_path
+.mt24
+  = link_to 'emialで新規登録', '#'
