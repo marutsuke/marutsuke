@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_110501) do
+ActiveRecord::Schema.define(version: 2020_11_09_140328) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -128,8 +128,10 @@ ActiveRecord::Schema.define(version: 2020_11_08_110501) do
   create_table "school_buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "school_id"
+    t.string "invitation_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["invitation_code"], name: "index_school_buildings_on_invitation_code", unique: true
     t.index ["school_id"], name: "index_school_buildings_on_school_id"
   end
 
