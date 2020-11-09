@@ -2,7 +2,7 @@
 
 class Teacher::SchoolBuildingsController < Teacher::Base
   skip_before_action :school_must_have_school_building
-  before_action :set_school_building, only: %i[show invitaion_manage update]
+  before_action :set_school_building, only: %i[show invitation_manage update]
 
   def index
     @school_buildings = current_teacher_school.school_buildings
