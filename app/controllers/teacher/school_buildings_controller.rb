@@ -25,18 +25,22 @@ class Teacher::SchoolBuildingsController < Teacher::Base
   def show
   end
 
-  def invitaion_manage
-
+  def invitation_manage
   end
 
   def update
-
+    if @school_building.update(school_building_params)
+      flash[:success] = '更新しました'
+      redirect_to invitation_manage_teacher_school_building_path(@school_building)
+    else
+      render :invitation_manage
+    end
   end
 
   private
 
   def school_building_params
-    params.require(:school_building).permit(:name)
+    params.require(:school_building).permit(:name, :invitation_code, :auto_invite)
   end
 
   def set_school_building
