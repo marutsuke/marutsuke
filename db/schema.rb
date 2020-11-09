@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_161229) do
+ActiveRecord::Schema.define(version: 2020_11_09_163215) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_161229) do
     t.string "email"
     t.bigint "school_id"
     t.bigint "user_id"
+    t.integer "school_building_id"
     t.string "name_at_school"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -150,6 +151,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_161229) do
     t.datetime "activated_at"
     t.integer "invited_school_building_id"
     t.index ["email"], name: "index_school_users_on_email"
+    t.index ["school_building_id"], name: "index_school_users_on_school_building_id"
     t.index ["school_id"], name: "index_school_users_on_school_id"
     t.index ["user_id"], name: "index_school_users_on_user_id"
   end
