@@ -83,7 +83,9 @@ Rails.application.routes.draw do
     get '/teachers', to: 'teachers#new'
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[index]
-    resources :school_buildings, only: %i[index new create]
+    resources :school_buildings, only: %i[index new create show update] do
+      get :invitation_manage, on: :member
+    end
     resources :lesson_groups, only: %i[index new show create edit update] do
       resources :lessons, only: %i[new create]
     end
