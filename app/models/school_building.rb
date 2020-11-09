@@ -9,4 +9,5 @@ class SchoolBuilding < ApplicationRecord
   has_many :lesson_groups
   validates :name, presence: true, length: { maximum: 20 }
   validates :name, uniqueness: { scope: :school_id, case_sensitive: true }
+  validates :invitation_code, uniqueness: true
 end
