@@ -1,7 +1,7 @@
 .flex-cen.mt24
   .a-text-secondary.a-text-large 新規登録/ログイン
 .flex-cen.mt40
-  =link_to sign_up_page_by_line_line_api_index_path do
+  =link_to sign_up_by_line_line_api_index_path, method: :post do
     .mt24.m-text-with-line-icon
       .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
       .m-text-with-line-icon__text 新規登録/ログイン

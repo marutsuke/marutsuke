@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   resources :school_user_activations, only: %i[edit new create]
   resources :line_api, only: %i[create new] do
     collection do
-      get :sign_up_page_by_line
       get :line_sign_up_new
       post :sign_up_by_line
       post :send_message

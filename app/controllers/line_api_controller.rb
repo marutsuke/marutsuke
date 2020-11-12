@@ -44,9 +44,6 @@ class LineApiController < UserBase
     redirect_to mypage_users_path
   end
 
-  def sign_up_page_by_line
-  end
-
   def sign_up_by_line
     @user_authentication = UserAuthentication.new(provider: 'line')
     if @user_authentication.save
