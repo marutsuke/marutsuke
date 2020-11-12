@@ -15,7 +15,6 @@ module UserSessionsHelper
 
     session[:user_id] = user.id
     session[:school_id] = school.id
-    cookies.permanent.signed[:school_id] = school.id
     session.delete(:user_authentication_id)
     @current_user_authentication = nil
   end
@@ -23,6 +22,7 @@ module UserSessionsHelper
   def remember_user(user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent.signed[:school_id] = school.id
     cookies.permanent[:user_remember_token] = user.user_remember_token
   end
 
@@ -30,12 +30,15 @@ module UserSessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:user_remember_token)
+    cookies.delete(:school_id)
   end
 
   def user_log_out
     forget_user(current_user)
     session.delete(:user_id)
+    session.delete(:school_id)
     @current_user = nil
+    @current_school = nil
   end
 
   def current_user

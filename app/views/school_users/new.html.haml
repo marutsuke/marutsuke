@@ -1,4 +1,6 @@
-学校入学リクエスト画面
+.flex.mb24
+  .mt16.ml16 学校入学リクエスト画面
+  .mt16.ml16= link_to '学校選択画面に戻る', school_users_path
 = form_with model: @school_user, url: school_users_path, local: true do |f|
   = text_field_tag :invitation_code
   = f.submit
