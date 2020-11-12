@@ -1,1 +1,4 @@
 学校入学リクエスト画面
+= form_with model: @school_user, url: school_users_path, local: true do |f|
+  = text_field_tag :invitation_code
+  = f.submit

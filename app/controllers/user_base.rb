@@ -18,13 +18,15 @@ class UserBase < ApplicationController
   end
 
   def school_select_required
-    flash[:info] = '学校を選択してください'
-    redirect_to school_users_path if current_school.nil?
+    if current_school.nil? & current_user
+      flash[:info] = '学校を選択してください'
+      redirect_to school_users_path
+    end
   end
 
   def user_log_out_required
     if current_user
-      flash[:info] = '学校を選択してください'
+      flash[:info] = 'すでにログインしています。'
       redirect_to school_users_path
     end
   end

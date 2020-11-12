@@ -131,11 +131,13 @@
   .o-profile__body
     .o-profile__item
       = link_to 'ログアウトする', logout_path, method: :delete
+  .mt16.ml24.mb24
+    = link_to '学校選択画面', school_users_path
 
-- if current_user.schools.size > 1
-  =form_with url: change_school_users_path do |f|
-    .div
-      = f.label :school_id, '学校切り替え'
-    = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
-    =f.submit '学校を切り替える', class: 'ml24'
+-# - if current_user.schools.size > 1
+-#   =form_with url: change_school_users_path do |f|
+-#     .div
+-#       = f.label :school_id, '学校切り替え'
+-#     = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
+-#     =f.submit '学校を切り替える', class: 'ml24'
 

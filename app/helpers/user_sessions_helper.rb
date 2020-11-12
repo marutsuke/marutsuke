@@ -11,6 +11,7 @@ module UserSessionsHelper
 
   def user_log_in(user, school)
     return unless user.school_ids.include?(school.id)
+    return unless user.school_users.find_by(school_id: school.id).activated
 
     session[:user_id] = user.id
     session[:school_id] = school.id

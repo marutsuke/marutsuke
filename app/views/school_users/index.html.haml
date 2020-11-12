@@ -1,1 +1,12 @@
 学校選択画面
+.mt16.ml16
+  - @school_users.each do |school_user|
+    .flex
+      .mr8= school_user.school.name
+      .ml8
+        - if school_user.activated?
+          = link_to '切り替え', select_school_school_user_path(school_user), method: :post
+        - elsif false #入学拒否の場合の処理いれるかも
+          %span.a-text-error 入学拒否
+        - else
+          %span 許可待ち

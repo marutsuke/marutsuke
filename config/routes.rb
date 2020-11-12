@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   end 
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
-  resources :school_users, only: %i[index new create]
+  resources :school_users, only: %i[index new create] do
+    post :select_school, on: :member
+  end
   resources :users, only: %i[new] do
     collection do
       get :mypage
