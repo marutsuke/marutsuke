@@ -47,7 +47,7 @@ class LineApiController < UserBase
   def sign_up_by_line
     @user_authentication = UserAuthentication.new(provider: 'line')
     if @user_authentication.save
-        user_authentication_login(@user_authentication)
+      user_authentication_login(@user_authentication)
       @user_authentication.authentication_token_save
       state = @user_authentication.authentication_token
       redirect_to line_authorize_request_url(state: state, redirect_uri: sign_up_redirect_uri)
