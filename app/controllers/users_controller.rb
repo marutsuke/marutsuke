@@ -1,9 +1,24 @@
 # frozen_string_literal: true
 
 class UsersController < UserBase
-  skip_before_action :user_login_required, :school_select_required, only: %i[new new_line_form create_by_line_form mypage]
-  before_action :user_log_out_required, only: %i[new new_line_form create_by_line_form]
+  skip_before_action :user_login_required,
+                     :school_select_required,
+                     only: %i[new
+                              new_line_form
+                              create_by_line_form
+                              mypage
+                              new_authentication_form_by_email
+                              create_user_authentication_by_email
+                            ]
+  before_action :user_log_out_required,
+                only: %i[new
+                         new_line_form
+                         create_by_line_form
+                         new_authentication_form_by_email
+                         create_user_authentication_by_email
+                        ]
   before_action :new_user_permission_check, only: [:new_line_form]
+
   def mypage; end
 
   def change_school
@@ -35,7 +50,6 @@ class UsersController < UserBase
   end
 
   def create_user_authentication_by_email
-    
   end
 
   def new_line_form
@@ -48,6 +62,7 @@ class UsersController < UserBase
     if @user.save
       if current_user_authentication.update(user_id: @user.id)
         user_log_in_without_school(@user)
+        flash[:success] = '登録完了しました！校舎に招待コードを送ってください!'
         redirect_to new_school_user_path
       else
         flash[:danger] = 'エラーです。'
