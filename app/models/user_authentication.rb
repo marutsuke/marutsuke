@@ -2,7 +2,7 @@ class UserAuthentication < ApplicationRecord
   attr_accessor :authentication_token
   belongs_to :user, optional: true
   validates :user_id, uniqueness: { scope: :provider, case_sensitive: true }, allow_nil: true
-
+  validate :email_format_check
   # has_secure_password
 
   def self.digest(string)
@@ -25,4 +25,11 @@ class UserAuthentication < ApplicationRecord
     BCrypt::Password.new(authentication_digest).is_password?(authentication_token)
   end
 
+  private
+
+  def email_format_check
+    return unless provider = 'email'
+
+    errors.add(:uid, '形式がメールアドレスではありません') unless uid.match?(VALIDATE_FORMAT_OF_EMAIL)
+  end
 end
