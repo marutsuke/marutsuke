@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     member do
       get :image_show
     end
-  end 
+  end
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
   resources :school_users, only: %i[index new create] do
@@ -31,10 +31,12 @@ Rails.application.routes.draw do
     collection do
       get :mypage
       get :edit
+      get :new_authentication_form_by_email
       get :new_line_form
       patch :update
       post :change_school
       post :create_by_line_form
+      post :create_user_authentication_by_email
     end
   end
   resources :school_user_activations, only: %i[edit new create]

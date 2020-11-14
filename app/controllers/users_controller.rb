@@ -30,6 +30,14 @@ class UsersController < UserBase
     @user = User.new
   end
 
+  def new_authentication_form_by_email
+    @user_authentication = UserAuthentication.new
+  end
+
+  def create_user_authentication_by_email
+    
+  end
+
   def new_line_form
     new_user_permission_check
     @user = User.new(name: '')
