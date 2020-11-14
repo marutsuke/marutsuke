@@ -1,7 +1,7 @@
 class UserAuthentication < ApplicationRecord
-  attr_accessor :line_state_token
+  attr_accessor :authentication_token
   belongs_to :user, optional: true
-  validates :user_id, uniqueness: true, allow_nil: true
+  validates :user_id, uniqueness: { scope: :provider, case_sensitive: true }, allow_nil: true
 
   # has_secure_password
 
@@ -14,15 +14,15 @@ class UserAuthentication < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  def line_state_save
-    self.line_state_token = self.class.new_token
-    update_attribute(:line_state_digest, self.class.digest(line_state_token))
+  def authentication_token_save
+    self.authentication_token = self.class.new_token
+    update_attribute(:authentication_digest, self.class.digest(authentication_token))
   end
 
-  def line_authenticated?(user_line_state_token)
-    return false if line_state_digest.nil?
+  def user_authenticated?(authentication_token)
+    return false if authentication_digest.nil?
 
-    BCrypt::Password.new(line_state_digest).is_password?(user_line_state_token)
+    BCrypt::Password.new(authentication_digest).is_password?(authentication_token)
   end
 
 end

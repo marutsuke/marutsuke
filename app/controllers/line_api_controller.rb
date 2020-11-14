@@ -48,8 +48,8 @@ class LineApiController < UserBase
     @user_authentication = UserAuthentication.new(provider: 'line')
     if @user_authentication.save
         user_authentication_login(@user_authentication)
-      @user_authentication.line_state_save
-      state = @user_authentication.line_state_token
+      @user_authentication.authentication_token_save
+      state = @user_authentication.authentication_token
       redirect_to line_authorize_request_url(state: state, redirect_uri: sign_up_redirect_uri)
     else
       render :sign_up_page_by_line
@@ -60,7 +60,7 @@ class LineApiController < UserBase
   def line_sign_up_new
     return if sign_up_fail?
 
-    if current_user_authentication.line_authenticated?(params[:state])
+    if current_user_authentication.user_authenticated?(params[:state])
       line_user_id = get_line_user_id(redirect_uri: sign_up_redirect_uri)
       old_user_authentication_login(line_user_id)
       if user = current_user_authentication&.user
