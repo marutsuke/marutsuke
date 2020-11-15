@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2020_11_15_122618) do
   end
 
   create_table "join_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "school_building_id"
-    t.bigint "school_id"
-    t.integer "status"
+    t.bigint "user_id", null: false
+    t.bigint "school_building_id", null: false
+    t.bigint "school_id", null: false
+    t.integer "status", default: 10, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["school_building_id"], name: "index_join_requests_on_school_building_id"

@@ -3,6 +3,15 @@ class JoinRequest < ApplicationRecord
   belogs_to :school_building
   belogs_to :school
 
-  validates :school_building_id, uniqueness: { scope: :user_id, case_sensitive: true }
+  validates :school_id, uniqueness: { scope: :user_id, case_sensitive: true }
+
+  enum status: {
+    requested: 10,
+    accepted: 20,
+    rejected: 30,
+    closed: 40
+  }
+
+
 
 end
