@@ -32,7 +32,7 @@ class UserAuthentication < ApplicationRecord
   private
 
   def email_format_check
-    return unless provider = 'email'
+    return unless provider == 'email'
 
     errors.add(:uid, '形式がメールアドレスではありません') unless uid.match?(VALIDATE_FORMAT_OF_EMAIL)
   end
