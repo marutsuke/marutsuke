@@ -1,7 +1,7 @@
 class JoinRequest < ApplicationRecord
-  belogs_to :user
-  belogs_to :school_building
-  belogs_to :school
+  belongs_to :user
+  belongs_to :school_building
+  belongs_to :school
 
   validates :school_id, uniqueness: { scope: :user_id, case_sensitive: true }
 
