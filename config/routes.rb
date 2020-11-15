@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       post :change_school
       post :create_by_line_form
       post :create_user_authentication_by_email
+      post :create_by_email_form
     end
   end
   resources :school_user_activations, only: %i[edit new create]

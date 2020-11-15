@@ -25,6 +25,10 @@ class UserAuthentication < ApplicationRecord
     BCrypt::Password.new(authentication_digest).is_password?(authentication_token)
   end
 
+  def send_activation_mail
+    UserActivationMailer.user_activation(self).deliver_now
+  end
+
   private
 
   def email_format_check
