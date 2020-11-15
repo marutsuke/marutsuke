@@ -32,10 +32,8 @@ Rails.application.routes.draw do
       get :mypage
       get :edit
       get :new_authentication_form_by_email
-      get :new_line_form
       patch :update
       post :change_school
-      post :create_by_line_form
       post :create_user_authentication_by_email
       post :create_by_email_form
     end
@@ -43,9 +41,18 @@ Rails.application.routes.draw do
   resources :school_user_activations, only: %i[edit new create]
   resources :line_api, only: %i[create new] do
     collection do
-      get :line_sign_up_new
-      post :sign_up_by_line
       post :send_message
+    end
+  end
+
+  namespace :user_authentications do
+    resources :line_authentications, only: %i[] do
+      collection do
+        post :line_authentication
+        get :line_logged_in
+        get :user_form
+        post :create_user
+      end
     end
   end
 
