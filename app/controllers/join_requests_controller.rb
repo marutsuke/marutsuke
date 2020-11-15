@@ -1,8 +1,8 @@
 class JoinRequestsController < UserBase
   skip_before_action :school_select_required
 
-  def def new
-    @join_requests = current_user.join_equests.new
+  def new
+    @join_requests = current_user.join_requests.new
   end
 
   def create
