@@ -54,6 +54,12 @@ Rails.application.routes.draw do
         post :create_user
       end
     end
+    resources :email_authentications, only: %i[new create] do
+      collection do
+        get :user_form
+        post :create_user
+      end
+    end
   end
 
   namespace :teacher do
