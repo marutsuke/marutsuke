@@ -93,7 +93,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
   end
 
   def user_params
-    params.require(:user).permit(:name, :name_kana, :birth_day, :school_grade, :email)
+    params.require(:user).permit(:name, :name_kana, :birth_day, :school_grade)
   end
 
   def user_authentication_login_required

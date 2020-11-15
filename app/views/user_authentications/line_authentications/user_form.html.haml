@@ -29,11 +29,5 @@ LINEで新規登録完了。情報を入力してください。
             .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: '' }, { class: 'a-select' }
       .o-profile__item
         .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium= f.label :email
-          .m-profile-item__body
-            .m-profile-item__item= f.email_field :email, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
           .m-profile-item__submit_button
             .m-profile-item__item= f.submit '新規登録', class: 'a-submit-button'
