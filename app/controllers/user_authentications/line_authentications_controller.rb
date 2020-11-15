@@ -42,7 +42,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
       end
     else
       flash[:danger] = 'LINE登録に失敗しました。ごめんね。'
-      redirect_to new_users_path
+      redirect_to new_user_path
     end
   end
 
@@ -87,8 +87,8 @@ class UserAuthentications::LineAuthenticationsController < UserBase
   def sign_up_fail?
     if params[:error].present?
       flash[:danger] = 'LINE通知を拒否しました。'
-      redirect_to new_users_path
-      return true
+      redirect_to new_user_path
+    return true
     end
   end
 

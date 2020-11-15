@@ -51,7 +51,7 @@ class UsersController < UserBase
     if @old_user_authentication = UserAuthentication.find_by(provider: 'email', uid: @user_authentication.uid)
       if @old_user_authentication.user_id.present?
         flash[:danger] = '入力されたメールアドレスは、既に登録されています。ログインしてください。'
-        redirect_to new_users_path
+        redirect_to new_user_path
       else
         @old_user_authentication.authentication_token_save
         @old_user_authentication.send_activation_mail
