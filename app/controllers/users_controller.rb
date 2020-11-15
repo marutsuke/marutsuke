@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class UsersController < UserBase
+  skip_before_action :school_select_required,
+                     only: :mypage
   skip_before_action :user_login_required,
                      :school_select_required,
-                     only: %i[new mypage]
+                     only: :new
   before_action :user_log_out_required, only: %i[new]
 
   def mypage; end
