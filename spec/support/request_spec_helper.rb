@@ -4,8 +4,8 @@ module RequestSpecHelper
   def user_log_in(user = nil, school = nil)
     user ||= create(:user)
     school ||= user.schools.first
-    session_params = { email: user.email, password: user.password, school_login_path: school.login_path }
-    post login_post_path(school.login_path), params: { session: session_params }
+    session_params = { email: user.user_authentication.uid, password: user.password }
+    post login_post_path, params: { session: session_params }
   end
 
   def user_log_out
