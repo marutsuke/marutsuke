@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   root 'lessons#index'
 
-  get '/login/:login_path', to: 'sessions#new', as: 'school_login'
-  post '/login_post/:login_path', to: 'sessions#create', as: 'login_post'
-  get '/login_post/:login_path', to: 'sessions#new'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login_post', to: 'sessions#create', as: 'login_post'
+  get '/login_post', to: 'sessions#new'
   get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
   resources :lessons, only: %i[index show]

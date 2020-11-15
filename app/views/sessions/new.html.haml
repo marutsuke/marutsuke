@@ -3,9 +3,8 @@
     =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
   .user_form_session__container
     .user_form_session__title
-      %span>#{ @school.name }
-      %span>専用ログイン画面
-    = form_with scope: :session, url: login_post_path(@school.login_path), local: true do |f|
+      %span>ログイン
+    = form_with scope: :session, url: login_post_path, local: true do |f|
       .user_form_session__label_and_input
         = f.label :email, "#{User.human_attribute_name(:email)}"
         = f.email_field :email
@@ -14,6 +13,5 @@
         = f.password_field :password
       .user_form_session__label_and_input--checkbox
         = f.check_box :remember_me
-        = f.label :remember_me, '次回から自動的にログイン'
-        =f.hidden_field :school_login_path, value: @school&.login_path
+        = f.label :remember_me, '次回から自動でログイン'
       = f.submit 'ログイン', class: 'user_form_session__submit_btn'
