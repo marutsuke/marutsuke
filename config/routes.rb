@@ -29,13 +29,9 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i[new] do
     collection do
-      get :mypage
       get :edit
-      get :new_authentication_form_by_email
       patch :update
       post :change_school
-      post :create_user_authentication_by_email
-      post :create_by_email_form
     end
   end
   resources :school_user_activations, only: %i[edit new create]
