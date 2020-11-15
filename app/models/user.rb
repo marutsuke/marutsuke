@@ -36,6 +36,7 @@ class User < ApplicationRecord
   has_many :schools, through: :school_users
   has_many :lesson_group_users
   has_many :lesson_groups, through: :lesson_group_users
+  has_many :join_requests
   has_one :user_authentication
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 

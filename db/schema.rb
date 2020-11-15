@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_14_120636) do
+ActiveRecord::Schema.define(version: 2020_11_15_122618) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 2020_11_14_120636) do
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["teacher_id"], name: "index_comments_on_teacher_id"
+  end
+
+  create_table "join_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "school_building_id"
+    t.bigint "school_id"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["school_building_id"], name: "index_join_requests_on_school_building_id"
+    t.index ["school_id"], name: "index_join_requests_on_school_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
   end
 
   create_table "lesson_group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
