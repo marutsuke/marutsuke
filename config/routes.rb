@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: %i[new] do
     collection do
+      get :mypage
       get :edit
       patch :update
       post :change_school
