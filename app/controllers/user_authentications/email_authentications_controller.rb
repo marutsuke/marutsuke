@@ -44,9 +44,10 @@ class UserAuthentications::EmailAuthenticationsController < UserBase
       redirect_to new_user_path
     end
 
+    # アクティベーションが終わってる時
     if @user_authentication&.user_authenticated?(params[:token])
       user_authentication_login(@user_authentication)
-      @user = User.new(name: '', school_grade: nil)
+      @user = User.new(name: '', school_grade: '')
     else
       flash[:danger] = '有効なURLではありません。'
       redirect_to new_user_path

@@ -49,7 +49,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
   # lineからの新規登録で、user登録する時
   def user_form
     new_user_permission_check #ユーザー登録後に直アクセスでuserフォームにアクセスされない
-    @user = User.new(name: '')
+    @user = User.new(name: '', school_grade: '')
   end
 
   # userの新規登録
