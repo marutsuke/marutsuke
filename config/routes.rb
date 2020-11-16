@@ -105,6 +105,12 @@ Rails.application.routes.draw do
       resources :lessons, only: %i[new create]
     end
     # resources :user_invitation_mails, only: %i[new create]
+    resources :join_requests, only: %i[index] do
+      member do
+        patch :accept
+        patch :reject
+      end
+    end
   end
 
   namespace :admin do
