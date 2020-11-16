@@ -35,7 +35,7 @@ RSpec.describe Question, type: :model do
       let!(:question_status) do
         create(:question_status, status: :complete, question: question)
       end
-      it { expect(Question.comple te).to include(question) }
+      it { expect(Question.complete).to include(question) }
       it { expect(Question.any_user_unchecked).not_to include(question) }
       it { expect(Question.have_any_question_status_submitted).to include(question) }
     end
