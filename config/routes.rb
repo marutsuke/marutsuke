@@ -104,7 +104,7 @@ Rails.application.routes.draw do
     resources :lesson_groups, only: %i[index new show create edit update] do
       resources :lessons, only: %i[new create]
     end
-    resources :user_invitation_mails, only: %i[new create]
+    # resources :user_invitation_mails, only: %i[new create]
   end
 
   namespace :admin do
