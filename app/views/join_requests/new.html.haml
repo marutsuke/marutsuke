@@ -4,3 +4,13 @@
 = form_with url: join_requests_path, local: true do |f|
   = text_field_tag :invitation_code
   = f.submit
+%table.mt24.ml24
+  %thead
+    %th 学校名
+    %th 校舎名
+    %th 状態
+  - current_user.join_requests.where.not(id: nil).each do |request|
+    %tr
+      %td.pr8= request.school.name
+      %td.pr8= request.school_building.name
+      %td.pr8= request.status
