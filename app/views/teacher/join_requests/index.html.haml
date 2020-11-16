@@ -1,2 +1,25 @@
 入学リクエスト一覧
+= link_to 'ユーザー一覧に戻る', teacher_users_path
 
+%table.o-table-simple.mr40
+  %thead.o-table-simple__thead
+    %th.o-table-simple__th 名前
+    %th.o-table-simple__th 学年
+    %th.o-table-simple__th 生年月日
+    %th.o-table-simple__th 状態
+    %th.o-table-simple__th
+    %th.o-table-simple__th
+  - @join_requests.each do |request|
+    %tr.o-table-simple__tr
+      %td.o-table-simple__td= request.user.name
+      %td.o-table-simple__td= request.user.school_grade
+      %td.o-table-simple__td= request.user.birth_day
+      %td.o-table-simple__td= request.status_i18n
+      - if request.status == 'accepted'
+        %td.o-table-simple__td
+      - else
+        %td.o-table-simple__td= link_to '許可', accept_teacher_join_request_path(request), method: :patch
+      - if request.status == 'rejected'
+        %td.o-table-simple__td
+      - else
+        %td.o-table-simple__td= link_to '拒否', reject_teacher_join_request_path(request), method: :patch
