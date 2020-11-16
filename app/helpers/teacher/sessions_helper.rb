@@ -38,4 +38,8 @@ module Teacher::SessionsHelper
   def current_teacher_school
     current_teacher&.school
   end
+
+  def current_teacher_school_building
+    current_teacher.main_school_building
+  end
 end
