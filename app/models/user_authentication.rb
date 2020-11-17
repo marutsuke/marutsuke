@@ -1,9 +1,8 @@
 class UserAuthentication < ApplicationRecord
   attr_accessor :authentication_token
   belongs_to :user, optional: true
-  validates :user_id, uniqueness: { scope: :provider, case_sensitive: true }, allow_nil: true
+  validates :uid, uniqueness: { scope: :provider, case_sensitive: true }, allow_nil: true
   validate :email_format_check
-  # has_secure_password
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
