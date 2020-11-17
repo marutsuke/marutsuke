@@ -24,7 +24,7 @@ class SchoolUsersController < UserBase
   def school_request_required
     if current_user.school_users.blank?
       flash[:info] = '招待コードを送って入学しましょう'
-      redirect_to new_school_user_path
+      redirect_to new_join_request_path
     end
   end
 

@@ -59,7 +59,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
       if current_user_authentication.update(user_id: @user.id)
         user_log_in_without_school(@user)
         flash[:success] = '登録完了しました！校舎に招待コードを送ってください!'
-        redirect_to new_school_user_path
+        redirect_to new_join_request_path
       else
         flash[:danger] = 'エラーです。'
         raise 'user_has_many_user_authentication'
