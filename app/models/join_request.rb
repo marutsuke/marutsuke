@@ -12,6 +12,25 @@ class JoinRequest < ApplicationRecord
     closed: 40
   }
 
+  scope :checked_recently, lambda {
+    where.not(status: ['requested', 'closed'])
+      .where(updated_at: 7.days.ago..Time.current)
+  }
 
+
+  def accept_user_join
+    create_school_user
+    create_main_school_building_user
+  end
+
+  private
+
+  def create_school_user
+    user.school_users.create(school_id: school.id, activated_at: Time.zone.now, activated: true)
+  end
+
+  def create_main_school_building_user
+    user.school_building_users.create(school_building_id: school_building.id, main: true)
+  end
 
 end
