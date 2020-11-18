@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class UsersController < UserBase
+  skip_before_action :school_select_required,
+                     only: :mypage
+  skip_before_action :user_login_required,
+                     :school_select_required,
+                     only: :new
+  before_action :user_log_out_required, only: %i[new]
+
   def mypage; end
 
   def change_school
@@ -11,7 +18,6 @@ class UsersController < UserBase
   end
 
   def edit
-
   end
 
   def update
@@ -24,9 +30,11 @@ class UsersController < UserBase
     end
   end
 
-  private
-  def user_params
-    params.require(:user).permit(:image, :name, :name_kana, :email, :birth_day)
+  def new
   end
 
+  private
+  def user_params
+    params.require(:user).permit(:image, :name, :name_kana, :email, :birth_day, :school_grade)
+  end
 end

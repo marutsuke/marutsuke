@@ -8,16 +8,24 @@ class User < ApplicationRecord
   before_save { email&.downcase! }
   before_save { start_at_set }
   before_save { end_at_set }
-  validates :name, presence: true, length: { maximum: 12 }
-  validates :email, presence: true,
-                    format: { with: VALIDATE_FORMAT_OF_EMAIL },
-                    length: { maximum: 50 },
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :name_kana, length: { maximum: 20 }
+  validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
+                    length: { maximum: 50, minimum: 8 },
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
-  validates :password, presence: true, length: { minimum: 6 }, on: :create
-  validate :image_size
+  validates :school_grade, presence: true
+  validates :birth_day, presence: true
 
-  has_secure_password
+  # パスワードのバリデーション(emailでログインの時のみ)
+  # See: https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb
+  has_secure_password validations: false
+  validates :password, presence: true, length: { minimum: 8 }, allow_blank: true, on: :email_authentication
+  validate(on: :email_authentication) do |record|
+    record.errors.add(:password, :blank) if record.password_digest.blank?
+  end
+  validates_length_of :password, maximum: ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED, on: :email_authentication
+  validates_confirmation_of :password, presence: true, on: :email_authentication
 
   has_many :answers
   has_many :question_statuses
@@ -28,6 +36,8 @@ class User < ApplicationRecord
   has_many :schools, through: :school_users
   has_many :lesson_group_users
   has_many :lesson_groups, through: :lesson_group_users
+  has_many :join_requests
+  has_one :user_authentication
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
   paginates_per 20
@@ -36,6 +46,14 @@ class User < ApplicationRecord
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  def email_to_authentication
+    if user_authentication.provider == 'email'
+      user_authentication.uid
+    else
+      nil
+    end
   end
 
   def self.new_token

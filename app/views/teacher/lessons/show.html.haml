@@ -9,7 +9,7 @@
   .a-text-xlarge= "課題受付期間 #{ @lesson.decorate.start_time_with_y } ~ #{ @lesson.decorate.end_time_with_y.gsub('-','') }"
 .ml16.mt16.flex
   .ml24.a-text-large= link_to '課題を追加・編集', new_teacher_lesson_question_path(@lesson)
-  .ml24.a-text-large= link_to '授業一覧に戻る', teacher_lessons_path(@lesson)
+  .ml24.a-text-large= link_to '授業一覧に戻る', teacher_lessons_path
 
 - if @questions.present?
   - @questions.published.each do |question|

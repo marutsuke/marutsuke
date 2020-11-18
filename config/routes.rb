@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root 'lessons#index'
 
-  get '/login/:login_path', to: 'sessions#new', as: 'school_login'
-  post '/login_post/:login_path', to: 'sessions#create', as: 'login_post'
-  get '/login_post/:login_path', to: 'sessions#new'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login_post', to: 'sessions#create', as: 'login_post'
+  get '/login_post', to: 'sessions#new'
+  get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
   resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
@@ -23,7 +24,11 @@ Rails.application.routes.draw do
   end
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
-  resources :users, only: [] do
+  resources :school_users, only: %i[index] do
+    post :select_school, on: :member
+  end
+  resources :join_requests, only: %i[new create update]
+  resources :users, only: %i[new] do
     collection do
       get :mypage
       get :edit
@@ -35,6 +40,23 @@ Rails.application.routes.draw do
   resources :line_api, only: %i[create new] do
     collection do
       post :send_message
+    end
+  end
+
+  namespace :user_authentications do
+    resources :line_authentications, only: %i[] do
+      collection do
+        post :line_authentication
+        get :line_logged_in
+        get :user_form
+        post :create_user
+      end
+    end
+    resources :email_authentications, only: %i[new create] do
+      collection do
+        get :user_form
+        post :create_user
+      end
     end
   end
 
@@ -76,11 +98,19 @@ Rails.application.routes.draw do
     get '/teachers', to: 'teachers#new'
     resources :account_activations, only: %i[edit]
     resources :comments, only: %i[index]
-    resources :school_buildings, only: %i[index new create]
+    resources :school_buildings, only: %i[index new create show update] do
+      get :invitation_manage, on: :member
+    end
     resources :lesson_groups, only: %i[index new show create edit update] do
       resources :lessons, only: %i[new create]
     end
-    resources :user_invitation_mails, only: %i[new create]
+    # resources :user_invitation_mails, only: %i[new create]
+    resources :join_requests, only: %i[index] do
+      member do
+        patch :accept
+        patch :reject
+      end
+    end
   end
 
   namespace :admin do

@@ -1,0 +1,45 @@
+あと少しで登録完了！
+.div
+  = form_with model: @user, url: create_user_user_authentications_email_authentications_path,  local: true do |f|
+    = render 'shared/error_messages', model_object: @user
+    .o-profile__body
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name
+          .m-profile-item__body
+            .m-profile-item__item= f.text_field :name, class: 'a-text-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name_kana
+          .m-profile-item__body
+            .m-profile-item__item= f.text_field :name_kana, class: 'a-text-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :birth_day
+          .m-profile-item__body
+            .m-profile-item__item= f.date_field :birth_day, class: 'a-text-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :school_grade
+          .m-profile-item__body
+            .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: @user.school_grade || '' }, { class: 'a-select' }
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :password
+          .m-profile-item__body
+            .m-profile-item__item= f.password_field :password, class: 'a-text-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :password_confirmation
+          .m-profile-item__body
+            .m-profile-item__item= f.password_field :password_confirmation, class: 'a-text-field'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__submit_button
+            .m-profile-item__item= f.submit '新規登録', class: 'a-submit-button'
