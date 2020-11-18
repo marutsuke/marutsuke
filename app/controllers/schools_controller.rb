@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SchoolsController < UserBase
-  skip_before_action :user_login_required
+  skip_before_action :user_login_required, :school_select_required
 
   def new
     @school = School.new

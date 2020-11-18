@@ -7,6 +7,7 @@ ja:
         name: 名前
         name_kana: かな
         birth_day: 生年月日
+        school_grade: 学年
         login_id: ログインID
         email: メールアドレス
         password: パスワード

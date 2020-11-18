@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_24_111145) do
+ActiveRecord::Schema.define(version: 2020_11_15_143131) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 2020_10_24_111145) do
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["teacher_id"], name: "index_comments_on_teacher_id"
+  end
+
+  create_table "join_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "school_building_id", null: false
+    t.bigint "school_id", null: false
+    t.integer "status", default: 10, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["school_building_id"], name: "index_join_requests_on_school_building_id"
+    t.index ["school_id"], name: "index_join_requests_on_school_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
   end
 
   create_table "lesson_group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -128,25 +140,23 @@ ActiveRecord::Schema.define(version: 2020_10_24_111145) do
   create_table "school_buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "school_id"
+    t.string "invitation_code"
+    t.boolean "auto_invite", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["invitation_code"], name: "index_school_buildings_on_invitation_code", unique: true
     t.index ["school_id"], name: "index_school_buildings_on_school_id"
   end
 
   create_table "school_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "email"
     t.bigint "school_id"
     t.bigint "user_id"
-    t.string "name_at_school"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.boolean "activated"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "activation_digest"
     t.datetime "activated_at"
-    t.integer "invited_school_building_id"
-    t.index ["email"], name: "index_school_users_on_email"
+    t.boolean "activated", default: false, null: false
     t.index ["school_id"], name: "index_school_users_on_school_id"
     t.index ["user_id"], name: "index_school_users_on_user_id"
   end
@@ -175,19 +185,33 @@ ActiveRecord::Schema.define(version: 2020_10_24_111145) do
     t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
+  create_table "user_authentications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.bigint "user_id"
+    t.string "authentication_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["provider", "uid"], name: "index_user_authentications_on_provider_and_uid", unique: true
+    t.index ["uid"], name: "index_user_authentications_on_uid"
+    t.index ["user_id"], name: "index_user_authentications_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "名前なし", null: false
     t.string "name_kana"
     t.string "email", default: ""
     t.date "birth_day"
+    t.integer "school_grade", default: 20, null: false
     t.string "image"
-    t.string "password_digest", null: false
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "remember_digest"
     t.string "line_state_digest"
     t.string "line_user_id"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["line_user_id"], name: "index_users_on_line_user_id"
   end
 
   add_foreign_key "lessons", "schools"

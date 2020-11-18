@@ -2,7 +2,8 @@
 
 class UserBase < ApplicationController
   include UserSessionsHelper
-  before_action :user_login_required
+  include UserAuthenticationSessionsHelper
+  before_action :user_login_required, :school_select_required
 
   layout 'layouts/user_layout'
 
@@ -12,11 +13,26 @@ class UserBase < ApplicationController
     unless current_user
       store_location
       flash[:info] = 'ログインしてください'
-      if school = School.find_by(id: cookies.signed[:school_id])
-        redirect_to school_login_path(login_path: school.login_path)
+      redirect_to new_user_path
+    end
+  end
+
+  def school_select_required
+    if current_school.nil? & current_user
+      if current_user.school_users.size == 1
+        user_log_in(current_user, current_user.schools.first)
+        redirect_to root_path
       else
-        raise LoginRequired
+        flash[:info] = '学校を選択してください'
+        redirect_to school_users_path
       end
+    end
+  end
+
+  def user_log_out_required
+    if current_user
+      flash[:info] = 'すでにログインしています。'
+      redirect_to root_path
     end
   end
 end

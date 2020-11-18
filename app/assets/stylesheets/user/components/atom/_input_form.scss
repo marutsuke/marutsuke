@@ -1,4 +1,5 @@
 .a-text-field {
+  width: 100%;
   color: $moss_1;
   padding: 4px;
   border: 1px solid $moss_4;
@@ -7,4 +8,21 @@
     border: 2px solid $green_0;
     outline: 0;
   }
+}
+
+.a-select {
+  width: 100%;
+  color: $moss_1;
+  padding: 4px;
+  border: 1px solid $moss_4;
+  border-radius: 4px;
+}
+
+.a-submit-button {
+  width: 100%;
+  color: $white_green;
+  background-color: $moss_2;
+  padding: 4px;
+  border: 1px solid $moss_2;
+  border-radius: 4px;
 }
