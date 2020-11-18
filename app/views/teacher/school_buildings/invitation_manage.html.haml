@@ -1,0 +1,11 @@
+.o-invitation-form
+  = form_with model: @school_building, url: teacher_school_building_path(@school_building.id), method: :patch, local: true do |f|
+    .o-invitaion-form__text-field
+      .o-invitaion-form__form-group
+        = f.label :invitation_code, class: 'o-invitation-form__label'
+        = f.text_field :invitation_code, class: 'o-invitation-form__text-field'
+      .o-invitaion-form__form-group
+        = f.check_box :auto_invite, class: 'o-invitation-form__check-box'
+        = f.label :auto_invite, class: 'o-invitation-form__label'
+      .o-invitaion-form__submit-button
+        = f.submit '更新'

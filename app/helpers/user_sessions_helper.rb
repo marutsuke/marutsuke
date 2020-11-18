@@ -2,12 +2,22 @@
 
 module UserSessionsHelper
 
+  def user_log_in_without_school(user)
+    session[:user_id] = user.id
+    session.delete(:user_authentication_id)
+    @current_user_authentication = nil
+  end
+
+
   def user_log_in(user, school)
     return unless user.school_ids.include?(school.id)
+    return unless user.school_users.find_by(school_id: school.id).activated
 
     session[:user_id] = user.id
     session[:school_id] = school.id
     cookies.permanent.signed[:school_id] = school.id
+    session.delete(:user_authentication_id)
+    @current_user_authentication = nil
   end
 
   def remember_user(user)
@@ -20,12 +30,15 @@ module UserSessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:user_remember_token)
+    cookies.delete(:school_id)
   end
 
   def user_log_out
     forget_user(current_user)
     session.delete(:user_id)
+    session.delete(:school_id)
     @current_user = nil
+    @current_school = nil
   end
 
   def current_user
