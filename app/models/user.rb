@@ -48,6 +48,14 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def email_to_authentication
+    if user_authentication.provider == 'email'
+      user_authentication.uid
+    else
+      nil
+    end
+  end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
