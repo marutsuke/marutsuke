@@ -23,6 +23,7 @@ class JoinRequest < ApplicationRecord
 
 
   def accept_user_join
+    update(status: 'accepted')
     create_school_user
     create_main_school_building_user
   end

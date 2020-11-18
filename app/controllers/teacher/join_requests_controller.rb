@@ -6,7 +6,6 @@ class Teacher::JoinRequestsController < Teacher::Base
   end
 
   def accept
-    @join_request.update(status: 'accepted')
     @join_request.accept_user_join
     flash[:success] = "#{ @join_request.user.name }さんの入学を許可しました。"
     redirect_to teacher_join_requests_path
