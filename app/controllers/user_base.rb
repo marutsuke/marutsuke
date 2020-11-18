@@ -21,6 +21,7 @@ class UserBase < ApplicationController
     if current_school.nil? & current_user
       if current_user.school_users.size == 1
         user_log_in(current_user, current_user.schools.first)
+        redirect_to root_path
       else
         flash[:info] = '学校を選択してください'
         redirect_to school_users_path
@@ -31,7 +32,7 @@ class UserBase < ApplicationController
   def user_log_out_required
     if current_user
       flash[:info] = 'すでにログインしています。'
-      redirect_to school_users_path
+      redirect_to root_path
     end
   end
 end
