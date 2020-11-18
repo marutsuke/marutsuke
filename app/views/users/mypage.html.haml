@@ -100,7 +100,14 @@
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium 塾はまだ登録されていません
+            - if current_user.schools.size > 0
+              %h2.a-text-secondary.a-text-medium
+                %span 未選択
+                = link_to '学校選択', school_users_path
+            - else
+              %h2.a-text-secondary.a-text-medium
+                %span 所属なし
+                = link_to '入学リクエスト', new_join_request_path
 
 .o-profile
   .o-profile__head
@@ -133,11 +140,3 @@
       = link_to 'ログアウトする', logout_path, method: :delete
   .mt16.ml24.mb24
     = link_to '学校選択画面', school_users_path
-
--# - if current_user.schools.size > 1
--#   =form_with url: change_school_users_path do |f|
--#     .div
--#       = f.label :school_id, '学校切り替え'
--#     = f.select :school_id, current_user.decorate.change_school_select_array([current_school])
--#     =f.submit '学校を切り替える', class: 'ml24'
-
