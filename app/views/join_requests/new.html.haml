@@ -2,8 +2,9 @@
   .mt16.ml16 学校入学リクエスト画面
   .mt16.ml16= link_to '学校選択画面に戻る', school_users_path
 = form_with url: join_requests_path, local: true do |f|
-  = text_field_tag :invitation_code
-  = f.submit
+  .flex.pr8.pl8
+    = text_field_tag :invitation_code, nil, { class: 'a-text-field' }
+    = f.submit 'リクエスト', class: 'ml8 a-button-primary'
 %table.mt24.ml24
   %thead
     %th 学校名
