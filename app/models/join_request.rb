@@ -17,6 +17,10 @@ class JoinRequest < ApplicationRecord
       .where(updated_at: 7.days.ago..Time.current)
   }
 
+  def accept_user_join_if_auto_invite
+    accept_user_join if school_building.auto_invite?
+  end
+
 
   def accept_user_join
     create_school_user

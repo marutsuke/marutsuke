@@ -12,6 +12,7 @@ class JoinRequestsController < UserBase
       @school = @school_building.school
       @join_request = current_user.join_requests.new(school_building_id: @school_building.id, school_id: @school.id)
       if @join_request.save
+        @join_request.accept_user_join_if_auto_invite
         flash[:success] = "#{ @school.name }/#{ @school_building.name }へのリクエストを受付ました。"
         redirect_to new_join_request_path
       else
