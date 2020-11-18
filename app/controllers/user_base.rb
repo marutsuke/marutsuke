@@ -19,8 +19,12 @@ class UserBase < ApplicationController
 
   def school_select_required
     if current_school.nil? & current_user
-      flash[:info] = '学校を選択してください'
-      redirect_to school_users_path
+      if current_user.school_users.size == 1
+        user_log_in(current_user, current_user.schools.first)
+      else
+        flash[:info] = '学校を選択してください'
+        redirect_to school_users_path
+      end
     end
   end
 
