@@ -76,3 +76,12 @@
       .o-checking__page-button--long
         - if next_status_submitted = @question_status.next_question_status_submitted
           = link_to '次の提出物 >', new_teacher_question_status_comment_path(next_status_submitted), class: ''
+    .o-checking__question-area
+      .o-checking__question-head
+        .a-text-primary.a-text-large 課題内容
+      .o-checking__question-image-wrap
+        - if @question&.image_url
+          = image_tag @question.image_url, alt: @question.image_alt, class: 'o-checking__question-image'
+    .o-checking__question-text
+      = @question.text
+

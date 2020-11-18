@@ -28,5 +28,5 @@
             %td.o-table-simple__td= user.id
             %td.o-table-simple__td= user.name
             %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
-            %td.o-table-simple__td= question&.question_status_of(user)&.status_i18n || '未読'
+            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.status_for_teacher || '課題未確認'
             %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.checking_link
