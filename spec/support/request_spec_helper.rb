@@ -6,6 +6,7 @@ module RequestSpecHelper
     school ||= user.schools.first
     session_params = { email: user.user_authentication.uid, password: user.password }
     post login_post_path, params: { session: session_params }
+    post select_school_school_user_path(user.school_user(school))
   end
 
   def user_log_out
