@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     post :select_school, on: :member
   end
   resources :join_requests, only: %i[new create update]
+  resources :lesson_group_requests, only: %i[index create]
   resources :users, only: %i[new] do
     collection do
       get :mypage
