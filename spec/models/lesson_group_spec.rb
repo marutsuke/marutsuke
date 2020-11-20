@@ -99,5 +99,22 @@ RSpec.describe LessonGroup, type: :model do
         it { is_expected.not_to include(other_lesson_group) }
       end
     end
+    describe '#for_school_grade' do
+      subject { LessonGroup.for_school_grade(10) }
+      let(:lesson_group_9) { create(:lesson_group, min_school_grade: 9) }
+      let(:lesson_group_10) { create(:lesson_group, min_school_grade: 10) }
+      let(:lesson_group_9_11) { create(:lesson_group, min_school_grade: 9, max_school_grade: 11) }
+      let(:lesson_group_8_10) { create(:lesson_group, min_school_grade: 8, max_school_grade: 10) }
+      let(:lesson_group_10_12) { create(:lesson_group, min_school_grade: 10, max_school_grade: 12) }
+      let(:lesson_group_11_14) { create(:lesson_group, min_school_grade: 11, max_school_grade: 14) }
+      context '該当の学年の講座は含む' do
+        it { is_expected.not_to include(lesson_group_9) }
+        it { is_expected.to include(lesson_group_10) }
+        it { is_expected.to include(lesson_group_9_11) }
+        it { is_expected.to include(lesson_group_8_10) }
+        it { is_expected.to include(lesson_group_10_12) }
+        it { is_expected.not_to include(lesson_group_11_14) }
+      end
+    end
   end
 end

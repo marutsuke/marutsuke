@@ -30,6 +30,16 @@ class LessonGroup < ApplicationRecord
     joins(:school_building).merge(school.school_buildings)
   }
 
+  scope :for_school_grade, lambda { |school_grade|
+    where(min_school_grade: school_grade)
+      .where(max_school_grade: nil)
+      .union(
+        where.not(max_school_grade: nil)
+          .where('min_school_grade <= ?', school_grade)
+          .where('max_school_grade >= ?', school_grade)
+      )
+  }
+
   def target_school_grade
     if max_school_grade.present?
       "#{ SCHOOL_GRADE_HASH[min_school_grade] } ~ #{ SCHOOL_GRADE_HASH[max_school_grade] }"
