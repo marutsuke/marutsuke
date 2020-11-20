@@ -52,7 +52,7 @@ class LessonGroup < ApplicationRecord
 
 
   def min_school_grade_validate
-    return if (1..20).include?(min_school_grade) || min_school_grade.nil?
+    return if (4..20).include?(min_school_grade) || min_school_grade.nil?
 
     errors.add(:min_school_grade, 'は不正な値です。')
   end
@@ -61,7 +61,7 @@ class LessonGroup < ApplicationRecord
     return if max_school_grade.nil?
 
     errors.add(:max_school_grade, 'は対象学年より上の学年にしてください。') unless min_school_grade < max_school_grade
-    errors.add(:max_school_grade, 'は不正な値です。') unless (1..19).include?(max_school_grade)
+    errors.add(:max_school_grade, 'は不正な値です。') unless (5..20).include?(max_school_grade)
   end
 
 end
