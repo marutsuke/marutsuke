@@ -40,6 +40,10 @@ class LessonGroup < ApplicationRecord
       )
   }
 
+   scope :for_school_year, lambda { |school_year|
+      where(school_year: school_year)
+   }
+
   def target_school_grade
     if max_school_grade.present?
       "#{ SCHOOL_GRADE_HASH[min_school_grade] } ~ #{ SCHOOL_GRADE_HASH[max_school_grade] }"
