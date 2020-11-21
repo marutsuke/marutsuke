@@ -14,16 +14,16 @@ class LessonGroupRequestsController < UserBase
 
   private
   def school_grade
-    school_grade = params[:school_grade]
+    school_grade = params[:school_grade].to_i
     return current_user.school_grade unless (4..20).include?(school_grade)
 
-    school_grade
+    school_grade.to_i
   end
 
   def school_year
-    school_year = params[:school_year]
-    return school_year_at unless (2020..9999).include?(school_year)
+    school_year = params[:school_year].to_i
+    return school_year_at unless (2000..9999).include?(school_year)
 
-    school_year
+    school_year.to_i
   end
 end

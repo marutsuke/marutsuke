@@ -1,1 +1,16 @@
 講座受講リクエスト画面
+
+- if @lesson_groups.size > 0
+  - @lesson_groups.each do |lesson_group|
+    .mt16= lesson_group.name
+- else
+  .mt16= "#{ school_grade_to_s(@school_grade) }対象の講座はありません"
+
+.flex-spbet.mb16
+  .mt8= previous_grade_lesson_group_request_link(@school_year, @school_grade)
+  .mt8= "#{ school_grade_to_s(@school_grade) }"
+  .mt8= next_grade_lesson_group_request_link(@school_year, @school_grade)
+.flex-spbet.pb24
+  .mt8= previous_year_lesson_group_request_link(@school_year, @school_grade)
+  .mt8= "#{ @school_year }年度"
+  .mt8= next_year_lesson_group_request_link(@school_year, @school_grade)
