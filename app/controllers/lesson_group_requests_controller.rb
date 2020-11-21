@@ -17,7 +17,7 @@ class LessonGroupRequestsController < UserBase
       flash[:success] = 'リクエストをしました！'
       redirect_to lesson_group_requests_path
     else
-      flash[:success] = 'リクエストに失敗しました。'
+      flash[:danger] = 'リクエストに失敗しました。'
       redirect_to lesson_group_requests_path
     end
   end
