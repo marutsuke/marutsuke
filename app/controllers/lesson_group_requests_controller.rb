@@ -10,6 +10,16 @@ class LessonGroupRequestsController < UserBase
   end
 
   def create
+    @lesson_group = LessonGroup.for_school(current_school).for_school_buildings_belonged_to_user(current_user).find(params[:lesson_group_id])
+    lesson_group_request= current_user.lesson_group_requests.new(lesson_group_id: @lesson_group.id, school_building_id: @lesson_group.school_building.id)
+
+    if lesson_group_request.save
+      flash[:success] = 'リクエストをしました！'
+      redirect_to lesson_group_requests_path
+    else
+      flash[:success] = 'リクエストに失敗しました。'
+      redirect_to lesson_group_requests_path
+    end
   end
 
   private

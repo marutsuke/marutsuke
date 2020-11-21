@@ -2,7 +2,9 @@
 
 - if @lesson_groups.size > 0
   - @lesson_groups.each do |lesson_group|
-    .mt16= lesson_group.name
+    .mb16.flex
+      .mt16.mr16= lesson_group.name
+      .mt16= link_to 'リクエスト', lesson_group_lesson_group_requests_path(lesson_group), method: :post
 - else
   .mt16= "#{ school_grade_to_s(@school_grade) }対象の講座はありません"
 
