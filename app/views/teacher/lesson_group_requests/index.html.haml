@@ -29,7 +29,7 @@
           %td.o-table-simple__td= link_to '許可', accept_teacher_lesson_group_request_path(request), method: :patch
           %td.o-table-simple__td= link_to '拒否', reject_teacher_lesson_group_request_path(request), method: :patch
 - if @checked_lesson_group_requests.size > 0
-  .mt56.ml24 処理済み入学リクエスト
+  .mt56.ml24 処理済み受講リクエスト
   %table.o-table-simple.mr40
     %thead.o-table-simple__thead
       %th.o-table-simple__th 講座名
@@ -39,13 +39,11 @@
       %th.o-table-simple__th 生年月日
       %th.o-table-simple__th 状態
       %th.o-table-simple__th
-      %th.o-table-simple__th
     - @checked_lesson_group_requests.each do |request|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= request.lesson_group.name
         %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
         %td.o-table-simple__td= request.user.name
-        %td.o-table-simple__td= request.user.school_grade
+        %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
         %td.o-table-simple__td= request.user.birth_day
-        %td.o-table-simple__td= request.status_i18n
         %td.o-table-simple__td= request.status_i18n

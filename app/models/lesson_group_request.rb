@@ -17,4 +17,16 @@ class LessonGroupRequest < ApplicationRecord
       .where(updated_at: 7.days.ago..Time.current)
   }
 
+  def accept_user_attend
+    update(status: 'accepted')
+    create_lesson_group_user
+  end
+
+
+  private
+
+  def create_lesson_group_user
+    LessonGroupUser.create(user_id: user_id, lesson_group_id: lesson_group_id)
+  end
+
 end
