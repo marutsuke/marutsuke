@@ -12,4 +12,9 @@ class LessonGroupRequest < ApplicationRecord
     closed: 40
   }
 
+  scope :checked_recently_lgr, lambda {
+    where(status: ['accepted', 'rejected'])
+      .where(updated_at: 7.days.ago..Time.current)
+  }
+
 end
