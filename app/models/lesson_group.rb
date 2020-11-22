@@ -41,7 +41,7 @@ class LessonGroup < ApplicationRecord
   }
 
    scope :for_school_year, lambda { |school_year|
-      where(school_year: school_year)
+      where(school_year: [nil, school_year])
    }
 
   def target_school_grade

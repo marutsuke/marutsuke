@@ -116,5 +116,16 @@ RSpec.describe LessonGroup, type: :model do
         it { is_expected.not_to include(lesson_group_11_14) }
       end
     end
+    describe '#for_school_year' do
+      subject { LessonGroup.for_school_year(2020) }
+      let(:lesson_group_2020) { create(:lesson_group, school_year: 2020) }
+      let(:lesson_group_2021) { create(:lesson_group, school_year: 2021) }
+      let(:lesson_group_nil) { create(:lesson_group, school_year: nil) }
+      context '該当の学年の講座は含む' do
+        it { is_expected.to include(lesson_group_2020) }
+        it { is_expected.not_to include(lesson_group_2021) }
+        it { is_expected.to include(lesson_group_nil) }
+      end
+    end
   end
 end
