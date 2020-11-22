@@ -64,7 +64,7 @@ class LessonGroup < ApplicationRecord
   def max_school_grade_validate
     return if max_school_grade.nil?
 
-    errors.add(:max_school_grade, 'は対象学年より上の学年にしてください。') unless min_school_grade < max_school_grade
+    errors.add(:max_school_grade, 'は対象学年上限より上の学年にしてください。') unless min_school_grade < max_school_grade
     errors.add(:max_school_grade, 'は不正な値です。') unless (5..20).include?(max_school_grade)
   end
 

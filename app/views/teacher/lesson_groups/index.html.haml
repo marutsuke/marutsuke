@@ -11,6 +11,7 @@
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_building_id)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_year)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:target_school_grade)
+        %th.o-table-simple__th= LessonGroup.human_attribute_name(:free_attend)
         %th.o-table-simple__th 受講人数
         %th.o-table-simple__th
       - @lesson_groups.each do |lesson_group|
@@ -19,6 +20,7 @@
           %td.o-table-simple__td= lesson_group.school_building.name
           %td.o-table-simple__td= lesson_group.school_year
           %td.o-table-simple__td= lesson_group.decorate.target_school_grade
+          %td.o-table-simple__td= lesson_group.decorate.free_attend_to_s
           %td.o-table-simple__td= lesson_group.users.size
           %td.o-table-simple__td= link_to '詳細', teacher_lesson_group_path(lesson_group)
     = paginate @lesson_groups

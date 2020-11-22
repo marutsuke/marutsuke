@@ -11,4 +11,12 @@ class LessonGroupDecorator < ApplicationDecorator
     end
   end
 
+  def free_attend_to_s
+    if free_attend
+      'すべて許可'
+    else
+      '要確認'
+    end
+  end
+
 end
