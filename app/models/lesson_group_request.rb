@@ -26,6 +26,10 @@ class LessonGroupRequest < ApplicationRecord
     accept_user_attend if lesson_group.free_attend?
   end
 
+  def attend_free?
+    lesson_group.free_attend?
+  end
+
   private
 
   def create_lesson_group_user

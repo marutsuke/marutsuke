@@ -14,7 +14,7 @@ class LessonGroupRequestsController < UserBase
     lesson_group_request= current_user.lesson_group_requests.new(lesson_group_id: @lesson_group.id, school_building_id: @lesson_group.school_building.id)
 
     if lesson_group_request.save
-      flash[:success] = 'リクエストをしました！'
+      flash[:success] = lesson_group_request.attend_free? ? '受講受付完了しました' : '受講リクエストをしました'
       lesson_group_request.accept_user_attend_if_free_attend
       redirect_to lesson_group_requests_path
     else

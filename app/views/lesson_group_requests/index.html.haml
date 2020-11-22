@@ -17,8 +17,10 @@
               .a-text-secondary 受講中
             - elsif request = lesson_group.request_of(current_user)
               .a-text-secondary= request.status_i18n
-            - else
+            - elsif lesson_group.school_grade_target_of_user?(current_user)
               = link_to 'リクエスト', lesson_group_lesson_group_requests_path(lesson_group), method: :post
+            - else
+              .a-text-secondary 対象学年ではありません
   - else
     .mt16= "#{ school_grade_to_s(@school_grade) }対象の講座はありません"
 
