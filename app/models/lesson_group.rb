@@ -40,9 +40,17 @@ class LessonGroup < ApplicationRecord
       )
   }
 
-   scope :for_school_year, lambda { |school_year|
+  scope :for_school_year, lambda { |school_year|
       where(school_year: [nil, school_year])
-   }
+  }
+
+  def request_of(user)
+    user.lesson_group_requests.find_by(lesson_group_id: id)
+  end
+
+  def attended_by?(user)
+    user.lesson_group_users.pluck(:lesson_group_id).include?(id)
+  end
 
   private
 
