@@ -1,5 +1,6 @@
-.mb24.mt16.ml16= link_to '講座新規作成', new_teacher_lesson_group_path
-
+.flex
+  .mb24.mt16.ml16= link_to '講座新規作成', new_teacher_lesson_group_path
+  .mb24.mt16.ml16= link_to '講座受講リクエスト', teacher_lesson_group_requests_path
 講座一覧
 .mb48
   - if @lesson_groups.present?
