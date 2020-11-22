@@ -17,7 +17,7 @@
           %td.o-table-simple__td= lesson_group.name
           %td.o-table-simple__td= lesson_group.school_building.name
           %td.o-table-simple__td= lesson_group.school_year
-          %td.o-table-simple__td= lesson_group.target_school_grade
+          %td.o-table-simple__td= lesson_group.decorate.target_school_grade
           %td.o-table-simple__td= lesson_group.users.size
           %td.o-table-simple__td= link_to '詳細', teacher_lesson_group_path(lesson_group)
     = paginate @lesson_groups

@@ -44,14 +44,6 @@ class LessonGroup < ApplicationRecord
       where(school_year: [nil, school_year])
    }
 
-  def target_school_grade
-    if max_school_grade.present?
-      "#{ SCHOOL_GRADE_HASH[min_school_grade] } ~ #{ SCHOOL_GRADE_HASH[max_school_grade] }"
-    else
-      SCHOOL_GRADE_HASH[min_school_grade]
-    end
-  end
-
   private
 
 
