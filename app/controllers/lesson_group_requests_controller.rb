@@ -15,6 +15,7 @@ class LessonGroupRequestsController < UserBase
 
     if lesson_group_request.save
       flash[:success] = 'リクエストをしました！'
+      lesson_group_request.accept_user_attend_if_free_attend
       redirect_to lesson_group_requests_path
     else
       flash[:danger] = 'リクエストに失敗しました。'
