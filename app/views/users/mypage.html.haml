@@ -1,5 +1,5 @@
 
-.o-profile
+.o-profile.pb24
   .o-profile__head
     .m-heading-line
       .m-heading-line__text
@@ -40,7 +40,14 @@
           %h2.a-text-secondary.a-text-medium メールアドレス
         .m-profile-item__body
           .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user&.email || '-'
+            .a-text-primary.a-text-xlarge= current_user&.email.presence || '-'
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium 学年
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= school_grade_to_s(current_user.school_grade)
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
@@ -79,7 +86,9 @@
           .m-profile-item__body
             -if current_user.lesson_groups_in(current_school).blank?
               .m-profile-item__item
-                .a-text-secondary.a-text-small 受講講座はまだありません
+                .a-text-secondary.a-text-small
+                  %span 受講講座はまだありません
+                  = link_to '受講リクエスト',lesson_group_requests_path
             - current_user.lesson_groups_in(current_school).each do |lesson_group|
               .m-profile-item__item
                 .a-text-primary.a-text-xlarge= lesson_group.name
@@ -140,3 +149,5 @@
       = link_to 'ログアウトする', logout_path, method: :delete
   .mt16.ml24.mb24
     = link_to '学校選択画面', school_users_path
+  .mt16.ml24.mb24
+    = link_to '受講リクエスト',lesson_group_requests_path

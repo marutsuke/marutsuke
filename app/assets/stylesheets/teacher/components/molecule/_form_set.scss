@@ -1,0 +1,20 @@
+.m-form-set {
+  height: 3rem;
+  margin-bottom: 3rem;
+  &__label_and_input_wrap {
+    display: flex;
+  }
+  &__label {
+    width: 240px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 2rem;
+  }
+  &__input {
+    padding-right: 1rem;
+    height: 1.5rem;
+  }
+  &__discription {
+  }
+}

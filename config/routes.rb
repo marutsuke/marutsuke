@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     post :select_school, on: :member
   end
   resources :join_requests, only: %i[new create update]
+  resources :lesson_group_requests, only: %i[index]
+  resources :lesson_groups, only: %i[] do
+    resources :lesson_group_requests, only: %i[create]
+  end
+
   resources :users, only: %i[new] do
     collection do
       get :mypage
@@ -72,7 +77,7 @@ Rails.application.routes.draw do
     get 'users', to: 'users#new'
     resources :schools, only: %i[edit update]
     resources :manage_menus, only: %i[index]
-    resources :teachers, only: %i[index new create edit update show] do # index, edit, update以外テスト済み
+    resources :teachers, only: %i[index new create edit update show] do
       member do
         post :resend_activation_mail
       end
@@ -91,7 +96,7 @@ Rails.application.routes.draw do
       # end
     end
 
-    resources :questions, only: %i[create edit update destroy] do # createテスト済み
+    resources :questions, only: %i[create edit update destroy] do
       post :publish, on: :member
     end
     get '/questions', to: 'lessons#index'
@@ -106,6 +111,12 @@ Rails.application.routes.draw do
     end
     # resources :user_invitation_mails, only: %i[new create]
     resources :join_requests, only: %i[index] do
+      member do
+        patch :accept
+        patch :reject
+      end
+    end
+    resources :lesson_group_requests, only: %i[index] do
       member do
         patch :accept
         patch :reject

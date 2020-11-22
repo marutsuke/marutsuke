@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_143131) do
+ActiveRecord::Schema.define(version: 2020_11_19_134534) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -63,6 +63,18 @@ ActiveRecord::Schema.define(version: 2020_11_15_143131) do
     t.index ["user_id"], name: "index_join_requests_on_user_id"
   end
 
+  create_table "lesson_group_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_group_id", null: false
+    t.bigint "school_building_id", null: false
+    t.integer "status", default: 10, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lesson_group_id"], name: "index_lesson_group_requests_on_lesson_group_id"
+    t.index ["school_building_id"], name: "index_lesson_group_requests_on_school_building_id"
+    t.index ["user_id"], name: "index_lesson_group_requests_on_user_id"
+  end
+
   create_table "lesson_group_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "lesson_group_id"
@@ -78,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_143131) do
     t.integer "school_year"
     t.integer "min_school_grade", default: 20, null: false
     t.integer "max_school_grade"
+    t.boolean "free_attend", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_building_id"], name: "index_lesson_groups_on_school_building_id"

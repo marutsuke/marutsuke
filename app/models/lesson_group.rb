@@ -5,6 +5,7 @@ class LessonGroup < ApplicationRecord
   has_many :lesson_group_users
   has_many :users, through: :lesson_group_users
   has_many :lessons
+  has_many :lesson_group_requests
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year], case_sensitive: false }
   validates :min_school_grade, presence: true
   validate :min_school_grade_validate
@@ -29,11 +30,33 @@ class LessonGroup < ApplicationRecord
     joins(:school_building).merge(school.school_buildings)
   }
 
-  def target_school_grade
-    if max_school_grade.present?
-      "#{ SCHOOL_GRADE_HASH[min_school_grade] } ~ #{ SCHOOL_GRADE_HASH[max_school_grade] }"
+  scope :for_school_grade, lambda { |school_grade|
+    where(min_school_grade: school_grade)
+      .where(max_school_grade: nil)
+      .union(
+        where.not(max_school_grade: nil)
+          .where('min_school_grade <= ?', school_grade)
+          .where('max_school_grade >= ?', school_grade)
+      )
+  }
+
+  scope :for_school_year, lambda { |school_year|
+      where(school_year: [nil, school_year])
+  }
+
+  def request_of(user)
+    user.lesson_group_requests.find_by(lesson_group_id: id)
+  end
+
+  def attended_by?(user)
+    user.lesson_group_users.pluck(:lesson_group_id).include?(id)
+  end
+
+  def school_grade_target_of_user?(user)
+    if max_school_grade.nil?
+      user.school_grade == min_school_grade
     else
-      SCHOOL_GRADE_HASH[min_school_grade]
+      user.school_grade <= max_school_grade && min_school_grade <= user.school_grade
     end
   end
 
@@ -41,7 +64,7 @@ class LessonGroup < ApplicationRecord
 
 
   def min_school_grade_validate
-    return if (1..20).include?(min_school_grade) || min_school_grade.nil?
+    return if (4..20).include?(min_school_grade) || min_school_grade.nil?
 
     errors.add(:min_school_grade, 'は不正な値です。')
   end
@@ -49,8 +72,8 @@ class LessonGroup < ApplicationRecord
   def max_school_grade_validate
     return if max_school_grade.nil?
 
-    errors.add(:max_school_grade, 'は対象学年より上の学年にしてください。') unless min_school_grade < max_school_grade
-    errors.add(:max_school_grade, 'は不正な値です。') unless (1..19).include?(max_school_grade)
+    errors.add(:max_school_grade, 'は対象学年上限より上の学年にしてください。') unless min_school_grade < max_school_grade
+    errors.add(:max_school_grade, 'は不正な値です。') unless (5..20).include?(max_school_grade)
   end
 
 end

@@ -2,3 +2,9 @@
   max-width: $ipad;
   margin: 0 auto;
 }
+
+.u-fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

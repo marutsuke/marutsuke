@@ -2,7 +2,7 @@
 .flex.mt24.ml16
   .mr16.a-text-large= @lesson_group.name
   .mr16.a-text-large= "#{@lesson_group.school_year}年度"
-  .mr16.a-text-large= "対象: #{ @lesson_group.target_school_grade }"
+  .mr16.a-text-large= "対象: #{ @lesson_group.decotate.target_school_grade }"
   .mr16.a-text-large= @lesson_group.school_building.name
 .ml16
   .a-text-xlarge= "授業名: #{ @lesson.name }"

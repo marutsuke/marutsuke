@@ -8,5 +8,6 @@ ja:
         school_building_id: 校舎
         school_year: 年度
         target_school_grade: 対象学年
-        min_school_grade: 対象学年
+        min_school_grade: 対象学年下限
         max_school_grade: 対象学年上限
+        free_attend: 受講許可方法
