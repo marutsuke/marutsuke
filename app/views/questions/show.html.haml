@@ -2,7 +2,8 @@
 .u-user-container
   .flex.mt16.ml8
     .m-question-card__question-num.mr8= "課題#{ @question.display_order }"
-    .m-question-card__question-status= @question.question_status_of(current_user).decorate.status_label
+    %div{ id: "js-question-status-label--#{@question.id}" }
+      .m-question-card__question-status= @question.question_status_of(current_user).decorate.status_label_link
   - if @question.image.present?
     = image_tag @question&.image_url, alt: @question.image_alt, class: 'a-question-image-on-user mt8'
   .pr8.pl8.mt8
@@ -50,26 +51,3 @@
                 .a-user-image--no-image-size100per
                   .a-text-xsmall.a-text-secondary No Image
                 .a-text-secondary.a-text-xsmall.mt8= "#{ comment.teacher.name }"
-
-  .a-border-secondary.mb24
-  .mt24
-  .pb16
-    - if @status == 'unselected'
-      .m-actually__buttons
-        .m-question-card__button-right
-          = will_not_do_button('しない', @question)
-        .m-question-card__button-center
-          = maybe_do_button('できたらする', @question)
-        .m-question-card__button-left
-          = will_do_button('する', @question)
-    - elsif ['will_do', 'maybe_do', 'will_not_do'].include?(@status)
-      .m-actually__buttons
-        - unless @status == 'will_not_do'
-          .m-actually__button
-            = will_not_do_button('やっぱりしない', @question)
-        - unless @status == 'maybe_do'
-          .m-actually__button
-            = maybe_do_button('できたらする', @question)
-        - unless @status == 'will_do'
-          .m-actually__button
-            = will_do_button('やっぱりする', @question)

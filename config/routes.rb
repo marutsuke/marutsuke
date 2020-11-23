@@ -9,13 +9,6 @@ Rails.application.routes.draw do
   resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new
-    resources :question_statuses, only: [] do
-      collection do
-        post :will_do
-        post :maybe_do
-        post :will_not_do
-      end
-    end
   end
   resources :question_statuses, only: [] do
     member do
