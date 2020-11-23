@@ -59,7 +59,7 @@ class QuestionStatusesController < UserBase
     else
       flash[:notice] = '更新エラー'
     end
-  end 
+  end
 
   def change_to_maybe_do
     if @status.update(status: :maybe_do)
