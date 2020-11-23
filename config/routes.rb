@@ -9,14 +9,15 @@ Rails.application.routes.draw do
   resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new
-    resources :question_statuses, only: [] do
-      collection do
-        post :will_do
-        post :maybe_do
-        post :will_not_do
-      end
+  end
+  resources :question_statuses, only: [] do
+    member do
+      post :change_to_will_do
+      post :change_to_maybe_do
+      post :change_to_will_not_do
     end
   end
+
   resources :answers, only: %i[create] do
     member do
       get :image_show
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
       get :mypage
       get :edit
       patch :update
-      post :change_school
+      post :change_school #いらなくなったかも
     end
   end
   resources :school_user_activations, only: %i[edit new create]
