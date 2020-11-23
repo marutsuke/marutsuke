@@ -31,7 +31,7 @@
           .m-form-set__label
             = f.label :max_school_grade, class: 'a-form-label'
           .m-form-set__input
-            = f.select :max_school_grade, SCHOOL_GRADE_HASH.reject{|k,v| k == 4 || k == 20}.invert,  { include_blank: true }, { class: 'a-form-select' }
+            = f.select :max_school_grade, SCHOOL_GRADE_HASH.reject{|k,v| k == 4}.invert,  { include_blank: true }, { class: 'a-form-select' }
             .m-form-set__discription
               .a-text-note 複数学年対象の場合のみ
       .m-form-set
