@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       get :mypage
       get :edit
       patch :update
-      post :change_school
+      post :change_school #いらなくなったかも
     end
   end
   resources :school_user_activations, only: %i[edit new create]
