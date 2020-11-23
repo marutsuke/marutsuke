@@ -63,6 +63,14 @@ class QuestionStatusDecorator < ApplicationDecorator
     end
   end
 
+  def opacity_class
+    if status == 'maybe_do'
+      'u-opacity-06'
+    elsif status == 'will_not_do'
+      'u-opacity-02'
+    end
+  end
+
   def status_for_teacher
     case status
     when 'unselected'
