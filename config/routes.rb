@@ -17,6 +17,14 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :question_statuses, only: [] do
+    member do
+      post :change_to_will_do
+      post :change_to_maybe_do
+      post :change_to_will_not_do
+    end
+  end
+
   resources :answers, only: %i[create] do
     member do
       get :image_show

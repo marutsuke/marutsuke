@@ -28,6 +28,41 @@ class QuestionStatusDecorator < ApplicationDecorator
     end
   end
 
+  def status_label_link
+    path = nil
+    case status
+    when 'unselected'
+      html_class = 'a-label--unselected'
+      path = change_to_will_do_question_status_path(self)
+    when 'will_do'
+      html_class = 'a-label--will-do'
+      path = change_to_maybe_do_question_status_path(self)
+    when 'maybe_do'
+      html_class = 'a-label--maybe-do'
+      path = change_to_will_not_do_question_status_path(self)
+    when 'will_not_do'
+      html_class = 'a-label--will-not-do'
+      path = change_to_will_do_question_status_path(self)
+    when 'checking'
+      html_class = 'a-label--checking'
+    when 'commented'
+      html_class = 'a-label--commented'
+    when 'comment_checked'
+      html_class = 'a-label--comment-checked'
+    when 'complete'
+      html_class = 'a-label--complete'
+    when 'will_submit_again'
+      html_class = 'a-label--will-submit-again'
+    end
+    if path
+      h.link_to status_i18n, path, method: :post, remote: true, class: "a-label #{ html_class }"
+    else
+      h.content_tag :span, class: "a-label #{ html_class }" do
+        status_i18n
+      end
+    end
+  end
+
   def status_for_teacher
     case status
     when 'unselected'
