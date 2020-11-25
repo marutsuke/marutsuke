@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/login_post', to: 'sessions#new'
   get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
-  resources :lessons, only: %i[index show]
+    resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new
   end
@@ -98,12 +98,8 @@ Rails.application.routes.draw do
 
     resources :question_statuses, only: [] do
       resources :comments, only: %i[new create]
-      # TODO: 不要なので消す予定 2020/11/03
-      # resources :answer_checks, only: [] do
-      #   get :checking, on: :collection
-      #   post :check, on: :collection
-      # end
     end
+    resources :answer_checks, only: [:index]
 
     resources :questions, only: %i[create edit update destroy] do
       post :publish, on: :member
