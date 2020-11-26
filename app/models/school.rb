@@ -10,4 +10,5 @@ class School < ApplicationRecord
   has_many :school_buildings, dependent: :destroy
   has_many :join_requests
   accepts_nested_attributes_for :teachers, allow_destroy: true
+
 end

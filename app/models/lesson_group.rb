@@ -41,7 +41,16 @@ class LessonGroup < ApplicationRecord
   }
 
   scope :for_school_year, lambda { |school_year|
-      where(school_year: [nil, school_year])
+    where(school_year: [nil, school_year])
+  }
+
+  scope :min_school_grade_order, lambda {
+    order(min_school_grade: :asc)
+  }
+
+  scope :have_lesson_taught_by, lambda { |teacher|
+    for_school_buildings_belonged_to_teacher(teacher)
+    .where(id: teacher.lessons.pluck(:lesson_group_id).uniq)
   }
 
   def request_of(user)
