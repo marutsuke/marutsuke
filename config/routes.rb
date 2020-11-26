@@ -99,7 +99,9 @@ Rails.application.routes.draw do
     resources :question_statuses, only: [] do
       resources :comments, only: %i[new create]
     end
-    resources :answer_checks, only: [:index]
+    resources :answer_checks, only: [:index] do
+      get :lessons_show, on: :member
+    end
 
     resources :questions, only: %i[create edit update destroy] do
       post :publish, on: :member
