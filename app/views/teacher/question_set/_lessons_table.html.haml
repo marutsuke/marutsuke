@@ -1,0 +1,19 @@
+- if lessons.size > 0
+  .mt56.ml24= "#{lesson_group.school_building.name}#{lesson_group.name}の授業一覧"
+  %table.o-table-simple.mr40
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th= Lesson.human_attribute_name(:name)
+      %th.o-table-simple__th= Lesson.human_attribute_name(:start_at)
+      %th.o-table-simple__th= Lesson.human_attribute_name(:end_at)
+      %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
+      %th.o-table-simple__th 公開課題数
+      %th.o-table-simple__th
+    - lessons.each do |lesson|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= lesson.name
+        %td.o-table-simple__td= lesson.decorate.start_time_with_y
+        %td.o-table-simple__td= lesson.decorate.end_time_with_y
+        %td.o-table-simple__td= lesson.teacher.name
+        %td.o-table-simple__td= lesson.questions.published.size
+        %td.o-table-simple__td 詳細
+        -# %td.o-table-simple__td= link_to '詳細', teacher_answer_check_path(lesson)

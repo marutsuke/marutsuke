@@ -103,6 +103,10 @@ Rails.application.routes.draw do
       get :lessons_show, on: :member
     end
 
+    resources :question_set, only: %i[index show] do
+      get :lessons_show, on: :member
+    end
+
     resources :questions, only: %i[create edit update destroy] do
       post :publish, on: :member
     end
