@@ -1,1 +1,34 @@
 .mt16.ml16= link_to '戻る', teacher_answer_checks_path(lesson_id: @lesson.id)
+
+.mt16.ml16 授業詳細
+.flex.mt24.ml16
+  .mr16.a-text-large= @lesson_group.name
+  .mr16.a-text-large= "#{@lesson_group.school_year}年度"
+  .mr16.a-text-large= "対象: #{ @lesson_group.decorate.target_school_grade }"
+  .mr16.a-text-large= @lesson_group.school_building.name
+.ml16
+  .a-text-xlarge= "授業名: #{ @lesson.name }"
+  .a-text-xlarge= "課題受付期間 #{ @lesson.decorate.start_time_with_y } ~ #{ @lesson.decorate.end_time_with_y.gsub('-','') }"
+.ml16.mt16.flex
+
+- if @questions.present?
+  - @questions.published.each do |question|
+    .mt40.ml16
+      .a-text-primary= "課題番号: #{question.display_order} "
+      %table.o-table-simple.mt16
+        %thead.o-table-simple__thead
+          %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
+          %th.o-table-simple__th= User.human_attribute_name(:name)
+          %th.o-table-simple__th 所属校舎
+          %th.o-table-simple__th ステータス
+          %th.o-table-simple__th 詳細
+        - @lesson_group.users.each do |user|
+          - school_user = user.school_user(current_teacher_school)
+          %tr.o-table-simple__tr
+            %td.o-table-simple__td= user.id
+            %td.o-table-simple__td= user.name
+            %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
+            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.status_for_teacher || '課題未確認'
+            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.checking_link
+- else
+  .a-text-primary まだ、課題は設定されていません。

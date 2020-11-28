@@ -14,6 +14,8 @@ class Teacher::AnswerChecksController < Teacher::Base
 
   def show
     @lesson = current_teacher_school.lessons.find(params[:id])
+    @questions = @lesson.questions
+    @lesson_group = @lesson.lesson_group
   end
 
 
