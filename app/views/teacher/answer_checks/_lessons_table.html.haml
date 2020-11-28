@@ -15,4 +15,4 @@
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.checking_count
-        %td.o-table-simple__td 詳細
+        %td.o-table-simple__td= link_to '詳細', teacher_answer_check_path(lesson)

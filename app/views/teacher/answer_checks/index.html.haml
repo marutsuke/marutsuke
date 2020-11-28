@@ -17,3 +17,5 @@
             %td.o-table-simple__td{ id: "js-lesson_group--#{lesson_group.id}"}= link_to '授業一覧', lessons_show_teacher_answer_check_path(lesson_group), remote: true
 
   #js-lessons_table
+    - if @lesson
+      = render 'teacher/answer_checks/lessons_table', lesson_group: @lesson.lesson_group, lessons: @lesson.lesson_group.lessons
