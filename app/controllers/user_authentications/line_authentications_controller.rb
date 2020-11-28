@@ -28,6 +28,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
       if user = current_user_authentication&.user
         flash[:info] = 'ログインしました。'
         user_log_in_without_school(user)
+        remember_user(user)
         redirect_to root_path
       else
         @user = User.new(name: '')
