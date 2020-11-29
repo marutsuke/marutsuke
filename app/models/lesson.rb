@@ -86,14 +86,6 @@ class Lesson < ApplicationRecord
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
 
-  def duration_judge_word
-    doing? ? 'doing' : 'expired'
-  end
-
-  def cheking_count_td_class
-    checking_count.positive? ? 'lesson_table__tr--red' : 'lesson_table__tr'
-  end
-
   def will_submit_count
     questions.size -
       checking_count -

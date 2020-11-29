@@ -16,7 +16,7 @@ RSpec.describe 'LessonsController', type: :request do
         user_log_out
         get lessons_path
         expect(response).to have_http_status 302
-        expect(response).to redirect_to school_login_path(login_path: school.login_path)
+        expect(response).to redirect_to new_user_path
       end
     end
 

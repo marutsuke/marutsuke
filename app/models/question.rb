@@ -26,8 +26,8 @@ class Question < ApplicationRecord
   has_many :answers
   has_many :question_statuses
 
-  scope :not_nil, -> { where.not(id: nil) }
-  scope :display_order, -> { not_nil.order(display_order: :asc) }
+  scope :id_not_nil, -> { where.not(id: nil) }
+  scope :display_order, -> { id_not_nil.order(display_order: :asc) }
   scope :published, -> { where(publish: true) }
   scope :unpublish, -> { where(publish: false) }
 
@@ -135,20 +135,21 @@ class Question < ApplicationRecord
       .where(question_statuses: { id: nil })
   }
 
+  scope :have_any_question_status_submitted, lambda {
+    joins(:question_statuses)
+      .includes(:question_statuses)
+      .merge(QuestionStatus.submitted_status)
+  }
+
   def question_status_of(user)
     question_statuses.find_by(user_id: user.id)
-  end
-
-  def title
-    title = text[0..10]
-    title += '...' if text.length  > 10
   end
 
   def image_alt
     lesson_group = lesson.lesson_group
     "#{ lesson_group.name }/#{ lesson.name }/課題#{ display_order }"
   end
-  alias name image_alt
+  alias info image_alt
 
   private
 

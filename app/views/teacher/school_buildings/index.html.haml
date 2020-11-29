@@ -2,7 +2,11 @@
 .mt8
 = link_to '校舎作成', new_teacher_school_building_path
 
-%hr
-- @school_buildings.each do |school_building|
-  .mb8= school_building.name
-  %hr
+%table.o-table-simple.mr40
+  %thead.o-table-simple__thead
+    %th.o-table-simple__th= SchoolBuilding.human_attribute_name(:name)
+    %th.o-table-simple__th
+  - @school_buildings.each do |school_building|
+    %tr.o-table-simple__tr
+      %td.o-table-simple__td= school_building.name
+      %td.o-table-simple__td= link_to '詳細', teacher_school_building_path(school_building)

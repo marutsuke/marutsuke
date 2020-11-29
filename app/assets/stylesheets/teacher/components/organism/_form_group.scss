@@ -1,0 +1,10 @@
+.o-form-group {
+  &__body {
+    width: 600px;
+  }
+  &__submit {
+    display: flex;
+    justify-content: flex-end;
+    width: 600px;
+  }
+}

@@ -6,8 +6,8 @@
     .teacher_header__element 生徒
   = link_to teacher_lessons_path do
     .teacher_header__element 授業
-  = link_to teacher_comments_path do
-    .teacher_header__element コメント履歴
+  -# = link_to teacher_comments_path do
+  -#   .teacher_header__element コメント履歴
   = link_to teacher_manage_menus_path do
     .teacher_header__element 管理メニュー
   .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building&.name || 'なし'})"

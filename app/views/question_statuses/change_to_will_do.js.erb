@@ -1,0 +1,7 @@
+$("<%="#js-question-status-label--#{@status.question.id}"%>")
+  .html("<%= j render(
+    partial: 'lessons/question_status_label_link',
+    locals: {
+      status: @status
+    }) %>");
+$("<%="#js-opacity-target--#{@status.question.id}"%>").removeClass();

@@ -34,7 +34,7 @@ class LessonDecorator < Draper::Decorator
   end
 
   def display_order_select_array(selected: nil)
-    return (1..3) if questions.not_nil.blank?
+    return (1..3) if questions.id_not_nil.blank?
 
     used_display_orders = questions.pluck(:display_order)
     max_display_order = used_display_orders.max
@@ -49,6 +49,13 @@ class LessonDecorator < Draper::Decorator
     "#{ lesson_group.name }/#{ name } (#{ lesson_group.school_building.name })"
   end
 
+  def question_set_status
+    questions.published.size > 0 ? '設定あり' : '未設定'
+  end
+
+  def has_checked_qeustion_status
+    checking_count > 0 ? '未チェックあり' : ''
+  end
 
   private
 

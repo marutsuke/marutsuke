@@ -1,5 +1,5 @@
 class SchoolUserActivationsController < UserBase
-  skip_before_action :user_login_required
+  skip_before_action :user_login_required, :school_select_required
   before_action :set_school_user_and_user_exist_check, only: %i[new create]
 
   def edit

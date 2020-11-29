@@ -67,4 +67,68 @@ RSpec.describe QuestionStatus, type: :model do
       end
     end
   end
+
+  describe '#課題チェック関連' do
+    let!(:question){ create(:question) }
+    let!(:user_1){ create(:user, id: 1) }
+    let!(:user_2){ create(:user, id: 2) }
+    let!(:user_3){ create(:user, id: 3) }
+    let!(:user_4){ create(:user, id: 4) }
+    let!(:user_5){ create(:user, id: 5) }
+    let!(:user_6){ create(:user, id: 6) }
+    let!(:user_7){ create(:user, id: 7) }
+    let!(:question_status_will_do_1){ create(:question_status, :will_do, question: question, user: user_1) }
+    let!(:question_status_will_do_2){ create(:question_status, :will_do, question: question, user: user_2) }
+    let!(:question_status_commented_1){ create(:question_status, :commented, question: question, user: user_3) }
+    let!(:question_status_commented_2){ create(:question_status, :commented, question: question, user: user_4) }
+    let!(:question_status_checking_1){ create(:question_status, :checking, question: question, user: user_5) }
+    let!(:question_status_checking_2){ create(:question_status, :checking, question: question, user: user_6) }
+    let!(:question_status_checking_other_question){ create(:question_status, :checking, user: user_7) }
+
+    describe '#next_question_status_submitted' do
+      it 'statusがwill_doの時' do
+        expect(question_status_will_do_1.next_question_status_submitted).to eq question_status_commented_1
+        expect(question_status_will_do_2.next_question_status_submitted).to eq question_status_commented_1
+      end
+      it 'statusがcommentedの時' do
+        expect(question_status_commented_1.next_question_status_submitted).to eq question_status_commented_2
+      end
+      it '次がない時がcommentedの時' do
+        expect(question_status_checking_2.next_question_status_submitted).to eq nil
+      end
+    end
+    describe '#prev_question_status_submitted' do
+      it '前がない時' do
+        expect(question_status_will_do_1.prev_question_status_submitted).to eq nil
+        expect(question_status_will_do_2.prev_question_status_submitted).to eq nil
+        expect(question_status_commented_1.prev_question_status_submitted).to eq nil
+      end
+      it 'statusがcommentedの時' do
+        expect(question_status_commented_2.prev_question_status_submitted).to eq question_status_commented_1
+      end
+    end
+    describe '#next_question_status_to_check' do
+      it 'statusがwill_doの時' do
+        expect(question_status_will_do_1.next_question_status_to_check).to eq question_status_checking_1
+      end
+      it 'statusがcommentedの時' do
+        expect(question_status_commented_1.next_question_status_to_check).to eq question_status_checking_1
+      end
+      it '次がない時がcommentedの時' do
+        expect(question_status_checking_2.next_question_status_to_check).to eq nil
+      end
+    end
+    describe '#prev_question_status_to_check' do
+      it 'statusがwill_doの時' do
+        expect(question_status_will_do_1.prev_question_status_to_check).to eq nil
+        expect(question_status_commented_1.prev_question_status_to_check).to eq nil
+        expect(question_status_checking_1.prev_question_status_to_check).to eq nil
+      end
+      it '次がない時がcommentedの時' do
+        expect(question_status_checking_2.prev_question_status_to_check).to eq question_status_checking_1
+      end
+    end
+
+  end
+
 end

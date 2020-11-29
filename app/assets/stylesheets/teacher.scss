@@ -10,6 +10,7 @@
 @import "./teacher/components/atom/buttons";
 @import "./teacher/components/atom/text";
 @import "./teacher/components/atom/user_image";
+@import "./teacher/components/atom/form";
 
 // molecule
 @import "./teacher/components/molecule/user_image";
@@ -17,9 +18,12 @@
 @import "./teacher/components/molecule/profile_item";
 @import "./teacher/components/molecule/label_input";
 @import "./teacher/components/molecule/button_set";
+@import "./teacher/components/molecule/form_set";
 
 // organism
 @import "./teacher/components/organism/search_form";
 @import "./teacher/components/organism/profile";
 @import "./teacher/components/organism/table-simple";
 @import "./teacher/components/organism/checking";
+@import "./teacher/components/organism/invitation_form";
+@import "./teacher/components/organism/form_group";

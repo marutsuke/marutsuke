@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      join_request: 課題の状況
+    attributes:
+      join_request:
+        user_id: ユーザー
+        question_id: 課題
+        status: 状況
+  enums:
+    join_request:
+      status:
+        requested: 出願中
+        accepted: 許可
+        rejected: 拒否
+        closed: 拒否確認済

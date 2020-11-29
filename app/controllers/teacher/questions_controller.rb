@@ -10,8 +10,9 @@ class Teacher::QuestionsController < Teacher::Base
     @questions = @lesson.questions.display_order
   end
 
-  def show
-  end
+  # TODO: 2020/11/03 使わないアクションなので消す。
+  # def show
+  # end
 
   def create
     @lesson = current_teacher_school
@@ -24,7 +25,7 @@ class Teacher::QuestionsController < Teacher::Base
       redirect_to new_teacher_lesson_question_path(@lesson)
     else
       @lesson = @question.lesson
-      @questions = @lesson.questions
+      @questions = @lesson.questions.id_not_nil
       render :new
     end
   end
@@ -51,7 +52,7 @@ class Teacher::QuestionsController < Teacher::Base
     if @question.update(publish: true)
       respond_to { |format| format.js } # publish.js.coffee
     else
-      flash[:success] = "#{@question.title}の公開に失敗しました。"
+      flash[:success] = "#{@question.lesson.name}/課題#{@question.display_order}の公開に失敗しました。"
       render :new
     end
   end

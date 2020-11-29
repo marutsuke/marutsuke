@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      lesson_group_request: 講座受講リクエスト
+    attributes:
+      lesson_group＿request:
+        name: 講座名
+        school_building_id: 校舎
+        school_year: 年度
+        target_school_grade: 対象学年
+        min_school_grade: 対象学年
+        max_school_grade: 対象学年上限
+  enums:
+    lesson_group_request:
+      status:
+        requested: リクエスト済
+        accepted: 受講許可
+        rejected: 受講拒否
+        closed: 拒否確認済

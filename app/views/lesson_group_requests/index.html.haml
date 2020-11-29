@@ -1,0 +1,35 @@
+.m-heading-line.mt16.mb16
+  .m-heading-line__text
+    %h1.a-text-secondary.a-text-large= "受講リクエスト(#{@school_year}年度/#{school_grade_to_s(@school_grade)}対象)"
+
+
+
+.mr8.ml8
+  - if @lesson_groups.size > 0
+    - @lesson_groups.each do |lesson_group|
+      .m-lesson-group-request.mb16
+        .m-lesson-group-request__left
+          %h2.m-lesson-group-request__title= "#{ lesson_group.name}"
+          .m-lesson-group-request__info= "対象: #{lesson_group.decorate.target_school_grade}"
+        .m-lesson-group-request__right
+          .m-lesson-group-request__status
+            - if lesson_group.attended_by?(current_user)
+              .a-text-secondary 受講中
+            - elsif request = lesson_group.request_of(current_user)
+              .a-text-secondary= request.status_i18n
+            - elsif lesson_group.school_grade_target_of_user?(current_user)
+              = link_to 'リクエスト', lesson_group_lesson_group_requests_path(lesson_group), method: :post
+            - else
+              .a-text-secondary 対象学年ではありません
+  - else
+    .mt16= "#{ school_grade_to_s(@school_grade) }対象の講座はありません"
+
+.u-fixed-bottom.pr8.pl8
+  .flex-spbet.mb16
+    .mt8= previous_grade_lesson_group_request_link(@school_year, @school_grade)
+    .mt8= "#{ school_grade_to_s(@school_grade) }"
+    .mt8= next_grade_lesson_group_request_link(@school_year, @school_grade)
+  .flex-spbet.pb24
+    .mt8= previous_year_lesson_group_request_link(@school_year, @school_grade)
+    .mt8= "#{ @school_year }年度"
+    .mt8= next_year_lesson_group_request_link(@school_year, @school_grade)

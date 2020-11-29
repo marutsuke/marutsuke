@@ -1,21 +1,21 @@
 .m-question-card {
   margin-bottom: 3rem;
   padding-bottom: 1rem;
-  &--opacity-09 {
-    opacity: 0.9;
-  }
-  &--opacity-02 {
-    opacity: 0.2;
-  }
   &__card-header {
     border-bottom: 1px solid $moss_4;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__card-header-right {
+  }
+  &__card-header-left {
     display: flex;
   }
   &__question-num {
     font-size: 1.125rem;
     color: $moss_2;
   }
-  &__question-link-wrap {
+  &__question-content-wrap {
     margin: 1rem 0;
     max-height: 6rem;
     display: flex;
@@ -23,6 +23,7 @@
   }
   &__image {
     height: 6rem;
+    max-width: 100%;
   }
   &__text {
     width: 70%;

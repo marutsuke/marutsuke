@@ -1,0 +1,47 @@
+.a-form-label {
+  height: 2.5rem;
+  line-height: 2.5rem;
+  color: $indigo_0;
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  &:after {
+    content: "(任意)";
+    padding-left: 2px;
+    color: $indigo_4;
+  }
+  &.required:after {
+    content: "(必須)";
+    padding-left: 2px;
+    color: $pink_0;
+  }
+}
+
+.a-form-text-field {
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  padding: 2px;
+  width: 240px;
+  font-size: 1.25rem;
+}
+
+.a-form-select {
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  padding: 2px;
+  width: 240px;
+  font-size: 1.25rem;
+}
+
+.a-form-checkbox {
+  height: 2rem;
+  width: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
+}
+
+.a-form-checkbox-label {
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
+  font-size: 1.25rem;
+}
