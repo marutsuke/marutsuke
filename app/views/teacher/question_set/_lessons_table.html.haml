@@ -8,6 +8,8 @@
       %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
       %th.o-table-simple__th 公開課題数
       %th.o-table-simple__th
+      %th.o-table-simple__th 未チェック
+      %th.o-table-simple__th
     - lessons.each do |lesson|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= lesson.name
@@ -15,5 +17,6 @@
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.questions.published.size
-        %td.o-table-simple__td 詳細
-        -# %td.o-table-simple__td= link_to '詳細', teacher_answer_check_path(lesson)
+        %td.o-table-simple__td= link_to '課題設定', teacher_question_set_path(lesson)
+        %td.o-table-simple__td= lesson.checking_count
+        %td.o-table-simple__td= link_to '課題チェック', teacher_answer_check_path(lesson)

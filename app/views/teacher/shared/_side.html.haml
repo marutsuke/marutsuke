@@ -1,0 +1,17 @@
+.m-teacher-side
+  = link_to teacher_path do
+    .m-teacher-side__logo
+      = image_tag ('marutsuke_logo_b.png'), art: 'marutsuke'
+  = link_to teacher_users_path do
+    .m-teacher-side__element 生徒
+  = link_to teacher_lessons_path do
+    .m-teacher-side__element 授業
+  -# = link_to teacher_comments_path do
+  -#   .m-teacher-side__element コメント履歴
+  = link_to teacher_manage_menus_path do
+    .m-teacher-side__element 管理メニュー
+  .teacher_name= "#{ current_teacher.name }先生(所属: #{current_teacher.main_school_building&.name || 'なし'})"
+
+  = link_to teacher_logout_path, method: :delete do
+    .m-teacher-side__element ログアウト
+  .m-teacher-side__space
