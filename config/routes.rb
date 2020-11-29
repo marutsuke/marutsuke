@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'lessons#index'
+
+  root 'lesson_groups#index'
 
   get '/login', to: 'sessions#new', as: 'login'
   post '/login_post', to: 'sessions#create', as: 'login_post'
@@ -16,6 +17,9 @@ Rails.application.routes.draw do
       post :change_to_maybe_do
       post :change_to_will_not_do
     end
+  end
+
+  resources :lesson_groups, only: %i[index] do
   end
 
   resources :answers, only: %i[create] do
