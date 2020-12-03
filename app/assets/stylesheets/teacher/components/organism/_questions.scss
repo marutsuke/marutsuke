@@ -1,0 +1,20 @@
+.o-questions {
+  min-width: 400px;
+  width: 60%;
+  border-right: 1px solid $indigo_4;
+  &__headding {
+    padding: 8px 16px;
+    border-bottom: 1px solid $indigo_4;
+  }
+  &__contents {
+    height: calc(100vh - 60px);
+    overflow: scroll;
+  }
+  &__top {
+    padding: 8px 4px;
+  }
+  &__content {
+    padding: 2rem 0.5rem;
+    border-bottom: 1px solid $indigo_4;
+  }
+}

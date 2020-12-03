@@ -1,44 +1,43 @@
 .flex
+
+
+
+  .o-questions
+    .o-questions__headding
+      .a-text-secondary.a-text-small= "#{@lesson_group.school_year || '-'}年度/#{@lesson_group.school_building.name}"
+      .flex-spbet-end
+        .a-text-primary.a-text-xlarge= "#{@lesson_group.name}/#{@lesson.name}"
+        .a-text-primary= "提出受付期間:#{@lesson.decorate.start_to_end_time}"
+    .o-questions__contents
+      - @questions.each do |question|
+        .o-questions__top
+          .flex-spbet
+            .a-text-primary.a-text-xlarge= "課題#{question.display_order}#{'(下書き)' if !question.publish}"
+            = link_to '編集', edit_teacher_question_path(question), class: 'a-text-xlarge'
+        .o-questions__content{class: question.decorate.unpublish_opacity_class}
+          .m-question
+            - if question&.image_url
+              = image_tag question.image_url, alt: question.image_alt, class: 'm-question__image'
+            .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
   .question_form_group
     .question_new_title
-      .question_new_title__lesson_title= "#{@lesson_group.name}/#{@lesson.name}"
       .question_new_title__description 課題作成
-      .ml24= link_to '授業詳細に戻る', teacher_lesson_path(@lesson)
-    .question_form
-      = form_with model: [:teacher, @question], local: true do |f|
-        =render 'shared/error_messages', model_object: @question
-        .question_form__label_and_input
-          = f.label :display_order, class: 'required'
-          = f.select :display_order, @lesson.decorate.display_order_select_array
-        .question_form__label_and_input
-          = f.label :text
-          = f.text_area :text, rows: '10', class: 'question_form__text_area'
-        .question_form__label_and_input
-          = f.file_field :image
-          .flex
-            = f.label :image
-            %span 1枚・最大5MBまで
-        .question_form__check_box
-          = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
-          = f.label :publish, '非公開で保存'
-        = f.hidden_field :lesson_id, value: @lesson.id
-        = f.submit '登録する', class: 'question_form__submit_btn'
-
-
-
-
-
-  .question_new_questions
-    - @questions.each do |question|
-      .question_section{id: "js-question_section--#{question.id}"}
-        .question_section__left
-          .question_section__title.mb40{class: question.decorate.unpublish_opacity_class}= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
-          .question_section__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
-          .question_section__buttons
-            = link_to '編集', edit_teacher_question_path(question), class: 'a-button a-button--edit mr16'
-            -if !question.publish?
-              = link_to '公開', publish_teacher_question_path(question), method: :post, remote: true, class: 'a-button a-button--primary'
-        -if question.image.present?
-          .question_section__right{class: question.decorate.unpublish_opacity_class}
-            = image_tag question.image_url, alt: '', height: '', width: '100%'
-      %hr
+      .ml24= link_to '戻る', teacher_question_set_index_path(lesson_id: @lesson.id)
+    = form_with model: [:teacher, @question], local: true do |f|
+      =render 'shared/error_messages', model_object: @question
+      .question_form__label_and_input
+        = f.label :display_order, class: 'required'
+        = f.select :display_order, @lesson.decorate.display_order_select_array
+      .question_form__label_and_input
+        = f.label :text
+        = f.text_area :text, rows: '10', class: 'question_form__text_area'
+      .question_form__label_and_input
+        = f.file_field :image
+        .flex
+          = f.label :image
+          %span 1枚・最大5MBまで
+      .question_form__check_box
+        = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
+        = f.label :publish, '下書きで保存'
+      = f.hidden_field :lesson_id, value: @lesson.id
+      = f.submit '登録する', class: 'question_form__submit_btn'

@@ -1,34 +1,44 @@
-.mt16.ml16= link_to '戻る', teacher_answer_checks_path(lesson_id: @lesson.id)
+.flex
+  .question_form_group
+    .question_new_title
+      .question_new_title__lesson_title= "#{@lesson_group.name}/#{@lesson.name}"
+      .question_new_title__description 課題作成
+      .ml24= link_to '授業詳細に戻る', teacher_question_set_index_path(lesson_id: @lesson.id)
+    .question_form
+      = form_with model: [:teacher, @question], local: true do |f|
+        =render 'shared/error_messages', model_object: @question
+        .question_form__label_and_input
+          = f.label :display_order, class: 'required'
+          = f.select :display_order, @lesson.decorate.display_order_select_array
+        .question_form__label_and_input
+          = f.label :text
+          = f.text_area :text, rows: '10', class: 'question_form__text_area'
+        .question_form__label_and_input
+          = f.file_field :image
+          .flex
+            = f.label :image
+            %span 1枚・最大5MBまで
+        .question_form__check_box
+          = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
+          = f.label :publish, '非公開で保存'
+        = f.hidden_field :lesson_id, value: @lesson.id
+        = f.submit '登録する', class: 'question_form__submit_btn'
 
-.mt16.ml16 授業詳細
-.flex.mt24.ml16
-  .mr16.a-text-large= @lesson_group.name
-  .mr16.a-text-large= "#{@lesson_group.school_year}年度"
-  .mr16.a-text-large= "対象: #{ @lesson_group.decorate.target_school_grade }"
-  .mr16.a-text-large= @lesson_group.school_building.name
-.ml16
-  .a-text-xlarge= "授業名: #{ @lesson.name }"
-  .a-text-xlarge= "課題受付期間 #{ @lesson.decorate.start_time_with_y } ~ #{ @lesson.decorate.end_time_with_y.gsub('-','') }"
-.ml16.mt16.flex
 
-- if @questions.present?
-  - @questions.published.each do |question|
-    .mt40.ml16
-      .a-text-primary= "課題番号: #{question.display_order} "
-      %table.o-table-simple.mt16
-        %thead.o-table-simple__thead
-          %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
-          %th.o-table-simple__th= User.human_attribute_name(:name)
-          %th.o-table-simple__th 所属校舎
-          %th.o-table-simple__th ステータス
-          %th.o-table-simple__th 詳細
-        - @lesson_group.users.each do |user|
-          - school_user = user.school_user(current_teacher_school)
-          %tr.o-table-simple__tr
-            %td.o-table-simple__td= user.id
-            %td.o-table-simple__td= user.name
-            %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
-            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.status_for_teacher || '課題未確認'
-            %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.checking_link
-- else
-  .a-text-primary まだ、課題は設定されていません。
+
+
+
+  .question_new_questions
+    - @questions.each do |question|
+      .question_section{id: "js-question_section--#{question.id}"}
+        .question_section__left
+          .question_section__title.mb40{class: question.decorate.unpublish_opacity_class}= "課題#{question.display_order} #{'(非公開)' unless question.publish}"
+          .question_section__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+          .question_section__buttons
+            = link_to '編集', edit_teacher_question_path(question), class: 'a-button a-button--edit mr16'
+            -if !question.publish?
+              = link_to '公開', publish_teacher_question_path(question), method: :post, remote: true, class: 'a-button a-button--primary'
+        -if question.image.present?
+          .question_section__right{class: question.decorate.unpublish_opacity_class}
+            = image_tag question.image_url, alt: '', height: '', width: '100%'
+      %hr

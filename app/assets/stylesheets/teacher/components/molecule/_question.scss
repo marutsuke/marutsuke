@@ -1,0 +1,14 @@
+.m-question {
+  &__image {
+    max-height: 640px;
+    max-width: 100%;
+  }
+  &__text {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: $blue_4;
+    border: solid 1px $blue_1;
+  }
+}

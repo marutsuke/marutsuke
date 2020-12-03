@@ -13,8 +13,9 @@ class Teacher::QuestionSetController < Teacher::Base
 
   def show
     @lesson = current_teacher_school.lessons.find(params[:id])
-    @questions = @lesson.questions
+    @questions = @lesson.questions.id_not_nil
     @lesson_group = @lesson.lesson_group
+    @question = @lesson.questions.new
   end
 
 end
