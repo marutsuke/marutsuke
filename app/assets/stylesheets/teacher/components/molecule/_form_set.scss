@@ -1,6 +1,6 @@
-.m-form-set {
+.m-horizonal-form-set {
   height: 3rem;
-  margin-bottom: 3rem;
+  // margin-bottom: 3rem;モジュールは、マージンを外に取ってはだめ。
   &__label_and_input_wrap {
     display: flex;
   }
@@ -16,5 +16,15 @@
     height: 1.5rem;
   }
   &__discription {
+  }
+}
+
+.m-form-vertical-set {
+  &__label {
+    margin-bottom: 8px;
+  }
+  &__textarea {
+  }
+  &__select {
   }
 }

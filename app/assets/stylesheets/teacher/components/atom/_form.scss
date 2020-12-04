@@ -2,7 +2,7 @@
   height: 2.5rem;
   line-height: 2.5rem;
   color: $indigo_0;
-  margin-bottom: 0;
+  margin: 0;
   font-size: 1.25rem;
   &:after {
     content: "(任意)";
@@ -30,18 +30,40 @@
   padding: 2px;
   width: 240px;
   font-size: 1.25rem;
+  &--narrow {
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    padding: 2px;
+    width: 240px;
+    font-size: 1.25rem;
+    width: 80px;
+  }
+}
+
+.a-form-textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
 }
 
 .a-form-checkbox {
-  height: 2rem;
-  width: 2rem;
-  padding: 0.5rem;
+  height: 1.25rem;
+  width: 1.25rem;
   border-radius: 0.125rem;
 }
 
 .a-form-checkbox-label {
   height: 2rem;
-  padding: 0.5rem;
-  border-radius: 0.125rem;
+  line-height: 2rem;
   font-size: 1.25rem;
+  margin: 0;
+}
+
+.a-form-submit {
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: solid 1px $blue_0;
+  background-color: $blue_0;
+  color: $indigo_6;
 }

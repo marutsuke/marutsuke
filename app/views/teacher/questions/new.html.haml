@@ -1,7 +1,4 @@
 .flex
-
-
-
   .o-questions
     .o-questions__headding
       .a-text-secondary.a-text-small= "#{@lesson_group.school_year || '-'}年度/#{@lesson_group.school_building.name}"
@@ -19,25 +16,33 @@
             - if question&.image_url
               = image_tag question.image_url, alt: question.image_alt, class: 'm-question__image'
             .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
-  .question_form_group
-    .question_new_title
-      .question_new_title__description 課題作成
-      .ml24= link_to '戻る', teacher_question_set_index_path(lesson_id: @lesson.id)
-    = form_with model: [:teacher, @question], local: true do |f|
-      =render 'shared/error_messages', model_object: @question
-      .question_form__label_and_input
-        = f.label :display_order, class: 'required'
-        = f.select :display_order, @lesson.decorate.display_order_select_array
-      .question_form__label_and_input
-        = f.label :text
-        = f.text_area :text, rows: '10', class: 'question_form__text_area'
-      .question_form__label_and_input
-        = f.file_field :image
-        .flex
-          = f.label :image
-          %span 1枚・最大5MBまで
-      .question_form__check_box
-        = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
-        = f.label :publish, '下書きで保存'
-      = f.hidden_field :lesson_id, value: @lesson.id
-      = f.submit '登録する', class: 'question_form__submit_btn'
+  .o-question-form-group
+    .o-question-form-group__hedding
+      .a-text-primary.a-text-xlarge 課題作成画面
+      = link_to '課題管理に戻る', teacher_question_set_index_path(lesson_id: @lesson.id), class: 'a-text-large'
+    .o-question-form-group__body
+      = form_with model: [:teacher, @question], local: true do |f|
+        =render 'shared/error_messages', model_object: @question
+        .o-question-form-group__form-set
+          .m-form-vertical-set
+            .m-form-vertical-set__label
+              = f.label :display_order, class: 'a-form-label required'
+            .m-form-vertical-set__select
+              = f.select :display_order, @lesson.decorate.display_order_select_array, {}, {class: 'a-form-select--narrow'}
+        .o-question-form-group__form-set
+          .m-form-vertical-set
+            .m-form-vertical-set__label
+              = f.label :text, class: 'a-form-label required'
+            .m-form-vertical-set__textarea
+              = f.text_area :text, rows: '3', class: 'a-form-textarea'
+        .o-question-form-group__form-set
+          .question_form__label_and_input
+            .div.mb8
+              %span.a-form-label 画像・1枚・最大5MBまで
+            = f.file_field :image
+        .o-question-form-group__form-set
+          = f.check_box :publish, {class: 'a-form-checkbox', checked: false}, false, true
+          = f.label :publish, '下書きで保存', class: 'a-form-checkbox-label'
+        .o-question-form-group__submit
+          = f.hidden_field :lesson_id, value: @lesson.id
+          = f.submit '登録する', class: 'a-form-submit'

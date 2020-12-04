@@ -1,8 +1,9 @@
 .o-questions {
   min-width: 400px;
-  width: 60%;
+  width: 50%;
   border-right: 1px solid $indigo_4;
   &__headding {
+    height: 72px;
     padding: 8px 16px;
     border-bottom: 1px solid $indigo_4;
   }
