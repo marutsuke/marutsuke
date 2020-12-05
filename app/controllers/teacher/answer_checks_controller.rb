@@ -18,6 +18,11 @@ class Teacher::AnswerChecksController < Teacher::Base
     @lesson_group = @lesson.lesson_group
   end
 
+  def question_statuses_show
+    @question = Question.published.find(params[:id])
+    @lesson = current_teacher_school.lessons.find(@question.lesson_id)
+  end
+
 
   private
 

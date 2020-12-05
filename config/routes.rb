@@ -101,6 +101,7 @@ Rails.application.routes.draw do
     end
     resources :answer_checks, only: %i[index show] do
       get :lessons_show, on: :member
+      get :question_statuses_show, on: :member
     end
 
     resources :question_set, only: %i[index show] do

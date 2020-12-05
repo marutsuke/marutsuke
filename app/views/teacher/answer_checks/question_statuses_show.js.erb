@@ -1,0 +1,6 @@
+$("<%="#js-question_statuses"%>")
+  .html("<%= j render(
+    partial: 'teacher/answer_checks/question_statuses',
+    locals: {
+      question: @question
+    }) %>");
