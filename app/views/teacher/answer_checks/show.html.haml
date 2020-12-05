@@ -22,3 +22,5 @@
       = link_to '課題管理に戻る', teacher_question_set_index_path(lesson_id: @lesson.id), class: 'a-text-large'
     .o-question-statuses__body
       #js-question_statuses
+        - if @question
+          = render 'teacher/answer_checks/question_statuses', question: @question

@@ -16,6 +16,7 @@ class Teacher::AnswerChecksController < Teacher::Base
     @lesson = current_teacher_school.lessons.find(params[:id])
     @questions = @lesson.questions.display_order
     @lesson_group = @lesson.lesson_group
+    @question = @lesson.questions.find_by(id: params[:question_id])
   end
 
   def question_statuses_show
