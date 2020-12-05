@@ -35,6 +35,10 @@ class UserDecorator < Draper::Decorator
     (schools - excepts).map{ |school| [school.name, school.id] }
   end
 
+  def school_grade_to_s
+    SCHOOL_GRADE_HASH[school_grade]
+  end
+
   private
 
   def time_format(time)
