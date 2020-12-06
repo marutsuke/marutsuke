@@ -9,4 +9,12 @@ class SchoolBuildingUser < ApplicationRecord
   scope :main_order, lambda {
     order(main: 'desc')
   }
+
+  scope :id_not_nil, lambda{
+    where.not(id: nil)
+  }
+
+  scope :in_school, lambda{ |school|
+    where(school_building_id: school.school_buildings.pluck(:id))
+  }
 end

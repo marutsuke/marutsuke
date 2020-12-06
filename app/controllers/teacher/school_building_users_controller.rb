@@ -5,6 +5,7 @@ class Teacher::SchoolBuildingUsersController < Teacher::Base
   before_action :main_setting, only: :create
   def new
     @school_building_user = @user.school_building_users.new
+    @school_building_users = @user.school_building_users.id_not_nil.in_school(current_teacher_school).main_order
   end
 
   def create
