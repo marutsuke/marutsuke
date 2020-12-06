@@ -31,7 +31,9 @@
       %th.o-table-simple__th= User.human_attribute_name(:name)
       %th.o-table-simple__th 学年
       %th.o-table-simple__th 所属校舎
-      %th.o-table-simple__th 受講講座詳細
+      %th.o-table-simple__th アカウント開始日
+      %th.o-table-simple__th アカウント終了日
+      %th.o-table-simple__th アカウント設定
     - @users.each do |user|
       - school_user = user.school_user(current_teacher_school)
       %tr.o-table-simple__tr
@@ -39,7 +41,9 @@
         %td.o-table-simple__td= user.name
         %td.o-table-simple__td= user.decorate.school_grade_to_s
         %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
-        %td.o-table-simple__td= link_to '受講詳細',lesson_groups_teacher_user_path(user)
+        %td.o-table-simple__td= school_user.decorate.start_at
+        %td.o-table-simple__td= school_user.decorate.end_at
+        %td.o-table-simple__td= link_to '設定', '#'
   = paginate @users
 
 
