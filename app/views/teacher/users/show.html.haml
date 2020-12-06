@@ -41,10 +41,11 @@
       .m-profile-item
         .m-profile-item__title
           .a-text-secondary.a-text-large 所属校
-          = link_to new_teacher_user_school_building_user_path(@user) do
-            %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
         .m-profile-item__body
           %ul
             %li.a-text-primary.a-text-large= "#{ @user.main_school_building(current_teacher_school).name }(所属)"
             - @user.sub_school_buildings(current_teacher_school).each  do |school_building|
               %li.a-text-primary.a-text-large= school_building.name
+.flex-sparo.mt40
+  .wrap
+    = link_to '所属校舎編集', new_teacher_user_school_building_user_path(@user)
