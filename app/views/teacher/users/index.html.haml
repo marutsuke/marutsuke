@@ -43,7 +43,7 @@
         %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
         %td.o-table-simple__td= school_user.decorate.start_at
         %td.o-table-simple__td= school_user.decorate.end_at
-        %td.o-table-simple__td= link_to '設定', '#'
+        %td.o-table-simple__td= link_to '設定', teacher_user_path(user)
   = paginate @users
 
 

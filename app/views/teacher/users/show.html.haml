@@ -18,19 +18,13 @@
         .m-heading__text
           %h2.a-text-primary.a-text-huge プロフィール
         .m-heading__button
-          = link_to '編集', '#', class: 'a-button a-button--edit'
+        .a-text-xlarge= link_to '戻る',  lesson_group_registration_teacher_users_path
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
           .a-text-secondary.a-text-large 学年
         .m-profile-item__body
-          .a-text-primary.a-text-xlarge 小5(仮)
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
-          .a-text-secondary.a-text-large= User.human_attribute_name(:email)
-        .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @user.email
+          .a-text-primary.a-text-xlarge= @user.decorate.school_grade_to_s
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
@@ -46,12 +40,6 @@
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
-          .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:activated_at)
-        .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @school_user.decorate.activated_at
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
           .a-text-secondary.a-text-large 所属校
           = link_to new_teacher_user_school_building_user_path(@user) do
             %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
@@ -60,13 +48,3 @@
             %li.a-text-primary.a-text-large= "#{ @user.main_school_building(current_teacher_school).name }(所属)"
             - @user.sub_school_buildings(current_teacher_school).each  do |school_building|
               %li.a-text-primary.a-text-large= school_building.name
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
-          .a-text-secondary.a-text-large 受講講座
-          = link_to new_teacher_user_lesson_group_user_path(@user) do
-            %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
-        .m-profile-item__body
-          %ul
-            - @lesson_groups.each  do |lesson_group|
-              %li.a-text-primary.a-text-large= lesson_group.name
