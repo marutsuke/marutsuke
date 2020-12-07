@@ -19,11 +19,6 @@ class Teacher::UsersController < Teacher::Base
     @lesson_groups = @user.lesson_groups_in(current_teacher_school)
   end
 
-  def edit
-    @user = current_teacher_school.users.find(params[:id]).decorate
-    @school_user = @user.school_user(current_teacher_school)
-  end
-
   def lesson_group_registration
     @users = @users.page(params[:page])
   end
