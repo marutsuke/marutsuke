@@ -30,13 +30,13 @@
         .m-profile-item__title
           .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:start_at)
         .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @school_user.start_at || '-'
+          .a-text-primary.a-text-xlarge= @school_user.decorate.start_at || '-'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
           .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:end_at)
         .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @school_user.end_at || '-'
+          .a-text-primary.a-text-xlarge= @school_user.decorate.end_at || '-'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
