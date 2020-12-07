@@ -7,6 +7,8 @@ class SchoolUser < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :school
   validates :user_id, uniqueness: { scope: :school_id, case_sensitive: true }, allow_blank: true
+  validates :start_at, presence: true
+  validate :start_at_and_end_at_validate
 
 
   def activate
@@ -30,4 +32,11 @@ class SchoolUser < ApplicationRecord
       self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
     end
   end
+
+  def start_at_and_end_at_validate
+    return if end_at.nil?
+
+    errors.add(:end_at, 'はアカウント開始日時より後にしてください。') unless start_at < end_at
+  end
+
 end

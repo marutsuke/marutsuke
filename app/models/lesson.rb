@@ -4,6 +4,7 @@ class Lesson < ApplicationRecord
   attr_accessor :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min
   validates :name, presence: true, length: { maximum: 30 }
+  validate :start_at_and_end_at_validate
 
   before_save { start_at_set }
   before_save { end_at_set }
@@ -102,4 +103,11 @@ class Lesson < ApplicationRecord
       self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
     end
   end
+
+  def start_at_and_end_at_validate
+    return if end_at.nil?
+
+    errors.add(:end_at, 'はアカウント開始日時より後にしてください。') unless start_at < end_at
+  end
+
 end
