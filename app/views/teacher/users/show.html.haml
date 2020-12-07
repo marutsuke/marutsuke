@@ -49,3 +49,5 @@
 .flex-sparo.mt40
   .wrap
     = link_to '所属校舎編集', new_teacher_user_school_building_user_path(@user)
+  .wrap
+    = link_to 'アカウント開始・終了時間編集', edit_teacher_school_user_path(@user.school_user(current_teacher_school))

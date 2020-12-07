@@ -77,6 +77,7 @@ Rails.application.routes.draw do
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
     end
+    resources :school_users, only: %i[edit update]
     resources :schools, only: %i[edit update]
     resources :manage_menus, only: %i[index]
     resources :menus, only: %i[] do
