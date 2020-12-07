@@ -31,6 +31,9 @@ class SchoolUser < ApplicationRecord
     if end_at_date.present? && end_at_hour.present? && end_at_min.present?
       self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
     end
+    if end_at_date.blank? && end_at_hour.blank? && end_at_min.blank?
+      self.end_at = nil
+    end
   end
 
   def start_at_and_end_at_validate
