@@ -71,13 +71,12 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
-    resources :users, only: %i[index show  edit] do
+    resources :users, only: %i[index show edit] do
       get :lesson_group_registration, on: :collection
       get :lesson_groups, on: :member
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
     end
-    get 'users', to: 'users#new'
     resources :schools, only: %i[edit update]
     resources :manage_menus, only: %i[index]
     resources :menus, only: %i[] do
