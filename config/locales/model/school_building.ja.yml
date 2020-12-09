@@ -3,5 +3,7 @@ ja:
     models:
       school_building: 校舎
     attributes:
-      school:
+      school_building:
         name: 校舎名
+        invitation_code: 招待コード
+        auto_invite: 自動招待許可
