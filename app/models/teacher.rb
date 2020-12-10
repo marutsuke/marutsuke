@@ -47,7 +47,7 @@ class Teacher < ApplicationRecord
   def resend_activation_mail
     update_activation_digest
     inactive
-    TeacherMailer.account_activation(self).deliver_now
+    TeacherMailer.resend_account_activation(self).deliver_now
   end
 
   def activate

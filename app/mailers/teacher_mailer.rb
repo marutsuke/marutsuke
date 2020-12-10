@@ -13,6 +13,12 @@ class TeacherMailer < ApplicationMailer
     mail to: @teacher.email, subject: 'アカウント有効化メール'
   end
 
+  def resend_account_activation(teacher)
+    @teacher = teacher
+
+    mail to: @teacher.email, subject: 'アカウント有効化メール[再送]'
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
