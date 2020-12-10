@@ -38,7 +38,8 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def destroy
-    # @leeson_group.destory
+    @lesson_group.destroy
+    flash[:danger] = "#{@lesson_group.name}を削除しました。"
     redirect_to teacher_lesson_groups_path
   end
 
@@ -49,7 +50,7 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def set_lesson_groups
-    @lesson_groups = LessonGroup.for_school(current_teacher_school).page(params[:page])
+    @lesson_groups = current_teacher_school_building.lesson_groups.min_school_grade_order.page(params[:page])
   end
 
   def set_lesson_group

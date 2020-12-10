@@ -120,7 +120,7 @@ Rails.application.routes.draw do
     resources :school_buildings, only: %i[index new create show update] do
       get :invitation_manage, on: :member
     end
-    resources :lesson_groups, only: %i[index new show create edit update] do
+    resources :lesson_groups, only: %i[index new show create edit update destroy] do
       resources :lessons, only: %i[new create]
     end
     # resources :user_invitation_mails, only: %i[new create]
