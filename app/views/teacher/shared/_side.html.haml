@@ -3,17 +3,11 @@
     .m-teacher-side__logo
       = image_tag ('marutsuke_logo_b.png'), art: 'marutsuke'
   .m-teacher-side__element
-    = link_to teacher_users_path do
-      .m-teacher-side__link 生徒
-  .m-teacher-side__element
-    = link_to teacher_lessons_path do
-      .m-teacher-side__link 授業
-  .m-teacher-side__element
     = link_to teacher_question_set_index_path do
       .m-teacher-side__link 課題管理
   .m-teacher-side__element
     = link_to lesson_group_registration_teacher_users_path do
-      .m-teacher-side__link 生徒受講管理
+      .m-teacher-side__link 生徒講座受講管理
   .m-teacher-side__element
     = link_to teacher_users_path do
       .m-teacher-side__link 生徒アカウント管理
