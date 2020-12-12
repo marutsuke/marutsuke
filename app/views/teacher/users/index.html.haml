@@ -1,5 +1,5 @@
 .o-search-form.mt16
-  %h3.o-search-form__title 生徒アカウント管理・生徒検索
+  %h3.o-search-form__title= "#{ current_teacher_school_building.name}の生徒アカウント管理・生徒検索"
   = search_form_for(@q, url: teacher_users_path) do |f|
     .o-search-form__label_forms
       .m-label-and-input
@@ -10,8 +10,8 @@
         = f.search_field :name_cont, class: 'm-label-and-input__input'
     .o-search-form__label_forms
       .m-label-and-input
-        = f.label :school_building_users_school_building_id_eq, '所属校', class: 'm-label-and-input__label'
-        = f.select :school_building_users_school_building_id_eq,  current_teacher.decorate.school_building_select_array, { include_blank: '', selected: @school_building_id || '' }, {  class: 'm-label-and-input__input' }
+        = f.label :school_grade_eq, '学年', class: 'm-label-and-input__label'
+        = f.select :school_grade_eq, school_grade_select_array, { include_blank: '', selected: @school_grade || '' }, {  class: 'm-label-and-input__input' }
       .m-label-and-input
         = f.label :lesson_group_users_lesson_group_id_eq, '受講講座', class: 'm-label-and-input__label'
         = f.select :lesson_group_users_lesson_group_id_eq,  current_teacher.decorate.lesson_groups_search_select_array, { include_blank: '', selected: @lesson_group_id || '' }, { class: 'm-label-and-input__input' }
