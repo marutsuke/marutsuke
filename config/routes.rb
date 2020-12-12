@@ -79,7 +79,6 @@ Rails.application.routes.draw do
     end
     resources :school_users, only: %i[edit update]
     resources :schools, only: %i[edit update]
-    resources :manage_menus, only: %i[index]
     resources :menus, only: %i[] do
       collection do
         get :regular_work
