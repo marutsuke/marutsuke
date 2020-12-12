@@ -16,7 +16,8 @@ class Teacher::TeachersController < Teacher::Base
   def create
     @teacher = current_teacher_school.teachers.new(teacher_params)
     if @teacher.save
-      flash[:success] = "#{@teacher.name}先生を作成しました"
+      flash[:success] = "#{@teacher.name}先生を作成し、アクティベーションメールを送信しました"
+      @teacher.send_activation_mail
       redirect_to new_teacher_teacher_path
     else
       render 'new'
