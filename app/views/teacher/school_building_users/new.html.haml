@@ -1,4 +1,8 @@
-= "#{@user.name}さんの所属校・他校受講校登録"
+.flex-sparo
+  .wrap
+    = "#{@user.name}さんの所属校・他校受講校登録"
+  .wrap
+    = link_to '生徒アカウントに戻る', teacher_user_path(@user)
 .user_form
   = form_with url: teacher_user_school_building_users_path(@user), model: @school_building_user, local: true do |f|
     = render 'shared/error_messages', model_object: @school_building_user
@@ -11,7 +15,7 @@
     = f.submit '登録する', class: 'user_form__submit_btn'
 %hr
 %hr
-- @user.school_building_users.where.not(id: nil).main_order.each do |school_building_user|
+- @school_building_users.each do |school_building_user|
   = school_building_user.school_building.name
   - if school_building_user.main?
     (所属校)

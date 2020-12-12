@@ -6,8 +6,8 @@ class Teacher < ApplicationRecord
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, on: :create
-  validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true
+  validates :password, presence: true, length: { minimum: 8 }, on: :create
+  validates :password, presence: true, length: { minimum: 8 }, on: :update, allow_blank: true
   has_secure_password
   belongs_to :school
   has_many :lessons, dependent: :destroy
@@ -47,7 +47,7 @@ class Teacher < ApplicationRecord
   def resend_activation_mail
     update_activation_digest
     inactive
-    TeacherMailer.account_activation(self).deliver_now
+    TeacherMailer.resend_account_activation(self).deliver_now
   end
 
   def activate

@@ -18,8 +18,8 @@
             = f.label :image
             %span (最大5MBまで)
         .question_form__check_box
-          = f.check_box :publish, {class: 'question_form__check_box', checked: false}, false, true
-          = f.label :publish, '非公開で保存'
+          = f.check_box :publish, {class: 'question_form__check_box'}, false, true
+          = f.label :publish, '下書きで保存'
         = f.hidden_field :lesson_id, value: @lesson.id
         .flex.flex-end
           = f.submit '更新する', class: 'a-button a-button--primary mr16'

@@ -1,7 +1,34 @@
-.user_form
+.mt24.ml16= link_to '校舎一覧に戻る', teacher_school_buildings_path
+.m-heading.m-heading--line
+  .m-heading__text.a-text-xlarge 校舎作成
+
+.o-form-group.mt24
   = form_with model: [:teacher, @school_building], local: true do |f|
-    =render 'shared/error_messages', model_object: @school_building
-    .user_form__label_and_input
-      = f.label :name, class: 'required'
-      = f.text_field :name
-    = f.submit '作成する', class: 'user_form__submit_btn'
+    .o-form-group__body
+      =render 'shared/error_messages', model_object: @school_building
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
+            = f.label :name, class: 'a-form-label required'
+          .m-horizonal-form-set__input
+            = f.text_field :name, class: 'a-form-text-field'
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
+            = f.label :invitation_code, class: 'a-form-label'
+          .m-horizonal-form-set__input
+            = f.text_field :invitation_code, class: 'a-form-text-field'
+            .m-horizonal-form-set__discription
+              .a-text-note 8文字以上
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
+            = f.label :auto_invite, class: 'a-form-label'
+          .m-horizonal-form-set__input.flex--cen
+            = f.check_box :auto_invite, class: 'a-form-checkbox mr8'
+            = f.label :auto_invite, '自動で入学を許可する', class: 'a-form-checkbox-label'
+
+    .o-form-group__submit
+      .m-horizonal-form-set
+        .u-width-wrap-160
+          = f.submit '作成する', class: 'a-form-submit'

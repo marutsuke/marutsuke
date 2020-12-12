@@ -134,6 +134,10 @@ class Question < ApplicationRecord
   end
   alias info image_alt
 
+  def checking_count
+    question_statuses.checking.size
+  end
+
   private
 
   def image_size

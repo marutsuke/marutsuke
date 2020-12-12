@@ -3,7 +3,6 @@
 @import "./teacher/invitation_form";
 @import "./teacher/teacher_header";
 @import "./teacher/question_new";
-@import "./teacher/top";
 @import "./teacher/pagination";
 
 // atom
@@ -19,6 +18,8 @@
 @import "./teacher/components/molecule/label_input";
 @import "./teacher/components/molecule/button_set";
 @import "./teacher/components/molecule/form_set";
+@import "./teacher/components/molecule/teacher_side";
+@import "./teacher/components/molecule/question";
 
 // organism
 @import "./teacher/components/organism/search_form";
@@ -27,3 +28,11 @@
 @import "./teacher/components/organism/checking";
 @import "./teacher/components/organism/invitation_form";
 @import "./teacher/components/organism/form_group";
+@import "./teacher/components/organism/questions";
+@import "./teacher/components/organism/question_statuses";
+@import "./teacher/components/organism/question_set";
+
+// utility
+@import "./teacher/components/utility/container";
+@import "./teacher/components/utility/width_wrap";
+@import "./teacher/components/utility/after_element";

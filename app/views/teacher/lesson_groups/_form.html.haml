@@ -2,51 +2,51 @@
   = form_with model: [:teacher, lesson_group], local: true do |f|
     .o-form-group__body
       =render 'shared/error_messages', model_object: lesson_group
-      .m-form-set
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :name, class: 'a-form-label required'
-          .m-form-set__input
+          .m-horizonal-form-set__input
             = f.text_field :name, class: 'a-form-text-field'
-            .m-form-set__discription
+            .m-horizonal-form-set__discription
               .a-text-note 例)小５算数
 
-      .m-form-set
+      .m-horizonal-form-set
         - year = Time.zone.now.year - 1
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :school_year, class: 'a-form-label'
-          .m-form-set__input
+          .m-horizonal-form-set__input
             = f.select :school_year, (year..year + 3), {include_blank: true} , {class: 'a-form-select'}
-            .m-form-set__discription
+            .m-horizonal-form-set__discription
               .a-text-note
-      .m-form-set
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :min_school_grade, class: 'a-form-label required'
-          .m-form-set__input
+          .m-horizonal-form-set__input
             = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true }, { class: 'a-form-select' }
-      .m-form-set
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :max_school_grade, class: 'a-form-label'
-          .m-form-set__input
+          .m-horizonal-form-set__input
             = f.select :max_school_grade, SCHOOL_GRADE_HASH.reject{|k,v| k == 4}.invert,  { include_blank: true }, { class: 'a-form-select' }
-            .m-form-set__discription
+            .m-horizonal-form-set__discription
               .a-text-note 複数学年対象の場合のみ
-      .m-form-set
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :school_building_id, class: 'a-form-label required'
-          .m-form-set__input
+          .m-horizonal-form-set__input
             = f.select :school_building_id, current_teacher.decorate.school_building_select_array, { selected: current_teacher.main_school_building.id }, { class: 'a-form-select' }
-      .m-form-set
-        .m-form-set__label_and_input_wrap
-          .m-form-set__label
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
             = f.label :free_attend, class: 'a-form-label'
-          .m-form-set__input
+          .m-horizonal-form-set__input.flex--cen
             = f.check_box :free_attend, class: 'a-form-checkbox'
             = f.label :free_attend, 'すべて許可', class: 'a-form-checkbox-label'
     .o-form-group__submit
-      .m-form-set
+      .m-horizonal-form-set
         = f.submit submit_word, class: 'a-button a-button--primary'

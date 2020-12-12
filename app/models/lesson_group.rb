@@ -2,9 +2,9 @@
 
 class LessonGroup < ApplicationRecord
   belongs_to :school_building
-  has_many :lesson_group_users
-  has_many :users, through: :lesson_group_users
-  has_many :lessons
+  has_many :lesson_group_users, dependent: :destroy
+  has_many :users, through: :lesson_group_users, dependent: :destroy
+  has_many :lessons, dependent: :destroy
   has_many :lesson_group_requests
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year], case_sensitive: false }
   validates :min_school_grade, presence: true
@@ -41,7 +41,16 @@ class LessonGroup < ApplicationRecord
   }
 
   scope :for_school_year, lambda { |school_year|
-      where(school_year: [nil, school_year])
+    where(school_year: [nil, school_year])
+  }
+
+  scope :min_school_grade_order, lambda {
+    order(min_school_grade: :asc)
+  }
+
+  scope :have_lesson_taught_by, lambda { |teacher|
+    for_school_buildings_belonged_to_teacher(teacher)
+    .where(id: teacher.lessons.pluck(:lesson_group_id).uniq)
   }
 
   def request_of(user)

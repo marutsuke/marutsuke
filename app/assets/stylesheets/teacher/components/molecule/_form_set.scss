@@ -1,11 +1,11 @@
-.m-form-set {
-  height: 3rem;
-  margin-bottom: 3rem;
+.m-horizonal-form-set {
+  height: 80px;
+  // margin-bottom: 3rem;モジュールは、マージンを外に取ってはだめ。
   &__label_and_input_wrap {
     display: flex;
   }
   &__label {
-    width: 240px;
+    width: 40%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -13,8 +13,19 @@
   }
   &__input {
     padding-right: 1rem;
-    height: 1.5rem;
+    width: 60%;
+    padding: 0;
   }
   &__discription {
+  }
+}
+
+.m-form-vertical-set {
+  &__label {
+    margin-bottom: 8px;
+  }
+  &__textarea {
+  }
+  &__select {
   }
 }

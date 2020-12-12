@@ -1,0 +1,39 @@
+.m-teacher-side
+  = link_to teacher_path do
+    .m-teacher-side__logo
+      = image_tag ('marutsuke_logo_b.png'), art: 'marutsuke'
+  .m-teacher-side__element
+    = link_to teacher_question_set_index_path do
+      .m-teacher-side__link 課題管理
+  .m-teacher-side__element
+    = link_to lesson_group_registration_teacher_users_path do
+      .m-teacher-side__link 生徒講座受講管理
+  .m-teacher-side__element
+    = link_to teacher_users_path do
+      .m-teacher-side__link 生徒アカウント管理
+  .m-teacher-side__element
+    = link_to teacher_teachers_path do
+      .m-teacher-side__link 教員アカウント管理
+  .m-teacher-side__element
+    = link_to teacher_lesson_groups_path do
+      .m-teacher-side__link 講座・授業設定
+  -# .m-teacher-side__element
+  -#   = link_to teacher_manage_menus_path do
+  -#     .m-teacher-side__link 講座分析
+  -# .m-teacher-side__element
+  -#   = link_to teacher_manage_menus_path do
+  -#     .m-teacher-side__link 生徒分析
+  .m-teacher-side__element
+    = link_to teacher_school_buildings_path do
+      .m-teacher-side__link 校舎作成・学校情報
+
+
+
+  .m-teacher-side__element.mt24
+    .m-teacher-side__text= current_teacher_school.name
+    .m-teacher-side__text= "#{ current_teacher.name }先生"
+    .m-teacher-side__text= "所属: #{current_teacher.main_school_building&.name || 'なし'} "
+  .m-teacher-side__element
+    = link_to teacher_logout_path, method: :delete do
+      .m-teacher-side__link ログアウト
+  .m-teacher-side__space

@@ -6,5 +6,7 @@
   %body
     .teacher_main
       =render 'layouts/notification'
-      =render 'teacher/shared/header'
-      = yield
+      .flex
+        =render 'teacher/shared/side'
+        .u-teacher-right
+          = yield

@@ -1,6 +1,5 @@
 .mt16.ml16 講座詳細
 .flex.mt24.ml16
-  .ml24.a-text-large= link_to '講座情報を編集する', edit_teacher_lesson_group_path(@lesson_group)
   .ml24.a-text-large= link_to 'この講座に授業を追加する', new_teacher_lesson_group_lesson_path(@lesson_group)
   .ml24.a-text-large= link_to '講座一覧に戻る', teacher_lesson_groups_path
 .flex.mt24.ml16
@@ -29,6 +28,9 @@
         %td.o-table-simple__td= lesson.decorate.end_time_with_y
         %td.o-table-simple__td= link_to '編集する', edit_teacher_lesson_path(lesson)
   = paginate @lessons
+- else
+  %p 授業はまだ登録されていません
+
 .mt40
 .mb8 登録生徒一覧
 - if @users.present?
@@ -37,7 +39,7 @@
     %thead.o-table-simple__thead
       %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
       %th.o-table-simple__th= User.human_attribute_name(:name)
-      -# %th.o-table-simple__th 学年
+      %th.o-table-simple__th 学年
       %th.o-table-simple__th 所属校舎
       %th.o-table-simple__th アカウント有効日
     - @users.each do |user|
@@ -45,6 +47,7 @@
       %tr.o-table-simple__tr
         %td.o-table-simple__td= user.id
         %td.o-table-simple__td= user.name
+        %td.o-table-simple__td= user.decorate.school_grade_to_s
         %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
         %td.o-table-simple__td= school_user.decorate.activated_at
   = paginate @users

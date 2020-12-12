@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/login_post', to: 'sessions#new'
   get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
-  resources :lessons, only: %i[index show]
+    resources :lessons, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new
   end
@@ -71,13 +71,14 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
-    resources :users, only: %i[index show  edit] do
+    resources :users, only: %i[index show edit] do
+      get :lesson_group_registration, on: :collection
+      get :lesson_groups, on: :member
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
     end
-    get 'users', to: 'users#new'
+    resources :school_users, only: %i[edit update]
     resources :schools, only: %i[edit update]
-    resources :manage_menus, only: %i[index]
     resources :teachers, only: %i[index new create edit update show] do
       member do
         post :resend_activation_mail
@@ -90,11 +91,14 @@ Rails.application.routes.draw do
 
     resources :question_statuses, only: [] do
       resources :comments, only: %i[new create]
-      # TODO: 不要なので消す予定 2020/11/03
-      # resources :answer_checks, only: [] do
-      #   get :checking, on: :collection
-      #   post :check, on: :collection
-      # end
+    end
+    resources :answer_checks, only: %i[index show] do
+      get :lessons_show, on: :member
+      get :question_statuses_show, on: :member
+    end
+
+    resources :question_set, only: %i[index show] do
+      get :lessons_show, on: :member
     end
 
     resources :questions, only: %i[create edit update destroy] do
@@ -107,7 +111,7 @@ Rails.application.routes.draw do
     resources :school_buildings, only: %i[index new create show update] do
       get :invitation_manage, on: :member
     end
-    resources :lesson_groups, only: %i[index new show create edit update] do
+    resources :lesson_groups, only: %i[index new show create edit update destroy] do
       resources :lessons, only: %i[new create]
     end
     # resources :user_invitation_mails, only: %i[new create]

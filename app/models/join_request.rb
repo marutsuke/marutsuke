@@ -31,7 +31,7 @@ class JoinRequest < ApplicationRecord
   private
 
   def create_school_user
-    user.school_users.create(school_id: school.id, activated_at: Time.zone.now, activated: true)
+    user.school_users.create(school_id: school.id, start_at: Time.zone.now, activated_at: Time.zone.now, activated: true)
   end
 
   def create_main_school_building_user

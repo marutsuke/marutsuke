@@ -4,11 +4,11 @@ ja:
       user: 受講生
     attributes:
       user:
-        name: 名前
+        id: ID
+        name: 生徒氏名
         name_kana: かな
         birth_day: 生年月日
         school_grade: 学年
-        login_id: ログインID
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード(確認)

@@ -8,3 +8,23 @@
     width: 600px;
   }
 }
+
+.o-question-form-group {
+  width: 50%;
+  &__hedding {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 72px;
+    padding: 8px 16px;
+    border-bottom: 1px solid $indigo_4;
+  }
+  &__body {
+    padding: 16px 8px;
+  }
+  &__form-set {
+    margin-bottom: 1rem;
+  }
+  &__submit {
+  }
+}

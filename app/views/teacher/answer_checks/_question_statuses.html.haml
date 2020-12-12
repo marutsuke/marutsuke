@@ -1,0 +1,14 @@
+.mt40.ml16
+  .a-text-primary= "課題番号: #{question.display_order} "
+  %table.o-table-simple.mt16
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th= User.human_attribute_name(:id)
+      %th.o-table-simple__th= User.human_attribute_name(:name)
+      %th.o-table-simple__th ステータス
+      %th.o-table-simple__th 提出
+    - question.lesson.lesson_group.users.each do |user|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= user.id
+        %td.o-table-simple__td= user.name
+        %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.status_for_teacher || '未確認'
+        %td.o-table-simple__td= question&.question_status_of(user)&.decorate&.checking_link

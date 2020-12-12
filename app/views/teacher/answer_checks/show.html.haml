@@ -1,0 +1,26 @@
+.flex
+  .o-questions
+    .o-questions__headding
+      .a-text-secondary.a-text-small= "#{@lesson_group.school_year || '-'}年度/#{@lesson_group.school_building.name}"
+      .flex-spbet-end
+        .a-text-primary.a-text-xlarge= "#{@lesson_group.name}/#{@lesson.name}"
+        .a-text-primary= "提出受付期間:#{@lesson.decorate.start_to_end_time}"
+    .o-questions__contents
+      - @questions.each do |question|
+        .o-questions__top
+          .flex-spbet
+            .a-text-primary.a-text-xlarge= "課題#{question.display_order}#{'(下書き)' if !question.publish}"
+            = link_to "課題状況#{ '(' + question.checking_count.to_s + ')' if question.checking_count> 0}", question_statuses_show_teacher_answer_check_path(question), remote: true, class: 'a-text-xlarge'
+        .o-questions__content{class: question.decorate.unpublish_opacity_class}
+          .m-question
+            - if question&.image_url
+              = image_tag question.image_url, alt: question.image_alt, class: 'm-question__image'
+            .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+  .o-question-statuses
+    .o-question-statuses__hedding
+      .a-text-primary.a-text-xlarge 課題状況
+      = link_to '課題管理に戻る', teacher_question_set_index_path(lesson_id: @lesson.id), class: 'a-text-large'
+    .o-question-statuses__body
+      #js-question_statuses
+        - if @question
+          = render 'teacher/answer_checks/question_statuses', question: @question

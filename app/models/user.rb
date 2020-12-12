@@ -2,12 +2,8 @@
 
 class User < ApplicationRecord
   attr_accessor :user_remember_token,
-                :user_line_state_token,
-                :start_at_date, :start_at_hour, :start_at_min,
-                :end_at_date, :end_at_hour, :end_at_min
+                :user_line_state_token
   before_save { email&.downcase! }
-  before_save { start_at_set }
-  before_save { end_at_set }
   validates :name, presence: true, length: { maximum: 20 }
   validates :name_kana, length: { maximum: 20 }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
@@ -120,18 +116,6 @@ class User < ApplicationRecord
   def sub_school_buildings_name_in(school)
     sub_school_buildings = school_buildings.where.not(id: main_school_building(school).id)
     sub_school_buildings.where(school_id: school.id).map(&:name).join(',')
-  end
-
-  def start_at_set
-    if start_at_date.present? && start_at_hour.present? && start_at_min.present?
-      self.start_at = Time.zone.parse("#{start_at_date} #{start_at_hour}:#{start_at_min}:00")
-    end
-  end
-
-  def end_at_set
-    if end_at_date.present? && end_at_hour.present? && end_at_min.present?
-      self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
-    end
   end
 
   private
