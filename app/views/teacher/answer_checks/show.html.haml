@@ -10,7 +10,7 @@
         .o-questions__top
           .flex-spbet
             .a-text-primary.a-text-xlarge= "課題#{question.display_order}#{'(下書き)' if !question.publish}"
-            = link_to '課題状況', question_statuses_show_teacher_answer_check_path(question), remote: true, class: 'a-text-xlarge'
+            = link_to "課題状況#{ '(' + question.checking_count.to_s + ')' if question.checking_count> 0}", question_statuses_show_teacher_answer_check_path(question), remote: true, class: 'a-text-xlarge'
         .o-questions__content{class: question.decorate.unpublish_opacity_class}
           .m-question
             - if question&.image_url

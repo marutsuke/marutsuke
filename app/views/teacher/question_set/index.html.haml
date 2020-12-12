@@ -1,8 +1,8 @@
 - if @lesson_groups.size == 0
   .mt16.ml16 担当の講座はまだありません。
 
-.flex
-  .div
+.o-question-set
+  .o-question-set__lesson-groups
     - if @lesson_groups.size > 0
       .mt56.ml24 担当授業の講座一覧
       %table.o-table-simple.mr40
@@ -17,7 +17,7 @@
             %td.o-table-simple__td= lesson_group.school_building.name
             %td.o-table-simple__td= lesson_group.name
             %td.o-table-simple__td{ id: "js-lesson_group--#{lesson_group.id}"}= link_to '授業一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true
-
-  #js-lessons_table
-    - if @lesson
-      = render 'teacher/question_set/lessons_table', lesson_group: @lesson.lesson_group, lessons: @lesson.lesson_group.lessons
+  .o-question-set__lessons
+    #js-lessons_table
+      - if @lesson
+        = render 'teacher/question_set/lessons_table', lesson_group: @lesson.lesson_group, lessons: @lesson.lesson_group.lessons
