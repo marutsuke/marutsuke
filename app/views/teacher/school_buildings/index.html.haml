@@ -1,12 +1,15 @@
 .mt16.ml16= "#{ current_teacher_school.name }の校舎管理"
-.mt8
-= link_to '校舎作成', new_teacher_school_building_path
-
-%table.o-table-simple.mr40
-  %thead.o-table-simple__thead
-    %th.o-table-simple__th= SchoolBuilding.human_attribute_name(:name)
-    %th.o-table-simple__th
-  - @school_buildings.each do |school_building|
-    %tr.o-table-simple__tr
-      %td.o-table-simple__td= school_building.name
-      %td.o-table-simple__td= link_to '詳細', teacher_school_building_path(school_building)
+.mt16.ml16
+  = link_to '校舎作成', new_teacher_school_building_path
+.mt16.ml16
+  %table.o-table-simple.mr40
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th= SchoolBuilding.human_attribute_name(:name)
+      %th.o-table-simple__th 生徒数
+      %th.o-table-simple__th 講座数
+    - @school_buildings.each do |school_building|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= school_building.name
+        %td.o-table-simple__td= school_building.users.size
+        %td.o-table-simple__td= school_building.lesson_groups.size
+        -# %td.o-table-simple__td= link_to '詳細', teacher_school_building_path(school_building)
