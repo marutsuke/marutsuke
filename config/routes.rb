@@ -79,14 +79,6 @@ Rails.application.routes.draw do
     end
     resources :school_users, only: %i[edit update]
     resources :schools, only: %i[edit update]
-    resources :menus, only: %i[] do
-      collection do
-        get :regular_work
-        get :school_building_manage
-        get :school_building_analysis
-        get :school_manage
-      end
-    end
     resources :teachers, only: %i[index new create edit update show] do
       member do
         post :resend_activation_mail
