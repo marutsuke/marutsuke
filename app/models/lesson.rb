@@ -67,6 +67,10 @@ class Lesson < ApplicationRecord
     questions.size - user.question_statuses.where(question_id: questions.pluck(:id)).size
   end
 
+  def unchecked_comment_count_of(user)
+    user.question_statuses.commented.where(question_id: questions.pluck(:id)).size
+  end
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end

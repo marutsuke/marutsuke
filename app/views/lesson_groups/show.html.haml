@@ -8,13 +8,18 @@
           .wrap=link_to '一覧へ戻る', lesson_groups_path
     .o-top-page__body
       - @lessons.each do |lesson|
-        = link_to lesson_path(lesson) do
-          .m-lesson-card.mb16
+        .m-lesson-card.mb16
+          .flex-spbet
             %h2.m-lesson-card__title= "#{lesson.name}"
-            .m-lesson-card__info= "#{lesson.decorate.start_to_end_time}　#{lesson.teacher.name}"
-            .m-lesson-card__info= "やる:#{lesson.will_do_count_of(current_user)}　未確認:#{lesson.have_not_seen_count_of(current_user)}"
+            .wrap=link_to '詳細', lesson_path(lesson)
+          .m-lesson-card__info= "#{lesson.decorate.start_to_end_time}　#{lesson.teacher.name}"
+          .m-lesson-card__info= "課題: #{lesson.questions.size}　やる: #{lesson.will_do_count_of(current_user)}　未確認: #{lesson.have_not_seen_count_of(current_user)}"
+          - if lesson.unchecked_comment_count_of(current_user) > 0
+            .m-lesson-card__info.flex-cen
+              .a-text-error= "未読コメントがあります"
   - else
     .o-top-page__heading
       .m-heading-line.mt8
-        .m-heading-line__text
+        .m-heading-line__text.flex-spbet
           %h1.a-text-secondary.a-text-xlarge まだ、授業はありません
+          .wrap=link_to '一覧へ戻る', lesson_groups_path
