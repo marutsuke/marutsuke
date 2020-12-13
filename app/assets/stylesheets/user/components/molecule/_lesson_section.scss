@@ -1,0 +1,17 @@
+.m-lesson-section {
+  border-bottom: 1px solid $moss_4;
+  padding: 0.5rem;
+  &__title {
+    font-size: 1.25rem;
+    color: $moss_1;
+  }
+  &__info {
+    font-size: 0.75 rem;
+    color: $moss_2;
+    &--bold {
+      font-size: 0.75 rem;
+      color: $moss_1;
+      font-weight: bold;
+    }
+  }
+}

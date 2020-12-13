@@ -1,9 +1,9 @@
 - if @lesson_groups&.size > 0
-  .o-top-page__heading
+  .user-index-page__heading
     .m-heading-line.mt8
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 受講講座一覧
-  .o-top-page__body
+  .user-index-page__body
     - @lesson_groups.each do |lesson_group|
       .m-lesson-card.mb16
         .flex-spbet
@@ -11,7 +11,7 @@
           .wrap=link_to '詳細', lesson_group_path(lesson_group)
         .m-lesson-card__info= "授業数: #{lesson_group.lessons.size}"
 - else
-  .o-top-page__heading
+  .user-index-page__heading
     .m-heading-line.mt8
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 受講している講座はありません。
