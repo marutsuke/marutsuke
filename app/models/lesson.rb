@@ -59,6 +59,14 @@ class Lesson < ApplicationRecord
       .merge(Question.published)
   }
 
+  def will_do_count_of(user)
+    user.question_statuses.will_do.where(question_id: questions.pluck(:id)).size
+  end
+
+  def have_not_seen_count_of(user)
+    questions.size - user.question_statuses.where(question_id: questions.pluck(:id)).size
+  end
+
   def doing?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
