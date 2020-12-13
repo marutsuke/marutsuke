@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  root 'lessons#index'
+  root 'lesson_groups#index'
 
   get '/login', to: 'sessions#new', as: 'login'
   post '/login_post', to: 'sessions#create', as: 'login_post'
   get '/login_post', to: 'sessions#new'
   get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
-    resources :lessons, only: %i[index show]
+  resources :lessons, only: %i[index show]
+  resources :lesson_groups, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new
   end

@@ -1,7 +1,0 @@
-.m-lesson-header
-  .m-lesson-header__term
-    .a-text-secondary.a-text-small= @lesson.decorate.start_to_end_time
-  .m-lesson-header__teacher
-    .a-text-secondary.a-text-small= "担当: #{@lesson.teacher.name}"
-  .m-lesson-header__name
-    =link_to "#{@lesson.lesson_group.name}/#{@lesson.name}" , lesson_path(@lesson)
