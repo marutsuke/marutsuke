@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/login_post', to: 'sessions#new'
   get '/line_api/sign_up_by_line', to: 'line_api#sign_up_page_by_line'
   delete '/logout', to: 'sessions#destroy'
-  resources :lessons, only: %i[index show]
+  resources :lessons, only: %i[show]
   resources :lesson_groups, only: %i[index show]
   resources :questions, only: %i[show] do
     resources :answers, only: :new

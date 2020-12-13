@@ -3,14 +3,6 @@
 class LessonsController < UserBase
   before_action :set_lesson_and_questions, only: [:show]
   before_action :question_status_find_or_create, only: [:show]
-  def index
-    lesson_group_ids = current_user.lesson_groups.for_school(current_school).pluck(:id)
-    @new_lessons = current_school
-      .lessons
-      .where(lesson_group_id: lesson_group_ids)
-      .includes(:teacher)
-      .has_published_question
-  end
 
   def show
   end
