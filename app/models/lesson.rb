@@ -63,19 +63,8 @@ class Lesson < ApplicationRecord
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
 
-  def will_submit_count
-    questions.size -
-      checking_count -
-      submit_again_count -
-      complete_count
-  end
-
   def checking_count
     questions.checking.size
-  end
-
-  def submit_again_count
-    questions.submit_again.size
   end
 
   def complete_count
