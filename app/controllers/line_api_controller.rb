@@ -1,8 +1,4 @@
-require 'net/http'
-require 'uri'
-
 class LineApiController < UserBase
-  skip_before_action :user_login_required, :school_select_required
 
   def create
     return if current_user.line_user_id.present?
