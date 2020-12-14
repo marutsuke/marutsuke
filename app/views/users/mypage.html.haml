@@ -124,11 +124,18 @@
   .o-profile__head
     .m-heading-line
       .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge その他設定
+  .o-profile__body
+    .o-profile__item
+      .mt8.ml24.mb24
+        = link_to '学校切り替え', school_users_path, class: 'a-button-primary'
+      .mt16.ml24.mb24
+        = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge ログアウト
   .o-profile__body
     .o-profile__item
-      = link_to 'ログアウトする', logout_path, method: :delete
-  .mt16.ml24.mb24
-    = link_to '学校選択画面', school_users_path
-  .mt16.ml24.mb24
-    = link_to '受講リクエスト',lesson_group_requests_path
+      = link_to 'ログアウトする', logout_path, method: :delete, class: 'a-button-danger'
