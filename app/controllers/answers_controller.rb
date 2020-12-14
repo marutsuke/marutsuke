@@ -19,6 +19,7 @@ class AnswersController < UserBase
     if @answer.save
       flash[:success] = '課題を提出しました'
       answer_images_save(@answer)
+      @answer.send_notification_email_to_teacher
       question_status_update(@answer.question)
       redirect_to question_path(@answer.question)
     else

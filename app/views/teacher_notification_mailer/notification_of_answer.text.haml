@@ -1,0 +1,6 @@
+= "#{ @lesson.lesson_group.name }の課題に提出がありました。"
+\
+= "ユーザー:#{@user.name}"
+= "提出日時:#{@answer.decorate.submitted_at}"
+\
+= "URL: #{new_teacher_question_status_comment_url(@question.question_status_of(@user))}"
