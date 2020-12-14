@@ -37,13 +37,6 @@
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium メールアドレス
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user&.email.presence || '-'
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
           %h2.a-text-secondary.a-text-medium 学年
         .m-profile-item__body
           .m-profile-item__item
@@ -72,7 +65,7 @@
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium 所属校
+            %h2.a-text-secondary.a-text-medium 所属
           .m-profile-item__body
             .m-profile-item__item
               .a-text-primary.a-text-xlarge= "#{ current_user.main_school_building(current_school).name} (所属)"
