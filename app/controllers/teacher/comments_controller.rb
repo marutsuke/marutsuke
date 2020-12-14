@@ -17,7 +17,7 @@ class Teacher::CommentsController < Teacher::Base
     commnet_security_check
     if @comment.save
       flash[:success] = 'コメントしました。'
-      send_notification_to_user(@comment.answer.user, @comment)
+      send_notification_to_user(@comment)
       @comment.answer.question_status.update(status: 'commented')
       redirect_to new_teacher_question_status_comment_path(@question_status)
     else
@@ -52,8 +52,7 @@ class Teacher::CommentsController < Teacher::Base
     params.require(:comment).permit(:text, :image, :answer_id)
   end
 
-  def send_notification_to_user(user, comment)
-    message = "先生からのコメントがあります。\n\n#{comment.text}\n\nリンク:#{ question_url(comment.answer.question) }"
-    user.send_notification(message)
+  def send_notification_to_user(comment)
+    comment.answer.user.send_comment_notification(comment)
   end
 end

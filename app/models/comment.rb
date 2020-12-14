@@ -9,6 +9,10 @@ class Comment < ApplicationRecord
   belongs_to :teacher
   belongs_to :answer
 
+  def send_notification_email_to_user
+    UserNotificationMailer.notification_of_comment(self).deliver_now
+  end
+
 
   private
   def image_size

@@ -3,6 +3,7 @@ require 'net/http'
 require 'uri'
 
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
   attr_accessor :user_remember_token,
                 :user_line_state_token
   before_save { email&.downcase! }
@@ -113,13 +114,14 @@ class User < ApplicationRecord
     lesson_groups.for_school(school)
   end
 
-  def send_notification(text)
+  def send_comment_notification(comment)
     return unless notification_permission?
 
     if user_authentication.provider == 'line'
-      send_simple_line_message(text)
+      message = "先生からのコメントがあります。\n\n#{comment.text}\n\nリンク:#{ Rails.application.routes.url_helpers.question_url(comment.answer.question) }"
+      send_simple_line_message(message)
     elsif user_authentication.provider == 'email'
-      send_simple_email(text)
+      comment.send_notification_email_to_user
     end
   end
 
@@ -138,10 +140,6 @@ class User < ApplicationRecord
       config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
     }
     client.push_message(user_authentication.uid, message)
-  end
-
-  def send_simple_email(text)
-    #ここに、メールを送る処理を書くぞ。
   end
 
   def main_school_building_name_in(school)
