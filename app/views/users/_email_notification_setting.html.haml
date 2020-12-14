@@ -15,7 +15,7 @@
           - if current_user.notification_permission?
             .a-text-primary.a-text-xlarge オン
             .mt16
-              = link_to 'メール通知を解除', cancel_notification_permission_index_path, method: :delete, class: 'a-button-secondary'
+              = link_to 'メール通知を解除', cancel_notification_permission_index_path, method: :delete, class: 'a-button-danger'
           - else
             .a-text-primary.a-text-xlarge オフ
             .mt16
