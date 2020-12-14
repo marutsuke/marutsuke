@@ -30,6 +30,7 @@ class LineApiController < UserBase
     end
   end
 
+  # TODO: テストのために作ったので使わない。消す
   def send_message
     return unless current_user.line_user_id
 

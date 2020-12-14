@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'net/http'
+require 'uri'
 
 class User < ApplicationRecord
   attr_accessor :user_remember_token,
@@ -111,7 +113,36 @@ class User < ApplicationRecord
     lesson_groups.for_school(school)
   end
 
+  def send_notification(text)
+    return unless notification_permission?
+
+    if user_authentication.provider == 'line'
+      send_simple_line_message(text)
+    elsif user_authentication.provider == 'email'
+      send_simple_email(text)
+    end
+  end
+
   private
+
+  def send_simple_line_message(text)
+    return unless user_authentication.provider == 'line'
+
+    message = {
+      type: 'text',
+      text: text
+    }
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
+
+      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
+    }
+    client.push_message(user_authentication.uid, message)
+  end
+
+  def send_simple_email(text)
+    #ここに、メールを送る処理を書くぞ。
+  end
 
   def main_school_building_name_in(school)
     school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true, user_id: id)).first.name
