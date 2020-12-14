@@ -18,6 +18,12 @@ Rails.application.routes.draw do
       post :change_to_will_not_do
     end
   end
+  resources :notification_permission, only: %i[] do
+    collection do
+      post :permit
+      delete :cancel
+    end
+  end
 
   resources :answers, only: %i[create] do
     member do
