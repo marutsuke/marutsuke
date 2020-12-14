@@ -23,6 +23,13 @@
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium ユーザーID
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.id
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
           %h2.a-text-secondary.a-text-medium 名前
         .m-profile-item__body
           .m-profile-item__item
