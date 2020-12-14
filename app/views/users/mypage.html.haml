@@ -116,22 +116,42 @@
     .m-heading-line
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 通知設定
-  .o-profile__body
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium LINE連携
-        .m-profile-item__body
-          .m-profile-item__item
-            = image_tag ('line_btn_base.png'), art: 'line'
-            = link_to 'LINE通知登録', line_api_index_path, method: :post
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium LINE連携確認
-        .m-profile-item__body
-          .m-profile-item__item
-            = link_to 'ここを押すとメッセージが届きます。', send_message_line_api_index_path, method: :post
+  - if current_user.user_authentication.provider == 'email'
+    .o-profile__body
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 通知先
+          .m-profile-item__body
+            .m-profile-item__item
+              .a-text-primary.a-text-xlarge= current_user.user_authentication.uid
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium 通知設定
+          .m-profile-item__body
+            .m-profile-item__item
+              - if current_user.notification_permission?
+                .a-text-primary.a-text-xlarge オン
+                .mt16
+                  = link_to 'メール通知を解除', '#', class: 'a-button-primary'
+              - else
+                .a-text-primary.a-text-xlarge オフ
+                .mt16
+                  = link_to 'メールに通知する', '#', class: 'a-button-primary'
+      .o-profile__item
+        .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium LINE連携
+          .m-profile-item__body
+            .m-profile-item__item
+              .flex-cen
+                =link_to line_api_index_path, method: :post do
+                  .m-text-with-line-icon
+                    .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
+                    .m-text-with-line-icon__text LINE連携
+              .a-text-secondary.a-text-tiny ※LINEでログインと通知ができるようになります。
+              .a-text-secondary.a-text-tiny ※メールアドレスは削除されます
 .o-profile
   .o-profile__head
     .m-heading-line
