@@ -23,6 +23,13 @@
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium ユーザーID
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.id
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
           %h2.a-text-secondary.a-text-medium 名前
         .m-profile-item__body
           .m-profile-item__item
@@ -34,13 +41,6 @@
         .m-profile-item__body
           .m-profile-item__item
             .a-text-primary.a-text-xlarge= current_user.name_kana || '---'
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium メールアドレス
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user&.email.presence || '-'
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
@@ -72,7 +72,7 @@
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium 所属校
+            %h2.a-text-secondary.a-text-medium 所属
           .m-profile-item__body
             .m-profile-item__item
               .a-text-primary.a-text-xlarge= "#{ current_user.main_school_building(current_school).name} (所属)"
@@ -122,23 +122,22 @@
   .o-profile__head
     .m-heading-line
       .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 通知設定
+  - if current_user.user_authentication.provider == 'email'
+    = render 'email_notification_setting'
+  - else
+    = render 'line_notification_setting'
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge その他設定
   .o-profile__body
     .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium LINE連携
-        .m-profile-item__body
-          .m-profile-item__item
-            = image_tag ('line_btn_base.png'), art: 'line'
-            = link_to 'LINE通知登録', line_api_index_path, method: :post
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium LINE連携確認
-        .m-profile-item__body
-          .m-profile-item__item
-            = link_to 'ここを押すとメッセージが届きます。', send_message_line_api_index_path, method: :post
+      .mt8.ml24.mb24
+        = link_to '学校切り替え', school_users_path, class: 'a-button-primary'
+      .mt16.ml24.mb24
+        = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
 .o-profile
   .o-profile__head
     .m-heading-line
@@ -146,8 +145,4 @@
         %h1.a-text-secondary.a-text-xlarge ログアウト
   .o-profile__body
     .o-profile__item
-      = link_to 'ログアウトする', logout_path, method: :delete
-  .mt16.ml24.mb24
-    = link_to '学校選択画面', school_users_path
-  .mt16.ml24.mb24
-    = link_to '受講リクエスト',lesson_group_requests_path
+      = link_to 'ログアウトする', logout_path, method: :delete, class: 'a-button-danger'

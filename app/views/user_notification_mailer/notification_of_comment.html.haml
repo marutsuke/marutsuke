@@ -1,0 +1,6 @@
+= "#{ @teacher.school.name }での提出物に#{@teacher.name}よりコメントがありました。"
+%br コメント：
+
+%br= @comment.text
+
+%br= "URL: #{question_url(@comment.answer.question)}"

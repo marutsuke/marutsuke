@@ -63,6 +63,14 @@ class Lesson < ApplicationRecord
     user.question_statuses.will_do.where(question_id: questions.pluck(:id)).size
   end
 
+  def to_judge_questions_count_of(user)
+    unselected_count_of(user) + have_not_seen_count_of(user)
+  end
+
+  def unselected_count_of(user)
+    user.question_statuses.unselected.where(question_id: questions.pluck(:id)).size
+  end
+
   def have_not_seen_count_of(user)
     questions.size - user.question_statuses.where(question_id: questions.pluck(:id)).size
   end
@@ -71,7 +79,7 @@ class Lesson < ApplicationRecord
     user.question_statuses.commented.where(question_id: questions.pluck(:id)).size
   end
 
-  def doing?
+  def during_the_period?
     start_at < Time.zone.now && (end_at.nil? || Time.zone.now < end_at)
   end
 

@@ -64,6 +64,8 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "marutsuke_#{Rails.env}"
   config.action_mailer.default_url_options = { host: 'https://marutsukeapp.com/' }
+  Rails.application.routes.default_url_options[:host] = 'https://marutsukeapp.com/'
+
   config.action_mailer.perform_caching = false
 
   config.action_mailer.raise_delivery_errors = true

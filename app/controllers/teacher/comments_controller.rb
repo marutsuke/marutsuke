@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::CommentsController < Teacher::Base
+  include Rails.application.routes.url_helpers
   before_action :set_variables, :security_check, only: %i[new create]
 
   def index
@@ -16,6 +17,7 @@ class Teacher::CommentsController < Teacher::Base
     commnet_security_check
     if @comment.save
       flash[:success] = 'コメントしました。'
+      send_notification_to_user(@comment)
       @comment.answer.question_status.update(status: 'commented')
       redirect_to new_teacher_question_status_comment_path(@question_status)
     else
@@ -48,5 +50,9 @@ class Teacher::CommentsController < Teacher::Base
 
   def comment_params
     params.require(:comment).permit(:text, :image, :answer_id)
+  end
+
+  def send_notification_to_user(comment)
+    comment.answer.user.send_comment_notification(comment)
   end
 end

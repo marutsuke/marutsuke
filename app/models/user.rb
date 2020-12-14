@@ -1,6 +1,9 @@
 # frozen_string_literal: true
+require 'net/http'
+require 'uri'
 
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
   attr_accessor :user_remember_token,
                 :user_line_state_token
   before_save { email&.downcase! }
@@ -52,6 +55,10 @@ class User < ApplicationRecord
       nil
     end
   end
+
+  def change_authenticatoin_email_to_line(line_user_id)
+    user_authentication.update(provider: 'line', uid: line_user_id)
+    end
 
   def self.new_token
     SecureRandom.urlsafe_base64
@@ -107,7 +114,33 @@ class User < ApplicationRecord
     lesson_groups.for_school(school)
   end
 
+  def send_comment_notification(comment)
+    return unless notification_permission?
+
+    if user_authentication.provider == 'line'
+      message = "先生からのコメントがあります。\n\n#{comment.text}\n\nリンク:#{ Rails.application.routes.url_helpers.question_url(comment.answer.question) }"
+      send_simple_line_message(message)
+    elsif user_authentication.provider == 'email'
+      comment.send_notification_email_to_user
+    end
+  end
+
   private
+
+  def send_simple_line_message(text)
+    return unless user_authentication.provider == 'line'
+
+    message = {
+      type: 'text',
+      text: text
+    }
+    client = Line::Bot::Client.new { |config|
+      config.channel_secret = Rails.application.credentials.line_message[:channel_secret]
+
+      config.channel_token = Rails.application.credentials.line_message[:channel_access_token]
+    }
+    client.push_message(user_authentication.uid, message)
+  end
 
   def main_school_building_name_in(school)
     school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: true, user_id: id)).first.name

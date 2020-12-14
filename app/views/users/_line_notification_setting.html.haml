@@ -1,0 +1,21 @@
+.o-profile__body
+  .o-profile__item
+    .m-profile-item
+      .m-profile-item__title
+        %h2.a-text-secondary.a-text-medium 通知先・ログイン方法
+        .m-profile-item__body
+          .m-profile-item__item
+            = image_tag ('line_btn_base.png'), art: 'line'
+    .m-profile-item
+      .m-profile-item__title
+        %h2.a-text-secondary.a-text-medium 通知設定
+      .m-profile-item__body
+        .m-profile-item__item
+          - if current_user.notification_permission?
+            .a-text-primary.a-text-xlarge オン
+            .mt16
+              = link_to 'LINE通知を解除', cancel_notification_permission_index_path, method: :delete, class: 'a-button-danger'
+          - else
+            .a-text-primary.a-text-xlarge オフ
+            .mt16
+              = link_to 'LINE通知する', permit_notification_permission_index_path, method: :post, class: 'a-button-primary'

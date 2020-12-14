@@ -1,11 +1,7 @@
-require 'net/http'
-require 'uri'
-
 class LineApiController < UserBase
-  skip_before_action :user_login_required, :school_select_required
 
   def create
-    return if current_user.line_user_id.present?
+    return if current_user.user_authentication.provider == 'line'
 
     if current_user.line_state_save
       state = current_user.user_line_state_token
@@ -21,7 +17,7 @@ class LineApiController < UserBase
 
     if current_user&.line_authenticated?(user_line_state_token)
       line_user_id = get_line_user_id(redirect_uri: link_line_account_redirect_uri, code: params[:code])
-      if current_user.update(line_user_id: line_user_id) && friendship_status_changed
+      if current_user.change_authenticatoin_email_to_line(line_user_id) && friendship_status_changed
         flash[:success] = 'LINE通知を設定しました！'
         redirect_to mypage_users_path
       else
@@ -34,6 +30,7 @@ class LineApiController < UserBase
     end
   end
 
+  # TODO: テストのために作ったので使わない。消す
   def send_message
     return unless current_user.line_user_id
 
