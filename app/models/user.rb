@@ -53,6 +53,10 @@ class User < ApplicationRecord
     end
   end
 
+  def change_authenticatoin_email_to_line(line_user_id)
+    user_authentication.update(provider: 'line', uid: line_user_id)
+    end
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
