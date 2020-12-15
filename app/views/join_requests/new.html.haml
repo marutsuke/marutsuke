@@ -1,6 +1,9 @@
-.flex.mb24
-  .mt16.ml16 学校入学リクエスト画面
-  .mt16.ml16= link_to '学校選択画面に戻る', school_users_path
+.o-profile.pb24
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text.flex-spbet-end
+        %h1.a-text-secondary.a-text-xlarge 入学リクエスト
+        = link_to '学校選択に戻る', school_users_path
 = form_with url: join_requests_path, local: true do |f|
   .flex.pr8.pl8
     = text_field_tag :invitation_code, nil, { class: 'a-text-field' }

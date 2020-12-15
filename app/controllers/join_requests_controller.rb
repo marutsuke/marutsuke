@@ -19,6 +19,9 @@ class JoinRequestsController < UserBase
         flash[:danger] = '既にリクエスト済みの学校です。'
         redirect_to new_join_request_path
       end
+    else
+      flash[:danger] = '学校が見つかりませんでした。コードを確認してください。'
+      redirect_to new_join_request_path
     end
   end
 end
