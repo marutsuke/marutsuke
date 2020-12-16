@@ -1,46 +1,29 @@
 .flex
-  .question_form_group
-    .question_new_title
-      .question_new_title__lesson_title= "#{@lesson_group.name}/#{@lesson.name}"
-      .question_new_title__description 課題編集
-    .question_form
-      = form_with model: [:teacher, @question], local: true do |f|
-        =render 'shared/error_messages', model_object: @question
-        .question_form__label_and_input
-          = f.label :display_order, class: 'required'
-          = f.select :display_order, @lesson.decorate.display_order_select_array(selected: @question.display_order)
-        .question_form__label_and_input
-          = f.label :text
-          = f.text_area :text, rows: '10', class: 'question_form__text_area'
-        .question_form__label_and_input
-          = f.file_field :image
-          .flex
-            = f.label :image
-            %span (最大5MBまで)
-        .question_form__check_box
-          = f.check_box :publish, {class: 'question_form__check_box'}, false, true
-          = f.label :publish, '下書きで保存'
-        = f.hidden_field :lesson_id, value: @lesson.id
-        .flex.flex-end
-          = f.submit '更新する', class: 'a-button a-button--primary mr16'
-          = link_to 'もどる', new_teacher_lesson_question_path(lesson_id: @lesson.id), class: 'a-button a-button--cancel'
-
-
-
-
-  .question_new_questions
-    .question_section{id: "js-question_section--#{@question.id}"}
-      .question_section__left
-        .question_section__title.mb40{class: @question.decorate.unpublish_opacity_class}= "課題#{@question.display_order} #{'(非公開)' unless @question.publish}"
-        .question_section__text{class: @question.decorate.unpublish_opacity_class}= simple_format(@question.text)
-      -if @question.image.present?
-        .question_section__right{class: @question.decorate.unpublish_opacity_class}
-          = image_tag @question.image_url, alt: '', height: '', width: '100%'
-    .question_section__delete_button
-      %div
-      = link_to '削除', teacher_question_path(@question), method: :delete, class: 'a-button a-button--danger', data: { confirm: '本当に削除しますか？' }
-
-
-
-
-
+  .o-questions
+    .o-questions__headding
+      .a-text-secondary.a-text-small= "#{@lesson_group.school_year || '-'}年度/#{@lesson_group.school_building.name}"
+      .flex-spbet-end
+        .a-text-primary.a-text-xlarge= "#{@lesson_group.name}/#{@lesson.name}"
+        .a-text-primary= "提出受付期間:#{@lesson.decorate.start_to_end_time}"
+    .o-questions__contents
+      .o-questions__top
+        .flex-spbet
+          .a-text-primary.a-text-xlarge= "課題#{@question.display_order}#{'(下書き)' if !@question.publish}"
+      .o-questions__content{class: @question.decorate.unpublish_opacity_class}
+        .m-question
+          - if @question&.image_url
+            = image_tag @question.image_url, alt: @question.image_alt, class: 'm-question__image'
+          .m-question__text{class: @question.decorate.unpublish_opacity_class}= simple_format(@question.text)
+          .m-question__note-head
+            .a-text-secondary メモ
+          .m-question__note
+            .a-text-note= @question.note
+      .mt56.pl24
+        .u-width-wrap-120
+          = link_to '課題削除', teacher_question_path(@question), method: :delete, class: 'a-button a-button--danger', data: { confirm: '本当に削除しますか？' }
+  .o-question-form-group
+    .o-question-form-group__hedding
+      .a-text-primary.a-text-xlarge 課題編集画面
+      = link_to '課題一覧に戻る', new_teacher_lesson_question_path(lesson_id: @lesson.id), class: 'a-text-large'
+    .o-question-form-group__body
+      = render 'form', question: @question, lesson: @lesson, submit_word: '編集する'

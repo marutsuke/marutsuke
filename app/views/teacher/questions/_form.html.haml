@@ -1,0 +1,33 @@
+= form_with model: [:teacher, question], local: true do |f|
+  =render 'shared/error_messages', model_object: question
+  .o-question-form-group__form-set
+    .m-form-vertical-set
+      .m-form-vertical-set__label
+        = f.label :display_order, class: 'a-form-label required'
+      .m-form-vertical-set__select
+        - selected_num = question.id.present? ? question.display_order : nil
+        = f.select :display_order, lesson.decorate.display_order_select_array(selected: selected_num), {}, {class: 'a-form-select--narrow'}
+  .o-question-form-group__form-set
+    .m-form-vertical-set
+      .m-form-vertical-set__label
+        = f.label :text, class: 'a-form-label required'
+      .m-form-vertical-set__textarea
+        = f.text_area :text, rows: '4', class: 'a-form-textarea'
+  .o-question-form-group__form-set
+    .m-form-vertical-set
+      .m-form-vertical-set__label
+        = f.label :note, class: 'a-form-label'
+      .a-text-note 教員側画面に表示される課題に関するメモです。
+      .m-form-vertical-set__textarea
+        = f.text_area :note, rows: '3', class: 'a-form-textarea'
+  .o-question-form-group__form-set
+    .question_form__label_and_input.mb24
+      .div.mb8
+        %span.a-form-label 画像・1枚・最大5MBまで
+      = f.file_field :image
+  .o-question-form-group__form-set.mb24
+    = f.check_box :publish, {class: 'a-form-checkbox', checked: false}, false, true
+    = f.label :publish, '下書きで保存', class: 'a-form-checkbox-label'
+  .o-question-form-group__submit
+    = f.hidden_field :lesson_id, value: lesson.id
+    = f.submit submit_word, class: 'a-form-submit'
