@@ -11,4 +11,10 @@
     background-color: $blue_4;
     border: solid 1px $blue_1;
   }
+  &__note-head {
+    margin-top: 1rem;
+  }
+  &__note {
+    padding: 1rem 0.5rem 0.5rem;
+  }
 }
