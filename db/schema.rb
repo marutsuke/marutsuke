@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_115112) do
+ActiveRecord::Schema.define(version: 2020_12_17_112809) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -215,7 +215,6 @@ ActiveRecord::Schema.define(version: 2020_12_16_115112) do
     t.string "name", default: "名前なし", null: false
     t.string "name_kana"
     t.string "email", default: ""
-    t.date "birth_day"
     t.integer "school_grade", default: 20, null: false
     t.string "image"
     t.string "password_digest"
