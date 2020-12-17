@@ -7,7 +7,13 @@
     - @lesson_groups.each do |lesson_group|
       .m-lesson-section.mb16
         .flex-spbet
-          %h2.m-lesson-section__title= "#{ lesson_group.name}"
+          .flex
+            %h2.m-lesson-section__title= "#{ lesson_group.name}"
+            - if lesson_group.commented_status_exists_of?(current_user)
+              .a-text-error.ml8
+                %span コメントあり
+                %i.far.fa-comment-alt
+
           .wrap=link_to '詳細', lesson_group_path(lesson_group)
         .m-lesson-section__info= "授業数: #{lesson_group.lessons.size}"
   - else

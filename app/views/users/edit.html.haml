@@ -42,11 +42,5 @@
             .a-text-primary.a-text-xlarge= current_user.email
       .o-profile__item
         .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium= f.label :birth_day
-          .m-profile-item__body
-            .m-profile-item__item= f.date_field :birth_day, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
           .m-profile-item__submit_button
             .m-profile-item__item= f.submit '更新', class: 'a-submit-button'

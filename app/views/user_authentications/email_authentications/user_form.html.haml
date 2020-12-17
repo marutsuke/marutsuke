@@ -18,12 +18,6 @@
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :birth_day
-          .m-profile-item__body
-            .m-profile-item__item= f.date_field :birth_day, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
             %h2.a-text-secondary.a-text-medium.u-after-required= f.label :school_grade
           .m-profile-item__body
             .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: @user.school_grade || '' }, { class: 'a-select' }

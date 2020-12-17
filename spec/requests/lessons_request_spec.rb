@@ -20,8 +20,7 @@ RSpec.describe 'LessonsController', type: :request do
       let!(:question) { create(:question, :unpublish, lesson: lesson) }
       it 'アクセスできる' do
         get lesson_path(lesson)
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to lessons_path
+        expect(response).to have_http_status(200)
       end
     end
   end

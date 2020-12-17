@@ -16,33 +16,13 @@
             - if question&.image_url
               = image_tag question.image_url, alt: question.image_alt, class: 'm-question__image'
             .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+            .m-question__note-head
+              .a-text-secondary メモ
+            .m-question__note
+              .a-text-note= question.note
   .o-question-form-group
     .o-question-form-group__hedding
       .a-text-primary.a-text-xlarge 課題作成画面
       = link_to '課題管理に戻る', teacher_question_set_index_path(lesson_id: @lesson.id), class: 'a-text-large'
     .o-question-form-group__body
-      = form_with model: [:teacher, @question], local: true do |f|
-        =render 'shared/error_messages', model_object: @question
-        .o-question-form-group__form-set
-          .m-form-vertical-set
-            .m-form-vertical-set__label
-              = f.label :display_order, class: 'a-form-label required'
-            .m-form-vertical-set__select
-              = f.select :display_order, @lesson.decorate.display_order_select_array, {}, {class: 'a-form-select--narrow'}
-        .o-question-form-group__form-set
-          .m-form-vertical-set
-            .m-form-vertical-set__label
-              = f.label :text, class: 'a-form-label required'
-            .m-form-vertical-set__textarea
-              = f.text_area :text, rows: '3', class: 'a-form-textarea'
-        .o-question-form-group__form-set
-          .question_form__label_and_input
-            .div.mb8
-              %span.a-form-label 画像・1枚・最大5MBまで
-            = f.file_field :image
-        .o-question-form-group__form-set
-          = f.check_box :publish, {class: 'a-form-checkbox', checked: false}, false, true
-          = f.label :publish, '下書きで保存', class: 'a-form-checkbox-label'
-        .o-question-form-group__submit
-          = f.hidden_field :lesson_id, value: @lesson.id
-          = f.submit '登録する', class: 'a-form-submit'
+      = render 'form', question: @question, lesson: @lesson, submit_word: '登録する'

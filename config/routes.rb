@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
+    get '/questions', to: 'question_set#index'
     resources :users, only: %i[index show edit] do
       get :lesson_group_registration, on: :collection
       get :lesson_groups, on: :member

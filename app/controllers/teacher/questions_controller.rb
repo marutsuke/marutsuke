@@ -60,7 +60,7 @@ class Teacher::QuestionsController < Teacher::Base
   private
 
   def question_params
-    params.require(:question).permit(:text, :image, :lesson_id, :display_order, :publish)
+    params.require(:question).permit(:text, :image, :lesson_id, :display_order, :publish, :note)
   end
 
   def set_question_and_lesson
