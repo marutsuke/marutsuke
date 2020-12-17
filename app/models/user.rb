@@ -14,7 +14,6 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false },
                     allow_blank: true
   validates :school_grade, presence: true
-  validates :birth_day, presence: true
 
   # パスワードのバリデーション(emailでログインの時のみ)
   # See: https://github.com/rails/rails/blob/master/activemodel/lib/active_model/secure_password.rb

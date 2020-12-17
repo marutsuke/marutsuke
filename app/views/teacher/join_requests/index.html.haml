@@ -11,15 +11,13 @@
     %thead.o-table-simple__thead
       %th.o-table-simple__th 名前
       %th.o-table-simple__th 学年
-      %th.o-table-simple__th 生年月日
       %th.o-table-simple__th 状態
       %th.o-table-simple__th
       %th.o-table-simple__th
     - @join_requests.each do |request|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= request.user.name
-        %td.o-table-simple__td= request.user.school_grade
-        %td.o-table-simple__td= request.user.birth_day
+        %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
         %td.o-table-simple__td= request.status_i18n
         - if request.status != 'requested'
           %td.o-table-simple__td
@@ -39,5 +37,4 @@
       %tr.o-table-simple__tr
         %td.o-table-simple__td= request.user.name
         %td.o-table-simple__td= request.user.school_grade
-        %td.o-table-simple__td= request.user.birth_day
         %td.o-table-simple__td= request.status_i18n

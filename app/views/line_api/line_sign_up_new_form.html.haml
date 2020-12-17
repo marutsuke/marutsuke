@@ -1,4 +1,5 @@
-LINEで新規登録完了。情報を入力してください。
+.a-text-note LINEで新規登録完了しました！プロフィールを入れてください。
+
 .div
   = form_with model: @user, url: create_by_line_users_paths,  local: true do |f|
     = render 'shared/error_messages', model_object: @user
@@ -15,12 +16,6 @@ LINEで新規登録完了。情報を入力してください。
             %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name_kana
           .m-profile-item__body
             .m-profile-item__item= f.text_field :name_kana, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :birth_day
-          .m-profile-item__body
-            .m-profile-item__item= f.date_field :birth_day, class: 'a-text-field'
       .o-profile__item
         .m-profile-item
           .m-profile-item__title

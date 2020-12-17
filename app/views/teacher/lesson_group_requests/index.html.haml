@@ -9,7 +9,6 @@
       %th.o-table-simple__th 対象学年
       %th.o-table-simple__th 生徒氏名
       %th.o-table-simple__th 学年
-      %th.o-table-simple__th 生年月日
       %th.o-table-simple__th 状態
       %th.o-table-simple__th
       %th.o-table-simple__th
@@ -19,7 +18,6 @@
         %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
         %td.o-table-simple__td= request.user.name
         %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
-        %td.o-table-simple__td= request.user.birth_day
         %td.o-table-simple__td= request.status_i18n
         - if request.status != 'requested'
           %td.o-table-simple__td
@@ -35,7 +33,6 @@
       %th.o-table-simple__th 対象学年
       %th.o-table-simple__th 生徒氏名
       %th.o-table-simple__th 学年
-      %th.o-table-simple__th 生年月日
       %th.o-table-simple__th 状態
       %th.o-table-simple__th
     - @checked_lesson_group_requests.each do |request|
@@ -44,5 +41,4 @@
         %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
         %td.o-table-simple__td= request.user.name
         %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
-        %td.o-table-simple__td= request.user.birth_day
         %td.o-table-simple__td= request.status_i18n

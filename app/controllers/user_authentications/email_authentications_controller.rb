@@ -78,6 +78,6 @@ class UserAuthentications::EmailAuthenticationsController < UserBase
   end
 
   def user_params
-    params.require(:user).permit(:name, :name_kana, :birth_day, :school_grade, :password, :password_confirmation)
+    params.require(:user).permit(:name, :name_kana, :school_grade, :password, :password_confirmation)
   end
 end

@@ -48,13 +48,6 @@
         .m-profile-item__body
           .m-profile-item__item
             .a-text-primary.a-text-xlarge= school_grade_to_s(current_user.school_grade)
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium 生年月日
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user.birth_day || '---'
 - if current_school
   .o-profile
     .o-profile__head
