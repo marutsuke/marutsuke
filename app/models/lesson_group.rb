@@ -61,6 +61,11 @@ class LessonGroup < ApplicationRecord
     user.lesson_group_users.pluck(:lesson_group_id).include?(id)
   end
 
+  def commented_status_exists_of?(user)
+    # 60は、commentedのstatus
+    lessons.joins(questions: :question_statuses).where(question_statuses: {user_id: user.id}).where(question_statuses: {status: 60}).exists?
+  end
+
   def school_grade_target_of_user?(user)
     if max_school_grade.nil?
       user.school_grade == min_school_grade
