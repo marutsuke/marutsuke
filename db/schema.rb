@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_112809) do
+ActiveRecord::Schema.define(version: 2020_12_18_122903) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 2020_12_17_112809) do
     t.string "name", null: false
     t.bigint "school_building_id"
     t.integer "school_year"
+    t.date "start_at", null: false
+    t.date "end_at"
     t.integer "min_school_grade", default: 20, null: false
     t.integer "max_school_grade"
     t.boolean "free_attend", default: false, null: false
