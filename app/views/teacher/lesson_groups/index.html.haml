@@ -10,6 +10,7 @@
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_building_id)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_year)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:target_school_grade)
+        %th.o-table-simple__th 公開期間
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:free_attend)
         %th.o-table-simple__th 授業数
         %th.o-table-simple__th 授業追加・編集
@@ -20,6 +21,7 @@
           %td.o-table-simple__td= lesson_group.school_building.name
           %td.o-table-simple__td= lesson_group.school_year
           %td.o-table-simple__td= lesson_group.decorate.target_school_grade
+          %td.o-table-simple__td= lesson_group.decorate.start_to_end_date
           %td.o-table-simple__td= lesson_group.decorate.free_attend_to_s
           %td.o-table-simple__td= lesson_group.lessons.size
           %td.o-table-simple__td= link_to '授業追加・編集', teacher_lesson_group_path(lesson_group)
