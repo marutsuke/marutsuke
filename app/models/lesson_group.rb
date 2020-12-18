@@ -55,6 +55,16 @@ class LessonGroup < ApplicationRecord
     .where(id: teacher.lessons.pluck(:lesson_group_id).uniq)
   }
 
+  scope :in_open, lambda {
+    where('start_at <= ?', Time.zone.now)
+      .where('end_at >= ?', Time.zone.now)
+      .or(
+        where('start_at <= ?', Time.zone.now)
+          .where(end_at: nil)
+      )
+  }
+
+
   def request_of(user)
     user.lesson_group_requests.find_by(lesson_group_id: id)
   end
