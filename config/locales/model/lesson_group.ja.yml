@@ -11,3 +11,5 @@ ja:
         min_school_grade: 対象学年下限
         max_school_grade: 対象学年上限
         free_attend: 受講許可方法
+        start_at: 講座公開日
+        end_at: 講座公開終了日
