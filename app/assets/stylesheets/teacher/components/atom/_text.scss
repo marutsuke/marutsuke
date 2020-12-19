@@ -16,7 +16,11 @@
 
 .a-text-note {
   color: $indigo_4;
+  &--green {
+    color: $green_1;
+  }
 }
+
 .a-text {
   &-tiny {
     font-size: 0.625rem;
