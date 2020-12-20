@@ -75,7 +75,20 @@ class LessonGroup < ApplicationRecord
 
   def commented_status_exists_of?(user)
     # 60は、commentedのstatus
-    lessons.joins(questions: :question_statuses).where(question_statuses: {user_id: user.id}).where(question_statuses: {status: 60}).exists?
+    lessons
+      .joins(questions: :question_statuses)
+      .where(question_statuses: {user_id: user.id})
+      .where(question_statuses: {status: 60})
+      .exists?
+  end
+
+  def to_check_status_exists_of?(teacher)
+    # 50は、checkingのstatus
+    lessons
+      .where(teacher_id: teacher.id)
+      .joins(questions: :question_statuses)
+      .where(question_statuses: {status: 50})
+      .exists?
   end
 
   def school_grade_target_of_user?(user)
