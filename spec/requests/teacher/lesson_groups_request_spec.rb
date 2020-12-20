@@ -33,6 +33,7 @@ RSpec.describe "Teacher::LessonGroups", type: :request do
       {
         name: 'テスト講座',
         school_building_id: teacher.main_school_building.id,
+        start_at: '2020-02-10',
         school_year: 2020,
         min_school_grade: 20,
         max_school_grade: nil,

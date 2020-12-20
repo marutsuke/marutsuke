@@ -46,7 +46,7 @@ class Teacher::LessonGroupsController < Teacher::Base
   private
 
   def lesson_group_params
-    params.require(:lesson_group).permit(:name, :school_building_id, :school_year, :min_school_grade, :max_school_grade, :free_attend)
+    params.require(:lesson_group).permit(:name, :school_building_id, :school_year, :min_school_grade, :max_school_grade, :free_attend, :start_at, :end_at)
   end
 
   def set_lesson_groups

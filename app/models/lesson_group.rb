@@ -10,6 +10,8 @@ class LessonGroup < ApplicationRecord
   validates :min_school_grade, presence: true
   validate :min_school_grade_validate
   validate :max_school_grade_validate
+  validate :start_at_and_end_at_validate
+
 
   scope :for_school_buildings_belonged_to_teacher_and_user,
         lambda { |teacher, user|
@@ -53,6 +55,16 @@ class LessonGroup < ApplicationRecord
     .where(id: teacher.lessons.pluck(:lesson_group_id).uniq)
   }
 
+  scope :in_open, lambda {
+    where('start_at <= ?', Time.zone.now)
+      .where('end_at >= ?', Time.zone.now)
+      .or(
+        where('start_at <= ?', Time.zone.now)
+          .where(end_at: nil)
+      )
+  }
+
+
   def request_of(user)
     user.lesson_group_requests.find_by(lesson_group_id: id)
   end
@@ -63,7 +75,20 @@ class LessonGroup < ApplicationRecord
 
   def commented_status_exists_of?(user)
     # 60は、commentedのstatus
-    lessons.joins(questions: :question_statuses).where(question_statuses: {user_id: user.id}).where(question_statuses: {status: 60}).exists?
+    lessons
+      .joins(questions: :question_statuses)
+      .where(question_statuses: {user_id: user.id})
+      .where(question_statuses: {status: 60})
+      .exists?
+  end
+
+  def to_check_status_exists_of?(teacher)
+    # 50は、checkingのstatus
+    lessons
+      .where(teacher_id: teacher.id)
+      .joins(questions: :question_statuses)
+      .where(question_statuses: {status: 50})
+      .exists?
   end
 
   def school_grade_target_of_user?(user)
@@ -88,6 +113,12 @@ class LessonGroup < ApplicationRecord
 
     errors.add(:max_school_grade, 'は対象学年上限より上の学年にしてください。') unless min_school_grade < max_school_grade
     errors.add(:max_school_grade, 'は不正な値です。') unless (5..20).include?(max_school_grade)
+  end
+
+  def start_at_and_end_at_validate
+    return if end_at.nil?
+
+    errors.add(:end_at, 'は公開終了日より後にしてください。') unless start_at < end_at
   end
 
 end

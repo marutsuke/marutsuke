@@ -16,6 +16,8 @@
         .o-checking__answer-wrap
           .o-checking__answer-text
             .a-text-primary.a-text-large= simple_format(answer.text)
+            .flex-end
+              .a-text-note= answer.decorate.created_at
           - if answer.answer_images.present?
             .o-checking__answer-images
               - answer&.answer_images.each do |answer_image|
@@ -25,6 +27,8 @@
           .o-checking__answer-wrap
             .o-checking__comment-text
               .a-text-primary.a-text-large= simple_format(comment.text)
+              .flex-end
+                .a-text-note= comment.decorate.created_at
             - if comment.image.present?
               .o-checking__answer-images
                 = image_tag comment&.image_url, class: 'o-checking__answer-image'

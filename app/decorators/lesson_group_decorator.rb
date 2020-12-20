@@ -11,6 +11,11 @@ class LessonGroupDecorator < ApplicationDecorator
     end
   end
 
+  def start_to_end_date
+    "#{date_format(start_at)} - #{date_format(end_at) || ''}"
+  end
+
+
   def free_attend_to_s
     if free_attend
       'すべて許可'
@@ -18,5 +23,12 @@ class LessonGroupDecorator < ApplicationDecorator
       '要確認'
     end
   end
+
+  private
+
+  def date_format(date)
+    date&.strftime('%Y/%m/%d')
+  end
+
 
 end

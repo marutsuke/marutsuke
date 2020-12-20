@@ -35,11 +35,11 @@
           .m-conversation-card__card
             .m-conversation-card__text= simple_format(answer.text)
             .m-conversation-card__sub-info
-              .m-conversation-card__submited-at
-                .a-text-secondary= answer.decorate.submitted_at
               - if answer.answer_images.present?
                 .m-conversation-card__image-link{ id: "js-image-show-link--#{ answer.id }"}
                   = link_to '画像をみる', image_show_answer_path(answer), remote: true
+              .m-conversation-card__submited-at
+                .a-text-note= answer.decorate.created_at
         %div{ id: "js-answer-image--#{answer.id}" }
         - answer.comments.each do |comment|
 
@@ -47,11 +47,11 @@
             .m-conversation-card__card
               .m-conversation-card__text= simple_format(comment.text)
               .m-conversation-card__sub-info
-                .m-conversation-card__submited-at
-                  .a-text-secondary= comment.decorate.commented_at
                 - if comment.image.present?
                   .m-conversation-card__image-link
                     = link_to '画像をみる', '#'
+                .m-conversation-card__submited-at
+                  .a-text-note= comment.decorate.created_at
             .m-conversation-card__user-image
               - if false # comment.teacher.image.present?
                 = image_tag current_user.image_url, class: 'a-user-image--size100per'

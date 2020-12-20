@@ -10,7 +10,6 @@
             = f.text_field :name, class: 'a-form-text-field'
             .m-horizonal-form-set__discription
               .a-text-note 例)小５算数
-
       .m-horizonal-form-set
         - year = Time.zone.now.year - 1
         .m-horizonal-form-set__label_and_input_wrap
@@ -40,6 +39,18 @@
             = f.label :school_building_id, class: 'a-form-label required'
           .m-horizonal-form-set__input
             = f.select :school_building_id, current_teacher.decorate.school_building_select_array, { selected: current_teacher.main_school_building.id }, { class: 'a-form-select' }
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
+            = f.label :start_at, class: 'a-form-label required'
+          .m-horizonal-form-set__input
+            = f.date_field :start_at, class: 'a-form-date'
+      .m-horizonal-form-set
+        .m-horizonal-form-set__label_and_input_wrap
+          .m-horizonal-form-set__label
+            = f.label :end_at, class: 'a-form-label'
+          .m-horizonal-form-set__input
+            = f.date_field :end_at, class: 'a-form-date'
       .m-horizonal-form-set
         .m-horizonal-form-set__label_and_input_wrap
           .m-horizonal-form-set__label
