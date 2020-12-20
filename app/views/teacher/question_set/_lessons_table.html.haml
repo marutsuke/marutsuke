@@ -13,4 +13,7 @@
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td= lesson.questions.size
         %td.o-table-simple__td= link_to '課題設定', new_teacher_lesson_question_path(lesson)
-        %td.o-table-simple__td= link_to "課題チェック#{'(' + lesson.checking_count.to_s + ')' if lesson.checking_count > 0}", teacher_answer_check_path(lesson)
+        %td.o-table-simple__td
+          = link_to "課題チェック", teacher_answer_check_path(lesson)
+          - if lesson.checking_count > 0
+            %span.a-badge-caution= lesson.checking_count.to_s

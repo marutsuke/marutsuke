@@ -18,7 +18,7 @@
             %td.o-table-simple__td
               = lesson_group.name
               - if lesson_group.to_check_status_exists_of?(current_teacher)
-                %i.far.fa-comment-alt.a-text-caution
+                %i.far.fa-bell.a-text-caution
 
             %td.o-table-simple__td{ id: "js-lesson_group--#{lesson_group.id}"}= link_to '授業一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true
   .o-question-set__lessons
