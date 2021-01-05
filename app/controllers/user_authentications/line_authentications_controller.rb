@@ -31,15 +31,17 @@ class UserAuthentications::LineAuthenticationsController < UserBase
         remember_user(user)
         redirect_to root_path
       else
-        @user = User.new(name: '')
-        if current_user_authentication.uid.present?
-          flash[:info] = 'プロフィールを入力してね'
-          redirect_to user_form_user_authentications_line_authentications_path
-        else
-          current_user_authentication.update(uid: line_user_id)
-          flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
-          redirect_to user_form_user_authentications_line_authentications_path
-        end
+        flash[:info] = 'アカウントがありません。新規登録をお願いします!'
+        redirect_to new_user_path
+        # @user = User.new(name: '')
+        # if current_user_authentication.uid.present?
+        #   flash[:info] = 'プロフィールを入力してね'
+        #   redirect_to user_form_user_authentications_line_authentications_path
+        # else
+        # current_user_authentication.update(uid: line_user_id)
+        # flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
+        # redirect_to user_form_user_authentications_line_authentications_path
+        # end
       end
     else
       flash[:danger] = 'LINE登録に失敗しました。ごめんね。'
@@ -87,7 +89,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
 
   def sign_up_fail?
     if params[:error].present?
-      flash[:danger] = 'LINE通知を拒否しました。'
+      flash[:danger] = 'LINE登録を拒否しました。'
       redirect_to new_user_path
     return true
     end
