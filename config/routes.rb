@@ -60,8 +60,10 @@ Rails.application.routes.draw do
   namespace :user_authentications do
     resources :line_authentications, only: %i[] do
       collection do
-        post :line_authentication
-        get :line_logged_in
+        post :line_login_authentication
+        post :line_sign_up_authentication
+        get :line_login
+        get :line_sign_up
         get :user_form
         post :create_user
       end
