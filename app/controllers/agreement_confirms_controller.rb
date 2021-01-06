@@ -3,6 +3,8 @@ class AgreementConfirmsController < UserBase
   :school_select_required,
   only: :index
 
+  layout 'user_layout_without_header'
+
   def index
 
   end

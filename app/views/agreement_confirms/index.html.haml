@@ -1,7 +1,12 @@
-規約
-
-.flex-cen.mt40
-  =link_to line_sign_up_authentication_user_authentications_line_authentications_path, method: :post do
-    .mt24.m-text-with-line-icon
-      .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
-      .m-text-with-line-icon__text LINEで新規登録
+.o-user-agreement
+  .o-user-agreement__top
+    %h1.a-text-primary.a-text-large 『Marutsuke』利用規約
+  .o-user-agreement__notice
+    .a-text-notice ほごしゃの方に見てもらってください。
+  .o-user-agreement__note
+    .a-text-secondary.a-text-small 会員登録には「利用規約」への同意が必要です。なお、18歳未満の利用申込者は、保護者の同意を得て本サービスの申込みを行うものとします。
+  .flex-cen.mt40
+    =link_to line_sign_up_authentication_user_authentications_line_authentications_path, method: :post do
+      .mt24.m-text-with-line-icon
+        .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
+        .m-text-with-line-icon__text LINEで新規登録

@@ -1,0 +1,26 @@
+.o-user-agreement {
+  padding: 16px 8px;
+  &__top {
+    text-align: center;
+    border-bottom: 1px solid $moss_4;
+    margin-bottom: 1rem;
+  }
+  &__notice {
+    border: 1px solid $pink_2;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  &__note {
+  }
+  &__headding {
+    margin-bottom: 8px;
+  }
+  &__body {
+    padding: 24px 16px;
+  }
+  &__bottom {
+    margin-bottom: 24px;
+  }
+}
