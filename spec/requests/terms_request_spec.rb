@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "AgreementConfirms", type: :request do
-  describe '/agreement_confirms#index' do
+RSpec.describe "Terms", type: :request do
+  describe '/terms#index' do
     it 'ユーザーmypageを表示する' do
-      get agreement_confirms_path
+      get terms_path
       expect(response).to have_http_status(200)
     end
   end

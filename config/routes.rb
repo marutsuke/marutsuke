@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       delete :cancel
     end
   end
-  resources :agreement_confirms, only: %i[index]
+  resources :terms, only: %i[index]
 
   resources :answers, only: %i[create] do
     member do

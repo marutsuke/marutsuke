@@ -1,4 +1,4 @@
-.o-user-agreement {
+.o-user-terms {
   padding: 16px 8px;
   &__top {
     text-align: center;
@@ -6,19 +6,30 @@
     margin-bottom: 1rem;
   }
   &__notice {
-    border: 1px solid $pink_2;
+    border: 1px solid $pink_0;
     text-align: center;
     border-radius: 0.5rem;
     padding: 0.25rem;
     margin-bottom: 1rem;
   }
   &__note {
-  }
-  &__headding {
-    margin-bottom: 8px;
+    margin-bottom: 1rem;
   }
   &__body {
-    padding: 24px 16px;
+    border: 1px solid $moss_4;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    color: $moss_0;
+  }
+  &__headding {
+    margin: 2.5rem 0 1.5rem;
+    font-weight: bold;
+  }
+  &__ul {
+  }
+  &__li {
+    margin-bottom: 0.5rem;
+    line-height: 1.25rem;
   }
   &__bottom {
     margin-bottom: 24px;
