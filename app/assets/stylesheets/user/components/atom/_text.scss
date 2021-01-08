@@ -6,7 +6,8 @@
   color: $moss_2;
 }
 
-.a-text-error {
+.a-text-error,
+.a-text-important {
   color: $pink_0;
 }
 
@@ -46,4 +47,9 @@
     font-size: 1.75rem;
     line-height: 1.75rem;
   }
+}
+
+.a-text-terms {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
 }

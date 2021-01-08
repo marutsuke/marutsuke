@@ -20,11 +20,19 @@ module LineApiHelper
     end
   end
 
-  def sign_up_redirect_uri
+  def line_sign_up_redirect_uri
     if Rails.env.production?
-      'https://marutsukeapp.com/user_authentications/line_authentications/line_logged_in'
+      'https://marutsukeapp.com/user_authentications/line_authentications/line_sign_up'
     elsif Rails.env.development?
-      'http://localhost:3000/user_authentications/line_authentications/line_logged_in'
+      'http://localhost:3000/user_authentications/line_authentications/line_sign_up'
+    end
+  end
+
+  def line_login_redirect_uri
+    if Rails.env.production?
+      'https://marutsukeapp.com/user_authentications/line_authentications/line_login'
+    elsif Rails.env.development?
+      'http://localhost:3000/user_authentications/line_authentications/line_login'
     end
   end
 

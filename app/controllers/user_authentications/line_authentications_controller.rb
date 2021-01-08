@@ -3,14 +3,14 @@ class UserAuthentications::LineAuthenticationsController < UserBase
   before_action :user_log_out_required
   before_action :user_authentication_login_required, only: %i[line_logged_in user_form create_user]
 
-  # users/newでlineのボタンを押した時のアクション
-  def line_authentication
+  # lineでログインのボタンを押した時のアクション
+  def line_login_authentication
     @user_authentication = UserAuthentication.new(provider: 'line')
     if @user_authentication.save
       user_authentication_login(@user_authentication)
       @user_authentication.authentication_token_save
       state = @user_authentication.authentication_token
-      redirect_to line_authorize_request_url(state: state, redirect_uri: sign_up_redirect_uri)
+      redirect_to line_authorize_request_url(state: state, redirect_uri: line_login_redirect_uri)
     else
       flash[:danger] = '不正なリクエストです。'
       redirect_to users_new_path
@@ -19,14 +19,51 @@ class UserAuthentications::LineAuthenticationsController < UserBase
 
   # lineでログイン後の認証画面
   # 既に登録があるかないか判断して、ログインor新規を判断。
-  def line_logged_in
+  def line_login
     return if sign_up_fail?
 
     if current_user_authentication.user_authenticated?(params[:state])
-      line_user_id = get_line_user_id(redirect_uri: sign_up_redirect_uri, code: params[:code])
+      line_user_id = get_line_user_id(redirect_uri: line_login_redirect_uri, code: params[:code])
       old_user_authentication_login(line_user_id)
       if user = current_user_authentication&.user
         flash[:info] = 'ログインしました。'
+        user_log_in_without_school(user)
+        remember_user(user)
+        redirect_to root_path
+      else
+        flash[:info] = 'アカウントがありません。新規登録をお願いします!'
+        redirect_to new_user_path
+      end
+    else
+      flash[:danger] = 'LINEログインに失敗しました。ごめんね。'
+      redirect_to new_user_path
+    end
+  end
+
+  # lineで新規登録のボタンを押した時のアクション
+  def line_sign_up_authentication
+    @user_authentication = UserAuthentication.new(provider: 'line')
+    if @user_authentication.save
+      user_authentication_login(@user_authentication)
+      @user_authentication.authentication_token_save
+      state = @user_authentication.authentication_token
+      redirect_to line_authorize_request_url(state: state, redirect_uri: line_sign_up_redirect_uri)
+    else
+      flash[:danger] = '不正なリクエストです。'
+      redirect_to users_new_path
+    end
+  end
+
+  # lineでログイン後の認証画面
+  # 既に登録があるかないか判断して、ログインor新規を判断。
+  def line_sign_up
+    return if sign_up_fail?
+
+    if current_user_authentication.user_authenticated?(params[:state])
+      line_user_id = get_line_user_id(redirect_uri: line_sign_up_redirect_uri, code: params[:code])
+      old_user_authentication_login(line_user_id)
+      if user = current_user_authentication&.user
+        flash[:info] = 'アカウントがすでにあり、ログインしました。'
         user_log_in_without_school(user)
         remember_user(user)
         redirect_to root_path
@@ -37,7 +74,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
           redirect_to user_form_user_authentications_line_authentications_path
         else
           current_user_authentication.update(uid: line_user_id)
-          flash[:success] = 'LINE登録に成功しました！ようこそ！プロフィールを入力してね'
+          flash[:success] = 'LINE登録成功！プロフィールを入力してね!'
           redirect_to user_form_user_authentications_line_authentications_path
         end
       end
@@ -87,9 +124,9 @@ class UserAuthentications::LineAuthenticationsController < UserBase
 
   def sign_up_fail?
     if params[:error].present?
-      flash[:danger] = 'LINE通知を拒否しました。'
+      flash[:danger] = 'LINE登録を拒否しました。'
       redirect_to new_user_path
-    return true
+      return true
     end
   end
 

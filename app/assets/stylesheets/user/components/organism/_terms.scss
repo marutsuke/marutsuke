@@ -1,0 +1,39 @@
+.o-user-terms {
+  padding: 16px 8px;
+  &__top {
+    text-align: center;
+    border-bottom: 1px solid $moss_4;
+    margin-bottom: 1rem;
+  }
+  &__notice {
+    border: 1px solid $pink_0;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  &__note {
+    margin-bottom: 1rem;
+  }
+  &__body {
+    border: 1px solid $moss_4;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    color: $moss_0;
+    height: 24rem;
+    overflow: scroll;
+  }
+  &__headding {
+    margin: 3rem 0 1rem;
+    font-weight: bold;
+  }
+  &__ul {
+  }
+  &__li {
+    margin-bottom: 0.5rem;
+    line-height: 1.25rem;
+  }
+  &__bottom {
+    margin-bottom: 24px;
+  }
+}
