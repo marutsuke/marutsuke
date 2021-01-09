@@ -24,7 +24,9 @@ Rails.application.routes.draw do
       delete :cancel
     end
   end
-  resources :terms, only: %i[index]
+  resources :terms, only: %i[index] do
+    get :privacy_policy, on: :collection
+  end
 
   resources :answers, only: %i[create] do
     member do
