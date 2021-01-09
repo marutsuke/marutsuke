@@ -4,9 +4,32 @@
   border-radius: 8px;
   margin: 8px;
   width: 196px;
+  &:hover {
+    background-color: #00e000;
+  }
+  &:active {
+    background-color: #00b300;
+  }
+  &--disable {
+    display: flex;
+    background-color: #c6c6c6;
+    border-radius: 8px;
+    margin: 8px;
+    width: 196px;
+  }
   &__image {
     border-right: 1px solid #00b300;
     height: 44px;
+    &:hover {
+      border-right: 1px solid #00c900;
+    }
+    &:active {
+      border-right: 1px solid #009800;
+    }
+    &--disable {
+      height: 44px;
+      border-right: 1px solid #b5b5b5;
+    }
   }
   &__text {
     width: 100%;

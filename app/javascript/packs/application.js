@@ -16,3 +16,4 @@
 require("user_answer/flex_textarea");
 require("user_answer/modal");
 require("user_answer/slide_in");
+require("commons/confirm_checkbox");

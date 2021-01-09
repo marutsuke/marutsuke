@@ -5,11 +5,16 @@
     .a-text-terms 会員登録には「利用規約」への同意が必要です。なお、18歳未満の利用申込者は、保護者の同意を得て本サービスの申込みを行うものとします。
   =render 'terms/master_terms'
   .o-user-terms__bottom
-    %label.a-checkbox
-      %input#js-agree-checkbox{:name => "test", :type => "checkbox", :autocomplete => "off"}/
-      %span.a-checkbox__text 上記の注意事項を確認しました
-    .flex-cen.mt40
-      =link_to line_sign_up_authentication_user_authentications_line_authentications_path, method: :post do
-        .mt24.m-text-with-line-icon
+    .flex-cen.mt56.mb16
+      %label.a-checkbox
+        %input#js-confirm-checkbox{:name => "confirm", :type => "checkbox", :autocomplete => "off"}/
+        %span.a-checkbox__text 利用規約に同意して、登録する。
+    .flex-cen#js-active_sign_up_btn.u-display-none
+      =link_to line_sign_up_authentication_user_authentications_line_authentications_path, id: 'js-aaa', method: :post do
+        .m-text-with-line-icon
           .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
           .m-text-with-line-icon__text LINEで新規登録
+    .flex-cen#js-inactive_sign_up_btn
+      .m-text-with-line-icon--disable
+        .m-text-with-line-icon__image--disable= image_tag 'line_images/iOS/44dp/1x/line_44.png'
+        .m-text-with-line-icon__text LINEで新規登録
