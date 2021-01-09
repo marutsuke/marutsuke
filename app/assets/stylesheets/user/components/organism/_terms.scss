@@ -20,8 +20,10 @@
     padding: 0.25rem;
     border-radius: 0.5rem;
     color: $moss_0;
-    height: 16rem;
-    overflow: scroll;
+    &--scroll {
+      height: 16rem;
+      overflow: scroll;
+    }
   }
   &__headding {
     margin: 3rem 0 1rem;

@@ -2,8 +2,9 @@
   .o-user-terms__top
     %h1.a-text-large 『Marutsuke』へようこそ！
   .o-user-terms__note
-    .a-text-terms 会員登録には「利用規約」への同意が必要です。なお、20歳未満の方は、保護者の同意を得て本サービスの申込みを行いましょう。
-  =render 'terms/master_terms'
+    .a-text-terms 会員登録には「利用規約」への同意が必要です。なお、20歳未満の方は、保護者の同意を得て本サービスの申込みをお願いします。
+  .o-user-terms__body.o-user-terms__body--scroll
+    =render 'terms/master_terms'
   .o-user-terms__bottom
     .flex-cen.mt56.mb16
       %label.a-checkbox
