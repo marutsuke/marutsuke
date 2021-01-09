@@ -64,7 +64,7 @@
         = f.file_field :image
         = f.hidden_field :answer_id, value: @target_answer.id
         .o-checking__submit
-          = f.submit '送信', class: 'a-button a-button--primary'
+          = f.submit '送信', class: 'a-button a-button--primary', data: { disable_with: '送信中' }
     -# この機能は要望が上がったら出す。
     -# .o-checking__page-buttons-area
     -#   .o-checking__page-button--long
