@@ -31,12 +31,6 @@
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium= f.label :name_kana
-          .m-profile-item__body
-            .m-profile-item__item= f.text_field :name_kana, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
             %h2.a-text-secondary.a-text-medium= f.label :email
           .m-profile-item__body
             .a-text-primary.a-text-xlarge= current_user.email

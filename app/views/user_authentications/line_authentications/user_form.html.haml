@@ -12,12 +12,6 @@ LINEで新規登録完了。情報を入力してください。
       .o-profile__item
         .m-profile-item
           .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :name_kana
-          .m-profile-item__body
-            .m-profile-item__item= f.text_field :name_kana, class: 'a-text-field'
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
             %h2.a-text-secondary.a-text-medium.u-after-required= f.label :school_grade
           .m-profile-item__body
             .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: @user.school_grade || '' }, { class: 'a-select' }
