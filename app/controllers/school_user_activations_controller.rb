@@ -26,7 +26,7 @@ class SchoolUserActivationsController < UserBase
       flash[:danger] = '有効でないリンク、または、すでに参加しています。'
       redirect_to root_path
     else
-      flash[:success] = "ようこそ！名前とパスワードを設定してください。"
+      flash[:success] = "ようこそ！ニックネームとパスワードを設定してください。"
       @new_user_activation_form = NewUserActivationForm.new(@school_user)
     end
   end
