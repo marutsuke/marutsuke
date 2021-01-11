@@ -12,7 +12,7 @@ class SessionsController < UserBase
       user_log_in_without_school(user)
       params[:session][:remember_me] == '1' ? remember_user(user) : forget_user(user)
       flash[:success] = "#{user.name}さん、こんにちは!"
-      redirect_back_or root_path
+      redirect_back_or(root_path)
     else
       flash.now[:danger] = 'メールアドレスかパスワードが間違っています。'
       render :new

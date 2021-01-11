@@ -7,18 +7,18 @@
   - if @lessons&.length > 0
     .o-user-index-page__body
       - @lessons.each do |lesson|
-        .m-lesson-section.mb16
-          .flex-spbet
-            %h2.m-lesson-card__title= "#{lesson.name}"
-            .wrap=link_to '詳細', lesson_path(lesson)
-          .m-lesson-section__info{ class: "#{ 'm-lesson-section__info--bold' if lesson.during_the_period?}"}= lesson.decorate.start_to_end_time
-          .m-lesson-section__info= "担当: #{lesson.teacher.name}"
-          .flex-spbet
-            .m-lesson-section__info= "課題: #{lesson.questions.size}"
-            .m-lesson-section__info{ class: "#{ 'm-lesson-section__info--bold' if lesson.will_do_count_of(current_user) > 0}"}= "する: #{lesson.will_do_count_of(current_user)}"
-            .m-lesson-section__info{ class: "#{ 'm-lesson-section__info--bold' if lesson.to_judge_questions_count_of(current_user) > 0}"}= "未選択: #{lesson.to_judge_questions_count_of(current_user)}"
-          - if lesson.unchecked_comment_count_of(current_user) > 0
-            .m-lesson-section__info.flex-cen
-              .a-text-error= "未読コメントがあります"
+        = link_to lesson_path(lesson) do
+          .m-lesson-card.mb16
+            .flex-spbet
+              %h2.m-lesson-card__title= "#{lesson.name}"
+            .m-lesson-card__info{ class: "#{ 'm-lesson-card__info--bold' if lesson.during_the_period?}"}= lesson.decorate.start_to_end_time
+            .m-lesson-card__info= "担当: #{lesson.teacher.name}"
+            .flex-spbet
+              .m-lesson-card__info= "課題: #{lesson.questions.size}"
+              .m-lesson-card__info{ class: "#{ 'm-lesson-card__info--bold' if lesson.will_do_count_of(current_user) > 0}"}= "する: #{lesson.will_do_count_of(current_user)}"
+              .m-lesson-card__info{ class: "#{ 'm-lesson-card__info--bold' if lesson.to_judge_questions_count_of(current_user) > 0}"}= "未選択: #{lesson.to_judge_questions_count_of(current_user)}"
+            - if lesson.unchecked_comment_count_of(current_user) > 0
+              .m-lesson-card__info.flex-cen
+                .a-text-error= "未読コメントがあります"
   - else
     .ml24.mt24.a-text-secondary.a-text-small まだ、授業はありません
