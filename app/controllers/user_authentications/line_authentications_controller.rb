@@ -2,6 +2,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
   skip_before_action :user_login_required, :school_select_required
   before_action :user_log_out_required
   before_action :user_authentication_login_required, only: %i[line_logged_in user_form create_user]
+  layout 'user_layout_with_header'
 
   # lineでログインのボタンを押した時のアクション
   def line_login_authentication

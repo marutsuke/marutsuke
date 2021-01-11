@@ -1,9 +1,9 @@
+- content_for(:back_path, mypage_users_path)
 .o-profile.pb24
   .o-profile__head
     .m-heading-line
       .m-heading-line__text.flex-spbet-end
         %h1.a-text-secondary.a-text-xlarge 学校選択
-        = link_to 'マイページへ戻る', mypage_users_path
 .pr8.pl8
   - @school_users.each do |school_user|
     .flex-spbet.mb24

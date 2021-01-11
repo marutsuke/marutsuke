@@ -8,6 +8,9 @@ class UsersController < UserBase
                      only: :new
   before_action :user_log_out_required, only: %i[new]
 
+  layout 'user_layout_with_header', only: :new
+  layout 'user_layout', expect: :new
+
   def mypage; end
 
   def change_school

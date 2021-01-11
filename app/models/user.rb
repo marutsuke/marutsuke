@@ -8,7 +8,6 @@ class User < ApplicationRecord
                 :user_line_state_token
   before_save { email&.downcase! }
   validates :name, presence: true, length: { maximum: 20 }
-  validates :name_kana, length: { maximum: 20 }
   validates :email, format: { with: VALIDATE_FORMAT_OF_EMAIL },
                     length: { maximum: 50, minimum: 8 },
                     uniqueness: { case_sensitive: false },

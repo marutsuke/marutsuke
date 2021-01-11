@@ -1,3 +1,4 @@
+- content_for(:back_path, 'back')
 .o-user-index-page__heading
   .m-heading-line.mt8
     .m-heading-line__text
@@ -17,5 +18,4 @@
           .wrap=link_to '詳細', lesson_group_path(lesson_group)
         .m-lesson-section__info= "授業数: #{lesson_group.lessons.size}"
   - else
-    .a-text-secondary.a-text-small.mb16 受講している講座はありません。
-    =link_to '受講リクエスト', lesson_group_requests_path
+    .a-text-secondary.a-text-small.mb16 受講している講座はありません。マイページから、受講リクエストしてください。

@@ -5,7 +5,7 @@ ja:
     attributes:
       user:
         id: ID
-        name: 生徒氏名
+        name: ニックネーム
         name_kana: かな
         school_grade: 学年
         email: メールアドレス

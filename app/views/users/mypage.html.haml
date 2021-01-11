@@ -1,3 +1,4 @@
+- content_for(:back_path, root_path)
 
 .o-profile.pb24
   .o-profile__head
@@ -30,17 +31,10 @@
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium 名前
+          %h2.a-text-secondary.a-text-medium ニックネーム
         .m-profile-item__body
           .m-profile-item__item
             .a-text-primary.a-text-xlarge= current_user.name
-    .o-profile__item
-      .m-profile-item
-        .m-profile-item__title
-          %h2.a-text-secondary.a-text-medium かな
-        .m-profile-item__body
-          .m-profile-item__item
-            .a-text-primary.a-text-xlarge= current_user.name_kana || '---'
     .o-profile__item
       .m-profile-item
         .m-profile-item__title
@@ -81,7 +75,9 @@
               .m-profile-item__item
                 .a-text-secondary.a-text-small
                   %span 受講講座はまだありません
-                  = link_to '受講リクエスト',lesson_group_requests_path
+                .mt16.ml24.mb24
+                  = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
+
             - current_user.lesson_groups_in(current_school).each do |lesson_group|
               .m-profile-item__item
                 .a-text-primary.a-text-xlarge= lesson_group.name
@@ -109,7 +105,8 @@
             - else
               %h2.a-text-secondary.a-text-medium
                 %span 所属なし
-                = link_to '入学リクエスト', new_join_request_path
+              .mt16.ml24.mb24
+                = link_to '入学リクエスト',new_join_request_path, class: 'a-button-primary'
 
 .o-profile
   .o-profile__head
@@ -127,10 +124,10 @@
         %h1.a-text-secondary.a-text-xlarge その他設定
   .o-profile__body
     .o-profile__item
-      .mt8.ml24.mb24
-        = link_to '学校切り替え', school_users_path, class: 'a-button-primary'
       .mt16.ml24.mb24
         = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
+      .mt8.ml24.mb24
+        = link_to '学校切り替え', school_users_path, class: 'a-button-secondary'
 .o-profile
   .o-profile__head
     .m-heading-line

@@ -3,7 +3,7 @@ class TermsController < UserBase
   :school_select_required,
   only: %i[index privacy_policy]
 
-  layout 'user_layout_without_header'
+  layout 'user_layout_simple'
 
   def index
   end
