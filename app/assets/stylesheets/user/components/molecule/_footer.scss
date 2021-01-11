@@ -1,14 +1,16 @@
-.user_footer {
+.m-user_footer {
   padding: 4px 24px;
   border-top: 1px black solid;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: $white;
-  color: $white_green;
-  &__ele a {
+  background-color: $moss_1;
+  &__a_tag {
+    color: $white_green;
+  }
+  &__icon {
     text-decoration: none;
-    color: black;
+    color: $white_green;
     opacity: 1;
     &:hover {
       text-decoration: none;

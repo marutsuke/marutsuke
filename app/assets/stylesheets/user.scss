@@ -1,6 +1,6 @@
 @import "./application.scss";
 @import "./user/user_layout";
-
+@import "./modules/footer";
 // atoms
 @import "./user/components/atom/text";
 @import "./user/components/atom/user_image";
@@ -24,6 +24,8 @@
 @import "./user/components/molecule/conversation_card";
 @import "./user/components/molecule/line_icon";
 @import "./user/components/molecule/lesson_group_request";
+@import "./user/components/molecule/footer";
+
 // organism
 @import "./user/components/organism/profile";
 @import "./user/components/organism/top_page";

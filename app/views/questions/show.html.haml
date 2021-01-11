@@ -1,3 +1,4 @@
+- content_for(:back_path, lesson_path(@lesson))
 .m-lesson-header
   .m-lesson-header__term
     .a-text-secondary.a-text-small= @lesson.decorate.start_to_end_time
@@ -6,8 +7,6 @@
   .flex-spbet-end
     .m-lesson-header__name
       =link_to "#{@lesson.lesson_group.name}/#{@lesson.name}" , lesson_path(@lesson)
-    .wrap= link_to '課題一覧に戻る', lesson_path(@lesson)
-
 .u-user-container
   .flex.mt16.ml8
     .m-question-card__question-num.mr8= "課題#{ @question.display_order }"
@@ -20,6 +19,7 @@
       .a-text-primary= simple_format(@question.text)
   .mt24.mb24.m-submit-answer-button-wrap
     =link_to "提出する", new_question_answer_path(@question.id), class: "a-button-primary pb8 pt8"
+    
   - if @answers.present?
     .a-border-secondary.mb24
     .pl8.pr8

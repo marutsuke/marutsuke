@@ -4,7 +4,7 @@
   %head
     = stylesheet_link_tag 'user', media: 'all', 'data-turbolinks-track': 'reload'
   %body
-    .user_main_with_footer
+    .user_main_with_header
       =render 'layouts/notification'
+      =render 'shared/header'
       = yield
-    = render 'shared/footer', back_path: (yield(:back_path) || '#')

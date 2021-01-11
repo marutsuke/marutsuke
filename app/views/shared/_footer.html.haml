@@ -1,0 +1,22 @@
+.m-user_footer.flex-sparo
+  .m-user_footer__ele.mr24
+    - if back_path == 'back'
+      = link_to :back, class: 'm-user_footer__a_tag' do
+        .flex-cen
+          %i.fas.fa-chevron-left
+        .m-user_footer__ele_text= '戻る'
+    - else
+      = link_to back_path, class: 'm-user_footer__a_tag' do
+        .flex-cen
+          %i.fas.fa-chevron-left
+        .m-user_footer__ele_text= '戻る'
+  .m-user_footer__ele.mr24
+    = link_to root_path, class: 'm-user_footer__a_tag' do
+      .flex-cen
+        %i.fas.fa-home
+      .m-user_footer__ele_text= 'トップ'
+  .m-user_footer__ele.mr24
+    = link_to mypage_users_path, class: 'm-user_footer__a_tag' do
+      .flex-cen
+        %i.fas.fa-user
+      .m-user_footer__ele_text= 'マイページ'
