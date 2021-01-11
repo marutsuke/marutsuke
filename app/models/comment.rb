@@ -9,6 +9,10 @@ class Comment < ApplicationRecord
   belongs_to :teacher
   belongs_to :answer
 
+  scope :created_desc_order, -> {
+    order(created_at: :desc)
+  }
+
   def send_notification_email_to_user
     UserNotificationMailer.notification_of_comment(self).deliver_now
   end

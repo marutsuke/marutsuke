@@ -19,6 +19,9 @@
     @media (min-width: $ipad) {
       width: calc(100% - 152px);
     }
+    &--white {
+      background-color: $white_green;
+    }
   }
   &__text {
     color: $moss_0;

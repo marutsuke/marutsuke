@@ -30,7 +30,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
         flash[:info] = 'ログインしました。'
         user_log_in_without_school(user)
         remember_user(user)
-        redirect_to root_path
+        redirect_back_or(root_path)
       else
         flash[:info] = 'アカウントがありません。新規登録をお願いします!'
         redirect_to new_user_path
@@ -67,7 +67,7 @@ class UserAuthentications::LineAuthenticationsController < UserBase
         flash[:info] = 'アカウントがすでにあり、ログインしました。'
         user_log_in_without_school(user)
         remember_user(user)
-        redirect_to root_path
+        redirect_back_or(root_path)
       else
         @user = User.new(name: '')
         if current_user_authentication.uid.present?

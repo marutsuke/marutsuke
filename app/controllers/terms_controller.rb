@@ -11,4 +11,7 @@ class TermsController < UserBase
   def privacy_policy
   end
 
+  def temrs
+  end
+
 end

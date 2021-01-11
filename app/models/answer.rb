@@ -7,7 +7,7 @@ class Answer < ApplicationRecord
   has_many :answer_images
   has_many :comments
 
-  scope :new_order, -> {
+  scope :created_desc_order, -> {
     order(created_at: :desc)
   }
 

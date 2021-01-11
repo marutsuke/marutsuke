@@ -136,3 +136,13 @@
   .o-profile__body
     .o-profile__item
       = link_to 'ログアウトする', logout_path, method: :delete, class: 'a-button-danger'
+.o-profile
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 規約・プライバシーポリシー
+  .o-profile__body
+    .o-profile__item
+      = link_to '利用規約', terms_terms_path, target: :_blank, rel: "noopener noreferrer"
+    .o-profile__item
+      = link_to 'プライバシーポリシー', privacy_policy_terms_path, target: :_blank, rel: "noopener noreferrer"

@@ -6,16 +6,15 @@
 .o-user-index-page__body
   - if @lesson_groups&.size > 0
     - @lesson_groups.each do |lesson_group|
-      .m-lesson-section.mb16
-        .flex-spbet
-          .flex
-            %h2.m-lesson-section__title= "#{ lesson_group.name}"
-            - if lesson_group.commented_status_exists_of?(current_user)
-              .a-text-error.ml8
-                %span コメントあり
-                %i.far.fa-comment-alt
-
-          .wrap=link_to '詳細', lesson_group_path(lesson_group)
-        .m-lesson-section__info= "授業数: #{lesson_group.lessons.size}"
+      = link_to lesson_group_path(lesson_group) do
+        .m-lesson-card.mb16
+          .flex-spbet
+            .flex
+              %h2.m-lesson-card__title= "#{ lesson_group.name}"
+              - if lesson_group.commented_status_exists_of?(current_user)
+                .a-text-error.ml8
+                  %span コメントあり
+                  %i.far.fa-comment-alt
+          .m-lesson-card__info= "授業数: #{lesson_group.lessons.size}"
   - else
     .a-text-secondary.a-text-small.mb16 受講している講座はありません。マイページから、受講リクエストしてください。
