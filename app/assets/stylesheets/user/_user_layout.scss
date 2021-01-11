@@ -9,13 +9,16 @@ body {
 .user_main_simple {
   background-color: $white_green;
   min-height: 100vh;
+  padding-bottom: 56px;
 }
 .user_main_with_header {
   background-color: $white_green;
   height: 100vh;
+  padding-bottom: 56px;
 }
 .user_main_with_footer {
   background-color: $white_green;
   height: calc(100% - 2rem);
   overflow: scroll;
+  padding-bottom: 56px;
 }
