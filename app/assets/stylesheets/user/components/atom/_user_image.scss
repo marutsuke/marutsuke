@@ -30,4 +30,7 @@
   text-align: center;
   border: 1px solid $moss_4;
   color: $moss_4;
+  &--white {
+    background-color: $white_green;
+  }
 }
