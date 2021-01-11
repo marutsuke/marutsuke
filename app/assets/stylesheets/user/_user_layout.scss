@@ -1,6 +1,10 @@
+html {
+  height: 100%;
+}
 body {
   font-family: "Open Sans", "M PLUS 1p", sans-serif;
   color: $moss_0;
+  height: 100%;
 }
 .user_main_simple {
   background-color: $white_green;
@@ -12,6 +16,6 @@ body {
 }
 .user_main_with_footer {
   background-color: $white_green;
-  height: calc(100vh - 40px);
+  height: calc(100% - 2rem);
   overflow: scroll;
 }
