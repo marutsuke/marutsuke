@@ -5,22 +5,26 @@
   bottom: 0;
   width: 100%;
   background-color: $moss_1;
+  // height: 40px;
   &__a_tag {
     color: $white_green;
+    &:hover {
+      text-decoration: none;
+      color: $white_green;
+    }
   }
   &__icon {
     text-decoration: none;
     color: $white_green;
-    opacity: 1;
+    font-size: 1.5rem;
     &:hover {
       text-decoration: none;
-      color: black;
-      opacity: 1;
+      color: $white_green;
     }
   }
   &__ele_text {
     text-align: center;
-    font-size: 0.25rem;
+    font-size: 0.5rem;
   }
 }
 
