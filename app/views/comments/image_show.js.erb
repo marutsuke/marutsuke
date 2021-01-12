@@ -1,0 +1,7 @@
+$("<%="#js-comment-image--#{@comment.id}"%>")
+  .html("<%= j render(
+    partial: 'comment_image',
+    locals: {
+      comment: @comment
+    }) %>");
+$("<%="#js-comment_image-show-link--#{@comment.id}"%>").html('');
