@@ -30,10 +30,12 @@ Rails.application.routes.draw do
   end
 
   resources :answers, only: %i[create] do
-    member do
-      get :image_show
+    get :image_show, on: :member
+    resources :comments, only: [] do
+      get :image_show, on: :member
     end
   end
+
   resources :schools, only: %i[new create]
   get '/schools', to: 'schools#new'
   resources :school_users, only: %i[index] do

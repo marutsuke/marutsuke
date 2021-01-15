@@ -24,15 +24,13 @@
     .pl8.pr8
       - @answers.each do |answer|
         - answer.comments.created_desc_order.each do |comment|
-
           .m-conversation-card.mb16.mb32
             .m-conversation-card__card.m-conversation-card__card--white
               .m-conversation-card__text= simple_format(comment.text)
               .m-conversation-card__sub-info
                 - if comment.image.present?
-                  -# .m-conversation-card__image-link
-                  -#   = link_to '画像をみる', '#'
-                  -# 教員からの画像が見えるようにしてから解放
+                  .m-conversation-card__image-link{ id: "js-comment_image-show-link--#{ comment.id }"}
+                    = link_to '画像をみる', image_show_answer_comment_path(answer, comment), remote: true
                 .m-conversation-card__submited-at
                   .a-text-note= comment.decorate.created_at
             .m-conversation-card__user-image
@@ -43,6 +41,7 @@
                 .a-user-image--no-image-size100per.a-user-image--no-image-size100per--white
                   .a-text-xsmall.a-text-secondary No Image
                 .a-text-secondary.a-text-xsmall.mt8= "#{ comment.teacher.name }"
+          %div{ id: "js-comment-image--#{comment.id}" }
         .m-conversation-card.mb32
           .m-conversation-card__user-image
             - if current_user.image.present?
