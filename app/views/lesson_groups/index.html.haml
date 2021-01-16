@@ -6,7 +6,7 @@
 .o-user-index-page__body
   - if @lesson_groups&.size > 0
     - @lesson_groups.each do |lesson_group|
-      = link_to lesson_group_path(lesson_group) do
+      = link_to lesson_group_path(lesson_group), class: 'u-text-decoration-none' do
         .m-lesson-card.mb16
           .flex-spbet
             .flex

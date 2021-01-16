@@ -7,7 +7,7 @@
   - if @lessons&.length > 0
     .o-user-index-page__body
       - @lessons.each do |lesson|
-        = link_to lesson_path(lesson) do
+        = link_to lesson_path(lesson), class: 'u-text-decoration-none' do
           .m-lesson-card.mb16
             .flex-spbet
               %h2.m-lesson-card__title= "#{lesson.name}"
