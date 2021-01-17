@@ -19,6 +19,7 @@
       .a-text-primary= simple_format(@question.text)
   .mt24.mb24.m-submit-answer-button-wrap
     =link_to "提出する", new_question_answer_path(@question.id), class: "a-button-primary pb8 pt8"
+  
   - if @answers.present?
     .a-border-secondary.mb24
     .pl8.pr8
