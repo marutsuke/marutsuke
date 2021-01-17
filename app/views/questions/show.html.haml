@@ -6,7 +6,7 @@
     .a-text-secondary.a-text-small= "担当: #{@lesson.teacher.name}"
   .flex-spbet-end
     .m-lesson-header__name
-      =link_to "#{@lesson.lesson_group.name}/#{@lesson.name}" , lesson_path(@lesson)
+      #{@lesson.lesson_group.name}/#{@lesson.name}
 .u-user-container
   .flex.mt16.ml8
     .m-question-card__question-num.mr8= "課題#{ @question.display_order }"

@@ -6,7 +6,7 @@
     .a-text-secondary.a-text-small= "担当: #{@lesson.teacher.name}"
   .flex-spbet-end
     .m-lesson-header__name
-      =link_to "#{@lesson.lesson_group.name}/#{@lesson.name}" , lesson_path(@lesson)
+      #{@lesson.lesson_group.name}/#{@lesson.name}
 .pr16.pl16.mt24
   - if @questions&.length == 0
     .mt24 現在、設定されている課題はありません。
