@@ -18,8 +18,8 @@
     .a-question-text-box
       .a-text-primary= simple_format(@question.text)
   .a-border-secondary.mt24.mb24
-  .a-text-secondary.pl8 提出/コメント
-  .mt8.mb24.pr8.pl8
+  .a-text-primary.a-text-large.pl8 提出/コメント
+  .mt8.mb40.pr8.pl8
     = render 'answer_form'
   - if @answers.present?
     .pl8.pr8
