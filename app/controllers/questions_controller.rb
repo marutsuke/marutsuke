@@ -9,6 +9,7 @@ class QuestionsController < UserBase
     @status = @question_status.status
     @lesson = current_school&.lessons&.find(@question.lesson_id)
     @answers = current_user&.answers&.where(id: @question.answer_ids).created_desc_order
+    @answer = current_user.answers.new
   end
 
   private

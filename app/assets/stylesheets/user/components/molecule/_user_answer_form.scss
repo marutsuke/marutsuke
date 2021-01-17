@@ -40,4 +40,16 @@
       color: $moss_5;
     }
   }
+  &__hidden_wrap {
+  }
+  &__cancel-button {
+    width: 40%;
+    max-width: 240px;
+    padding: 0.25rem;
+  }
+  &__submit-button {
+    width: 40%;
+    max-width: 240px;
+    padding: 0.25rem;
+  }
 }
