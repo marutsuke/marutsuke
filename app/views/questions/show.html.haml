@@ -17,11 +17,11 @@
   .pr8.pl8.mt8
     .a-question-text-box
       .a-text-primary= simple_format(@question.text)
-  .mt24.mb24.m-submit-answer-button-wrap
-    =link_to "提出する", new_question_answer_path(@question.id), class: "a-button-primary pb8 pt8"
-  
+  .a-border-secondary.mt24.mb24
+  .a-text-secondary.pl8 提出/コメント
+  .mt8.mb24.pr8.pl8
+    = render 'answer_form'
   - if @answers.present?
-    .a-border-secondary.mb24
     .pl8.pr8
       - @answers.each do |answer|
         - answer.comments.created_desc_order.each do |comment|

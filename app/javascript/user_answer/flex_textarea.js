@@ -1,11 +1,13 @@
 $(document).on("turbolinks:load", function () {
-  if ($("#answer_text").length) {
-    var $textarea = $("#answer_text");
-    var lineHeight = parseInt($textarea.css("lineHeight"));
+  const text_area_dummy = document.getElementById(
+    "js-user-answer-form-text-area-dummy"
+  );
 
-    $textarea.on("input", function (e) {
-      var lines = ($(this).val() + "\n").match(/\n/g).length;
-      $(this).height(lineHeight * lines);
+  const text_area = document.getElementById("js-user-answer-form-text-area");
+
+  if (text_area) {
+    text_area.addEventListener("input", function () {
+      text_area_dummy.textContent = text_area.value + "\u200b";
     });
   }
 });

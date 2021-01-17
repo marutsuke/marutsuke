@@ -1,0 +1,4 @@
+= form_with model: Answer.new, local: true do |f|
+  .m-user-answer-form__text-area-wrap
+    .m-user-answer-form__text-area-dummy{aria: {hidden: :true}, id: 'js-user-answer-form-text-area-dummy'}
+    = f.text_area :text, required: true, class: 'm-user-answer-form__text-area', id: 'js-user-answer-form-text-area', placeholder: 'この課題へ提出'
