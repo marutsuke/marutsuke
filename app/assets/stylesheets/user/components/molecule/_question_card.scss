@@ -19,8 +19,8 @@
     margin: 1rem 0;
     max-height: 6rem;
     display: flex;
-    flex-wrap: wrap;
-    // justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
   }
   &__image_wrap {
     max-height: 6rem;

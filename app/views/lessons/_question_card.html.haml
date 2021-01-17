@@ -4,16 +4,14 @@
       .m-question-card__question-num.mr8= "課題#{ question.display_order }"
       %div{ id: "js-question-status-label--#{question.id}" }
         .m-question-card__question-status= question.question_status_of(current_user).decorate.status_label_link
-    .m-question-card__card-header-right
-      = link_to '詳細', question_path(question)
   %div{ class: question.question_status_of(current_user).decorate.opacity_class, id: "js-opacity-target--#{question.id}"}
     .m-question-card__question-content-wrap
       - if question.image.present?
         .m-question-card__image_wrap
           =image_tag question&.image_url, alt: question.image_alt, class: 'm-question-card__image'
-        .m-question-card__text-wrap
+        = link_to question_path(question), class: 'u-text-decoration-none m-question-card__text-wrap' do
           .m-question-card__text= question.text
       - else
-        .m-question-card__text-wrap.m-question-card__text-wrap--width-100
-          .m-question-card__text.m-question-card__text= question.text
+        = link_to question_path(question), class: 'u-text-decoration-none m-question-card__text-wrap m-question-card__text-wrap--width-100' do
+          .m-question-card__text= question.text
 
