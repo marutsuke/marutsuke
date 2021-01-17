@@ -6,6 +6,7 @@
     = f.fields_for @answer.answer_images.build do |ff|
       = ff.file_field :image, multiple: true
       %span (最大5MBまで・複数投稿できます)
+    = f.hidden_field :question_id, value: @question.id
     .flex-sparo.mt16
       .a-button-secondary.m-user-answer-form__cancel-button{ id: 'js-user-answer-form-cancel' } キャンセル
       = f.submit '提出する', class: 'a-button-primary m-user-answer-form__submit-button'
