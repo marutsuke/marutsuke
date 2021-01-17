@@ -75,9 +75,6 @@
               .m-profile-item__item
                 .a-text-secondary.a-text-small
                   %span 受講講座はまだありません
-                .mt16.mb24
-                  = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
-
             - current_user.lesson_groups_in(current_school).each do |lesson_group|
               .m-profile-item__item
                 .a-text-primary.a-text-xlarge= lesson_group.name
