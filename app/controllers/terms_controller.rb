@@ -14,4 +14,7 @@ class TermsController < UserBase
   def temrs
   end
 
+  def rules
+  end
+
 end

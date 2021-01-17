@@ -25,8 +25,11 @@ Rails.application.routes.draw do
     end
   end
   resources :terms, only: %i[index] do
-    get :privacy_policy, on: :collection
-    get :terms, on: :collection
+    collection do
+      get :privacy_policy
+      get :terms
+      get :rules
+    end
   end
 
   resources :answers, only: %i[create] do
