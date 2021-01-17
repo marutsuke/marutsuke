@@ -9,4 +9,4 @@
     = f.hidden_field :question_id, value: @question.id
     .flex-sparo.mt16
       .a-button-secondary.m-user-answer-form__cancel-button{ id: 'js-user-answer-form-cancel' } キャンセル
-      = f.submit '提出する', class: 'a-button-primary m-user-answer-form__submit-button'
+      = f.submit '提出する', class: 'a-button-primary m-user-answer-form__submit-button', data: { disable_with: '送信中...'}
