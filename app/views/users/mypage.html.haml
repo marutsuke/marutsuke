@@ -81,13 +81,6 @@
             - current_user.lesson_groups_in(current_school).each do |lesson_group|
               .m-profile-item__item
                 .a-text-primary.a-text-xlarge= lesson_group.name
-      .o-profile__item
-        .m-profile-item
-          .m-profile-item__title
-            %h2.a-text-secondary.a-text-medium= SchoolUser.human_attribute_name(:activated_at)
-          .m-profile-item__body
-            .m-profile-item__item
-              .a-text-primary.a-text-xlarge= current_user.school_user(current_school).decorate.activated_at
 - else
   .o-profile
     .o-profile__head

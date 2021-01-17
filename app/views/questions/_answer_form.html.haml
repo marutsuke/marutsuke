@@ -1,0 +1,12 @@
+= form_with model: @answer, local: true do |f|
+  .m-user-answer-form__text-area-wrap.mb16
+    .m-user-answer-form__text-area-dummy{aria: {hidden: :true}, id: 'js-user-answer-form-text-area-dummy'}
+    = f.text_area :text, required: true, class: 'm-user-answer-form__text-area', id: 'js-user-answer-form-text-area', placeholder: 'この課題へ提出'
+  .m-user-answer-form__hidden-wrap.u-display-none{id: 'js-user-answer-form-hidden-area'}
+    = f.fields_for @answer.answer_images.build do |ff|
+      = ff.file_field :image, multiple: true
+      %span (最大5MBまで・複数投稿できます)
+    = f.hidden_field :question_id, value: @question.id
+    .flex-sparo.mt16
+      .a-button-secondary.m-user-answer-form__cancel-button{ id: 'js-user-answer-form-cancel' } キャンセル
+      = f.submit '提出する', class: 'a-button-primary m-user-answer-form__submit-button'
