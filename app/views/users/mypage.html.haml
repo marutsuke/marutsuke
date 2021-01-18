@@ -5,8 +5,6 @@
     .m-heading-line
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 基本情報
-        = link_to edit_users_path do
-          %i.far.fa-edit.ml8.a-text-secondary.a-text-medium
   .o-profile__body
     .o-profile__item
       .m-profile-item
@@ -42,6 +40,15 @@
         .m-profile-item__body
           .m-profile-item__item
             .a-text-primary.a-text-xlarge= school_grade_to_s(current_user.school_grade)
+    .o-profile__item
+      .m-profile-item
+        .m-profile-item__title
+          %h2.a-text-secondary.a-text-medium メールアドレス
+        .m-profile-item__body
+          .m-profile-item__item
+            .a-text-primary.a-text-xlarge= current_user.email
+    .mt16.mb24
+      = link_to '基本情報編集', edit_users_path, class: 'a-button-secondary'
 - if current_school
   .o-profile
     .o-profile__head
@@ -135,5 +142,7 @@
   .o-profile__body
     .o-profile__item
       = link_to '利用規約', terms_terms_path, target: :_blank, rel: "noopener noreferrer"
+    .o-profile__item
+      = link_to '利用上の注意点', rules_terms_path, target: :_blank, rel: "noopener noreferrer"
     .o-profile__item
       = link_to 'プライバシーポリシー', privacy_policy_terms_path, target: :_blank, rel: "noopener noreferrer"
