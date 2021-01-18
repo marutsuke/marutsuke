@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_account_settings, only: %i[index]
+
   resources :answers, only: %i[create] do
     get :image_show, on: :member
     resources :comments, only: [] do
