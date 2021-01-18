@@ -4,8 +4,8 @@ class Answer < ApplicationRecord
   validates :text, length: { maximum: 800 }, allow_nil: true
   belongs_to :user
   belongs_to :question
-  has_many :answer_images
-  has_many :comments
+  has_many :answer_images, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   scope :created_desc_order, -> {
     order(created_at: :desc)
