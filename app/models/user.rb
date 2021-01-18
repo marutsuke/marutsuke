@@ -26,16 +26,16 @@ class User < ApplicationRecord
 
   has_many :answers, dependent: :destroy
   has_many :question_statuses, dependent: :destroy
-  has_many :questions, through: :question_statuses
   has_many :school_building_users, dependent: :destroy
-  has_many :school_buildings, through: :school_building_users
   has_many :school_users, dependent: :destroy
   has_many :schools, through: :school_users
   has_many :lesson_group_users, dependent: :destroy
-  has_many :lesson_groups, through: :lesson_group_users
   has_many :join_requests, dependent: :destroy
   has_many :lesson_group_requests, dependent: :destroy
   has_one :user_authentication, dependent: :destroy
+  has_many :questions, through: :question_statuses
+  has_many :school_buildings, through: :school_building_users
+  has_many :lesson_groups, through: :lesson_group_users
   accepts_nested_attributes_for :school_building_users, allow_destroy: true
 
   paginates_per 20
