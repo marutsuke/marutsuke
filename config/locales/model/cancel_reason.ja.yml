@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      cancel_reason: 退会理由
+    attributes:
+      cancel_reason:
+        reason: 退会理由
+        text: その他理由・ご意見
+        confirm: 退会確認
+  enums:
+    cancel_reason:
+      reason:
+        school_canceled: 学校・塾を卒業・退学した
+        not_user_friendly: 使いづらい
+        expensive: 利用料金が高い
+        other: その他
