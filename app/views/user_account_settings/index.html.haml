@@ -1,2 +1,13 @@
 - content_for(:back_path, mypage_users_path)
-アカウント設定
+.o-profile.pb24
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge アカウント設定
+.o-profile.mt64
+  .o-profile__head
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 退会
+  .o-profile__body
+    .o-profile__item= link_to '退会する', new_cancel_path, class: 'a-button-danger'
