@@ -4,4 +4,15 @@
     .m-heading-line
       .m-heading-line__text
         %h1.a-text-secondary.a-text-xlarge 退会手続き
-
+  = form_with model: @cancel_reason, url: cancels_path, method: :post, local: true do |f|
+    =render 'shared/error_messages', model_object: @cancel_reason
+    = f.radio_button :reason, :school_canceled
+    = f.label :reason, CancelReason.reasons_i18n[:school_canceled], {value: :school_canceled, style: "display: inline-block;"}
+    = f.radio_button :reason, :not_user_friendly
+    = f.label :reason, CancelReason.reasons_i18n[:not_user_friendly], {value: :not_user_friendly, style: "display: inline-block;"}
+    = f.radio_button :reason, :expensive
+    = f.label :reason, CancelReason.reasons_i18n[:expensive], {value: :expensive, style: "display: inline-block;"}
+    = f.radio_button :reason, :other
+    = f.label :reason, CancelReason.reasons_i18n[:other], {value: :other, style: "display: inline-block;"}
+    = f.text_area :text
+    = f.submit

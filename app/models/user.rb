@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_many :lesson_group_users, dependent: :destroy
   has_many :join_requests, dependent: :destroy
   has_many :lesson_group_requests, dependent: :destroy
+  has_many :cancel_reasons
   has_one :user_authentication, dependent: :destroy
   has_many :questions, through: :question_statuses
   has_many :school_buildings, through: :school_building_users

@@ -25,7 +25,7 @@ class UsersController < UserBase
       flash[:success] = "更新しました。"
       redirect_to mypage_users_path
     else
-      flash[:success] = '更新に失敗しました'
+      flash[:danger] = '更新に失敗しました'
       render :mypage
     end
   end

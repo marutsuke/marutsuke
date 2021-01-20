@@ -33,7 +33,8 @@ Rails.application.routes.draw do
   end
 
   resources :user_account_settings, only: %i[index]
-  resources :cancels, only: %i[new]
+  resources :cancels, only: %i[new create edit update]
+  get 'cancels', to: 'cancels#new'
 
   resources :answers, only: %i[create] do
     get :image_show, on: :member
