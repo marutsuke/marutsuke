@@ -8,12 +8,12 @@ class CancelsController < UserBase
     if @cancel_reason.save
       redirect_to edit_cancel_path(@cancel_reason)
     else
-      flash[:danger] = 'エラーがあります'
       render :new
     end
   end
 
   def edit
+    @cancel_reason = current_user.cancel_reasons.find(params[:id])
   end
 
   def update

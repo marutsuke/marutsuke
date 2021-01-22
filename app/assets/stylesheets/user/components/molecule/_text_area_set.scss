@@ -1,0 +1,15 @@
+.m-text-area {
+  &__label {
+    display: block;
+  }
+  &__form {
+    display: block;
+    height: 5rem;
+    line-height: 1rem;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0.25rem;
+    border: 1px solid $moss_4;
+    border-radius: 4px;
+  }
+}
