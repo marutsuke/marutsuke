@@ -6,7 +6,9 @@
         %h1.a-text-secondary.a-text-xlarge 退会最終確認
   .o-cancel-form__description
     .a-text-notice.a-text-xlarge.u-text-align--center.mb16 注意
-    .a-text-primary 利用規約をよく読み、退会をお願いします。
+    .a-text-primary
+      =link_to '利用規約', terms_terms_path, target: :_blank, rel: "noopener noreferrer"
+      %span をよく読み、退会をお願いします。
   .o-cancel-form__body
     .o-cancel-form__description
       .a-text-primary.mb8 退会理由: #{ @cancel_reason.reason_i18n }
@@ -32,7 +34,8 @@
 
       %label.a-checkbox
         %input#js-confirm-checkbox{:name => "confirm", :type => "checkbox", :autocomplete => "off"}/
-        %span.a-checkbox__text 利用規約に同意し、退会します。
+        %span.a-checkbox__text
+          利用規約に同意し、退会します。
     = form_with model: @cancel_reason, url: cancels_path, method: :patch, local: true do |f|
       .flex-cen#js-active_button.u-display-none
         = f.submit '退会する', class: 'a-button-danger u-width--120px'
