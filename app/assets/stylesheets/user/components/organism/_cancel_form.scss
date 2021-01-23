@@ -1,0 +1,17 @@
+.o-cancel-form {
+  padding-top: 16px;
+  &__heading {
+    margin-bottom: 8px;
+  }
+  &__description {
+    padding: 16px 16px;
+  }
+  &__caution {
+    padding: 8px 4px;
+    border: 1px solid $pink_0;
+    border-radius: 4px;
+  }
+  &__body {
+    padding: 24px 16px;
+  }
+}

@@ -25,6 +25,8 @@
 @import "./user/components/molecule/lesson_group_request";
 @import "./user/components/molecule/footer";
 @import "./user/components/molecule/user_answer_form";
+@import "./user/components/molecule/radio_form_set";
+@import "./user/components/molecule/text_area_set";
 
 // organism
 @import "./user/components/organism/profile";
@@ -32,6 +34,7 @@
 @import "./user/components/molecule/lesson_section";
 @import "./user/components/organism/terms";
 @import "./user/components/organism/privacy_policy";
+@import "./user/components/organism/cancel_form";
 
 //utility
 @import "./user/components/utility/container";
@@ -39,3 +42,7 @@
 @import "./user/components/utility/opacity";
 @import "./user/components/utility/disnon";
 @import "./user/components/utility/text_decoration";
+@import "./user/components/utility/width";
+@import "./user/components/utility/height";
+@import "./user/components/utility/text-align";
+@import "./user/components/utility/line_height";

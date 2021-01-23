@@ -10,12 +10,12 @@
       %label.a-checkbox
         %input#js-confirm-checkbox{:name => "confirm", :type => "checkbox", :autocomplete => "off"}/
         %span.a-checkbox__text 利用規約に同意して、登録する。
-    .flex-cen#js-active_sign_up_btn.u-display-none
+    .flex-cen#js-active_button.u-display-none
       =link_to line_sign_up_authentication_user_authentications_line_authentications_path, id: 'js-aaa', method: :post do
         .m-text-with-line-icon
           .m-text-with-line-icon__image= image_tag 'line_images/iOS/44dp/1x/line_44.png'
           .m-text-with-line-icon__text LINEで新規登録
-    .flex-cen#js-inactive_sign_up_btn
+    .flex-cen#js-inactive_button
       .m-text-with-line-icon--disable
         .m-text-with-line-icon__image--disable= image_tag 'line_images/iOS/44dp/1x/line_44.png'
         .m-text-with-line-icon__text LINEで新規登録

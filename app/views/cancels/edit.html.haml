@@ -1,0 +1,43 @@
+- content_for(:back_path, new_cancel_path)
+.o-cancel-form
+  .o-cancel-form__heading
+    .m-heading-line
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 退会最終確認
+  .o-cancel-form__description
+    .a-text-notice.a-text-xlarge.u-text-align--center.mb16 注意
+    .a-text-primary
+      =link_to '利用規約', terms_terms_path, target: :_blank, rel: "noopener noreferrer"
+      %span をよく読み、退会をお願いします。
+  .o-cancel-form__body
+    .o-cancel-form__description
+      .a-text-primary.mb8 退会理由: #{ @cancel_reason.reason_i18n }
+      - if @cancel_reason.text.present?
+        .a-text-secondary= CancelReason.human_attribute_name(:text)
+        .a-text-primary= @cancel_reason.text
+    .o-cancel-form__caution.mb40
+      - other = @cancel_reason.other?
+      - if @cancel_reason.school_canceled?
+        .a-text-primary
+          塾や学校をやめたあとでも、アカウントは無料で残すことができますが、本当に退会しますか?
+      - if @cancel_reason.not_user_friendly?
+        .a-text-primary
+          今後も使いやすさを改善していきます。アカウントは無料で残すことができますが、本当に退会しますか?
+      - if @cancel_reason.expensive?
+        .a-text-primary
+          アカウントは、無料で残すことができますが、本当に退会しますか?
+      - if @cancel_reason.other?
+        .a-text-primary
+          ご意見ありがとうございます。
+          アカウントは、無料で残すことができますが、本当に退会しますか?
+    .flex-cen.mt56.mb16
+
+      %label.a-checkbox
+        %input#js-confirm-checkbox{:name => "confirm", :type => "checkbox", :autocomplete => "off"}/
+        %span.a-checkbox__text
+          利用規約に同意し、退会します。
+    = form_with model: @cancel_reason, url: cancel_path, method: :patch, local: true do |f|
+      .flex-cen#js-active_button.u-display-none
+        = f.submit '退会する', class: 'a-button-danger u-width--120px'
+      .flex-cen#js-inactive_button
+        .a-button-disable.u-width--120px 退会する
