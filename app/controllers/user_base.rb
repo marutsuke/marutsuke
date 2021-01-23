@@ -14,6 +14,10 @@ class UserBase < ApplicationController
       store_location
       flash[:info] = 'ログインしてください'
       redirect_to new_user_path
+    else
+      if current_user.school_users.size == 1
+        user_log_in(current_user, current_user.schools.first)
+      end
     end
   end
 
