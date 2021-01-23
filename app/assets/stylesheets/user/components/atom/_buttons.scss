@@ -18,6 +18,16 @@
   text-align: center;
 }
 
+.a-button-disable {
+  display: block;
+  color: $moss_5;
+  background-color: $white_green;
+  padding: 4px;
+  border: 1px solid $moss_5;
+  border-radius: 4px;
+  text-align: center;
+}
+
 .a-button-danger {
   display: block;
   color: $pink_0;
