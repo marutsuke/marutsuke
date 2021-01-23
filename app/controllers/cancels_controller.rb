@@ -1,4 +1,6 @@
 class CancelsController < UserBase
+  skip_before_action :school_select_required
+
   def new
     @cancel_reason = current_user.cancel_reasons.new
   end
