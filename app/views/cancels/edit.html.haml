@@ -36,7 +36,7 @@
         %input#js-confirm-checkbox{:name => "confirm", :type => "checkbox", :autocomplete => "off"}/
         %span.a-checkbox__text
           利用規約に同意し、退会します。
-    = form_with model: @cancel_reason, url: cancels_path, method: :patch, local: true do |f|
+    = form_with model: @cancel_reason, url: cancel_path, method: :patch, local: true do |f|
       .flex-cen#js-active_button.u-display-none
         = f.submit '退会する', class: 'a-button-danger u-width--120px'
       .flex-cen#js-inactive_button

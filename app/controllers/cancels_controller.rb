@@ -17,6 +17,13 @@ class CancelsController < UserBase
   end
 
   def update
+    @cancel_reason = current_user.cancel_reasons.find(params[:id])
+    @cancel_reason.update(confirm: true)
+    @user = @cancel_reason.user
+    user_log_out
+    @user.destroy
+    flash[:danger] = 'ユーザーを削除しました。ご利用ありがとうございました。'
+    redirect_to new_user_path
   end
 
   private
