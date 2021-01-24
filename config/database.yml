@@ -11,7 +11,9 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_ja_0900_as_cs
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
@@ -31,9 +33,11 @@ test:
 production:
   <<: *default
   database: marutsuke_production
-  username: root
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.database[:username] %>
+  password: <%= Rails.application.credentials.database[:password] %>
+  host: <%= Rails.application.credentials.database[:host] %>
   socket: /var/lib/mysql/mysql.sock
+  port: 3306
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
