@@ -1,7 +1,7 @@
 class TermsController < UserBase
   skip_before_action :user_login_required,
   :school_select_required,
-  only: %i[index privacy_policy]
+  except: %i[]
 
   layout 'user_layout_simple'
 
