@@ -17,4 +17,6 @@
                   %i.far.fa-comment-alt
           .m-lesson-card__info= "授業数: #{lesson_group.lessons.size}"
   - else
-    .a-text-secondary.a-text-small.mb16 受講している講座はありません。マイページから、受講リクエストしてください。
+    .a-text-secondary.a-text-small.mb16 受講している講座はありません。
+.mt24.mb16.pr8.pl8
+  = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
