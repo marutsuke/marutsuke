@@ -1,22 +1,23 @@
 - content_for(:back_path, 'back')
-.o-user-index-page__heading
-  .m-heading-line.mt8
-    .m-heading-line__text
-      %h1.a-text-secondary.a-text-xlarge 受講講座一覧
-.o-user-index-page__body
-  - if @lesson_groups&.size > 0
-    - @lesson_groups.each do |lesson_group|
-      = link_to lesson_group_path(lesson_group), class: 'u-text-decoration-none' do
-        .m-lesson-card.mb16
-          .flex-spbet
-            .flex
-              %h2.m-lesson-card__title= "#{ lesson_group.name}"
-              - if lesson_group.commented_status_exists_of?(current_user)
-                .a-text-error.ml8
-                  %span コメントあり
-                  %i.far.fa-comment-alt
-          .m-lesson-card__info= "授業数: #{lesson_group.lessons.size}"
-  - else
-    .a-text-secondary.a-text-small.mb16 受講している講座はありません。
-.mt24.mb16.pr8.pl8
-  = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
+.o-user-index-page
+  .o-user-index-page__heading
+    .m-heading-line.mt8
+      .m-heading-line__text
+        %h1.a-text-secondary.a-text-xlarge 受講講座一覧
+  .o-user-index-page__body
+    - if @lesson_groups&.size > 0
+      - @lesson_groups.each do |lesson_group|
+        = link_to lesson_group_path(lesson_group), class: 'u-text-decoration-none' do
+          .m-lesson-card.mb16
+            .flex-spbet
+              .flex
+                %h2.m-lesson-card__title= "#{ lesson_group.name}"
+                - if lesson_group.commented_status_exists_of?(current_user)
+                  .a-text-error.ml8
+                    %span コメントあり
+                    %i.far.fa-comment-alt
+            .m-lesson-card__info= "授業数: #{lesson_group.lessons.size}"
+    - else
+      .a-text-secondary.a-text-small.mb16 受講している講座はありません。
+  .mt24.mb16.pr8.pl8
+    = link_to '受講リクエスト',lesson_group_requests_path, class: 'a-button-primary'
