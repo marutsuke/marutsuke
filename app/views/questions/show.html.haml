@@ -1,12 +1,14 @@
 - content_for(:back_path, lesson_path(@lesson))
-.m-lesson-header
-  .m-lesson-header__term
-    .a-text-secondary.a-text-small= @lesson.decorate.start_to_end_time
-  .m-lesson-header__teacher
-    .a-text-secondary.a-text-small= "担当: #{@lesson.teacher.name}"
-  .flex-spbet-end
-    .m-lesson-header__name
-      #{@lesson.lesson_group.name}/#{@lesson.name}
+.o-user-index-page
+  .o-user-index-page__heading
+    .m-heading-line.mt8
+      .m-heading-line__text.flex-spbet
+        %h1.a-text-secondary.a-text-xlarge 課題
+        .wrap
+          .a-text-secondary.a-text-xsmall.mb4= @lesson.decorate.start_to_end_time
+          .a-text-secondary.a-text-xsmall= "担当: #{@lesson.teacher.name}"
+    %h4.m-heading-sub.mt8.ml8
+      .a-text-primary.a-text-small= "#{@lesson.lesson_group.name}>#{@lesson.name}"
 .u-user-container
   .flex.mt16.ml8
     .m-question-card__question-num.mr8= "課題#{ @question.display_order }"

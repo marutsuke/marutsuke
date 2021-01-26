@@ -3,7 +3,9 @@
   .o-user-index-page__heading
     .m-heading-line.mt8
       .m-heading-line__text.flex-spbet
-        %h1.a-text-secondary.a-text-xlarge= "#{@lesson_group.name}の授業一覧"
+        %h1.a-text-secondary.a-text-xlarge 授業一覧
+    .m-heading-sub.mt8.ml8
+      %h4.a-text-primary.a-text-small= "#{@lesson_group.name}"
   - if @lessons&.length > 0
     .o-user-index-page__body
       - @lessons.each do |lesson|
