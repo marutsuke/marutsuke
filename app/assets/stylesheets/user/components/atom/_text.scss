@@ -1,22 +1,32 @@
 .a-text-primary {
   color: $moss_0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .a-text-secondary {
   color: $moss_2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .a-text-error,
 .a-text-important {
   color: $pink_0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .a-text-notice {
   color: $pink_2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .a-text-note {
   color: $moss_4;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .a-text {
   &-tiny {
@@ -52,4 +62,6 @@
 .a-text-terms {
   font-size: 0.875rem;
   line-height: 1.125rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }

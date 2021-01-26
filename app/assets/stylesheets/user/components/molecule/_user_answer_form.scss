@@ -31,6 +31,8 @@
     color: inherit;
     font: inherit;
     letter-spacing: inherit;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     resize: none;
     &:focus {
       box-shadow: 0 0 0 2px $green_2;

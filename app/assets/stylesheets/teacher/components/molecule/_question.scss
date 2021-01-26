@@ -10,6 +10,8 @@
     border-radius: 0.5rem;
     background-color: $blue_4;
     border: solid 1px $blue_1;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   &__note-head {
     margin-top: 1rem;

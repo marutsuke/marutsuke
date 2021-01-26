@@ -26,6 +26,8 @@
   &__text {
     color: $moss_0;
     font-size: 0.75rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     @media (min-width: $ipad) {
       font-size: 1rem;
     }
