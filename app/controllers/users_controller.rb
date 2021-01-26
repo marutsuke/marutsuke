@@ -2,7 +2,7 @@
 
 class UsersController < UserBase
   skip_before_action :school_select_required,
-                     only: :mypage
+                     except: %i[]
   skip_before_action :user_login_required,
                      :school_select_required,
                      only: :new

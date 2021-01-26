@@ -38,5 +38,11 @@
             .m-profile-item__item= f.email_field :email, class: 'a-text-field'
       .o-profile__item
         .m-profile-item
+          .m-profile-item__title
+            %h2.a-text-secondary.a-text-medium.u-after-required= f.label :school_grade
+          .m-profile-item__body
+            .m-profile-item__item= f.select :school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: current_user.school_grade || '' }, { class: 'a-select' }
+      .o-profile__item
+        .m-profile-item
           .m-profile-item__submit_button
             .m-profile-item__item= f.submit '更新', class: 'a-submit-button'
