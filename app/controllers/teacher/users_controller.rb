@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::UsersController < Teacher::Base
-  before_action :search_users, only: %i[index lesson_group_registration]
+  before_action :search_users, only: %i[index]
 
   def index
     @users = @users.page(params[:page])
@@ -17,10 +17,6 @@ class Teacher::UsersController < Teacher::Base
     @user = current_teacher_school.users.find(params[:id]).decorate
     @school_user = @user.school_user(current_teacher_school)
     @lesson_groups = @user.lesson_groups_in(current_teacher_school)
-  end
-
-  def lesson_group_registration
-    @users = @users.page(params[:page])
   end
 
   private

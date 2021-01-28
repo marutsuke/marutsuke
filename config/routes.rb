@@ -95,7 +95,6 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy'
     get '/questions', to: 'question_set#index'
     resources :users, only: %i[index show edit] do
-      get :lesson_group_registration, on: :collection
       get :lesson_groups, on: :member
       resources :school_building_users, only: %i[new create destroy]
       resources :lesson_group_users, only: %i[new create destroy]
