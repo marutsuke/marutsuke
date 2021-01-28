@@ -20,8 +20,6 @@
       .m-button-set
         = link_to 'クリア', lesson_group_registration_teacher_users_path, class: 'a-button a-button--cancel'
         = f.submit '検索', class: 'a-button a-button--primary'
-%hr
-=link_to '受講リクエスト一覧', teacher_lesson_group_requests_path
 - if @users.present?
   = paginate @users
   %table.o-table-simple

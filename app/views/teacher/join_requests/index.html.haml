@@ -1,8 +1,6 @@
 .mt16.ml16="#{ current_teacher_school_building.name}の入学リクエスト一覧"
 .flex-sparo
   .wrap
-    = link_to 'ユーザー一覧に戻る', teacher_users_path
-  .wrap
     = link_to 'ユーザー招待の設定', invitation_manage_teacher_school_building_path(current_teacher_school_building)
 - if @join_requests.size == 0
   .mt24 未チェックの入学リクエストはありません
