@@ -133,6 +133,7 @@ Rails.application.routes.draw do
     resources :school_buildings, only: %i[index new create show update] do
       get :invitation_manage, on: :member
     end
+    resources :school_building_settings, only: %i[index]
     resources :lesson_groups, only: %i[index new show create edit update destroy] do
       resources :lessons, only: %i[new create]
     end

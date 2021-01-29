@@ -1,0 +1,22 @@
+.o-profile
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge 校舎設定
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 校舎名
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.name
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 招待コード
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.invitation_code
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 生徒数
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.active_users.size

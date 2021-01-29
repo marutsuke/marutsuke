@@ -14,4 +14,9 @@ class SchoolBuilding < ApplicationRecord
   validates :name, uniqueness: { scope: :school_id, case_sensitive: true }
   validates :invitation_code, uniqueness: { case_sensitive: true }, length: { minimum: 8 }, allow_blank: true
 
+  def active_users
+    active_user_ids = school.school_users.active.pluck(:user_id)
+    users.where(id: active_user_ids)
+  end
+
 end

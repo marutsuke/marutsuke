@@ -10,6 +10,17 @@ class SchoolUser < ApplicationRecord
   validates :start_at, presence: true
   validate :start_at_and_end_at_validate
 
+  scope :active, lambda  {
+    where(activated: true)
+      .where('start_at <= ?', Time.zone.now)
+      .where('end_at >= ?', Time.zone.now)
+      .or(
+        where(activated: true)
+          .where('start_at <= ?', Time.zone.now)
+          .where(end_at: nil)
+      )
+
+  }
 
   def activate
     update_columns(activated: true, activated_at: Time.zone.now)
