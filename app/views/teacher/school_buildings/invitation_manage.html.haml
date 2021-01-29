@@ -1,4 +1,4 @@
-.ml16.mt16= link_to '入学リクエスト一覧に戻る',teacher_join_requests_path
+.ml16.mt16= link_to '戻る',teacher_school_building_settings_path
 .ml16.mt16= "#{@school_building.name}の入学コードの設定"
 .o-invitation-form
   = form_with model: @school_building, url: teacher_school_building_path(@school_building.id), method: :patch, local: true do |f|

@@ -14,9 +14,16 @@
         .m-profile-item__title
           .a-text-secondary.a-text-large 招待コード
         .m-profile-item__body
-          .a-text-primary.a-text-xlarge= current_teacher_school_building.invitation_code
+          .a-text-primary.a-text-xlarge.mr32= current_teacher_school_building.invitation_code
+          = link_to '設定', invitation_manage_teacher_school_building_path(current_teacher_school_building), class: 'a-button a-button--secondary'
+
       .m-profile-item
         .m-profile-item__title
-          .a-text-secondary.a-text-large 生徒数
+          .a-text-secondary.a-text-large 所属生徒数
         .m-profile-item__body
           .a-text-primary.a-text-xlarge= current_teacher_school_building.active_users.size
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 開講講座数
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.lesson_groups.in_open.size
