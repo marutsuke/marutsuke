@@ -26,7 +26,8 @@
     color: $indigo_6;
   }
 }
-.a-button--cancel {
+.a-button--cancel,
+.a-button--secondary {
   color: $blue_0;
   border: 1px solid $blue_0;
   &:hover {

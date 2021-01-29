@@ -6,18 +6,23 @@
           = image_tag @user.image_url, class: 'a-user-image'
         - else
           .a-user-no-image No Image
-      .m-user-image__name
-        .a-text-primary.a-text-xlarge= "氏名: #{ @user.name }"
-      .m-user-image__kana
-        .a-text-secondary.a-text-medium (ふりがなかりかり)
-      .m-user-image__id
-        .a-text-secondary.a-text-medium= "ID: #{ @user.id }"
   .o-profile__content
     .o-profile__header
       .m-heading.m-heading--line
         .m-heading__text
           %h2.a-text-primary.a-text-huge 受講講座一覧
-        .a-text-xlarge= link_to '戻る',  lesson_group_registration_teacher_users_path
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 生徒ID
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @user.id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large ニックネーム
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @user.name
     .o-profile__element
       .m-profile-item
         .m-profile-item__title

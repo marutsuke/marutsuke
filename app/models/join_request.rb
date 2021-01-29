@@ -5,14 +5,24 @@ class JoinRequest < ApplicationRecord
 
   validates :school_id, uniqueness: { scope: :user_id, case_sensitive: true }
 
+  paginates_per 20
+
   enum status: {
     requested: 10,
     accepted: 20,
-    rejected: 30,
-    closed: 40
+    rejected: 30
+  }
+
+  scope :created_desc_order, -> {
+    order(created_at: :desc)
   }
 
   scope :checked_recently, lambda {
+    where.not(status: ['requested', 'closed'])
+      .where(updated_at: 7.days.ago..Time.current)
+  }
+
+  scope :checked_within_1hour, lambda {
     where.not(status: ['requested', 'closed'])
       .where(updated_at: 7.days.ago..Time.current)
   }

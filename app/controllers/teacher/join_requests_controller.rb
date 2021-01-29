@@ -1,8 +1,9 @@
 class Teacher::JoinRequestsController < Teacher::Base
   before_action :set_join_request, only: %i[accept reject]
+  before_action :search_join_requests, only: %i[index]
+
   def index
-    @join_requests = current_teacher_school_building.join_requests.requested
-    @checked_join_requests = current_teacher_school_building.join_requests.checked_recently
+    @join_requests = @join_requests.created_desc_order.page(params[:page])
   end
 
   def accept
@@ -21,6 +22,15 @@ class Teacher::JoinRequestsController < Teacher::Base
 
   def set_join_request
     @join_request = current_teacher_school_building.join_requests.find(params[:id])
+  end
+
+  def search_join_requests
+    @q = current_teacher_school_building.join_requests.ransack(params[:q])
+    @join_requests = @q.result(distinct: true)
+    # セレクトボックスの初期値設定のため
+    if params[:q]
+      @status = params[:q][:status_eq]
+    end
   end
 
 end
