@@ -16,7 +16,7 @@ class SchoolBuilding < ApplicationRecord
 
   def active_users
     active_user_ids = school.school_users.active.pluck(:user_id)
-    users.where(id: active_user_ids)
+    school_building_users.where(user_id: active_user_ids, main: true)
   end
 
 end
