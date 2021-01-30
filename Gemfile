@@ -100,3 +100,4 @@ gem 'faraday'
 gem 'jwt'
 gem 'line-bot-api'
 gem 'active_record_union'
+gem 'whenever', require: false
