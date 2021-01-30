@@ -2,12 +2,6 @@
 
 class AnswersController < UserBase
 
-  def new
-    @question = Question.find(params[:question_id])
-    @lesson = current_school&.lessons&.find(@question.lesson_id)
-    @answer = current_user.answers.new
-  end
-
   def image_show
     @answer = current_user.answers.find(params[:id])
     @answer_images = @answer.answer_images
