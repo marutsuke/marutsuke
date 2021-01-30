@@ -1,5 +1,5 @@
-# config valid for current version and patch releases of Capistrano
-lock '3.14.1'
+  # config valid for current version and patch releases of Capistrano
+lock '3.15.0'
 
 set :application, "marutsuke"
 set :repo_url, "git@github.com:marutsuke/marutsuke.git"
