@@ -107,7 +107,7 @@ Rails.application.routes.draw do
       end
       resources :school_building_teachers, only: %i[new create destroy]
     end
-    resources :lessons, only: %i[index show edit update] do
+    resources :lessons, only: %i[show edit update] do
       resources :questions, only: :new
     end
 
