@@ -13,7 +13,6 @@ ja:
   enums:
     lesson_group_request:
       status:
-        requested: リクエスト済
+        requested: リクエスト中
         accepted: 受講許可
         rejected: 受講拒否
-        closed: 拒否確認済

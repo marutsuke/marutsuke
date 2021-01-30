@@ -1,7 +1,7 @@
 .o-search-form {
   margin: 0 auto;
   min-width: 600px;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 24px 40px;
   border: 1px solid $indigo_4;
   border-radius: 8px;
@@ -11,7 +11,7 @@
   }
   &__label_forms {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
   }
   &__button_area {
     display: flex;

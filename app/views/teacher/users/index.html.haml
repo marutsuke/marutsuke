@@ -1,5 +1,5 @@
 .o-search-form.mt16
-  %h3.o-search-form__title= "#{ current_teacher_school_building.name}の生徒一覧"
+  %h3.o-search-form__title.mb32= "#{ current_teacher_school_building.name}の生徒一覧"
   = search_form_for(@q, url: teacher_users_path) do |f|
     .o-search-form__label_forms
       .m-label-and-input

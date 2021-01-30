@@ -1,43 +1,52 @@
-.mt16.ml16 受講リクエスト一覧
+.o-search-form.mt16.mb40
+  %h3.o-search-form__title.mb32= "#{ current_teacher_school_building.name}の受講リクエスト一覧"
+  = search_form_for(@q, url: teacher_lesson_group_requests_path) do |f|
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :user_id_eq, '生徒ID', class: 'm-label-and-input__label'
+        = f.search_field :user_id_eq, class: 'm-label-and-input__input'
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :status_eq, '状態', class: 'm-label-and-input__label'
+        = f.select :status_eq, LessonGroupRequest.statuses.map{|k,v| [I18n.t("enums.lesson_group_request.status.#{k}"),v] }, { include_blank: '', selected: @status || '' }, { class: 'm-label-and-input__input' }
+    .o-search-form__button_area
+      .m-button-set
+        = link_to 'クリア', teacher_lesson_group_requests_path, class: 'a-button a-button--cancel'
+        = f.submit '検索', class: 'a-button a-button--primary'
+
+
 - if @lesson_group_requests.size == 0
-  .mt24 未チェックの受講リクエストはありません
+  .mt24 受講リクエストはありません
 - else
-  %table.o-table-simple.mr40
-    %thead.o-table-simple__thead
-      %th.o-table-simple__th 講座名
-      %th.o-table-simple__th 対象学年
-      %th.o-table-simple__th ニックネーム
-      %th.o-table-simple__th 学年
-      %th.o-table-simple__th 状態
-      %th.o-table-simple__th
-      %th.o-table-simple__th
-    - @lesson_group_requests.each do |request|
-      %tr.o-table-simple__tr
-        %td.o-table-simple__td= request.lesson_group.name
-        %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
-        %td.o-table-simple__td= request.user.name
-        %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
-        %td.o-table-simple__td= request.status_i18n
-        - if request.status != 'requested'
-          %td.o-table-simple__td
-          %td.o-table-simple__td
-        - else
-          %td.o-table-simple__td= link_to '許可', accept_teacher_lesson_group_request_path(request), method: :patch
-          %td.o-table-simple__td= link_to '拒否', reject_teacher_lesson_group_request_path(request), method: :patch
-- if @checked_lesson_group_requests.size > 0
-  .mt56.ml24 処理済み受講リクエスト
-  %table.o-table-simple.mr40
-    %thead.o-table-simple__thead
-      %th.o-table-simple__th 講座名
-      %th.o-table-simple__th 対象学年
-      %th.o-table-simple__th ニックネーム
-      %th.o-table-simple__th 学年
-      %th.o-table-simple__th 状態
-      %th.o-table-simple__th
-    - @checked_lesson_group_requests.each do |request|
-      %tr.o-table-simple__tr
-        %td.o-table-simple__td= request.lesson_group.name
-        %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
-        %td.o-table-simple__td= request.user.name
-        %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
-        %td.o-table-simple__td= request.status_i18n
+  = paginate @lesson_group_requests
+  .flex-sparo.mt16
+    %table.o-table-simple
+      %thead.o-table-simple__thead
+        %th.o-table-simple__th 年度
+        %th.o-table-simple__th 講座名
+        %th.o-table-simple__th 対象学年
+        %th.o-table-simple__th ID
+        %th.o-table-simple__th ニックネーム
+        %th.o-table-simple__th 学年
+        %th.o-table-simple__th 申請日時
+        %th.o-table-simple__th 許可/拒否日時
+        %th.o-table-simple__th 状態
+        %th.o-table-simple__th
+        %th.o-table-simple__th
+      - @lesson_group_requests.each do |request|
+        %tr.o-table-simple__tr
+          %td.o-table-simple__td= request.lesson_group.school_year
+          %td.o-table-simple__td= request.lesson_group.name
+          %td.o-table-simple__td= request.lesson_group.decorate.target_school_grade
+          %td.o-table-simple__td= request.user_id
+          %td.o-table-simple__td= request.user.name
+          %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
+          %td.o-table-simple__td= request.decorate.created_at
+          %td.o-table-simple__td= request.decorate.updated_at
+          %td.o-table-simple__td= request.status_i18n
+          - if request.status != 'requested'
+            %td.o-table-simple__td.o-table-simple__td--120px-width
+            %td.o-table-simple__td.o-table-simple__td--120px-width
+          - else
+            %td.o-table-simple__td= link_to '拒否', reject_teacher_lesson_group_request_path(request), method: :patch, class: 'a-button a-button--danger'
+            %td.o-table-simple__td= link_to '許可', accept_teacher_lesson_group_request_path(request), method: :patch, class: 'a-button a-button--primary'

@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::LessonsController < Teacher::Base
-  before_action :search_lessons, only: :index
   before_action :set_lesson, only: %i[show edit update]
-  def index
-    @lessons = @lessons.page(params[:page])
-  end
 
   def show
     @lesson_group = @lesson.lesson_group
@@ -51,14 +47,6 @@ class Teacher::LessonsController < Teacher::Base
 
   def set_lesson
     @lesson = current_teacher_school.lessons.find(params[:id])
-  end
-
-  def search_lessons
-    @q = current_teacher_school
-          .lessons
-          .includes(:teacher, lesson_group: [:school_building])
-          .ransack(params[:q])
-    @lessons = @q.result(distinct: true)
   end
 
   def lesson_params
