@@ -1,6 +1,10 @@
 .o-search-form.mt16.mb40
-  %h3.o-search-form__title= "#{ current_teacher_school_building.name}の入学リクエスト一覧"
+  %h3.o-search-form__title.mb32= "#{ current_teacher_school_building.name}の入学リクエスト一覧"
   = search_form_for(@q, url: teacher_join_requests_path) do |f|
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :user_id_eq, '生徒ID', class: 'm-label-and-input__label'
+        = f.search_field :user_id_eq, class: 'm-label-and-input__input'
     .o-search-form__label_forms
       .m-label-and-input
         = f.label :status_eq, '状態', class: 'm-label-and-input__label'
@@ -9,12 +13,14 @@
       .m-button-set
         = link_to 'クリア', teacher_join_requests_path, class: 'a-button a-button--cancel'
         = f.submit '検索', class: 'a-button a-button--primary'
-.flex-sparo
-  - if @join_requests.size == 0
-    .mt24 未チェックの入学リクエストはありません
-  - else
+- if @join_requests.size == 0
+  .mt24 未チェックの入学リクエストはありません
+- else
+  = paginate @join_requests
+  .flex-sparo.mt16
     %table.o-table-simple.mr40
       %thead.o-table-simple__thead
+        %th.o-table-simple__th ID
         %th.o-table-simple__th ニックネーム
         %th.o-table-simple__th 学年
         %th.o-table-simple__th 状態
@@ -24,6 +30,7 @@
         %th.o-table-simple__th
       - @join_requests.each do |request|
         %tr.o-table-simple__tr
+          %td.o-table-simple__td= request.user_id
           %td.o-table-simple__td= request.user.name
           %td.o-table-simple__td= school_grade_to_s(request.user.school_grade)
           %td.o-table-simple__td= request.status_i18n
