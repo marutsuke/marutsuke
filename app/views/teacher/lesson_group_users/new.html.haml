@@ -1,6 +1,6 @@
 .mt24.ml24
   = "#{@user.name}さん受講講座登録ページ"
-  = link_to "#{@user.name}さん受講一覧に戻る", lesson_groups_teacher_user_path(@user)
+  = link_to "戻る", teacher_user_path(@user)
 .user_form
   = form_with url: teacher_user_lesson_group_users_path(@user), model: @lesson_group_user, local: true do |f|
     = render 'shared/error_messages', model_object: @lesson_group_user

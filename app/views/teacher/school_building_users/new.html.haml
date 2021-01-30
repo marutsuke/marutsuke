@@ -8,7 +8,7 @@
     = render 'shared/error_messages', model_object: @school_building_user
     .user_form__label_and_input
       = f.label :school_building_id, class: 'required'
-      = f.select :school_building_id, (current_teacher.school_buildings - @user.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
+      = f.select :school_building_id, (current_teacher_school.school_buildings - @user.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
     .user_form__label_and_input--checkbox
       = f.label :main
       = f.check_box(:main, {checked: false})

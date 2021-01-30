@@ -13,7 +13,7 @@
         .m-heading__text
           %h2.a-text-primary.a-text-huge プロフィール
         .m-heading__button
-        .a-text-xlarge= link_to '生徒アカウント一覧に戻る',  teacher_users_path
+        .a-text-xlarge= link_to '戻る',  teacher_users_path, class: 'a-button a-button--secondary'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
@@ -58,3 +58,5 @@
     = link_to '所属校舎編集', new_teacher_user_school_building_user_path(@user)
   .wrap
     = link_to 'アカウント開始・終了時間編集', edit_teacher_school_user_path(@user.school_user(current_teacher_school))
+  .wrap
+    = link_to '受講登録', new_teacher_user_lesson_group_user_path(@user)

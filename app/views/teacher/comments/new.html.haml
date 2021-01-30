@@ -46,7 +46,7 @@
   .o-checking__right-container
     .o-checking__question-title.flex-spbet-end
       .a-text-primary.a-text-xlarge= @target_answer.question.info
-      .ml16= link_to '課題状況に戻る', teacher_answer_check_path(@lesson, question_id: @question.id)
+      .ml16= link_to '戻る', teacher_answer_check_path(@lesson, question_id: @question.id), class: 'a-button a-button--secondary'
     -# 要望が出たら戻す
     -# .flex-spbet-end
     -#   .div
