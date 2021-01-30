@@ -90,4 +90,8 @@
           = image_tag @question.image_url, alt: @question.image_alt, class: 'o-checking__question-image'
     .o-checking__question-text
       = @question.text
+    .m-question__note-head
+      .a-text-secondary メモ
+    .m-question__note
+      .a-text-note= @question.note
 
