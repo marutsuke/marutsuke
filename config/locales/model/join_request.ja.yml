@@ -10,6 +10,6 @@ ja:
   enums:
     join_request:
       status:
-        requested: 出願中
+        requested: リクエスト中
         accepted: 許可
         rejected: 拒否

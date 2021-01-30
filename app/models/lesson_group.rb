@@ -64,7 +64,6 @@ class LessonGroup < ApplicationRecord
       )
   }
 
-
   def request_of(user)
     user.lesson_group_requests.find_by(lesson_group_id: id)
   end

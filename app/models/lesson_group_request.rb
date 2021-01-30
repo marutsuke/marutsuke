@@ -5,16 +5,21 @@ class LessonGroupRequest < ApplicationRecord
 
   validates :lesson_group_id, uniqueness: { scope: :user_id, case_sensitive: true }
 
+  paginates_per 20
+
   enum status: {
     requested: 10,
     accepted: 20,
     rejected: 30,
-    closed: 40
   }
 
   scope :checked_recently_lgr, lambda {
     where(status: ['accepted', 'rejected'])
       .where(updated_at: 7.days.ago..Time.current)
+  }
+
+  scope :created_desc_order, -> {
+    order(created_at: :desc)
   }
 
   def accept_user_attend
