@@ -1,7 +1,7 @@
 = form_with model: @answer, local: true do |f|
   .m-user-answer-form__text-area-wrap.mb16
     .m-user-answer-form__text-area-dummy{aria: {hidden: :true}, id: 'js-user-answer-form-text-area-dummy'}
-    = f.text_area :text, required: true, class: 'm-user-answer-form__text-area', id: 'js-user-answer-form-text-area', placeholder: 'この課題へ提出'
+    = f.text_area :text, required: true, class: 'm-user-answer-form__text-area', id: 'js-user-answer-form-text-area', placeholder: '先生できました'
   .m-user-answer-form__hidden-wrap.u-display-none{id: 'js-user-answer-form-hidden-area'}
     = f.fields_for @answer.answer_images.build do |ff|
       = ff.file_field :image, multiple: true
