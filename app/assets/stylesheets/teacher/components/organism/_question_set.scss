@@ -2,7 +2,6 @@
   display: flex;
   padding: 1rem;
   &__lesson-groups {
-    height: calc(100vh - 60px);
     overflow: scroll;
     width: 40%;
     border-right: 1px solid $indigo_4;
@@ -10,6 +9,8 @@
   &__lessons {
     width: 60%;
     height: calc(100vh - 60px);
+    display: flex;
+    justify-content: space-around;
     overflow: scroll;
   }
 }
