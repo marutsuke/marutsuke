@@ -23,8 +23,8 @@
                 %div= s_b_t.school_building.name
 
           %td.o-table-simple__td= teacher.decorate.email
-          %td.o-table-simple__td= teacher.decorate.start_at
-          %td.o-table-simple__td= teacher.decorate.end_at
+          %td.o-table-simple__td= teacher.decorate.start_at || '-'
+          %td.o-table-simple__td= teacher.decorate.end_at || '-'
           %td.o-table-simple__td= teacher.decorate.activated_status
           %td.o-table-simple__td= link_to '詳細', teacher_teacher_path(teacher), class: 'a-button a-button--secondary'
           -# %td.o-table-simple__td= link_to '再送信', resend_activation_mail_teacher_teacher_path(teacher), method: :post, confirm: 'アカウント有効化メールを再送信します。よろしいですか。'
