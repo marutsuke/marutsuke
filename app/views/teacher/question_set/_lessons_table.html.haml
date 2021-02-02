@@ -1,5 +1,6 @@
 - if lessons.size > 0
-  .mt56.ml24= "#{lesson_group.school_building.name}#{lesson_group.name}の授業一覧"
+  %h3.mt56.ml24= "#{lessons.first.lesson_group.school_building.name}/#{lessons.first.lesson_group.name}"
+
   %table.o-table-simple.mr40
     %thead.o-table-simple__thead
       %th.o-table-simple__th= Lesson.human_attribute_name(:name)
