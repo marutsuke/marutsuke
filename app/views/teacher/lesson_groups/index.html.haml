@@ -1,9 +1,30 @@
-.flex
-  .mb24.mt16.ml16= link_to '講座新規作成', new_teacher_lesson_group_path
-講座一覧
-.mb48
-  - if @lesson_groups.present?
-    = paginate @lesson_groups
+.o-search-form.mt16
+  %h3.o-search-form__title.mb32= "#{ current_teacher_school_building.name}の講座一覧"
+  = search_form_for(@q, url: teacher_lesson_groups_path) do |f|
+    .o-search-form__label_forms
+      .m-label-and-input
+        - year = Time.zone.now.year - 1
+        = f.label :school_year_eq, '年度', class: 'm-label-and-input__label'
+        = f.select :school_year_eq, (year..year + 3), {include_blank: true, selected: @school_year}, {class: 'm-label-and-input__input'}
+      .m-label-and-input
+        = f.label :name_cont, '講座名', class: 'm-label-and-input__label'
+        = f.search_field :name_cont, class: 'm-label-and-input__input', value: @lesson_group_name
+    .o-search-form__label_forms
+      .m-label-and-input
+        = f.label :min_school_grade_eq, '対象学年下限', class: 'm-label-and-input__label'
+        = f.select :min_school_grade_eq, school_grade_select_array, { include_blank: '', selected: @min_school_grade || '' }, {  class: 'm-label-and-input__input' }
+      .m-label-and-input
+        = f.label :max_school_grade_eq, '対象学年上限', class: 'm-label-and-input__label'
+        = f.select :max_school_grade_eq, school_grade_select_array, { include_blank: '', selected: @max_school_grade || '' }, {  class: 'm-label-and-input__input' }
+    .o-search-form__button_area
+      .m-button-set
+        = link_to 'クリア', teacher_lesson_groups_path, class: 'a-button a-button--cancel'
+        = f.submit '検索', class: 'a-button a-button--primary'
+- if @lesson_groups.present?
+  = paginate @lesson_groups
+  .u-width-wrap-160
+    = link_to '新規作成', new_teacher_lesson_group_path, class: 'a-button a-button--primary ml40 mt40'
+  .flex-sparo.mt24
     %table.o-table-simple.mr40
       %thead.o-table-simple__thead
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:name)
@@ -14,7 +35,7 @@
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:free_attend)
         %th.o-table-simple__th 授業数
         %th.o-table-simple__th 授業追加・編集
-        %th.o-table-simple__th  講座情報編集
+        %th.o-table-simple__th  講座編集
       - @lesson_groups.each do |lesson_group|
         %tr.o-table-simple__tr
           %td.o-table-simple__td= lesson_group.name
@@ -24,6 +45,6 @@
           %td.o-table-simple__td= lesson_group.decorate.start_to_end_date
           %td.o-table-simple__td= lesson_group.decorate.free_attend_to_s
           %td.o-table-simple__td= lesson_group.lessons.size
-          %td.o-table-simple__td= link_to '授業追加・編集', teacher_lesson_group_path(lesson_group)
-          %td.o-table-simple__td= link_to '講座情報編集', edit_teacher_lesson_group_path(lesson_group)
+          %td.o-table-simple__td= link_to '授業', teacher_lesson_group_path(lesson_group), class:  'a-button a-button--secondary'
+          %td.o-table-simple__td= link_to '編集', edit_teacher_lesson_group_path(lesson_group), class: 'a-button a-button--edit'
     = paginate @lesson_groups
