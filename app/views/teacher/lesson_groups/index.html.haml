@@ -28,7 +28,6 @@
     %table.o-table-simple.mr40
       %thead.o-table-simple__thead
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:name)
-        %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_building_id)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:school_year)
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:target_school_grade)
         %th.o-table-simple__th 公開期間
@@ -39,7 +38,6 @@
       - @lesson_groups.each do |lesson_group|
         %tr.o-table-simple__tr
           %td.o-table-simple__td= lesson_group.name
-          %td.o-table-simple__td= lesson_group.school_building.name
           %td.o-table-simple__td= lesson_group.school_year
           %td.o-table-simple__td= lesson_group.decorate.target_school_grade
           %td.o-table-simple__td= lesson_group.decorate.start_to_end_date
