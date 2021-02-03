@@ -96,7 +96,9 @@ Rails.application.routes.draw do
     get '/questions', to: 'question_set#index'
     resources :users, only: %i[index show edit] do
       get :lesson_groups, on: :member
-      resources :school_building_users, only: %i[new create destroy]
+      resources :school_building_users, only: %i[new destroy update] do
+        post :create, on: :member
+      end
       resources :lesson_group_users, only: %i[new create destroy]
     end
     resources :school_users, only: %i[edit update]

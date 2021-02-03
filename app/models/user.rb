@@ -102,7 +102,11 @@ class User < ApplicationRecord
   end
 
   def sub_school_buildings(school)
-    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: false))
+    school.school_buildings.joins(:school_building_users).merge(school_building_users.where(main: false))
+  end
+
+  def school_buildings_not_belong_to(school)
+    school.school_buildings - school_buildings
   end
 
   def school_user(school)
