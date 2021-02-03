@@ -98,11 +98,11 @@ class User < ApplicationRecord
   end
 
   def school_buildings_main_order(school)
-    school_buildings.includes(:school_building_users).where(school_id: school.id).order('school_building_users.main desc')
+    school.school_buildings.includes(:school_building_users).order('school_building_users.main desc')
   end
 
   def sub_school_buildings(school)
-    school_buildings.includes(:school_building_users).where(school_id: school.id).where('school_building_users.main = ?', false)
+    school.school_buildings.joins(:school_building_users).merge(SchoolBuildingUser.where(main: false))
   end
 
   def school_user(school)
