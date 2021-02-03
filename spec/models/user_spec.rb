@@ -67,6 +67,26 @@ RSpec.describe User, type: :model do
     it { expect(user.main_school_building(school)).to eq school_building_1 }
   end
 
+  describe '#sub_school_buildings' do
+    let!(:user) { create(:user) }
+    let!(:school){ create(:school) }
+    let!(:school_2){ create(:school) }
+    let!(:school_user) { create(:school_user, user: user, school: school ) }
+    let!(:school_user_2) { create(:school_user, user: user, school: school_2 ) }
+    let!(:school_building_1) { create(:school_building, school: school) }
+    let!(:school_building_2) { create(:school_building, school: school) }
+    let!(:school_building_2_1) { create(:school_building, school: school_2) }
+    let!(:school_building_2_2) { create(:school_building, school: school_2) }
+    let!(:school_building_user_1){ create(:school_building_user, school_building: school_building_1, user: user, main: true) }
+    let!(:school_building_user_2){ create(:school_building_user, :sub, school_building: school_building_2, user: user) }
+    let!(:school_building_user_2_1){ create(:school_building_user, school_building: school_building_2_1, user: user, main: true) }
+    let!(:school_building_user_2_2){ create(:school_building_user, :sub, school_building: school_building_2_2, user: user, main: true) }
+    it { expect(user.sub_school_buildings(school)).not_to include(school_building_1) }
+    it { expect(user.sub_school_buildings(school)).to include(school_building_2) }
+    it { expect(user.sub_school_buildings(school)).not_to include(school_building_2_1) }
+    it { expect(user.sub_school_buildings(school)).not_to include(school_building_2_2) }
+  end
+
   describe '#lesson_groups_in(school)' do
     subject { user.lesson_groups_in(school) }
     let(:user) { create(:user) }
