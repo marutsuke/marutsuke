@@ -97,10 +97,6 @@ class User < ApplicationRecord
     "#{main_school_building_name_in(school)}(所属校), #{sub_school_buildings_name_in(school)}"
   end
 
-  def school_buildings_main_order(school)
-    school.school_buildings.includes(:school_building_users).order('school_building_users.main desc')
-  end
-
   def sub_school_buildings(school)
     school.school_buildings.joins(:school_building_users).merge(school_building_users.where(main: false))
   end
