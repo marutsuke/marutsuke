@@ -1,8 +1,8 @@
-.flex-sparo
+.flex-sparo.mt24
+  %h2.a-text-primary.a-text-xlarge
+    = "#{@user.name}さんの所属校登録"
   .wrap
-    = "#{@user.name}さんの所属校・他校受講校登録"
-  .wrap
-    = link_to '生徒アカウントに戻る', teacher_user_path(@user)
+    = link_to '戻る', teacher_user_path(@user), class: 'a-button a-button--secondary'
 %hr
 .flex-sparo.mt24
   %table.o-table-simple.mr40
