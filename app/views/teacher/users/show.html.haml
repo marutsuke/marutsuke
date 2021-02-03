@@ -60,7 +60,9 @@
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
-          .a-text-secondary.a-text-large 受講講座数
+          .a-text-secondary.a-text-large 受講中の講座
         .m-profile-item__body.flex-spbet
-          .a-text-primary.a-text-xlarge= @school_user.user.lesson_groups.for_school(current_teacher_school).size || '-'
-          =link_to '一覧', new_teacher_user_lesson_group_user_path(@user), class:  'a-button  a-button--secondary ml40'
+          %div
+            - @user.lesson_groups_in(current_teacher_school).in_open.each do |lesson_group|
+              .a-text-primary.a-text-xlarge= lesson_group.name
+          =link_to '編集', new_teacher_user_lesson_group_user_path(@user), class:  'a-button  a-button--edit ml40'
