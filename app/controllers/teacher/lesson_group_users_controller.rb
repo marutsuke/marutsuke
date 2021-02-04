@@ -8,18 +8,17 @@ class Teacher::LessonGroupUsersController < Teacher::Base
   end
 
   def create
-    @lesson_group_user =
-      @user
-      .lesson_group_users
-      .new(lesson_group_user_params)
+    @user = current_teacher_school_building.users.find(params[:user_id])
+    @lesson_group = current_teacher_school_building.lesson_groups.find(params[:id])
 
-      raise ActiveRecord::RecordNotFound unless @lesson_group_user.lesson_group.school_building.school == current_teacher_school
+    @lesson_group_user = @user.lesson_group_users.new(lesson_group_id: @lesson_group.id)
 
-      if @lesson_group_user.save
-      flash[:success] = '登録に成功しました。'
+    if @lesson_group_user.save
+      flash[:success] = '登録しました。'
       redirect_to new_teacher_user_lesson_group_user_path(@user)
     else
-      render :new
+      flash[:success] = '失敗しました'
+      redirect_to new_teacher_user_lesson_group_user_path(@user)
     end
   end
 

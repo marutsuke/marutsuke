@@ -24,7 +24,7 @@
         %td.o-table-simple__td= lesson_group.name
         %td.o-table-simple__td= lesson_group.school_year
         %td.o-table-simple__td= lesson_group.decorate.target_school_grade
-        %td.o-table-simple__td 受講
+        %td.o-table-simple__td= link_to '受講', teacher_user_lesson_group_user_path(@user, lesson_group), method: :post, class: 'a-button a-button--primary'
         %td.o-table-simple__td
 
 
