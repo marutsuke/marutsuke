@@ -12,5 +12,5 @@ ja:
         start_at_date: アカウント開始日時
         end_at: アカウント終了日時
         end_at_date: アカウント終了日時
-        activated: アカウント有効化
+        activated: アカウント有効
         activated_at: ユーザーアカウント有効化日時

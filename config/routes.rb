@@ -103,7 +103,9 @@ Rails.application.routes.draw do
         post :create, on: :member
       end
     end
-    resources :school_users, only: %i[edit update]
+    resources :school_users, only: %i[edit update destroy] do
+      post :create, on: :member
+    end
     resources :schools, only: %i[edit update]
     resources :teachers, only: %i[index new create edit update show] do
       member do

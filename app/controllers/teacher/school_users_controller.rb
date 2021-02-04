@@ -13,6 +13,18 @@ class Teacher::SchoolUsersController < Teacher::Base
     end
   end
 
+  def destroy
+    @school_user.update(activated: false)
+    flash[:danger] = '無効にしました'
+    redirect_to edit_teacher_school_user_path(@school_user)
+end
+
+  def create
+    @school_user.update(activated: true)
+    flash[:success] = 'アカウントを有効にしました'
+    redirect_to edit_teacher_school_user_path(@school_user)
+end
+
   private
   def set_school_user
     @school_user = current_teacher_school.school_users.find(params[:id])
