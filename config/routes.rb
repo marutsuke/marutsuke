@@ -111,7 +111,9 @@ Rails.application.routes.draw do
       member do
         post :resend_activation_mail
       end
-      resources :school_building_teachers, only: %i[new create destroy]
+      resources :school_building_teachers, only: %i[new update destroy] do
+        post :create, on: :member
+      end
     end
     resources :lessons, only: %i[show edit update] do
       resources :questions, only: :new

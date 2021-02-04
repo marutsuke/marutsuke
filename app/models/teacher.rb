@@ -63,7 +63,12 @@ class Teacher < ApplicationRecord
   end
 
   def sub_school_buildings
-    school_buildings.joins(:school_building_teachers).merge(SchoolBuildingTeacher.where(main: false))
+    school_buildings.joins(:school_building_teachers).merge(SchoolBuildingTeacher.where(main: false)).distinct
+  end
+
+  def school_buildings_not_belog_to
+    ids = school_buildings.pluck(:id)
+    school.school_buildings.where.not(id: ids)
   end
 
   private
