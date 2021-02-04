@@ -4,11 +4,7 @@ class Teacher::LessonGroupUsersController < Teacher::Base
   before_action :set_user
 
   def new
-    @lesson_group_users = @user.lesson_group_users.for_school(current_teacher_school)
-    @lesson_group_user = @user.lesson_group_users.new
-    @lesson_groups = LessonGroup
-                      .for_school(current_teacher_school)
-                      .for_school_buildings_belonged_to_teacher_and_user(current_teacher, @user) - @user.lesson_groups
+    @lesson_groups = current_teacher_school_building.lesson_groups.in_open
   end
 
   def create

@@ -19,17 +19,16 @@ class LessonGroup < ApplicationRecord
             .for_school_buildings_belonged_to_user(user)
         }
 
-  scope :for_school_buildings_belonged_to_teacher, lambda { |teacher|
-    where(school_building_id: teacher
-            .school_building_teachers.pluck(:school_building_id))
-  }
-
-  scope :for_school_buildings_belonged_to_user, lambda { |user|
-    where(school_building_id: user.school_building_users.pluck(:school_building_id))
+  scope :for_school_building, lambda { |school_building|
+    where(school_building_id: school_building.id)
   }
 
   scope :for_school, lambda { |school|
     joins(:school_building).merge(school.school_buildings)
+  }
+
+  scope :for_school_buildings_belonged_to_user, lambda { |user|
+    where(school_building_id: user.school_building_users.pluck(:school_building_id))
   }
 
   scope :for_school_grade, lambda { |school_grade|

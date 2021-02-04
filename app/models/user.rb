@@ -113,6 +113,15 @@ class User < ApplicationRecord
     lesson_groups.for_school(school)
   end
 
+  def lesson_groups_at_school_building(school_building)
+    lesson_groups.for_school_building(school_building)
+  end
+
+  def lesson_groups_not_taken_at_school_building(school_building)
+    ids = (school_building.lesson_groups - lesson_groups).pluck(:id)
+    school_building.lesson_groups.where(id: ids)
+  end
+
   def send_comment_notification(comment)
     return unless notification_permission?
 
