@@ -1,6 +1,6 @@
 .flex-sparo.mt24
   %h2.a-text-primary.a-text-xlarge
-    = "#{@user.name}さんの受講登録"
+    = "#{@user.name}さん(#{@user.decorate.school_grade_to_s})の受講登録"
   .wrap
     = link_to '戻る', teacher_user_path(@user), class: 'a-button a-button--secondary'
 %hr
@@ -18,7 +18,7 @@
         %td.o-table-simple__td= lesson_group.school_year
         %td.o-table-simple__td= lesson_group.decorate.target_school_grade
         %td.o-table-simple__td
-        %td.o-table-simple__td 解除
+        %td.o-table-simple__td= link_to '解除', teacher_user_lesson_group_user_path(user_id: @user.id, id: lesson_group.id), method: :delete, class: 'a-button a-button--danger'
     - @user.lesson_groups_not_taken_at_school_building(current_teacher_school_building).in_open.each do |lesson_group|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= lesson_group.name
