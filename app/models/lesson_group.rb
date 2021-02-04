@@ -31,6 +31,11 @@ class LessonGroup < ApplicationRecord
     where(school_building_id: user.school_building_users.pluck(:school_building_id))
   }
 
+  scope :for_school_buildings_belonged_to_teacher, lambda { |teacher|
+    where(school_building_id: teacher.school_buildings.pluck(:id))
+  }
+
+
   scope :for_school_grade, lambda { |school_grade|
     where(min_school_grade: school_grade)
       .where(max_school_grade: nil)
