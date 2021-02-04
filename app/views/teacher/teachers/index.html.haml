@@ -1,3 +1,5 @@
+.flex-sparo.mt24
+  %h3.a-text-primary= "#{current_teacher_school_building.name}の教員一覧"
 - if @teachers.present?
   = paginate @teachers
   .u-width-wrap-160
@@ -6,7 +8,7 @@
     %table.o-table-simple
       %thead.o-table-simple__thead
         %th.o-table-simple__th= Teacher.human_attribute_name(:name)
-        %th.o-table-simple__th 所属校
+        %th.o-table-simple__th 所属校数
         %th.o-table-simple__th= Teacher.human_attribute_name(:email)
         %th.o-table-simple__th= Teacher.human_attribute_name(:start_at)
         %th.o-table-simple__th= Teacher.human_attribute_name(:end_at)
@@ -15,12 +17,12 @@
       - @teachers.each do |teacher|
         %tr.o-table-simple__tr
           %td.o-table-simple__td= teacher.name
-          %td.o-table-simple__td
-            - teacher.school_building_teachers.main_order.each do |s_b_t|
-              - if s_b_t.main?
-                %div= "#{s_b_t.school_building.name}(所属)"
-              - else
-                %div= s_b_t.school_building.name
+          %td.o-table-simple__td= teacher.school_building_teachers.size
+          -# - teacher.school_building_teachers.main_order.each do |s_b_t|
+          -#   - if s_b_t.main?
+          -#     %div= "#{s_b_t.school_building.name}(所属)"
+          -#   - else
+          -#     %div= s_b_t.school_building.name
 
           %td.o-table-simple__td= teacher.decorate.email
           %td.o-table-simple__td= teacher.decorate.start_at || '-'

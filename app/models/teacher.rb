@@ -62,6 +62,10 @@ class Teacher < ApplicationRecord
     school_building_teachers.find_by(main: true)&.school_building
   end
 
+  def sub_school_buildings
+    school_buildings.joins(:school_building_teachers).merge(SchoolBuildingTeacher.where(main: false))
+  end
+
   private
 
   def downcase_email

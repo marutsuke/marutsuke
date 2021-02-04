@@ -26,4 +26,12 @@ class TeacherDecorator < Draper::Decorator
     select_array
   end
 
+  def start_at
+    super&.strftime('%F-%R') || '未設定'
+  end
+
+  def end_at
+    super&.strftime('%F-%R') || '未設定'
+  end
+
 end
