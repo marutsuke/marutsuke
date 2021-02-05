@@ -33,8 +33,8 @@
         %th.o-table-simple__th 公開期間
         %th.o-table-simple__th= LessonGroup.human_attribute_name(:free_attend)
         %th.o-table-simple__th 授業数
-        %th.o-table-simple__th 授業追加・編集
-        %th.o-table-simple__th  講座編集
+        %th.o-table-simple__th 受講生徒数
+        %th.o-table-simple__th  詳細
       - @lesson_groups.each do |lesson_group|
         %tr.o-table-simple__tr
           %td.o-table-simple__td= lesson_group.name
@@ -43,6 +43,6 @@
           %td.o-table-simple__td= lesson_group.decorate.start_to_end_date
           %td.o-table-simple__td= lesson_group.decorate.free_attend_to_s
           %td.o-table-simple__td= lesson_group.lessons.size
-          %td.o-table-simple__td= link_to '授業', teacher_lesson_group_path(lesson_group), class:  'a-button a-button--secondary'
-          %td.o-table-simple__td= link_to '編集', edit_teacher_lesson_group_path(lesson_group), class: 'a-button a-button--edit'
+          %td.o-table-simple__td= lesson_group.users.size
+          %td.o-table-simple__td= link_to '詳細', teacher_lesson_group_path(lesson_group), class:  'a-button a-button--secondary'
     = paginate @lesson_groups
