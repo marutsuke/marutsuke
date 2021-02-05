@@ -10,11 +10,12 @@
       %th.o-table-simple__th 所属状態
       %th.o-table-simple__th 所属アクション
       %th.o-table-simple__th 所属解除
-    %tr.o-table-simple__tr
-      %td.o-table-simple__td= @teacher.main_school_building.name
-      %td.o-table-simple__td 本所属
-      %td.o-table-simple__td -
-      %td.o-table-simple__td -
+    - if @teacher.main_school_building.present?
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= @teacher.main_school_building.name
+        %td.o-table-simple__td 本所属
+        %td.o-table-simple__td -
+        %td.o-table-simple__td -
     - @teacher.sub_school_buildings.each do |school_building|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= school_building.name

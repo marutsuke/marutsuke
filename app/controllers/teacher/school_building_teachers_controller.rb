@@ -11,6 +11,7 @@ class Teacher::SchoolBuildingTeachersController < Teacher::Base
     @school_building = current_teacher_school.school_buildings.find(params[:id])
     @school_building_teacher = @teacher.school_building_teachers.new(school_building_id: @school_building.id, main: false)
     if @school_building_teacher.save
+      @school_building_teacher.update(main: true) unless @teacher.main_school_building
       flash[:success] = '登録に成功しました。'
       redirect_to new_teacher_teacher_school_building_teacher_path(@teacher)
     else
