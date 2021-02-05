@@ -1,7 +1,8 @@
-.mt24.ml16= link_to '校舎一覧に戻る', teacher_school_buildings_path
-.m-heading.m-heading--line
-  .m-heading__text.a-text-xlarge 校舎作成
-
+.flex-sparo.mt24
+  %h2.a-text-primary.a-text-xlarge 校舎作成
+  .wrap
+    = link_to '戻る', teacher_school_buildings_path, class: 'a-button a-button--secondary'
+%hr
 .o-form-group.mt24
   = form_with model: [:teacher, @school_building], local: true do |f|
     .o-form-group__body
