@@ -42,6 +42,10 @@ class Lesson < ApplicationRecord
       .merge(Question.checking)
   }
 
+  scope :taught_by, lambda { |teacher|
+    where(teacher_id: teacher.id)
+  }
+
   scope :no_question, lambda {
     left_outer_joins(:questions)
       .where(questions: { id: nil })
@@ -85,6 +89,10 @@ class Lesson < ApplicationRecord
 
   def checking_count
     questions.checking.size
+  end
+
+  def should_check?
+    questions.checking.exists?
   end
 
   def complete_count

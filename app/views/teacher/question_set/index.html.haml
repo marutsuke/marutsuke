@@ -12,7 +12,7 @@
             %th.o-table-simple__th 校舎名
             %th.o-table-simple__th 講座名
             %th.o-table-simple__th
-          - @lesson_groups.each do |lesson_group|
+          - @lesson_groups.includes(:school_building).each do |lesson_group|
             %tr.o-table-simple__tr{ id: "js-lesson_group-tr--#{lesson_group.id}"}
               %td.o-table-simple__td= lesson_group.decorate.target_school_grade
               %td.o-table-simple__td= lesson_group.school_building.name
@@ -25,4 +25,4 @@
   .o-question-set__lessons
     #js-lessons_table
       - if @lesson
-        = render 'teacher/question_set/lessons_table', lesson_group: @lesson.lesson_group, lessons: @lesson.lesson_group.lessons
+        = render 'teacher/question_set/lessons_table', lesson_group: @lesson.lesson_group, lessons: @lesson.lesson_group.lessons.includes(:teacher).taught_by(current_teacher)
