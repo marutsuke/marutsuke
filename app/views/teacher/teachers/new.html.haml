@@ -1,2 +1,6 @@
-.user_form__title 教師追加登録
+.flex-sparo
+  %h2.mt16.ml16 教員登録
+  .mt16.ml16= link_to '戻る', teacher_teachers_path, class: 'a-button a-button--secondary'
+%hr
+
 = render 'form', teacher: @teacher, password_show: true
