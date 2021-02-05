@@ -8,6 +8,7 @@ class LessonGroup < ApplicationRecord
   has_many :lesson_group_requests
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: [:school_building_id, :school_year], case_sensitive: false }
   validates :min_school_grade, presence: true
+  validates :start_at, presence: true
   validate :min_school_grade_validate
   validate :max_school_grade_validate
   validate :start_at_and_end_at_validate
