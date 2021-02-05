@@ -21,5 +21,5 @@
         %td.o-table-simple__td
           - if lesson.should_check?
             = link_to "未チェックあり", teacher_answer_check_path(lesson), class: 'a-button a-button--primary'
-          - else
+          - elsif lesson.questions.exists?
             = link_to "チェック", teacher_answer_check_path(lesson), class: 'a-button a-button--secondary'
