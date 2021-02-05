@@ -1,7 +1,7 @@
 .flex-sparo.mt24.mb24
   %h2.a-text-primary.a-text-huge 講座編集
   .wrap
-    = link_to '戻る', teacher_lesson_groups_path, class: 'a-button a-button--secondary'
+    = link_to '戻る', teacher_lesson_group_path(@lesson_group), class: 'a-button a-button--secondary'
 %hr
 = render 'teacher/lesson_groups/form', lesson_group: @lesson_group, submit_word: '更新'
 

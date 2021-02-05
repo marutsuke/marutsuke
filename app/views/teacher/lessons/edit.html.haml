@@ -1,5 +1,6 @@
-.flex
-  .mt16.ml16.lesson_form__title= "#{@lesson_group.school_building.name}/ #{@lesson_group.school_year}年度/ #{@lesson_group.name}/ 授業編集"
-  .ml24.mt16= link_to '戻る', teacher_lesson_group_lessons_path(@lesson_group), class: 'a-button a-button--edit'
+.flex-sparo
+  %h2.mt16.ml16= "#{@lesson_group.name}/#{@lesson.name}/ 授業編集"
+  .mt16.ml16= link_to '戻る', teacher_lesson_group_lessons_path(@lesson_group), class: 'a-button a-button--secondary'
+%hr
 .mb32
 = render 'form', lesson: @lesson, url: teacher_lesson_path(@lesson)

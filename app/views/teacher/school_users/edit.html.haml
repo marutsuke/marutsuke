@@ -1,6 +1,7 @@
-.flex-sparo.mb40
+.flex-sparo
   %h2.mt16.ml16 #{@school_user.user.name}さんのアカウント設定
   .mt16.ml16= link_to '戻る', teacher_user_path(@school_user.user), class: 'a-button a-button--secondary'
+%hr
 .flex-sparo
   = form_with model: [:teacher, @school_user], local: true, method: :patch do |f|
     = render 'shared/error_messages', model_object: @school_user
