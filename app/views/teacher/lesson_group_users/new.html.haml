@@ -26,6 +26,15 @@
         %td.o-table-simple__td= lesson_group.decorate.target_school_grade
         %td.o-table-simple__td= link_to '受講', teacher_user_lesson_group_user_path(@user, lesson_group), method: :post, class: 'a-button a-button--primary'
         %td.o-table-simple__td
+    - @user.lesson_groups_at_other_school_building(current_teacher_school_building).in_open.each do |lesson_group|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= lesson_group.name
+        %td.o-table-simple__td= lesson_group.school_year
+        %td.o-table-simple__td= lesson_group.decorate.target_school_grade
+        %td.o-table-simple__td
+          .a-text-primary= "受講中"
+          .a-text-primary= "#{lesson_group.school_building.name}"
+        %td.o-table-simple__td
 
 
 
