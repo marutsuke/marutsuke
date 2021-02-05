@@ -2,7 +2,7 @@
   %h3.a-text-primary= "#{@lesson_group.name}の授業追加・編集"
   .ml40
     = link_to '戻る', teacher_lesson_group_path(@lesson_group), class: 'a-button a-button--secondary'
-
+%hr
 .u-width-wrap-160.ml40
   = link_to '授業追加', new_teacher_lesson_group_lesson_path(@lesson_group), class: 'a-button a-button--primary ml40 mt40'
 

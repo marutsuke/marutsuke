@@ -3,7 +3,7 @@
 class Lesson < ApplicationRecord
   attr_accessor :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :lesson_group_id, case_sensitive: false }
   validate :start_at_and_end_at_validate
 
   before_save { start_at_set }
