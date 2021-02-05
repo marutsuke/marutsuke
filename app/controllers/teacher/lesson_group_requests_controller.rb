@@ -3,7 +3,7 @@ class Teacher::LessonGroupRequestsController < Teacher::Base
   before_action :search_join_requests, only: %i[index]
 
   def index
-    @lesson_group_requests = @lesson_group_requests.created_desc_order.page(params[:page])
+    @lesson_group_requests = @lesson_group_requests.includes([:lesson_group, :user]).created_desc_order.page(params[:page])
   end
 
   def accept
