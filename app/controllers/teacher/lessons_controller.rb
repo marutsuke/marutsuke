@@ -5,7 +5,7 @@ class Teacher::LessonsController < Teacher::Base
 
   def index
     @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
-    @lessons = @lesson_group.lessons.page(params[:page])
+    @lessons = @lesson_group.lessons.includes(:teacher).page(params[:page])
   end
 
   def show
