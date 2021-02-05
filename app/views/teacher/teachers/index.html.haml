@@ -1,9 +1,9 @@
 .flex-sparo.mt24
   %h3.a-text-primary= "#{current_teacher_school_building.name}の教員一覧"
 - if @teachers.present?
-  = paginate @teachers
   .u-width-wrap-160
     = link_to '教員追加', new_teacher_teacher_path, class: 'a-button a-button--primary ml40 mt40'
+  = paginate @teachers
   .flex-sparo.mt24
     %table.o-table-simple
       %thead.o-table-simple__thead

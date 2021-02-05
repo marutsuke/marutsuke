@@ -3,6 +3,11 @@
 class Teacher::LessonsController < Teacher::Base
   before_action :set_lesson, only: %i[show edit update]
 
+  def index
+    @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
+    @lessons = @lesson_group.lessons.page(params[:page])
+  end
+
   def show
     @lesson_group = @lesson.lesson_group
     @questions = @lesson.questions

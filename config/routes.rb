@@ -143,7 +143,7 @@ Rails.application.routes.draw do
     end
     resources :school_building_settings, only: %i[index]
     resources :lesson_groups, only: %i[index new show create edit update destroy] do
-      resources :lessons, only: %i[new create]
+      resources :lessons, only: %i[index new create]
     end
     # resources :user_invitation_mails, only: %i[new create]
     resources :join_requests, only: %i[index] do
