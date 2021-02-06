@@ -27,7 +27,7 @@
           %ul.u-width-wrap-100per
             %li.flex-spbet
               .a-text-primary.a-text-large= "#{ @teacher.main_school_building.name }(本所属)"
-              =link_to '編集', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
+              =link_to '所属変更', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
             - @teacher.sub_school_buildings.each do |school_building|
               %li.flex-spbet
                 .a-text-primary.a-text-large= school_building.name
@@ -37,6 +37,8 @@
           .a-text-secondary.a-text-large 担当講座
         .m-profile-item__body
           %ul.u-width-wrap-100per
+            - unless LessonGroup.have_lesson_taught_by(@teacher).exists?
+              .a-text-primary.a-text-large 担当はまだありません
             - LessonGroup.have_lesson_taught_by(@teacher).each do |lesson_group|
               %li.flex-spbet
                 .a-text-primary.a-text-large= lesson_group.name
