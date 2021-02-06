@@ -16,8 +16,10 @@ class Teacher::TeachersController < Teacher::Base
   def create
     @teacher = current_teacher_school.teachers.new(teacher_params)
     if @teacher.save
-      flash[:success] = "#{@teacher.name}先生を作成し、アクティベーションメールを送信しました"
-      @teacher.send_activation_mail
+      flash[:success] = "#{@teacher.name}先生を作成しました"
+      current_teacher_school_building.school_building_teachers.new(teacher_id: @teacher.id, main: true).save
+      # flash[:success] = "#{@teacher.name}先生を作成し、アクティベーションメールを送信しました"
+      # @teacher.send_activation_mail
       redirect_to new_teacher_teacher_path
     else
       render 'new'
@@ -50,10 +52,10 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def teacher_params
-    params.require(:teacher).permit(:name, :email, :password, :password_confirmation, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min )
+    params.require(:teacher).permit(:name, :email, :password, :password_confirmation, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min, :login_id, :role, :image)
   end
 
   def teacher_update_params
-    params.require(:teacher).permit(:name, :email, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min)
+    params.require(:teacher).permit(:name, :email, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min, :login_id, :role, :image)
   end
 end

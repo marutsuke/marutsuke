@@ -6,22 +6,18 @@
 .flex-sparo.mt24
   %table.o-table-simple
     %thead.o-table-simple__thead
+      %th.o-table-simple__th= Teacher.human_attribute_name(:id)
       %th.o-table-simple__th= Teacher.human_attribute_name(:name)
-      %th.o-table-simple__th= Teacher.human_attribute_name(:email)
+      %th.o-table-simple__th= Teacher.human_attribute_name(:role)
       %th.o-table-simple__th= Teacher.human_attribute_name(:start_at)
       %th.o-table-simple__th= Teacher.human_attribute_name(:end_at)
       %th.o-table-simple__th= Teacher.human_attribute_name(:activated)
       %th.o-table-simple__th 詳細
     - @teachers.each do |teacher|
       %tr.o-table-simple__tr
+        %td.o-table-simple__td= teacher.id
         %td.o-table-simple__td= teacher.name
-        -# - teacher.school_building_teachers.main_order.each do |s_b_t|
-        -#   - if s_b_t.main?
-        -#     %div= "#{s_b_t.school_building.name}(所属)"
-        -#   - else
-        -#     %div= s_b_t.school_building.name
-
-        %td.o-table-simple__td= teacher.decorate.email
+        %td.o-table-simple__td= teacher.role_i18n
         %td.o-table-simple__td= teacher.decorate.start_at || '-'
         %td.o-table-simple__td= teacher.decorate.end_at || '-'
         %td.o-table-simple__td= teacher.decorate.activated_status

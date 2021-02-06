@@ -5,7 +5,9 @@ class Teacher < ApplicationRecord
   :end_at_date, :end_at_hour, :end_at_min
 
   validates :name, presence: true, length: { maximum: 12 }
-  validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
+  validates :email, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :login_id, presence: true, length: { maximum: 30 }, format: { with: VALIDATE_FORMAT_OF_ID, message: 'は半角英数字8文字以上です' }, uniqueness: { scope: :school_id, case_sensitive: false }
+  validates :role, presence: true
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :password, presence: true, length: { minimum: 8 }, on: :update, allow_blank: true
   validate :start_at_and_end_at_validate
@@ -22,6 +24,13 @@ class Teacher < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :school_building_teachers
   has_many :school_buildings, through: :school_building_teachers
+
+  enum role: {
+    general_teacher: 10,
+    regular_teacher: 20,
+    school_building_owner: 30,
+    school_owner: 40
+  }
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
@@ -42,6 +51,18 @@ class Teacher < ApplicationRecord
     return false if digest.nil?
 
     BCrypt::Password.new(digest).is_password?(teacher_token)
+  end
+
+  def regular_teacher_authority?
+    regular_teacher? || school_building_owner? || school_owner?
+  end
+
+  def school_building_owner_authority?
+    school_building_owner? || school_owner?
+  end
+
+  def school_owner_authority?
+    school_owner?
   end
 
   def forget
@@ -83,6 +104,7 @@ class Teacher < ApplicationRecord
 
   def downcase_email
     self.email = email.downcase
+    self.email = nil if self.email.blank?
   end
 
   def create_activation_digest

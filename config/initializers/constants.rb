@@ -1,6 +1,8 @@
 # 書式バリデーション
 VALIDATE_FORMAT_OF_EMAIL = /[A-Za-z0-9\-\.\_]+@[A-Za-z0-9\-\_]+\.[A-Za-z0-9\-\.\_]+/
 
+VALIDATE_FORMAT_OF_ID = /\A([a-zA-Z0-9]{8,})\z/
+
 #学年ハッシュ
 SCHOOL_GRADE_HASH = { 4 => '年少',
                       5 => '年中',
