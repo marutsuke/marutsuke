@@ -1,8 +1,8 @@
 class SchoolUser < ApplicationRecord
   attr_accessor :start_at_date, :start_at_hour, :start_at_min,
   :end_at_date, :end_at_hour, :end_at_min
-  before_save { start_at_set }
-  before_save { end_at_set }
+  before_validation { start_at_set }
+  before_validation { end_at_set }
 
   belongs_to :user, optional: true
   belongs_to :school
