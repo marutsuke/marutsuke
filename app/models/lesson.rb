@@ -6,8 +6,8 @@ class Lesson < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :lesson_group_id, case_sensitive: false }
   validate :start_at_and_end_at_validate
 
-  before_save { start_at_set }
-  before_save { end_at_set }
+  before_validation { start_at_set }
+  before_validation { end_at_set }
   belongs_to :school
   belongs_to :teacher
   belongs_to :lesson_group
@@ -127,7 +127,7 @@ class Lesson < ApplicationRecord
   def start_at_and_end_at_validate
     return if end_at.nil?
 
-    errors.add(:end_at, 'はアカウント開始日時より後にしてください。') unless start_at < end_at
+    errors.add(:end_at, 'は提出受付開始より後にしてください。') unless start_at < end_at
   end
 
 end
