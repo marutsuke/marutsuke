@@ -1,20 +1,52 @@
-= "#{@teacher.name}先生の所属校・兼務校登録"
-.user_form
-  = form_with url: teacher_teacher_school_building_teachers_path(@teacher), model: @school_building_teacher, local: true do |f|
-    = render 'shared/error_messages', model_object: @school_building_teacher
-    .user_form__label_and_input
-      = f.label :school_building_id, class: 'required'
-      = f.select :school_building_id, (current_teacher_school.school_buildings - @teacher.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
-    .user_form__label_and_input--checkbox
-      = f.label :main
-      = f.check_box(:main, {checked: false})
-    = f.submit '登録する', class: 'user_form__submit_btn'
+.flex-sparo.mt24
+  %h2.a-text-primary.a-text-xlarge= "#{@teacher.name}先生の所属校・兼務校登録"
+  .wrap
+    = link_to '戻る', teacher_teacher_path(@teacher), class: 'a-button a-button--secondary'
 %hr
-%hr
-- @teacher.school_building_teachers.where.not(id: nil).main_order.each do |school_building_teacher|
-  = school_building_teacher.school_building.name
-  - if school_building_teacher.main?
-    (所属校)
-  - else
-    = link_to '削除', teacher_teacher_school_building_teacher_path(@teacher, school_building_teacher), method: :delete, class: 'btn  btn-samll btn-danger'
-  %hr
+.flex-sparo.mt24
+  %table.o-table-simple.mr40
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th 校舎名
+      %th.o-table-simple__th 所属状態
+      %th.o-table-simple__th 所属アクション
+      %th.o-table-simple__th 所属解除
+    - if @teacher.main_school_building.present?
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= @teacher.main_school_building.name
+        %td.o-table-simple__td 本所属
+        %td.o-table-simple__td -
+        %td.o-table-simple__td -
+    - @teacher.sub_school_buildings.each do |school_building|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= school_building.name
+        %td.o-table-simple__td 所属
+        %td.o-table-simple__td= link_to '本所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :patch, class: 'a-button a-button--primary'
+        %td.o-table-simple__td= link_to '解除', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :delete, class: 'a-button a-button--danger'
+    - @teacher.school_buildings_not_belog_to.each do |school_building|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= school_building.name
+        %td.o-table-simple__td -
+        %td.o-table-simple__td= link_to '所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :post, class: 'a-button a-button--secondary'
+        %td.o-table-simple__td
+
+
+
+-# .user_form
+-#   = form_with url: teacher_teacher_school_building_teachers_path(@teacher), model: @school_building_teacher, local: true do |f|
+-#     = render 'shared/error_messages', model_object: @school_building_teacher
+-#     .user_form__label_and_input
+-#       = f.label :school_building_id, class: 'required'
+-#       = f.select :school_building_id, (current_teacher_school.school_buildings - @teacher.school_buildings).map{|s_b| [s_b.name, s_b.id]}, include_blank: true
+-#     .user_form__label_and_input--checkbox
+-#       = f.label :main
+-#       = f.check_box(:main, {checked: false})
+-#     = f.submit '登録する', class: 'user_form__submit_btn'
+-# %hr
+-# %hr
+-# - @teacher.school_building_teachers.where.not(id: nil).main_order.each do |school_building_teacher|
+-#   = school_building_teacher.school_building.name
+-#   - if school_building_teacher.main?
+-#     (所属校)
+-#   - else
+-#     = link_to '削除', teacher_teacher_school_building_teacher_path(@teacher, school_building_teacher), method: :delete, class: 'btn  btn-samll btn-danger'
+-#   %hr

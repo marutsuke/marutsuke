@@ -47,6 +47,9 @@
     .o-checking__question-title.flex-spbet-end
       .a-text-primary.a-text-xlarge= @target_answer.question.info
       .ml16= link_to '戻る', teacher_answer_check_path(@lesson, question_id: @question.id), class: 'a-button a-button--secondary'
+    .flex-sparo.mb16
+      .a-text-large= "#{ @question_status.user.name }さん"
+      .a-text-large= @question_status.decorate.status_for_teacher || '未確認'
     -# 要望が出たら戻す
     -# .flex-spbet-end
     -#   .div
@@ -78,10 +81,10 @@
     .o-checking__page-buttons-area.mt56
       .o-checking__page-button--long
         - if prev_status_submitted = @question_status.prev_question_status_submitted
-          = link_to '< 前の提出者', new_teacher_question_status_comment_path(prev_status_submitted), class: ''
+          = link_to '< 前', new_teacher_question_status_comment_path(prev_status_submitted), class: 'a-button a-button--secondary'
       .o-checking__page-button--long
         - if next_status_submitted = @question_status.next_question_status_submitted
-          = link_to '次の提出者 >', new_teacher_question_status_comment_path(next_status_submitted), class: ''
+          = link_to '次 >', new_teacher_question_status_comment_path(next_status_submitted), class: 'a-button a-button--secondary'
     .o-checking__question-area
       .o-checking__question-head
         .a-text-primary.a-text-large 課題内容

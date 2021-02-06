@@ -96,16 +96,24 @@ Rails.application.routes.draw do
     get '/questions', to: 'question_set#index'
     resources :users, only: %i[index show edit] do
       get :lesson_groups, on: :member
-      resources :school_building_users, only: %i[new create destroy]
-      resources :lesson_group_users, only: %i[new create destroy]
+      resources :school_building_users, only: %i[new destroy update] do
+        post :create, on: :member
+      end
+      resources :lesson_group_users, only: %i[new destroy] do
+        post :create, on: :member
+      end
     end
-    resources :school_users, only: %i[edit update]
+    resources :school_users, only: %i[edit update destroy] do
+      post :create, on: :member
+    end
     resources :schools, only: %i[edit update]
     resources :teachers, only: %i[index new create edit update show] do
       member do
         post :resend_activation_mail
       end
-      resources :school_building_teachers, only: %i[new create destroy]
+      resources :school_building_teachers, only: %i[new update destroy] do
+        post :create, on: :member
+      end
     end
     resources :lessons, only: %i[show edit update] do
       resources :questions, only: :new
@@ -135,7 +143,7 @@ Rails.application.routes.draw do
     end
     resources :school_building_settings, only: %i[index]
     resources :lesson_groups, only: %i[index new show create edit update destroy] do
-      resources :lessons, only: %i[new create]
+      resources :lessons, only: %i[index new create]
     end
     # resources :user_invitation_mails, only: %i[new create]
     resources :join_requests, only: %i[index] do

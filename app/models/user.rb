@@ -97,12 +97,12 @@ class User < ApplicationRecord
     "#{main_school_building_name_in(school)}(所属校), #{sub_school_buildings_name_in(school)}"
   end
 
-  def school_buildings_main_order(school)
-    school_buildings.includes(:school_building_users).where(school_id: school.id).order('school_building_users.main desc')
+  def sub_school_buildings(school)
+    school.school_buildings.joins(:school_building_users).merge(school_building_users.where(main: false))
   end
 
-  def sub_school_buildings(school)
-    school_buildings.includes(:school_building_users).where(school_id: school.id).where('school_building_users.main = ?', false)
+  def school_buildings_not_belong_to(school)
+    school.school_buildings - school_buildings
   end
 
   def school_user(school)
@@ -111,6 +111,20 @@ class User < ApplicationRecord
 
   def lesson_groups_in(school)
     lesson_groups.for_school(school)
+  end
+
+  def lesson_groups_at_school_building(school_building)
+    lesson_groups.for_school_building(school_building)
+  end
+
+  def lesson_groups_not_taken_at_school_building(school_building)
+    ids = (school_building.lesson_groups - lesson_groups).pluck(:id)
+    school_building.lesson_groups.where(id: ids)
+  end
+
+  def lesson_groups_at_other_school_building(school_building)
+    ids = (lesson_groups_in(school_building.school) - lesson_groups_at_school_building(school_building)).pluck(:id)
+    lesson_groups.where(id: ids)
   end
 
   def send_comment_notification(comment)

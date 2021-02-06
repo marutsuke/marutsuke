@@ -1,21 +1,36 @@
-= link_to 'ユーザープロフィールに戻る', teacher_user_path(@school_user.user)
-
-= form_with model: [:teacher, @school_user], local: true, method: :patch do |f|
-  = render 'shared/error_messages', model_object: @school_user
-  .lesson_form__label_and_input
-    = f.label :start_at_date, class: 'required'
-    .lesson_form__datetime_select
-      = f.date_field :start_at_date, value: @school_user.start_at&.to_date || Time.zone.today
-      = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, selected: @school_user.start_at&.hour || Time.zone.now.hour
-      = f.label :start_at_hour, '時'
-      = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, selected: @school_user.start_at&.min&.floor(-1) || Time.zone.now.min.floor(-1)
-      = f.label :start_at_min, '分'
-  .lesson_form__label_and_input
-    = f.label :end_at_date
-    .lesson_form__datetime_select
-      = f.date_field :end_at_date, value: @school_user.end_at&.to_date
-      = f.select :end_at_hour, (8..21).map{|e| [format('%02d', e), e]}, include_blank: true, selected: @school_user.end_at&.hour
-      = f.label :end_at_hour, '時'
-      = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, include_blank: true, selected: @school_user.end_at&.min&.floor(-1)
-      = f.label :end_at_min, '分'
-  = f.submit '登録する', class: 'lesson_form__submit_btn'
+.flex-sparo
+  %h2.mt16.ml16 #{@school_user.user.name}さんのアカウント設定
+  .mt16.ml16= link_to '戻る', teacher_user_path(@school_user.user), class: 'a-button a-button--secondary'
+%hr
+.flex-sparo
+  = form_with model: [:teacher, @school_user], local: true, method: :patch do |f|
+    = render 'shared/error_messages', model_object: @school_user
+    .m-horizonal-form-set
+      .m-horizonal-form-set__label_and_input_wrap.mb40
+        .m-horizonal-form-set__label.m-horizonal-form-set__label--auto-width
+          = f.label :start_at_date, class: 'a-form-label required'
+        .m-horizonal-form-set__input.m-horizonal-form-set__input--auto-width
+          .m-form-date-hour-min
+            = f.date_field :start_at_date, value: @school_user.start_at&.to_date || Time.zone.today, class: 'm-form-date-hour-min__date'
+            = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, { selected: @school_user.start_at&.hour || Time.zone.now.hour }, { class: 'm-form-date-hour-min__hour' }
+            = f.label :start_at_hour, '時', class: 'm-form-date-hour-min__hour-label'
+            = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, { selected: @school_user.start_at&.min&.floor(-1) || Time.zone.now.min.floor(-1) }, { class: 'm-form-date-hour-min__min' }
+            = f.label :start_at_min, '分', class: 'm-form-date-hour-min__min-label'
+      .m-horizonal-form-set__label_and_input_wrap.mb40
+        .m-horizonal-form-set__label.m-horizonal-form-set__label--auto-width
+          = f.label :end_at_date, class: 'a-form-label'
+        .m-horizonal-form-set__input.m-horizonal-form-set__input--auto-width
+          .m-form-date-hour-min
+            = f.date_field :end_at_date, value: @school_user.end_at&.to_date, class: 'm-form-date-hour-min__date'
+            = f.select :end_at_hour, (0..23).map{|e| [format('%02d', e), e]}, { selected: @school_user.end_at&.hour }, { class: 'm-form-date-hour-min__hour' }
+            = f.label :end_at_hour, '時', class: 'm-form-date-hour-min__hour-label'
+            = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, { selected: @school_user.end_at&.min&.floor(-1) }, { class: 'm-form-date-hour-min__min' }
+            = f.label :end_at_min, '分', class: 'm-form-date-hour-min__min-label'
+      .flex-end
+        = f.submit '登録', class: 'a-button a-button--primary'
+.flex-end-end{ style: 'height: 60vh'}
+  .mt40.mr40.u-width-wrap-160
+    -if @school_user.activated?
+      =link_to 'アカウント無効化', teacher_school_user_path(@school_user), method: :delete, class: 'a-button a-button--danger'
+    - else
+      =link_to 'アカウント有効化', teacher_school_user_path(@school_user),method: :post, class: 'a-button a-button--primary'

@@ -24,7 +24,7 @@
           .m-horizonal-form-set__label
             = f.label :min_school_grade, class: 'a-form-label required'
           .m-horizonal-form-set__input
-            = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true }, { class: 'a-form-select' }
+            = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: '' }, { class: 'a-form-select' }
       .m-horizonal-form-set
         .m-horizonal-form-set__label_and_input_wrap
           .m-horizonal-form-set__label
@@ -38,7 +38,7 @@
           .m-horizonal-form-set__label
             = f.label :school_building_id, class: 'a-form-label required'
           .m-horizonal-form-set__input
-            = f.select :school_building_id, current_teacher.decorate.school_building_select_array, { selected: current_teacher.main_school_building.id }, { class: 'a-form-select' }
+            = f.select :school_building_id, [[current_teacher_school_building.name, current_teacher_school_building.id]], { selected: current_teacher.main_school_building.id }, { class: 'a-form-select' }
       .m-horizonal-form-set
         .m-horizonal-form-set__label_and_input_wrap
           .m-horizonal-form-set__label

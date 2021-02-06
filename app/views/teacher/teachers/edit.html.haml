@@ -1,2 +1,4 @@
-.user_form__title 教師情報編集
-= render 'form', teacher: @teacher, password_show: false
+.flex-sparo
+  %h2.mt16.ml16 教員編集
+  .mt16.ml16= link_to '戻る', teacher_teacher_path(@teacher), class: 'a-button a-button--secondary'
+%hr= render 'form', teacher: @teacher, password_show: false

@@ -4,33 +4,30 @@ class Teacher::LessonGroupUsersController < Teacher::Base
   before_action :set_user
 
   def new
-    @lesson_group_users = @user.lesson_group_users.for_school(current_teacher_school)
-    @lesson_group_user = @user.lesson_group_users.new
-    @lesson_groups = LessonGroup
-                      .for_school(current_teacher_school)
-                      .for_school_buildings_belonged_to_teacher_and_user(current_teacher, @user) - @user.lesson_groups
+    @lesson_groups = current_teacher_school_building.lesson_groups.in_open
   end
 
   def create
-    @lesson_group_user =
-      @user
-      .lesson_group_users
-      .new(lesson_group_user_params)
+    @user = current_teacher_school_building.users.find(params[:user_id])
+    @lesson_group = current_teacher_school_building.lesson_groups.find(params[:id])
 
-      raise ActiveRecord::RecordNotFound unless @lesson_group_user.lesson_group.school_building.school == current_teacher_school
+    @lesson_group_user = @user.lesson_group_users.new(lesson_group_id: @lesson_group.id)
 
-      if @lesson_group_user.save
-      flash[:success] = '登録に成功しました。'
+    if @lesson_group_user.save
+      flash[:success] = '登録しました。'
       redirect_to new_teacher_user_lesson_group_user_path(@user)
     else
-      render :new
+      flash[:success] = '失敗しました'
+      redirect_to new_teacher_user_lesson_group_user_path(@user)
     end
   end
 
   def destroy
-    @lesson_group_user = @user.lesson_group_users.find(params[:id])
+    @user = current_teacher_school_building.users.find(params[:user_id])
+    @lesson_group = current_teacher_school_building.lesson_groups.find(params[:id])
+    @lesson_group_user = @user.lesson_group_users.find_by(lesson_group_id: @lesson_group.id)
     @lesson_group_user.destroy
-    flash[:danger] = '削除に成功しました。'
+    flash[:danger] = '削除しました。'
     redirect_to new_teacher_user_lesson_group_user_path(@user)
   end
 

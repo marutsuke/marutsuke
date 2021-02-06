@@ -3,11 +3,12 @@
 class Lesson < ApplicationRecord
   attr_accessor :start_at_date, :start_at_hour, :start_at_min,
                 :end_at_date, :end_at_hour, :end_at_min
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: { scope: :lesson_group_id, case_sensitive: false }
+  validates :start_at, presence: true
   validate :start_at_and_end_at_validate
 
-  before_save { start_at_set }
-  before_save { end_at_set }
+  before_validation { start_at_set }
+  before_validation { end_at_set }
   belongs_to :school
   belongs_to :teacher
   belongs_to :lesson_group
@@ -40,6 +41,10 @@ class Lesson < ApplicationRecord
     joins(:questions)
       .includes(:questions)
       .merge(Question.checking)
+  }
+
+  scope :taught_by, lambda { |teacher|
+    where(teacher_id: teacher.id)
   }
 
   scope :no_question, lambda {
@@ -87,6 +92,10 @@ class Lesson < ApplicationRecord
     questions.checking.size
   end
 
+  def should_check?
+    questions.checking.exists?
+  end
+
   def complete_count
     questions.complete.size
   end
@@ -119,7 +128,7 @@ class Lesson < ApplicationRecord
   def start_at_and_end_at_validate
     return if end_at.nil?
 
-    errors.add(:end_at, 'はアカウント開始日時より後にしてください。') unless start_at < end_at
+    errors.add(:end_at, 'は提出受付開始より後にしてください。') unless start_at < end_at
   end
 
 end

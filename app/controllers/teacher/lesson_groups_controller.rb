@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Teacher::LessonGroupsController < Teacher::Base
-  before_action :set_lesson_groups, only: %i[index]
+  before_action :search_lesson_groups, only: %i[index]
   before_action :set_lesson_group, only: %i[show edit update destroy]
 
-  def index; end
+  def index
+    @lesson_groups = @lesson_groups.page(params[:page])
+  end
 
   def show
     @lessons = @lesson_group.lessons.page(params[:page])
@@ -56,5 +58,17 @@ class Teacher::LessonGroupsController < Teacher::Base
   def set_lesson_group
     set_lesson_groups
     @lesson_group = @lesson_groups.find(params[:id])
+  end
+
+  def search_lesson_groups
+    @q = current_teacher_school_building.lesson_groups.ransack(params[:q])
+    @lesson_groups = @q.result(distinct: true)
+    # セレクトボックスの初期値設定のため
+    if params[:q]
+      @school_year = params[:q][:school_year_eq]
+      @lesson_group_name = params[:q][:name_cont]
+      @min_school_grade = params[:q][:min_school_grade_eq]
+      @max_school_grade = params[:q][:max_school_grade_eq]
+    end
   end
 end

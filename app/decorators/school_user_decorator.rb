@@ -11,6 +11,18 @@ class SchoolUserDecorator < Draper::Decorator
     super&.strftime('%F-%R') || '未設定'
   end
 
+  def activated
+    if super
+      h.content_tag :span, class: "" do
+        '有効'
+      end
+    else
+      h.content_tag :span, class: "a-text-caution" do
+        '無効'
+      end
+    end
+  end
+
   def start_at
     super&.strftime('%F-%R') || '未設定'
   end

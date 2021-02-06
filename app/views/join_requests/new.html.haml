@@ -4,6 +4,7 @@
     .m-heading-line
       .m-heading-line__text.flex-spbet-end
         %h1.a-text-secondary.a-text-xlarge 入学リクエスト
+    .a-text-primary.ml8 招待コードを入力してください
 = form_with url: join_requests_path, local: true do |f|
   .flex.pr8.pl8
     = text_field_tag :invitation_code, nil, { class: 'a-text-field' }

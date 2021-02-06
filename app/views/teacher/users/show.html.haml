@@ -36,8 +36,9 @@
       .m-profile-item
         .m-profile-item__title
           .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:start_at)
-        .m-profile-item__body
+        .m-profile-item__body.flex-spbet
           .a-text-primary.a-text-xlarge= @school_user.decorate.start_at || '-'
+          =link_to '編集', edit_teacher_school_user_path(@user.school_user(current_teacher_school)), class:  'a-button  a-button--edit ml40'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
@@ -47,16 +48,27 @@
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolUser.human_attribute_name(:activated)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @school_user.decorate.activated
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
           .a-text-secondary.a-text-large 所属校
         .m-profile-item__body
-          %ul
-            %li.a-text-primary.a-text-large= "#{ @user.main_school_building(current_teacher_school).name }(所属)"
+          %ul.u-width-wrap-100per
+            %li.flex-spbet
+              .a-text-primary.a-text-large= "#{ @user.main_school_building(current_teacher_school).name }(本所属)"
+              =link_to '編集', new_teacher_user_school_building_user_path(@user), class:  'a-button  a-button--edit ml40'
+
             - @user.sub_school_buildings(current_teacher_school).each  do |school_building|
               %li.a-text-primary.a-text-large= school_building.name
-.flex-sparo.mt40
-  .wrap
-    = link_to '所属校舎編集', new_teacher_user_school_building_user_path(@user)
-  .wrap
-    = link_to 'アカウント開始・終了時間編集', edit_teacher_school_user_path(@user.school_user(current_teacher_school))
-  .wrap
-    = link_to '受講登録', new_teacher_user_lesson_group_user_path(@user)
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 受講中の講座
+        .m-profile-item__body.flex-spbet
+          %div
+            - @user.lesson_groups_in(current_teacher_school).in_open.each do |lesson_group|
+              .a-text-primary.a-text-xlarge= lesson_group.name
+          =link_to '編集', new_teacher_user_lesson_group_user_path(@user), class:  'a-button  a-button--edit ml40'

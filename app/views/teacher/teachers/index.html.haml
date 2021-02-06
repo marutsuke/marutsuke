@@ -1,27 +1,29 @@
+.flex-sparo.mt24
+  %h3.a-text-primary= "#{current_teacher_school_building.name}の教員一覧"
+.u-width-wrap-160
+  = link_to '教員登録', new_teacher_teacher_path, class: 'a-button a-button--primary ml40 mt40'
+= paginate @teachers
+.flex-sparo.mt24
+  %table.o-table-simple
+    %thead.o-table-simple__thead
+      %th.o-table-simple__th= Teacher.human_attribute_name(:name)
+      %th.o-table-simple__th= Teacher.human_attribute_name(:email)
+      %th.o-table-simple__th= Teacher.human_attribute_name(:start_at)
+      %th.o-table-simple__th= Teacher.human_attribute_name(:end_at)
+      %th.o-table-simple__th= Teacher.human_attribute_name(:activated)
+      %th.o-table-simple__th 詳細
+    - @teachers.each do |teacher|
+      %tr.o-table-simple__tr
+        %td.o-table-simple__td= teacher.name
+        -# - teacher.school_building_teachers.main_order.each do |s_b_t|
+        -#   - if s_b_t.main?
+        -#     %div= "#{s_b_t.school_building.name}(所属)"
+        -#   - else
+        -#     %div= s_b_t.school_building.name
 
-.mt16.ml24= link_to '教員追加', new_teacher_teacher_path
-.mt16
-%table.users_account_table.ml24
-  %thead.users_account_table__thead
-    %th.users_account_table__th= Teacher.human_attribute_name(:name)
-    %th.users_account_table__th 所属校
-    %th.users_account_table__th= Teacher.human_attribute_name(:email)
-    %th.users_account_table__th= Teacher.human_attribute_name(:start_at)
-    %th.users_account_table__th= Teacher.human_attribute_name(:end_at)
-    %th.users_account_table__th= Teacher.human_attribute_name(:activated)
-    %th.users_account_table__th 認証メール再送信
-  - @teachers.each do |teacher|
-    %tr.users_account_table__tr
-      %td.users_account_table__tr= link_to teacher.name, teacher_teacher_path(teacher)
-      %td.users_account_table__tr
-        - teacher.school_building_teachers.main_order.each do |s_b_t|
-          - if s_b_t.main?
-            = "#{s_b_t.school_building.name}(所属)"
-          - else
-            = s_b_t.school_building.name
-
-      %td.users_account_table__tr= teacher.decorate.email
-      %td.users_account_table__tr= teacher.decorate.start_at
-      %td.users_account_table__tr= teacher.decorate.end_at
-      %td.users_account_table__tr= teacher.decorate.activated_status
-      %td.users_account_table__tr= link_to '再送信', resend_activation_mail_teacher_teacher_path(teacher), method: :post, confirm: 'アカウント有効化メールを再送信します。よろしいですか。'
+        %td.o-table-simple__td= teacher.decorate.email
+        %td.o-table-simple__td= teacher.decorate.start_at || '-'
+        %td.o-table-simple__td= teacher.decorate.end_at || '-'
+        %td.o-table-simple__td= teacher.decorate.activated_status
+        %td.o-table-simple__td= link_to '詳細', teacher_teacher_path(teacher), class: 'a-button a-button--secondary'
+        -# %td.o-table-simple__td= link_to '再送信', resend_activation_mail_teacher_teacher_path(teacher), method: :post, confirm: 'アカウント有効化メールを再送信します。よろしいですか。'

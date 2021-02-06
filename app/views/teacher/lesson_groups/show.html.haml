@@ -1,56 +1,65 @@
-.mt16.ml16 講座詳細
-.flex.mt24.ml16
-  .ml24.a-text-large= link_to 'この講座に授業を追加する', new_teacher_lesson_group_lesson_path(@lesson_group)
-  .ml24.a-text-large= link_to '講座一覧に戻る', teacher_lesson_groups_path
-.flex.mt24.ml16
-  .mr16.a-text-large= @lesson_group.name
-  .mr16.a-text-large= "#{@lesson_group.school_year}年度"
-  .mr16.a-text-large= "対象: #{ @lesson_group.decorate.target_school_grade }"
-  .mr16.a-text-large= @lesson_group.school_building.name
-  .mr16.a-text-large= "受講許可方法: #{@lesson_group.decorate.free_attend_to_s}"
+.o-profile.mt24
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge 講座詳細
+        .m-heading__button
+        .a-text-xlarge= link_to '戻る',  teacher_lesson_groups_path, class: 'a-button a-button--secondary'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 講座名
+        .m-profile-item__body.flex-spbet
+          .a-text-primary.a-text-xlarge= @lesson_group.name
+          = link_to '編集', edit_teacher_lesson_group_path(@lesson_group), class: 'a-button a-button--edit'
 
-.mt40
-.mt16 登録授業一覧
-- if @lessons.present?
-  = paginate @lessons
-  %table.o-table-simple.mr40
-    %thead.o-table-simple__thead
-      %th.o-table-simple__th= Lesson.human_attribute_name(:name)
-      %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
-      %th.o-table-simple__th= Lesson.human_attribute_name(:start_at)
-      %th.o-table-simple__th= Lesson.human_attribute_name(:end_at)
-      %th.o-table-simple__th
-    - @lessons.each do |lesson|
-      %tr.o-table-simple__tr
-        %td.o-table-simple__td= lesson.name
-        %td.o-table-simple__td= lesson.teacher.name
-        %td.o-table-simple__td= lesson.decorate.start_time_with_y
-        %td.o-table-simple__td= lesson.decorate.end_time_with_y
-        %td.o-table-simple__td= link_to '編集する', edit_teacher_lesson_path(lesson)
-  = paginate @lessons
-- else
-  %p 授業はまだ登録されていません
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 年度
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= "#{@lesson_group.school_year}年度"
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 校舎
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @lesson_group.school_building.name
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 対象学年
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @lesson_group.decorate.target_school_grade
 
-.mt40
-.mb8 登録生徒一覧
-- if @users.present?
-  = paginate @users
-  %table.o-table-simple
-    %thead.o-table-simple__thead
-      %th.o-table-simple__th= SchoolUser.human_attribute_name(:id)
-      %th.o-table-simple__th= User.human_attribute_name(:name)
-      %th.o-table-simple__th 学年
-      %th.o-table-simple__th 所属校舎
-      %th.o-table-simple__th アカウント有効日
-    - @users.each do |user|
-      - school_user = user.school_user(current_teacher_school)
-      %tr.o-table-simple__tr
-        %td.o-table-simple__td= user.id
-        %td.o-table-simple__td= user.name
-        %td.o-table-simple__td= user.decorate.school_grade_to_s
-        %td.o-table-simple__td= user.main_school_building(current_teacher_school)&.name || '所属なし'
-        %td.o-table-simple__td= school_user.decorate.activated_at
-  = paginate @users
 
-- else
-  %p 生徒はまだいません
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 受講許可方法
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @lesson_group.decorate.free_attend_to_s
+
+
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 授業一覧
+        .m-profile-item__body
+          .flex-spbet.u-width-wrap-100per
+            %ul
+              - @lesson_group.lessons.each do |lesson|
+                %li.flex-spbet
+                  .a-text-primary.a-text-large= lesson.name
+            = link_to '追加・編集', teacher_lesson_group_lessons_path(@lesson_group), class: 'a-button a-button--edit'
+
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 生徒一覧
+        .m-profile-item__body
+          .flex-spbet.u-width-wrap-100per
+            %ul
+              - @users.each do |user|
+                %li.a-text-primary.a-text-large= user.name

@@ -1,0 +1,28 @@
+.flex-sparo.mt24
+  %h3.a-text-primary= "#{@lesson_group.name}の授業追加・編集"
+  .ml40
+    = link_to '戻る', teacher_lesson_group_path(@lesson_group), class: 'a-button a-button--secondary'
+%hr
+.u-width-wrap-160.ml40
+  = link_to '授業追加', new_teacher_lesson_group_lesson_path(@lesson_group), class: 'a-button a-button--primary ml40 mt40'
+
+.flex-sparo.mt24
+  - if @lessons.present?
+    = paginate @lessons
+    %table.o-table-simple.mr40
+      %thead.o-table-simple__thead
+        %th.o-table-simple__th= Lesson.human_attribute_name(:name)
+        %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
+        %th.o-table-simple__th= Lesson.human_attribute_name(:start_at)
+        %th.o-table-simple__th= Lesson.human_attribute_name(:end_at)
+        %th.o-table-simple__th
+      - @lessons.each do |lesson|
+        %tr.o-table-simple__tr
+          %td.o-table-simple__td= lesson.name
+          %td.o-table-simple__td= lesson.teacher.name
+          %td.o-table-simple__td= lesson.decorate.start_time_with_y
+          %td.o-table-simple__td= lesson.decorate.end_time_with_y
+          %td.o-table-simple__td= link_to '編集', edit_teacher_lesson_path(lesson), class:'a-button a-button--edit'
+    = paginate @lessons
+  - else
+    %p 授業はまだ登録されていません

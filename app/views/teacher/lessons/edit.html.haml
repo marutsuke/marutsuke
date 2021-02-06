@@ -1,23 +1,6 @@
-.flex
-  .mt16.ml16.lesson_form__title= "#{@lesson_group.school_building.name}/ #{@lesson_group.school_year}年度/ #{@lesson_group.name}/ 授業編集"
-  .ml24.mt16= link_to '詳細へ戻る', teacher_lesson_group_path(@lesson_group)
+.flex-sparo
+  %h2.mt16.ml16= "#{@lesson_group.name}/#{@lesson.name}/ 授業編集"
+  .mt16.ml16= link_to '戻る', teacher_lesson_group_lessons_path(@lesson_group), class: 'a-button a-button--secondary'
+%hr
 .mb32
 = render 'form', lesson: @lesson, url: teacher_lesson_path(@lesson)
-
-.mt32.ml32 登録済みの授業
-.mt16.ml32
-  - if @lessons.present?
-    %table.o-table-simple.mt24
-      %thead.o-table-simple__thead
-        %th.o-table-simple__th=  Lesson.human_attribute_name(:name)
-        %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
-        %th.o-table-simple__th= Lesson.human_attribute_name(:start_at)
-        %th.o-table-simple__th= Lesson.human_attribute_name(:end_at)
-      - @lessons.each do |lesson|
-        %tr.o-table-simple__tr{ class: "#{'o-table-simple__tr--active' if lesson == @lesson}" }
-          %td.o-table-simple__td= lesson.name
-          %td.o-table-simple__td= lesson.teacher.name
-          %td.o-table-simple__td= lesson.decorate.start_time_with_y
-          %td.o-table-simple__td= lesson.decorate.end_time_with_y
-  - else
-    .mt24 授業はまだありません
