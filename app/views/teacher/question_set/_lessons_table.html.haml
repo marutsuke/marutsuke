@@ -5,7 +5,6 @@
     %thead.o-table-simple__thead
       %th.o-table-simple__th= Lesson.human_attribute_name(:name)
       %th.o-table-simple__th= Lesson.human_attribute_name(:teacher_id)
-      %th.o-table-simple__th 課題
       %th.o-table-simple__th 課題設定
       %th.o-table-simple__th 課題チェック
     - lessons.includes(:teacher).each do |lesson|
@@ -14,10 +13,10 @@
         %td.o-table-simple__td= lesson.teacher.name
         %td.o-table-simple__td
           - if lesson.questions.exists?
-            .a-text-primary あり
+            = link_to '追加', new_teacher_lesson_question_path(lesson), class: 'a-button a-button--secondary'
           - else
-            .a-text-caution なし
-        %td.o-table-simple__td= link_to '設定', new_teacher_lesson_question_path(lesson), class: 'a-button a-button--secondary'
+            = link_to '作成', new_teacher_lesson_question_path(lesson), class: 'a-button a-button--primary'
+
         %td.o-table-simple__td
           - if lesson.should_check?
             = link_to "未チェックあり", teacher_answer_check_path(lesson), class: 'a-button a-button--primary'

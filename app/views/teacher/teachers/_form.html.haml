@@ -1,17 +1,31 @@
-.user_form
+.flex-sparo.u-width-wrap--100per
   = form_with model: [:teacher, teacher], local: true do |f|
     = render 'shared/error_messages', model_object: teacher
-    .user_form__label_and_input
-      = f.label :name, class: 'required'
-      = f.text_field :name
-    .user_form__label_and_input
-      = f.label :email, class: 'required'
-      = f.email_field :email
-    - if password_show
-      .user_form__label_and_input
-        = f.label :password, class: 'required'
-        = f.password_field :password
-      .user_form__label_and_input
-        = f.label :password_confirmation, class: 'required'
-        = f.password_field :password_confirmation
-    = f.submit '登録する', class: 'user_form__submit_btn'
+    .u-display-table
+      .u-display-table-row
+        .u-display-table-cell
+          = f.label :name, class: 'a-form-label required'
+        .u-display-table-cell.mb24
+          = f.text_field :name, class:  'a-form-text-field'
+        .u-display-table-cell.mb24
+      .u-display-table-row
+        .u-display-table-cell
+          = f.label :email, class: 'a-form-label required'
+        .u-display-table-cell.mb24
+          = f.email_field :email, class:  'a-form-text-field'
+      - if password_show
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :password, class: 'a-form-label required'
+          .u-display-table-cell
+            = f.password_field :password, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :password_confirmation, class: 'a-form-label required'
+          .u-display-table-cell
+            = f.password_field :password_confirmation, class: 'a-form-text-field'
+      .u-display-table-row
+        .u-display-table-cell
+        .u-display-table-cell
+          .flex-end
+            = f.submit '登録', class: 'a-button a-button--primary'
