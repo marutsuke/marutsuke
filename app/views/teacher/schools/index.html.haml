@@ -1,0 +1,19 @@
+.o-profile
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge 学校情報
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 学校名
+        .m-profile-item__body.flex-spbet
+          .a-text-primary.a-text-xlarge= current_teacher_school.name
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 学校ログインURL
+        .m-profile-item__body.flex-spbet
+          .a-text-primary.a-text-xlarge= teacher_school_login_url(current_teacher_school.login_path)
+    .a-text-note.u-text-align--right 学校情報を編集したい場合は、お問い合わせください。

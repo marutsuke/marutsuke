@@ -90,7 +90,7 @@ Rails.application.routes.draw do
 
   namespace :teacher do
     get '', to: 'top#top'
-    get '/login', to: 'sessions#new'
+    get '/login/:login_path', to: 'sessions#new', as: 'school_login'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
     get '/questions', to: 'question_set#index'
@@ -106,7 +106,7 @@ Rails.application.routes.draw do
     resources :school_users, only: %i[edit update destroy] do
       post :create, on: :member
     end
-    resources :schools, only: %i[edit update]
+    resources :schools, only: %i[index edit update]
     resources :teachers, only: %i[index new create edit update show] do
       member do
         post :resend_activation_mail

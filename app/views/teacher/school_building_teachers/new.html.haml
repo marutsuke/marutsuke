@@ -20,13 +20,13 @@
       %tr.o-table-simple__tr
         %td.o-table-simple__td= school_building.name
         %td.o-table-simple__td 所属
-        %td.o-table-simple__td= link_to '本所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :patch, class: 'a-button a-button--primary'
+        %td.o-table-simple__td= link_to '本所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :patch, class: 'a-button a-button--secondary'
         %td.o-table-simple__td= link_to '解除', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :delete, class: 'a-button a-button--danger'
     - @teacher.school_buildings_not_belog_to.each do |school_building|
       %tr.o-table-simple__tr
         %td.o-table-simple__td= school_building.name
         %td.o-table-simple__td -
-        %td.o-table-simple__td= link_to '所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :post, class: 'a-button a-button--secondary'
+        %td.o-table-simple__td= link_to '所属へ', teacher_teacher_school_building_teacher_path(@teacher, school_building), method: :post, class: 'a-button a-button--primary'
         %td.o-table-simple__td
 
 

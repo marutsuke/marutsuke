@@ -5,7 +5,9 @@ ja:
     attributes:
       teacher:
         name: 名前
+        login_id: ログインID
         email: メールアドレス
+        image: 画像
         password: パスワード
         password_confirmation: パスワード(確認)
         school_id: 学校ID
@@ -15,9 +17,18 @@ ja:
         end_at_date: 業務終了日時
         activated: アカウント有効化
         school: 学校
+        role: 権限
+        id: 教員ID
     errors:
       models:
         teacher:
           attributes:
             school:
               required: の保存が失敗しました。同じ名前の学校があります。
+  enums:
+    teacher:
+      role:
+        general_teacher: 一般講師
+        regular_teacher: 常勤講師
+        school_building_owner: 校長
+        school_owner: 学校管理者

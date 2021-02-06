@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_221613) do
+ActiveRecord::Schema.define(version: 2021_02_06_052715) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_ja_0900_as_cs", force: :cascade do |t|
     t.string "name", null: false
@@ -196,7 +196,9 @@ ActiveRecord::Schema.define(version: 2021_01_19_221613) do
 
   create_table "teachers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_ja_0900_as_cs", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", null: false
+    t.string "login_id"
+    t.string "image"
+    t.string "email"
     t.string "password_digest", null: false
     t.datetime "start_at"
     t.datetime "end_at"
@@ -207,7 +209,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_221613) do
     t.string "activation_digest"
     t.datetime "activated_at"
     t.bigint "school_id"
-    t.index ["email"], name: "index_teachers_on_email", unique: true
+    t.integer "role", default: 10, null: false
+    t.index ["email"], name: "index_teachers_on_email"
     t.index ["school_id"], name: "index_teachers_on_school_id"
   end
 
