@@ -31,7 +31,7 @@ class Teacher::TeachersController < Teacher::Base
   def update
     if @teacher.update(teacher_update_params)
       flash[:success] = "#{@teacher.name}先生の情報を更新しました。"
-      redirect_to teacher_teachers_path
+      redirect_to edit_teacher_teacher_path(@teacher)
     else
       render 'edit'
     end
@@ -50,10 +50,10 @@ class Teacher::TeachersController < Teacher::Base
   end
 
   def teacher_params
-    params.require(:teacher).permit(:name, :email, :password, :password_confirmation)
+    params.require(:teacher).permit(:name, :email, :password, :password_confirmation, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min )
   end
 
   def teacher_update_params
-    params.require(:teacher).permit(:name, :email)
+    params.require(:teacher).permit(:name, :email, :start_at_date, :start_at_hour, :start_at_min, :end_at_date, :end_at_hour, :end_at_min)
   end
 end

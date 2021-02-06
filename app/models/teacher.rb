@@ -1,13 +1,21 @@
 # frozen_string_literal: true
 
 class Teacher < ApplicationRecord
-  attr_accessor :teacher_remember_token, :teacher_activation_token
-  before_save :downcase_email
-  before_create :create_activation_digest
+  attr_accessor :teacher_remember_token, :teacher_activation_token, :start_at_date, :start_at_hour, :start_at_min,
+  :end_at_date, :end_at_hour, :end_at_min
+
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, presence: true, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :password, presence: true, length: { minimum: 8 }, on: :update, allow_blank: true
+  validate :start_at_and_end_at_validate
+  validates :start_at, presence: true
+
+  before_save :downcase_email
+  before_create :create_activation_digest
+  before_validation { start_at_set }
+  before_validation { end_at_set }
+
   has_secure_password
   belongs_to :school
   has_many :lessons, dependent: :destroy
@@ -86,4 +94,26 @@ class Teacher < ApplicationRecord
     self.teacher_activation_token = self.class.new_token
     update_columns(activation_digest: self.class.digest(teacher_activation_token))
   end
+
+  def start_at_set
+    if start_at_date.present? && start_at_hour.present? && start_at_min.present?
+      self.start_at = Time.zone.parse("#{start_at_date} #{start_at_hour}:#{start_at_min}:00")
+    end
+  end
+
+  def end_at_set
+    if end_at_date.present? && end_at_hour.present? && end_at_min.present?
+      self.end_at = Time.zone.parse("#{end_at_date} #{end_at_hour}:#{end_at_min}:00")
+    end
+    if end_at_date.blank? && end_at_hour.blank? && end_at_min.blank?
+      self.end_at = nil
+    end
+  end
+
+  def start_at_and_end_at_validate
+    return if end_at.nil?
+
+    errors.add(:end_at, 'は業務終了日時より後にしてください。') unless start_at < end_at
+  end
+
 end
