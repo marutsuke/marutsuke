@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Teacher::SchoolsController < Teacher::Base
+
+  def index
+  end
+
   def edit; end
 
   def update

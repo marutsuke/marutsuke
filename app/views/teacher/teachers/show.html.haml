@@ -9,16 +9,34 @@
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
-          .a-text-secondary.a-text-large 教員名
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:id)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @teacher.id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:name)
         .m-profile-item__body.flex-spbet
           .a-text-primary.a-text-xlarge= @teacher.name
           = link_to '編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:role)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @teacher.role_i18n
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:login_id)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @teacher.login_id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
           .a-text-secondary.a-text-large メールアドレス
         .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @teacher.email
+          .a-text-primary.a-text-xlarge= @teacher.email.present? ? @teacher.email : '登録なし'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title

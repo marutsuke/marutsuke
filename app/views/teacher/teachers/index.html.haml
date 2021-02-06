@@ -1,5 +1,6 @@
 .flex-sparo.mt24
   %h3.a-text-primary= "#{current_teacher_school_building.name}の教員一覧"
+%hr
 .u-width-wrap-160
   = link_to '教員登録', new_teacher_teacher_path, class: 'a-button a-button--primary ml40 mt40'
 = paginate @teachers
