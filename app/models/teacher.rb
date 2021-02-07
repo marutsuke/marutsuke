@@ -103,7 +103,7 @@ class Teacher < ApplicationRecord
   private
 
   def downcase_email
-    self.email = email.downcase
+    self.email = email&.downcase
     self.email = nil if self.email.blank?
   end
 
