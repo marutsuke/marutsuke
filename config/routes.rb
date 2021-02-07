@@ -158,6 +158,7 @@ Rails.application.routes.draw do
         patch :reject
       end
     end
+    resources :mypage, only: %i[index]
   end
 
   namespace :admin do
