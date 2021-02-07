@@ -32,8 +32,8 @@ class Teacher::CommentsController < Teacher::Base
     @question_status = QuestionStatus.find(params[:question_status_id])
     @question = @question_status.question
     @lesson = @question.lesson
-    @answers = @question_status.answers
-    @target_answer = @answers.last
+    @answers = @question_status.answers.created_desc_order
+    @target_answer = @answers.first
   end
 
   def security_check
