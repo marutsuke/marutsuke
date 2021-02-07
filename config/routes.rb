@@ -166,6 +166,10 @@ Rails.application.routes.draw do
       get :edit, on: :collection
       patch :update, on: :collection
     end
+    resources :password, only: %i[] do
+      get :edit, on: :collection
+      patch :update, on: :collection
+    end
   end
 
   namespace :admin do

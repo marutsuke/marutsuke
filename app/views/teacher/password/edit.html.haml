@@ -1,0 +1,29 @@
+.flex-sparo
+  %h2.mt16.ml16 パスワード変更
+  .mt16.ml16= link_to '戻る', teacher_mypage_index_path, class: 'a-button a-button--secondary'
+%hr
+.flex-sparo
+  .u-width-wrap--100per
+    = form_with model: current_teacher, url: teacher_password_index_path, method: :patch, local: true do |f|
+      = render 'shared/error_messages', model_object: current_teacher
+      .u-display-table
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :old_password, 'パスワード', class: 'a-form-label required'
+          .u-display-table-cell
+            = f.password_field :old_password, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :password, '新しいパスワード', class: 'a-form-label required'
+          .u-display-table-cell
+            = f.password_field :password, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :password_confirmation, '新しいパスワード(確認)', class: 'a-form-label required'
+          .u-display-table-cell
+            = f.password_field :password_confirmation, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+          .u-display-table-cell
+            .flex-end
+              = f.submit '変更', class: 'a-button a-button--primary'

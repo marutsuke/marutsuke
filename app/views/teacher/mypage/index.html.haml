@@ -29,6 +29,13 @@
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:password)
+        .m-profile-item__body.flex-spbet
+          .a-text-primary.a-text-xlarge *******
+          = link_to '変更', edit_teacher_password_index_path, class: 'a-button a-button--edit'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
           .a-text-secondary.a-text-large メールアドレス
         .m-profile-item__body
           .a-text-primary.a-text-xlarge= current_teacher.email.present? ? current_teacher.email : '登録なし'
