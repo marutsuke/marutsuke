@@ -5,19 +5,24 @@ class Teacher::SessionsController < Teacher::Base
   layout 'layouts/application'
   def new
     @login_path = params[:login_path]
+    @school = School.find_by(login_path: @login_path)
+
+    raise ActiveRecord::RecordNotFound unless @school
   end
 
   def create
-    school = School.find_by(login_path: params[:session][:login_path])
-    teacher = school.teachers.find_by(login_id: params[:session][:login_id])
+    login_path = params[:session][:login_path]
+    school = School.find_by(login_path: login_path)
+
+    teacher = school&.teachers&.find_by(login_id: params[:session][:login_id])
     if teacher&.authenticate(params[:session][:password])
       teacher_log_in(teacher)
       flash[:success] = "#{teacher.name}先生、こんにちは!"
       params[:session][:remember_me] == '1' ? remember_teacher(teacher) : forget_teacher(teacher)
       redirect_to teacher_path
     else
-      flash.now[:danger] = 'メールアドレスまたはパスワードが間違っています。'
-      render :new
+      flash[:danger] = 'メールアドレスまたはパスワードが間違っています。'
+      redirect_to teacher_school_login_path(login_path)
     end
   end
 

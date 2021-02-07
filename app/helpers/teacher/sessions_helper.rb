@@ -3,6 +3,7 @@
 module Teacher::SessionsHelper
   def teacher_log_in(teacher)
     session[:teacher_id] = teacher.id
+    cookies.permanent.signed[:teacher_school_login_path] = teacher.school.login_path
   end
 
   def remember_teacher(teacher)

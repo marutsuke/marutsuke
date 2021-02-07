@@ -14,7 +14,12 @@ class Teacher::Base < ApplicationController
     unless current_teacher
       teacher_store_location
       flash[:info] = 'ログインしてください'
-      redirect_to teacher_login_path
+      teacher_school_login_path = cookies.signed[:teacher_school_login_path]
+      if teacher_school_login_path
+        redirect_to teacher_school_login_path(teacher_school_login_path)
+      else
+        redirect_to teacher_school_login_path('unknown')
+      end
     end
   end
 
