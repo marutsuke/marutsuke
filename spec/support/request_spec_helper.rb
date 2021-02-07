@@ -25,7 +25,7 @@ module RequestSpecHelper
 
   def teacher_log_in(teacher = nil)
     teacher ||= create(:teacher)
-    session_params = { email: teacher.email, password: teacher.password }
+    session_params = { login_id: teacher.login_id, password: teacher.password, login_path: teacher.school.login_path }
     post teacher_login_path, params: { session: session_params }
   end
 
