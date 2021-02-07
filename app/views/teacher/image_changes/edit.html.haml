@@ -1,0 +1,31 @@
+- submit_text = current_teacher.image.present? ? '更新' : '登録'
+
+.flex-sparo
+  %h2.mt16.ml16 画像登録
+  .mt16.ml16= link_to '戻る', teacher_mypage_index_path, class: 'a-button a-button--secondary'
+%hr
+.flex-sparo
+  .o-profile__user_image
+    .m-user-image
+      .m-user-image__image
+        - if current_teacher.image.present?
+          = image_tag current_teacher.image_url, class: 'a-user-image'
+        - else
+          .a-user-no-image No Image
+      .m-user-image__name 現在の画像
+
+  .u-width-wrap--100per
+    = form_with model: current_teacher, url: teacher_image_changes_path, method: :patch, local: true do |f|
+      = render 'shared/error_messages', model_object: current_teacher
+      .u-display-table
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :image, class: 'a-form-label required'
+          .u-display-table-cell.mb24
+            = f.file_field :image
+            .a-text-note 5MB以内
+        .u-display-table-row
+          .u-display-table-cell
+          .u-display-table-cell
+            .flex-end
+              = f.submit submit_text, class: 'a-button a-button--primary'

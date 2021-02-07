@@ -25,7 +25,7 @@
                       - elsif request = lesson_group.request_of(current_user)
                         .a-text-secondary= request.status_i18n
                       - elsif lesson_group.school_grade_target_of_user?(current_user)
-                        = link_to 'リクエスト', lesson_group_lesson_group_requests_path(lesson_group), method: :post
+                        = link_to 'リクエスト', lesson_group_lesson_group_requests_path(lesson_group), method: :post, class: 'a-button-primary'
                       - else
                         .a-text-secondary 対象学年ではありません
             - else
