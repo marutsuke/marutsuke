@@ -12,6 +12,7 @@ class Teacher < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }, on: :update, allow_blank: true
   validate :start_at_and_end_at_validate
   validates :start_at, presence: true
+  validate :image_size
 
   before_save :downcase_email
   before_create :create_activation_digest
@@ -24,6 +25,9 @@ class Teacher < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :school_building_teachers
   has_many :school_buildings, through: :school_building_teachers
+
+  paginates_per 20
+  mount_uploader :image, ImageUploader
 
   enum role: {
     general_teacher: 10,
@@ -136,6 +140,10 @@ class Teacher < ApplicationRecord
     return if end_at.nil?
 
     errors.add(:end_at, 'は業務終了日時より後にしてください。') unless start_at < end_at
+  end
+
+  def image_size
+    errors.add(:image, 'サイズは5MBまでです。') if image.size > 5.megabytes
   end
 
 end

@@ -21,7 +21,7 @@ class Teacher::SessionsController < Teacher::Base
       params[:session][:remember_me] == '1' ? remember_teacher(teacher) : forget_teacher(teacher)
       redirect_to teacher_path
     else
-      flash[:danger] = 'メールアドレスまたはパスワードが間違っています。'
+      flash[:danger] = 'ログインIDまたはパスワードが間違っています。'
       redirect_to teacher_school_login_path(login_path)
     end
   end

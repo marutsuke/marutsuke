@@ -5,40 +5,34 @@
   .m-teacher-side__element
     = link_to teacher_question_set_index_path do
       .m-teacher-side__link 課題管理
+  - if current_teacher.regular_teacher_authority?
+    .m-teacher-side__element
+      = link_to teacher_users_path do
+        .m-teacher-side__link 生徒一覧
+    .m-teacher-side__element
+      = link_to teacher_join_requests_path do
+        .m-teacher-side__link 入学リクエスト
+    .m-teacher-side__element
+      = link_to teacher_lesson_group_requests_path do
+        .m-teacher-side__link 受講リクエスト
+    .m-teacher-side__element
+      = link_to teacher_lesson_groups_path do
+        .m-teacher-side__link 講座一覧
+    .m-teacher-side__element
+      = link_to teacher_teachers_path do
+        .m-teacher-side__link 教員アカウント管理
+    .m-teacher-side__element
+      = link_to teacher_school_building_settings_path do
+        .m-teacher-side__link 校舎設定
+    .m-teacher-side__element
+      = link_to teacher_school_buildings_path do
+        .m-teacher-side__link 校舎作成
+    .m-teacher-side__element
+      = link_to teacher_schools_path do
+        .m-teacher-side__link 学校情報
   .m-teacher-side__element
-    = link_to teacher_users_path do
-      .m-teacher-side__link 生徒一覧
-  .m-teacher-side__element
-    = link_to teacher_join_requests_path do
-      .m-teacher-side__link 入学リクエスト
-  .m-teacher-side__element
-    = link_to teacher_lesson_group_requests_path do
-      .m-teacher-side__link 受講リクエスト
-  .m-teacher-side__element
-    = link_to teacher_lesson_groups_path do
-      .m-teacher-side__link 講座一覧
-  .m-teacher-side__element
-    = link_to teacher_teachers_path do
-      .m-teacher-side__link 教員アカウント管理
-  .m-teacher-side__element
-    = link_to teacher_school_building_settings_path do
-      .m-teacher-side__link 校舎設定
-  -# .m-teacher-side__element
-  -#   = link_to teacher_manage_menus_path do
-  -#     .m-teacher-side__link 講座分析
-  -# .m-teacher-side__element
-  -#   = link_to teacher_manage_menus_path do
-  -#     .m-teacher-side__link 生徒分析
-  .m-teacher-side__element
-    = link_to teacher_school_buildings_path do
-      .m-teacher-side__link 校舎作成
-
-  .m-teacher-side__element
-    = link_to teacher_schools_path do
-      .m-teacher-side__link 学校情報
-
-
-
+    = link_to teacher_mypage_index_path do
+      .m-teacher-side__link マイページ
   .m-teacher-side__element.mt24
     .m-teacher-side__text= current_teacher_school.name
     .m-teacher-side__text= "#{ current_teacher.name }先生"

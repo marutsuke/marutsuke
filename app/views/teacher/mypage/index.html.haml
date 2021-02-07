@@ -1,0 +1,67 @@
+.o-profile
+  .o-profile__user_image
+    .m-user-image
+      .m-user-image__image
+        - if current_teacher.image.present?
+          = image_tag current_teacher.image_url, class: 'a-user-image'
+        - else
+          .a-user-no-image No Image
+      .m-user-image__name
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge #{current_teacher.name}先生/マイページ
+        .a-text-xlarge= link_to '編集',  edit_teacher_mypage_index_path, class: 'a-button a-button--edit'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:id)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher.id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:login_id)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher.login_id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large メールアドレス
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher.email.present? ? current_teacher.email : '登録なし'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 所属校
+        .m-profile-item__body
+          %ul.u-width-wrap-100per
+            %li.flex-spbet
+              .a-text-primary.a-text-large= "#{ current_teacher.main_school_building.name }(本所属)"
+            - current_teacher.sub_school_buildings.each do |school_building|
+              %li.flex-spbet
+                .a-text-primary.a-text-large= school_building.name
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 担当講座
+        .m-profile-item__body
+          %ul.u-width-wrap-100per
+            - unless LessonGroup.have_lesson_taught_by(current_teacher).exists?
+              .a-text-primary.a-text-large 担当はまだありません
+            - LessonGroup.have_lesson_taught_by(current_teacher).each do |lesson_group|
+              %li.flex-spbet
+                .a-text-primary.a-text-large= lesson_group.name
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 業務開始日時
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher.decorate.start_at
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large 業務終了日時
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher.decorate.end_at

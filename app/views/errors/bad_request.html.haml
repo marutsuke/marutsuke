@@ -1,0 +1,13 @@
+.errors
+  .errors__logo
+    =image_tag 'marutsuke_logo_b.png', alt: 'marutsuke'
+  .errors__container
+    .errors__head
+      - case @exception
+      - when ActionController::InvalidAuthenticityToken
+        %p Cookieが無効のためエラーになっている可能性があります。Cookieの設定を見直してください。
+      - else
+        %p このページにアクセスできません。
+        %p= @exception
+    .errors__caption
+      %p.errors__caption--status 400 Bad Request

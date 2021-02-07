@@ -8,9 +8,14 @@ module ErrorHandlers
     rescue_from ApplicationController::Forbidden, with: :rescue403
     rescue_from ApplicationController::LoginRequired, with: :rescue403
     rescue_from ActiveRecord::RecordNotFound, with: :rescue404
+    rescue_from ActionController::InvalidAuthenticityToken, with: :rescue400
   end
 
   private
+  def rescue400(e)
+    @exception = e
+    render 'errors/bad_request', status: 400
+  end
 
   def rescue403(e)
     @exception = e

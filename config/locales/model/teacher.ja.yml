@@ -28,7 +28,7 @@ ja:
   enums:
     teacher:
       role:
-        general_teacher: 一般講師
-        regular_teacher: 常勤講師
-        school_building_owner: 校長
-        school_owner: 学校管理者
+        general_teacher: 課題チェック
+        regular_teacher: 授業・講座・生徒運営
+        school_building_owner: 校舎運営
+        school_owner: 学校運営
