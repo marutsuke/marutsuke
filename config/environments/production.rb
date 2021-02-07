@@ -71,9 +71,9 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    user_name: Rails.application.credentials.sendgrid[:username],
-    password: Rails.application.credentials.sendgrid[:password],
-    domain: 'em5170.marutsukeapp.com',
+    user_name: 'apikey',
+    password: Rails.application.credentials.sendgrid[:api_key],
+    domain: Rails.application.credentials.sendgrid[:domain],
     address: 'smtp.sendgrid.net',
     port: 587,
     authentication: :plain,
