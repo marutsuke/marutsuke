@@ -7,6 +7,7 @@
         - else
           .a-user-no-image No Image
       .m-user-image__name
+        = link_to '画像変更', edit_teacher_image_changes_path, class: 'a-button a-button--edit'
   .o-profile__content
     .o-profile__header
       .m-heading.m-heading--line
@@ -25,6 +26,13 @@
           .a-text-secondary.a-text-large= Teacher.human_attribute_name(:login_id)
         .m-profile-item__body
           .a-text-primary.a-text-xlarge= current_teacher.login_id
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= Teacher.human_attribute_name(:password)
+        .m-profile-item__body.flex-spbet
+          .a-text-primary.a-text-xlarge *******
+          = link_to '変更', edit_teacher_password_index_path, class: 'a-button a-button--edit'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title

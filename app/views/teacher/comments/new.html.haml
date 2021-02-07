@@ -1,48 +1,49 @@
 .o-checking
   .o-checking__left-container
-    - @answers&.each do |answer|
-      .o-checking__conversation-wrap
-        .o-checking__user-image
-          .m-user-image
-            .m-user-image__image
-              - if answer.user.image.present?# ユーザーに画像を登録させる。
-                = image_tag answer.user.image_url, class: 'a-user-image a-user-image--small'
-              - else
-                .a-user-no-image.a-user-no-image--small No Image
-            .m-user-image__name--small
-              .a-text-primary.a-text-small= answer.user.name
-              .flex.flex-cen
-                .a-text-primary.a-text-small さん
-        .o-checking__answer-wrap
-          .o-checking__answer-text
-            .a-text-primary.a-text-large= simple_format(answer.text)
-            .flex-end
-              .a-text-note= answer.decorate.created_at
-          - if answer.answer_images.present?
-            .o-checking__answer-images
-              - answer&.answer_images.each do |answer_image|
-                = image_tag answer_image&.image_url, class: 'o-checking__answer-image'
-      - answer.comments&.each do |comment|
+    - if @answers.present?
+      - @answers&.each do |answer|
+        - answer.comments.created_desc_order&.each do |comment|
+          .o-checking__conversation-wrap
+            .o-checking__answer-wrap
+              .o-checking__comment-text
+                .a-text-primary.a-text-large= simple_format(comment.text)
+                .flex-end
+                  .a-text-note= comment.decorate.created_at
+              - if comment.image.present?
+                .o-checking__answer-images
+                  = image_tag comment&.image_url, class: 'o-checking__answer-image'
+            .o-checking__user-image
+              .m-user-image
+                .m-user-image__image
+                  - if comment.teacher.image.present?
+                    = image_tag comment.teacher.image_url, class: 'a-user-image a-user-image--small'
+                  - else
+                    .a-user-no-image.a-user-no-image--small No Image
+                .m-user-image__name--small
+                  .a-text-primary.a-text-small= comment.teacher.name
+                  .flex.flex-cen
+                    .a-text-primary.a-text-small 先生
         .o-checking__conversation-wrap
-          .o-checking__answer-wrap
-            .o-checking__comment-text
-              .a-text-primary.a-text-large= simple_format(comment.text)
-              .flex-end
-                .a-text-note= comment.decorate.created_at
-            - if comment.image.present?
-              .o-checking__answer-images
-                = image_tag comment&.image_url, class: 'o-checking__answer-image'
           .o-checking__user-image
             .m-user-image
               .m-user-image__image
-                - if false # comment.teacher.image.present? 教員にimageを登録させたい。
-                  = image_tag comment.teacher.image_url, class: 'a-user-image a-user-image--small'
+                - if answer.user.image.present?# ユーザーに画像を登録させる。
+                  = image_tag answer.user.image_url, class: 'a-user-image a-user-image--small'
                 - else
                   .a-user-no-image.a-user-no-image--small No Image
               .m-user-image__name--small
-                .a-text-primary.a-text-small= comment.teacher.name
+                .a-text-primary.a-text-small= answer.user.name
                 .flex.flex-cen
                   .a-text-primary.a-text-small さん
+          .o-checking__answer-wrap
+            .o-checking__answer-text
+              .a-text-primary.a-text-large= simple_format(answer.text)
+              .flex-end
+                .a-text-note= answer.decorate.created_at
+            - if answer.answer_images.present?
+              .o-checking__answer-images
+                - answer&.answer_images.each do |answer_image|
+                  = image_tag answer_image&.image_url, class: 'o-checking__answer-image'
   .o-checking__right-container
     .o-checking__question-title.flex-spbet-end
       .a-text-primary.a-text-xlarge= @target_answer.question.info
