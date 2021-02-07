@@ -12,6 +12,8 @@ class Answer < ApplicationRecord
   }
 
   def send_notification_email_to_teacher
+    return if question.lesson.teacher.email.blank?
+
     TeacherNotificationMailer.notification_of_answer(self).deliver_now
   end
 
