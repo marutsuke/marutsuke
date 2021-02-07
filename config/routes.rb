@@ -158,7 +158,10 @@ Rails.application.routes.draw do
         patch :reject
       end
     end
-    resources :mypage, only: %i[index]
+    resources :mypage, only: %i[index] do
+      get :edit, on: :collection
+      patch :update, on: :collection
+    end
   end
 
   namespace :admin do
