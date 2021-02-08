@@ -44,7 +44,7 @@
           %ul.u-width-wrap-100per
             %li.flex-spbet
               .a-text-primary.a-text-large= "#{ @teacher.main_school_building.name }(本所属)"
-              - if current_teacher.school_building_owner_authority?
+              - if current_teacher.manager_of?(@teacher)
                 =link_to '所属変更', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
             - @teacher.sub_school_buildings.each do |school_building|
               %li.flex-spbet
@@ -78,12 +78,13 @@
           .a-text-secondary.a-text-large アカウント有効
         .m-profile-item__body
           .a-text-primary.a-text-xlarge= @teacher.decorate.activated_status
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
-          .a-text-secondary.a-text-large アカウント編集
-        .m-profile-item__body.flex-sparo
-          .a-text-primary.a-text-xlarge= link_to 'アカウント編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
+    - if current_teacher.manager_of?(@teacher)
+      .o-profile__element
+        .m-profile-item
+          .m-profile-item__title
+            .a-text-secondary.a-text-large アカウント編集
+          .m-profile-item__body.flex-sparo
+            .a-text-primary.a-text-xlarge= link_to 'アカウント編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
 - if current_teacher.manager_of?(@teacher)
   %hr
   .o-profile.mt56
