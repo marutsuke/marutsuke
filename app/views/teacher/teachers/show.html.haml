@@ -84,24 +84,31 @@
           .a-text-secondary.a-text-large アカウント編集
         .m-profile-item__body.flex-sparo
           .a-text-primary.a-text-xlarge= link_to 'アカウント編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
-%hr
--# .flex-end.mt56
--#   .a-text-primary.a-text-xlarge= link_to 'パスワード変更', '', class: 'a-button a-button--danger pl40 pr40'
-.o-profile.mt56
-  .o-profile__content
-    .o-profile__header
-      .m-heading.m-heading--line
-        .m-heading__text
-          %h2.a-text-primary.a-text-huge その他設定
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
-          .a-text-secondary.a-text-large パスワード変更
-        .m-profile-item__body.flex-sparo
-          .a-text-primary.a-text-xlarge= link_to 'パスワード変更', edit_other_teacher_password_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
-    .o-profile__element
-      .m-profile-item
-        .m-profile-item__title
-          .a-text-secondary.a-text-large アカウントの無効化
-        .m-profile-item__body
-          .a-text-primary.a-text-xlarge= @teacher.id
+- if current_teacher.manager_of?(@teacher)
+  %hr
+  .o-profile.mt56
+    .o-profile__content
+      .o-profile__header
+        .m-heading.m-heading--line
+          .m-heading__text
+            %h2.a-text-primary.a-text-huge その他設定
+      .o-profile__element
+        .m-profile-item
+          .m-profile-item__title
+            .a-text-secondary.a-text-large パスワード変更
+          .m-profile-item__body.flex-sparo
+            .a-text-primary.a-text-xlarge= link_to 'パスワード変更', edit_other_teacher_password_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
+      - if @teacher.activated?
+        .o-profile__element.pt24.pb24
+          .m-profile-item
+            .m-profile-item__title
+              .a-text-secondary.a-text-large アカウントの無効化
+            .m-profile-item__body.flex-sparo
+              .a-text-primary.a-text-xlarge= link_to 'アカウントの無効化', teacher_teacher_path(@teacher), method: :delete, class: 'a-button a-button--danger pl40 pr40', data: { confirm: 'アカウントを無効化します。よろしいですか?'}
+      - else
+        .o-profile__element
+          .m-profile-item
+            .m-profile-item__title
+              .a-text-secondary.a-text-large アカウントの有効化
+            .m-profile-item__body.flex-sparo
+              .a-text-primary.a-text-xlarge= link_to 'アカウントの有効化', restore_teacher_teacher_path(@teacher), method: :patch, class: 'a-button a-button--primary pl40 pr40'

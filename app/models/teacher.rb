@@ -69,6 +69,12 @@ class Teacher < ApplicationRecord
     school_owner?
   end
 
+  def manager_of?(teacher)
+    return false unless school_building_owner_authority?
+    return false if teacher == self
+    teacher.main_school_building.id == main_school_building.id
+  end
+
   def forget
     update_attribute(:remember_digest, nil)
   end

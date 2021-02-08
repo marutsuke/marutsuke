@@ -107,9 +107,10 @@ Rails.application.routes.draw do
       post :create, on: :member
     end
     resources :schools, only: %i[index edit update]
-    resources :teachers, only: %i[index new create edit update show] do
+    resources :teachers, only: %i[index new create edit update show destroy] do
       member do
         post :resend_activation_mail
+        patch :restore
       end
       resources :school_building_teachers, only: %i[new update destroy] do
         post :create, on: :member
