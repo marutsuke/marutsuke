@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_07_121154) do
+ActiveRecord::Schema.define(version: 2021_02_08_130914) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_ja_0900_as_cs", force: :cascade do |t|
     t.string "name", null: false
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2021_02_07_121154) do
     t.bigint "school_id"
     t.string "invitation_code"
     t.boolean "auto_invite", default: false, null: false
+    t.boolean "invite_code_availability", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invitation_code"], name: "index_school_buildings_on_invitation_code", unique: true

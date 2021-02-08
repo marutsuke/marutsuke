@@ -6,7 +6,7 @@ class JoinRequestsController < UserBase
   end
 
   def create
-    @school_building = SchoolBuilding.find_by(invitation_code: params[:invitation_code]) if params[:invitation_code]
+    @school_building = SchoolBuilding.find_by(invitation_code: params[:invitation_code], invite_code_availability: true) if params[:invitation_code]
 
     if @school_building
       @school = @school_building.school

@@ -40,7 +40,7 @@ class Teacher::SchoolBuildingsController < Teacher::Base
   private
 
   def school_building_params
-    params.require(:school_building).permit(:name, :invitation_code, :auto_invite)
+    params.require(:school_building).permit(:name, :invitation_code, :auto_invite, :invite_code_availability)
   end
 
   def set_school_building
