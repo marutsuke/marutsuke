@@ -169,6 +169,8 @@ Rails.application.routes.draw do
     resources :password, only: %i[] do
       get :edit, on: :collection
       patch :update, on: :collection
+      get :edit_other, on: :member
+      patch :update_other, on: :member
     end
   end
 

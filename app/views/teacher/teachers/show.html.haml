@@ -16,9 +16,8 @@
       .m-profile-item
         .m-profile-item__title
           .a-text-secondary.a-text-large= Teacher.human_attribute_name(:name)
-        .m-profile-item__body.flex-spbet
+        .m-profile-item__body
           .a-text-primary.a-text-xlarge= @teacher.name
-          = link_to '編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit'
     .o-profile__element
       .m-profile-item
         .m-profile-item__title
@@ -45,7 +44,8 @@
           %ul.u-width-wrap-100per
             %li.flex-spbet
               .a-text-primary.a-text-large= "#{ @teacher.main_school_building.name }(本所属)"
-              =link_to '所属変更', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
+              - if current_teacher.school_building_owner_authority?
+                =link_to '所属変更', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
             - @teacher.sub_school_buildings.each do |school_building|
               %li.flex-spbet
                 .a-text-primary.a-text-large= school_building.name
@@ -78,3 +78,30 @@
           .a-text-secondary.a-text-large アカウント有効
         .m-profile-item__body
           .a-text-primary.a-text-xlarge= @teacher.decorate.activated_status
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large アカウント編集
+        .m-profile-item__body.flex-sparo
+          .a-text-primary.a-text-xlarge= link_to 'アカウント編集', edit_teacher_teacher_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
+%hr
+-# .flex-end.mt56
+-#   .a-text-primary.a-text-xlarge= link_to 'パスワード変更', '', class: 'a-button a-button--danger pl40 pr40'
+.o-profile.mt56
+  .o-profile__content
+    .o-profile__header
+      .m-heading.m-heading--line
+        .m-heading__text
+          %h2.a-text-primary.a-text-huge その他設定
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large パスワード変更
+        .m-profile-item__body.flex-sparo
+          .a-text-primary.a-text-xlarge= link_to 'パスワード変更', edit_other_teacher_password_path(@teacher), class: 'a-button a-button--edit pl40 pr40'
+    .o-profile__element
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large アカウントの無効化
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= @teacher.id

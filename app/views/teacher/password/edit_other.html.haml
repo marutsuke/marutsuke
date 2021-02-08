@@ -1,0 +1,10 @@
+.flex-sparo
+  %h2.mt16.ml16 パスワード変更
+  .mt16.ml16= link_to '戻る', teacher_teacher_path(@teacher), class: 'a-button a-button--secondary'
+%hr
+.flex-sparo
+  .u-width-wrap--100per
+    = form_with model: @teacher, url: update_other_teacher_password_path(@teacher), method: :patch, local: true do |f|
+      = render 'shared/error_messages', model_object: @teacher
+      .u-display-table
+        = render 'new_password_form', f: f
