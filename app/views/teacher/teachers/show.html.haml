@@ -44,7 +44,7 @@
           %ul.u-width-wrap-100per
             %li.flex-spbet
               .a-text-primary.a-text-large= "#{ @teacher.main_school_building.name }(本所属)"
-              - if current_teacher.manager_of?(@teacher)
+              - if current_teacher.manager_of?(@teacher) || @teacher == current_teacher
                 =link_to '所属変更', new_teacher_teacher_school_building_teacher_path(@teacher), class:  'a-button  a-button--edit ml40'
             - @teacher.sub_school_buildings.each do |school_building|
               %li.flex-spbet
