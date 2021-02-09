@@ -10,7 +10,7 @@
         %div
           .a-text-primary.a-text-large= "提出期間: #{@lesson.decorate.start_to_end_time}"
         %div
-          = link_to '期間設定', edit_teacher_lesson_submission_period_path(@lesson), class: 'a-button a-button--edit'
+          = link_to '期間設定', edit_teacher_lesson_submission_period_path(@lesson), class: 'a-button a-button--secondary'
       %hr
       - @questions.each do |question|
         .o-questions__top
