@@ -24,7 +24,7 @@
           .m-horizonal-form-set__label
             = f.label :min_school_grade, class: 'a-form-label required'
           .m-horizonal-form-set__input
-            = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: '' }, { class: 'a-form-select' }
+            = f.select :min_school_grade, SCHOOL_GRADE_HASH.invert, { include_blank: true, selected: f.object.id ? f.object.min_school_grade : ''}, { class: 'a-form-select' }
       .m-horizonal-form-set
         .m-horizonal-form-set__label_and_input_wrap
           .m-horizonal-form-set__label
