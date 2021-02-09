@@ -40,9 +40,14 @@ class Teacher::LessonGroupsController < Teacher::Base
   end
 
   def destroy
-    @lesson_group.destroy
-    flash[:danger] = "#{@lesson_group.name}を削除しました。"
-    redirect_to teacher_lesson_groups_path
+    if @lesson_group.lessons.exists?
+      flash[:danger] = "授業があるので削除できません"
+      redirect_to edit_teacher_lesson_group_path(@lesson_group)
+    else
+      @lesson_group.destroy
+      flash[:danger] = "#{@lesson_group.name}を削除しました。"
+      redirect_to teacher_lesson_groups_path
+    end
   end
 
   private
