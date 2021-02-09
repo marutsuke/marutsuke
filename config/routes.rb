@@ -107,15 +107,16 @@ Rails.application.routes.draw do
       post :create, on: :member
     end
     resources :schools, only: %i[index edit update]
-    resources :teachers, only: %i[index new create edit update show] do
+    resources :teachers, only: %i[index new create edit update show destroy] do
       member do
         post :resend_activation_mail
+        patch :restore
       end
       resources :school_building_teachers, only: %i[new update destroy] do
         post :create, on: :member
       end
     end
-    resources :lessons, only: %i[show edit update] do
+    resources :lessons, only: %i[show edit update destroy] do
       resources :questions, only: :new
     end
 
@@ -169,7 +170,10 @@ Rails.application.routes.draw do
     resources :password, only: %i[] do
       get :edit, on: :collection
       patch :update, on: :collection
+      get :edit_other, on: :member
+      patch :update_other, on: :member
     end
+    resources :lesson_submission_period, only: %i[edit update]
   end
 
   namespace :admin do

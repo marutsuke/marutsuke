@@ -12,7 +12,7 @@ class SchoolBuilding < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :name, uniqueness: { scope: :school_id, case_sensitive: true }
-  validates :invitation_code, uniqueness: { case_sensitive: true }, length: { minimum: 8 }, presence: true
+  validates :invitation_code, uniqueness: { case_sensitive: true }, length: { minimum: 8 }, presence: true, format: { with: VALIDATE_FORMAT_OF_ID, message: 'は半角英数字8文字以上です' }
 
   def active_users
     active_user_ids = school.school_users.active.pluck(:user_id)

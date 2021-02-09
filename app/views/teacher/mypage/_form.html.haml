@@ -16,11 +16,6 @@
           .a-text-note 半角英数字8文字以上
       .u-display-table-row
         .u-display-table-cell
-          = f.label :role, class: 'a-form-label required'
-        .u-display-table-cell.mb24
-          = f.select :role, Teacher.roles.map{|k,v|[I18n.t("enums.teacher.role.#{k}"),k]}, { include_blank: true }, { class: 'a-form-select'}
-      .u-display-table-row
-        .u-display-table-cell
           = f.label :email, class: 'a-form-label'
         .u-display-table-cell.mb24
           = f.email_field :email, class:  'a-form-text-field'

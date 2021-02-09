@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::TeachersController < Teacher::Base
-  before_action :set_teacher, only: %i[show edit update resend_activation_mail]
+  before_action :set_teacher, only: %i[show edit update resend_activation_mail destroy restore]
 
   def index
     @teachers = current_teacher_school_building.teachers.page(params[:page])
@@ -36,6 +36,20 @@ class Teacher::TeachersController < Teacher::Base
       redirect_to edit_teacher_teacher_path(@teacher)
     else
       render 'edit'
+    end
+  end
+
+  def destroy
+    if @teacher.update(activated: false) && @teacher.update_attribute(:end_at, Time.zone.now)
+      flash[:danger] = "#{@teacher.name}先生のアカウントを無効にしました"
+      redirect_to teacher_teacher_path(@teacher)
+    end
+  end
+
+  def restore
+    if @teacher.update(activated: true, end_at: nil)
+      flash[:success] = "#{@teacher.name}先生のアカウントを有効にしました"
+      redirect_to teacher_teacher_path(@teacher)
     end
   end
 

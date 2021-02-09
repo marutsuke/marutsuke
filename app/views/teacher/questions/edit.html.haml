@@ -23,7 +23,7 @@
           = link_to '課題削除', teacher_question_path(@question), method: :delete, class: 'a-button a-button--danger', data: { confirm: '本当に削除しますか？' }
   .o-question-form-group
     .o-question-form-group__hedding
-      .a-text-primary.a-text-xlarge 課題編集画面
+      %h2.a-text-primary.a-text-xlarge 課題編集
       = link_to '戻る', new_teacher_lesson_question_path(lesson_id: @lesson.id), class: 'a-button a-button--secondary'
     .o-question-form-group__body
       = render 'form', question: @question, lesson: @lesson, submit_word: '編集する'

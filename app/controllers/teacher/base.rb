@@ -39,4 +39,25 @@ class Teacher::Base < ApplicationController
     flash[:info] = '所属校を登録してください。'
     redirect_to new_teacher_teacher_school_building_teacher_path(current_teacher)
   end
+
+  def regular_teacher_authority_required
+    return if current_teacher&.regular_teacher_authority? || current_teacher.nil?
+
+    flash[:danger] = '権限がありません'
+    redirect_to teacher_path
+  end
+
+  def school_building_owner_authority_required
+    return if current_teacher&.school_building_owner_authority? || current_teacher.nil?
+
+    flash[:danger] = '権限がありません'
+    redirect_to teacher_path
+  end
+
+  def school_owner_authority_required
+    return if current_teacher&.school_owner_authority? || current_teacher.nil?
+
+    flash[:danger]  = '権限がありません'
+    redirect_to teacher_path
+  end
 end

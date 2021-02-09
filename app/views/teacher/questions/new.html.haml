@@ -1,28 +1,36 @@
+
 .flex
   .o-questions
     .o-questions__headding
       .a-text-secondary.a-text-small= "#{@lesson_group.school_year || '-'}年度/#{@lesson_group.school_building.name}"
       .flex-spbet-end
         .a-text-primary.a-text-xlarge= "#{@lesson_group.name}/#{@lesson.name}"
-        .a-text-primary= "提出受付期間:#{@lesson.decorate.start_to_end_time}"
     .o-questions__contents
+      .flex-sparo.pt16
+        %div
+          .a-text-primary.a-text-large= "提出期間: #{@lesson.decorate.start_to_end_time}"
+        %div
+          = link_to '期間設定', edit_teacher_lesson_submission_period_path(@lesson), class: 'a-button a-button--secondary'
+      %hr
       - @questions.each do |question|
         .o-questions__top
           .flex-spbet
             .a-text-primary.a-text-xlarge= "課題#{question.display_order}#{'(下書き)' if !question.publish}"
             = link_to '編集', edit_teacher_question_path(question), class: 'a-button a-button--edit'
         .o-questions__content{class: question.decorate.unpublish_opacity_class}
-          .m-question
+          .m-question.flex
             - if question&.image_url
               = image_tag question.image_url, alt: question.image_alt, class: 'm-question__image'
-            .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
-            .m-question__note-head
-              .a-text-secondary メモ
-            .m-question__note
-              .a-text-note= question.note
+              .m-question__text.m-question__text--with-image{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+            - else
+              .m-question__text{class: question.decorate.unpublish_opacity_class}= simple_format(question.text)
+          .m-question__note-head
+            .a-text-secondary メモ
+          .m-question__note
+            .a-text-note= simple_format(question.note)
   .o-question-form-group
     .o-question-form-group__hedding
-      .a-text-primary.a-text-xlarge 課題作成
+      %h2.a-text-primary.a-text-xlarge 課題作成
       = link_to '戻る', teacher_question_set_index_path(lesson_id: @lesson.id), class: 'a-button a-button--secondary'
     .o-question-form-group__body
       = render 'form', question: @question, lesson: @lesson, submit_word: '登録する'

@@ -1,7 +1,6 @@
 .m-question {
   &__image {
-    max-height: 640px;
-    max-width: 100%;
+    width: 20%;
   }
   &__text {
     width: 100%;
@@ -12,6 +11,9 @@
     border: solid 1px $blue_1;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    &--with-image {
+      width: 80%;
+    }
   }
   &__note-head {
     margin-top: 1rem;

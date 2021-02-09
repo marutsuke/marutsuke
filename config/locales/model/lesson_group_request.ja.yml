@@ -14,5 +14,5 @@ ja:
     lesson_group_request:
       status:
         requested: リクエスト中
-        accepted: 受講許可
-        rejected: 受講拒否
+        accepted: 許可
+        rejected: 拒否

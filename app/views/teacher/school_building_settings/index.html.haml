@@ -12,10 +12,21 @@
           .a-text-primary.a-text-xlarge= current_teacher_school_building.name
       .m-profile-item
         .m-profile-item__title
-          .a-text-secondary.a-text-large 招待コード
+          .a-text-secondary.a-text-large= SchoolBuilding.human_attribute_name(:invitation_code)
         .m-profile-item__body
           .a-text-primary.a-text-xlarge.mr32= current_teacher_school_building.invitation_code
           = link_to '設定', invitation_manage_teacher_school_building_path(current_teacher_school_building), class: 'a-button a-button--secondary'
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolBuilding.human_attribute_name(:auto_invite)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.decorate.auto_invite
+
+      .m-profile-item
+        .m-profile-item__title
+          .a-text-secondary.a-text-large= SchoolBuilding.human_attribute_name(:invite_code_availability)
+        .m-profile-item__body
+          .a-text-primary.a-text-xlarge= current_teacher_school_building.decorate.invite_code_availability
 
       .m-profile-item
         .m-profile-item__title

@@ -19,24 +19,23 @@
       = link_to teacher_lesson_groups_path do
         .m-teacher-side__link 講座一覧
     .m-teacher-side__element
+      = link_to teacher_school_building_settings_path do
+        .m-teacher-side__link 校舎設定
+  - if current_teacher.school_building_owner_authority?
+    .m-teacher-side__element
       = link_to teacher_teachers_path do
         .m-teacher-side__link 教員一覧
     .m-teacher-side__element
-      = link_to teacher_school_building_settings_path do
-        .m-teacher-side__link 校舎設定
+      = link_to teacher_schools_path do
+        .m-teacher-side__link 学校情報
+  - if current_teacher.school_owner_authority?
     .m-teacher-side__element
       = link_to teacher_school_buildings_path do
         .m-teacher-side__link 校舎作成
-    .m-teacher-side__element
-      = link_to teacher_schools_path do
-        .m-teacher-side__link 学校情報
   .m-teacher-side__element
     = link_to teacher_mypage_index_path do
       .m-teacher-side__link マイページ
-  .m-teacher-side__element.mt24
-    .m-teacher-side__text= current_teacher_school.name
-    .m-teacher-side__text= "#{ current_teacher.name }先生"
-    .m-teacher-side__text= "所属: #{current_teacher.main_school_building&.name || 'なし'} "
+  .m-teacher-side__text.mt40= "#{ current_teacher.name }先生"
   .m-teacher-side__element
     = link_to teacher_logout_path, method: :delete do
       .m-teacher-side__link ログアウト

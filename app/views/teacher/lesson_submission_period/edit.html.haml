@@ -1,0 +1,34 @@
+.flex-sparo
+  %h4.mt16.ml16= "#{@lesson_group.name}/#{@lesson.name}/ 提出期間変更"
+  .mt16.ml16= link_to '戻る', new_teacher_lesson_question_path(@lesson), class: 'a-button a-button--secondary'
+%hr
+.mb32
+.flex-sparo.u-width-wrap--100per
+  = form_with model: @lesson, url: teacher_lesson_submission_period_path(@lesson), method: :patch, local: true do |f|
+    =render 'shared/error_messages', model_object: @lesson
+    .u-display-table
+      .u-display-table-row
+        .u-display-table-cell
+          = f.label :start_at_date, class: 'a-form-label required'
+        .u-display-table-cell
+          .m-form-date-hour-min
+            = f.date_field :start_at_date, value: @lesson.start_at&.to_date || Time.zone.today, class: 'm-form-date-hour-min__date'
+            = f.select :start_at_hour, (0..23).map{|e| [format('%02d', e), e]}, { selected: @lesson.start_at&.hour || Time.zone.now.hour }, { class: 'm-form-date-hour-min__hour' }
+            = f.label :start_at_hour, '時', class: 'm-form-date-hour-min__hour-label'
+            = f.select :start_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, { selected: @lesson.start_at&.min&.floor(-1) || Time.zone.now.min.floor(-1) }, { class: 'm-form-date-hour-min__min' }
+            = f.label :start_at_min, '分', class: 'm-form-date-hour-min__min-label'
+      .u-display-table-row
+        .u-display-table-cell
+          = f.label :end_at_date, class: 'a-form-label'
+        .u-display-table-cell
+          .m-form-date-hour-min
+            = f.date_field :end_at_date, value: @lesson.end_at&.to_date, class: 'm-form-date-hour-min__date'
+            = f.select :end_at_hour, (0..23).map{|e| [format('%02d', e), e]}, { selected: @lesson.end_at&.hour }, { class: 'm-form-date-hour-min__hour' }
+            = f.label :end_at_hour, '時', class: 'm-form-date-hour-min__hour-label'
+            = f.select :end_at_min, (0..5).map{|e| [format('%02d', e*10), e*10]}, { selected: @lesson.end_at&.min&.floor(-1) }, { class: 'm-form-date-hour-min__min' }
+            = f.label :end_at_min, '分', class: 'm-form-date-hour-min__min-label'
+      .u-display-table-row
+        .u-display-table-cell
+        .u-display-table-cell
+          .flex-end
+            = f.submit '登録', class: 'a-button a-button--primary u-width-wrap-120'

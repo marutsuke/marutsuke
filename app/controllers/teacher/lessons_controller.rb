@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Teacher::LessonsController < Teacher::Base
-  before_action :set_lesson, only: %i[show edit update]
+  before_action :set_lesson, only: %i[show edit update destroy]
 
   def index
     @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:lesson_group_id])
@@ -45,6 +45,18 @@ class Teacher::LessonsController < Teacher::Base
       redirect_to edit_teacher_lesson_path(@lesson)
     else
       render :edit
+    end
+  end
+
+  def destroy
+    @lesson_group = @lesson.lesson_group
+    if Answer.where(question_id: @lesson.questions.pluck(:id)).exists?
+      flash[:danger] = 'すでに解答があるため、この課題は削除できません'
+      redirect_to edit_teacher_lesson_path(@lesson)
+    else
+      flash[:danger] = "#{@lesson.name}を削除しました"
+      @lesson.destroy
+      redirect_to teacher_lesson_group_lessons_path(@lesson_group)
     end
   end
 
