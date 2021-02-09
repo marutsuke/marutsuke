@@ -4,3 +4,5 @@
 %hr
 .mb32
 = render 'form', lesson: @lesson, url: teacher_lesson_path(@lesson)
+.mt40.flex-end.mr24
+  = link_to '削除', teacher_lesson_path(@lesson), method: :delete, class: 'a-button a-button--danger', data: { confirm: '授業を本当に削除しますか?' }

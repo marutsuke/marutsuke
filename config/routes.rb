@@ -116,7 +116,7 @@ Rails.application.routes.draw do
         post :create, on: :member
       end
     end
-    resources :lessons, only: %i[show edit update] do
+    resources :lessons, only: %i[show edit update destroy] do
       resources :questions, only: :new
     end
 
