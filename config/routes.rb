@@ -173,6 +173,7 @@ Rails.application.routes.draw do
       get :edit_other, on: :member
       patch :update_other, on: :member
     end
+    resources :lesson_submission_period, only: %i[edit update]
   end
 
   namespace :admin do
