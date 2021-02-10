@@ -21,7 +21,7 @@ class Teacher::PasswordController < Teacher::Base
 
   def update_other
     set_teacher
-    if current_teacher.update(password_params)
+    if @teacher.update(password_params)
       flash[:success] = 'パスワードを変更しました'
       redirect_to edit_other_teacher_password_path(@teacher)
     else
