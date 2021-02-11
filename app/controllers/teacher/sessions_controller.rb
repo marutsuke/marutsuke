@@ -2,7 +2,7 @@
 
 class Teacher::SessionsController < Teacher::Base
   skip_before_action :teacher_login_required
-  layout 'layouts/application'
+  layout 'teacher/layouts/teacher_layout_without_side'
   def new
     @login_path = params[:login_path]
     @school = School.find_by(login_path: @login_path)

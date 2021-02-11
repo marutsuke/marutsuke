@@ -1,17 +1,29 @@
+.flex-sparo
+  %h4.mt16.mb40= "#{@school.name} 教師ログイン"
 - if @school
-  .user_form__title= "#{@school.name} 教師ログイン"
-  .user_form
+  .flex-sparo
     = form_with scope: :session, url: teacher_login_path, local: true do |f|
-      .user_form__label_and_input
-        = f.label :login_id, Teacher.human_attribute_name(:login_id)
-        = f.text_field :login_id
-      .user_form__label_and_input
-        = f.label :password, Teacher.human_attribute_name(:password)
-        = f.password_field :password
-      .user_form__label_and_input--checkbox
-        = f.check_box :remember_me
-        = f.label :remember_me, 'ログイン状態を保持する'
-      = f.hidden_field :login_path, value: @login_path
-      = f.submit 'ログイン', class: 'user_form__submit_btn'
+      .u-display-table
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :login_id, Teacher.human_attribute_name(:login_id), class: 'a-form-label-login'
+          .u-display-table-cell
+            = f.text_field :login_id, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+            = f.label :password, Teacher.human_attribute_name(:password), class: 'a-form-label-login'
+          .u-display-table-cell
+            = f.password_field :password, class: 'a-form-text-field'
+        .u-display-table-row
+          .u-display-table-cell
+          .u-display-table-cell
+            = f.check_box :remember_me, class: 'a-form-checkbox'
+            = f.label :remember_me, 'ログイン状態を保持する', class: 'a-form-checkbox-label'
+        .u-display-table-row
+          .u-display-table-cell
+          .u-display-table-cell
+            = f.hidden_field :login_path, value: @login_path
+            = f.submit 'ログイン', class: 'a-form-submit'
 - else
-  ログインURLが間違っています。学校管理者にお問い合わせください。
+  ログインURLが間違っています。学校管理者にお問い
+  合わせください。
