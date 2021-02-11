@@ -6,7 +6,7 @@
     %th.o-table-simple__th 課題数
     %th.o-table-simple__th 課題設定
     %th.o-table-simple__th 課題チェック
-  - lessons.includes(:teacher).each do |lesson|
+  - lessons.each do |lesson|
     %tr.o-table-simple__tr
       %td.o-table-simple__td= lesson.name
       %td.o-table-simple__td= lesson.questions.published.size

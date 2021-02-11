@@ -3,7 +3,7 @@ class Teacher::JoinRequestsController < Teacher::Base
   before_action :search_join_requests, only: %i[index]
 
   def index
-    @join_requests = @join_requests.created_desc_order.page(params[:page])
+    @join_requests = @join_requests.includes(:user).created_desc_order.page(params[:page])
   end
 
   def accept

@@ -9,7 +9,7 @@ class Teacher::QuestionSetController < Teacher::Base
 
   def lessons_show
     @lesson_group = LessonGroup.for_school(current_teacher_school).find(params[:id])
-    @lessons = @lesson_group.lessons.includes(:teacher).taught_by(current_teacher)
+    @lessons = @lesson_group.lessons.taught_by(current_teacher)
   end
 
   def show
