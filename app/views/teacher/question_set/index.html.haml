@@ -13,6 +13,12 @@
             %th.o-table-simple__th 講座名
             %th.o-table-simple__th
           - @lesson_groups.includes(:school_building).each do |lesson_group|
+            :ruby
+              if @lesson&.lesson_group ==  lesson_group
+                button_class = 'a-button a-button--primary'
+              else
+                button_class = 'a-button a-button--secondary'
+              end
             %tr.o-table-simple__tr{ id: "js-lesson_group-tr--#{lesson_group.id}"}
               %td.o-table-simple__td= lesson_group.decorate.target_school_grade
               %td.o-table-simple__td= lesson_group.school_building.name
@@ -20,8 +26,7 @@
                 = lesson_group.name
                 - if lesson_group.to_check_status_exists_of?(current_teacher)
                   %i.far.fa-bell.a-text-caution
-
-              %td.o-table-simple__td{ id: "js-lesson_group--#{lesson_group.id}"}= link_to '一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true, class: 'a-button a-button--secondary'
+              %td.o-table-simple__td.js-lessons-show-button= link_to '一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true, class: lesson_group.decorate.lessons_show_button_html_class(@lesson), id: "js-lesson_group--#{lesson_group.id}"
   .o-question-set__lessons
     #js-lessons_table
       - if @lesson

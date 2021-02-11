@@ -5,3 +5,14 @@ $("<%="#js-lessons_table"%>")
       lesson_group: @lesson_group,
       lessons: @lessons
     }) %>");
+
+buttons = document.querySelectorAll("td.js-lessons-show-button a")
+buttons.forEach((button) => {
+  button.classList.remove('a-button--primary');
+  button.classList.add('a-button--secondary');
+});
+
+selected_button = $("<%="#js-lesson_group--#{@lesson_group.id}"%>")[0]
+
+selected_button.classList.add('a-button--primary');
+selected_button.classList.remove('a-button--secondary');

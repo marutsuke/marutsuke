@@ -24,6 +24,14 @@ class LessonGroupDecorator < ApplicationDecorator
     end
   end
 
+  def lessons_show_button_html_class(lesson)
+    if lesson&.lesson_group&.id == id
+      'a-button a-button--primary'
+    else
+      'a-button a-button--secondary'
+    end
+  end
+
   private
 
   def date_format(date)
