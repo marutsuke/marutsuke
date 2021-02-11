@@ -5,6 +5,7 @@ class Teacher::SchoolBuildingTeachersController < Teacher::Base
   skip_before_action :teacher_must_belong_to_school_building
 
   def new
+    @page_from = params[:page_from]
   end
 
   def create
