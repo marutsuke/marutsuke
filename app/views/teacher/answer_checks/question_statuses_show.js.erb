@@ -4,3 +4,13 @@ $("<%="#js-question_statuses"%>")
     locals: {
       question: @question
     }) %>");
+
+buttons = document.querySelectorAll("div.js-quetion-statuses-show-button a")
+buttons.forEach((button) => {
+  button.classList.remove('a-button--primary');
+  button.classList.add('a-button--secondary');
+});
+selected_button = $("<%="#js-question-statuses-show-button--#{@question.id}"%>")[0]
+
+selected_button.classList.add('a-button--primary');
+selected_button.classList.remove('a-button--secondary');

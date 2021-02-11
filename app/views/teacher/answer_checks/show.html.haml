@@ -10,10 +10,10 @@
         .o-questions__top
           .flex-spbet
             .a-text-primary.a-text-large= "課題#{question.display_order}#{'(下書き)' if !question.publish}"
-            .flex
-              = link_to '課題状況', question_statuses_show_teacher_answer_check_path(question), remote: true, class: 'a-button a-button--primary'
-              - if question.checking_count > 0
-                %span.a-badge-caution.ml8= question.checking_count.to_s
+            .js-quetion-statuses-show-button
+              = link_to '課題状況', question_statuses_show_teacher_answer_check_path(question), remote: true, class: 'a-button a-button--secondary', id: "js-question-statuses-show-button--#{question.id}"
+              - if question.question_statuses.checking.exists?
+                .a-text-caution 未チェックあり
 
         .o-questions__content{class: question.decorate.unpublish_opacity_class}
           .m-question
