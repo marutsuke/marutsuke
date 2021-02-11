@@ -132,6 +132,7 @@ ja:
       before: "は%{date}より前に設定してください"
       before_or_equal_to: "は%{date}以前に設定してください"
       equal_to: "は%{date}にしてください"
+      extension_whitelist_error: 'のファイル形式はjpg jpeg png JPGのどれかです'
     template:
       body: 次の項目を確認してください。
       header:
