@@ -1,4 +1,11 @@
 .o-profile
+  .o-profile__user_image
+    .m-user-image
+      .m-user-image__image
+        - if @teacher.image.present?
+          = image_tag @teacher.image_url, class: 'a-user-image'
+        - else
+          .a-user-no-image No Image
   .o-profile__content
     .o-profile__header
       .m-heading.m-heading--line
