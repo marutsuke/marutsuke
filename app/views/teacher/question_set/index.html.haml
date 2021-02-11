@@ -1,6 +1,6 @@
 - if @lesson_groups.size == 0
   .mt16.ml16= "#{current_teacher.name}先生担当の講座はまだありません。"
-
+- to_check_count = 0
 .o-question-set
   .o-question-set__lesson-groups
     - if @lesson_groups.size > 0
@@ -24,9 +24,13 @@
               %td.o-table-simple__td= lesson_group.school_building.name
               %td.o-table-simple__td
                 = lesson_group.name
+              %td.o-table-simple__td.js-lessons-show-button
+                = link_to '一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true, class: lesson_group.decorate.lessons_show_button_html_class(@lesson), id: "js-lesson_group--#{lesson_group.id}"
                 - if lesson_group.to_check_status_exists_of?(current_teacher)
-                  %i.far.fa-bell.a-text-caution
-              %td.o-table-simple__td.js-lessons-show-button= link_to '一覧', lessons_show_teacher_question_set_path(lesson_group), remote: true, class: lesson_group.decorate.lessons_show_button_html_class(@lesson), id: "js-lesson_group--#{lesson_group.id}"
+                  .a-text-caution 未チェックあり
+                  - to_check_count += 1
+      - if to_check_count == 0
+        .a-text-primary.a-text-large.u-text-align--center.mt16 未チェックはありません
   .o-question-set__lessons
     #js-lessons_table
       - if @lesson
