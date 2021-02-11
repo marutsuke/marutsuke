@@ -13,7 +13,7 @@
           = f.label :login_id, class: 'a-form-label required'
         .u-display-table-cell.mb24
           = f.text_field :login_id, class:  'a-form-text-field'
-          .a-text-note 半角英数字8文字以上
+          .a-text-note= VALIDATE_FORMAT_OF_ID_TEXT
       .u-display-table-row
         .u-display-table-cell
           = f.label :role, class: 'a-form-label required'

@@ -6,7 +6,7 @@ class Teacher < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 12 }
   validates :email, length: { maximum: 50 }, format: { with: VALIDATE_FORMAT_OF_EMAIL }, uniqueness: { case_sensitive: false }, allow_blank: true
-  validates :login_id, presence: true, length: { maximum: 30 }, format: { with: VALIDATE_FORMAT_OF_ID, message: 'は半角英数字8文字以上です' }, uniqueness: { scope: :school_id, case_sensitive: false }
+  validates :login_id, presence: true, length: { maximum: 30 }, format: { with: VALIDATE_FORMAT_OF_ID, message: "は#{VALIDATE_FORMAT_OF_ID_TEXT}です"}, uniqueness: { scope: :school_id, case_sensitive: false }
   validates :role, presence: true
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :password, presence: true, length: { minimum: 8 }, on: :update, allow_blank: true
