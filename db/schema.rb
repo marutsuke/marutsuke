@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_130914) do
+ActiveRecord::Schema.define(version: 2021_02_11_065916) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_ja_0900_as_cs", force: :cascade do |t|
     t.string "name", null: false
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2021_02_08_130914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_question_statuses_on_question_id"
+    t.index ["user_id", "question_id"], name: "index_question_statuses_on_user_id_and_question_id", unique: true
     t.index ["user_id"], name: "index_question_statuses_on_user_id"
   end
 
