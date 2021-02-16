@@ -15,7 +15,8 @@
     %div{ id: "js-question-status-label--#{@question.id}" }
       .m-question-card__question-status= @question.question_status_of(current_user).decorate.status_label_link
   - if @question.image.present?
-    = image_tag @question&.image_url, alt: @question.image_alt, class: 'a-question-image-on-user mt8'
+    -# = image_tag @question&.image_url, alt: @question.image_alt, class: 'a-question-image-on-user mt8'
+    = image_or_pdf_tag(@question, 'a-question-image-on-user mt8')
   .pr8.pl8.mt8
     .a-question-text-box
       .a-text-primary= simple_format(@question.text)
